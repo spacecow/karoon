@@ -1,5 +1,12 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
-  hello: "Hello world"
+  book: 'Book'
+  books: 'Books'
+  
+  formtastic:
+    labels:
+      email: 'Login'
+      password_confirmation: "Confirmation"
+  labels:
+    new: 'New %{o}'
+  notices:
+    signed_up: "Signed up."

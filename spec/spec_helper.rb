@@ -1,3 +1,5 @@
+require 'spork'
+
 Spork.prefork do
   ENV["RAILS_ENV"] ||= 'test'
   require File.expand_path("../../config/environment", __FILE__)
@@ -19,3 +21,17 @@ end
 Spork.each_run do
   FactoryGirl.reload
 end
+
+def create_user(login)
+  Factory(:user,:email=>login)
+end
+
+def controller_actions(controller)
+  Rails.application.routes.routes.inject({}) do |hash, route|
+    if route.requirements[:controller] == controller && !route.verb.nil?
+      hash[route.requirements[:action]] = route.verb.downcase.empty? ? "get" : route.verb.downcase
+    end
+    hash
+  end
+end
+

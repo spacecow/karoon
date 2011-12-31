@@ -8,11 +8,12 @@ guard 'spork', :cucumber_env => { 'RAILS_ENV' => 'test' }, :rspec_env => { 'RAIL
   watch(%r{^config/initializers/.+\.rb$})
   watch('Gemfile')
   watch('Gemfile.lock')
-  watch('config/routes.rb')
   watch('spec/spec_helper.rb')
   watch('test/test_helper.rb')
   watch(%r{^spec/support/.+\.rb$})
-  watch(%r{^~/apps/basiq/spec/support/.+\.rb$})
+  watch('config/routes.rb')
+  watch('config/locales/en.yml')
+  watch('spec/factories.rb')
 end
 
 guard 'rspec', :version => 2, :cli => "--format nested --drb" do
