@@ -1,1 +1,1 @@
-/Users/johan/apps/basiq/app/helper/basic_application_helper.rb
+/home/johan/apps/basiq/app/helper/basic_application_helper.rb
