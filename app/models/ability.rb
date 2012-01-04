@@ -6,7 +6,9 @@ class Ability
     if user
       if user.role? :admin
         can :create, Book
-      end
+      elsif user.role? :god
+        can :manage, :all
+      end 
     end
   end
 end

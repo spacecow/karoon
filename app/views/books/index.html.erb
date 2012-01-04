@@ -1,2 +1,2 @@
 <%= title t(:books) %>
-<%= link_to new(:book), new_book_path %>
+<%= link_to new(:book), new_book_path if can? :new, Book %>

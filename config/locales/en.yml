@@ -1,7 +1,10 @@
 en:
   book: 'Book'
   books: 'Books'
+  login: 'Login'
   
+  alerts:
+    invalid_login_or_password: "Invalid login or password."
   formtastic:
     labels:
       email: 'Login'
@@ -9,4 +12,8 @@ en:
   labels:
     new: 'New %{o}'
   notices:
+    logged_in: "Logged in."
+    logged_out: "Logged out."
     signed_up: "Signed up."
+  successes:
+    created: "Successfully created %{o}."

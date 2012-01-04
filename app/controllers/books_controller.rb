@@ -5,5 +5,15 @@ class BooksController < ApplicationController
   end
 
   def new
+    @book.authorships.build
+    @authors = Author.all
+  end
+
+  def create
+    if @book.save
+      redirect_to books_path, :notice => created(:book)
+    else
+      render :new
+    end
   end
 end

@@ -14,6 +14,15 @@ class User < ActiveRecord::Base
   def roles; ROLES.reject{|r| ((roles_mask||0) & 2**ROLES.index(r)).zero? } end
 
   class << self
+    def authenticate(email,password)
+      user = find_by_email(email)
+      if user && user.password_hash == BCrypt::Engine.hash_secret(password,user.password_salt)
+        user
+      else
+        nil
+      end
+    end
+
     def role(s); 2**ROLES.index(s.to_s) end
   end
 

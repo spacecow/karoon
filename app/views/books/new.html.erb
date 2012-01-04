@@ -1,0 +1,9 @@
+<%= title new(:book) %>
+
+<%= semantic_form_for @book do |f| %>
+  <%= f.input :title %>
+  <%= f.semantic_fields_for :authorships do |ref| %>
+    <%= ref.input :author_id, :as => :select, :collection => @authors %>
+  <% end %>
+  <%= f.submit %>
+<% end %>

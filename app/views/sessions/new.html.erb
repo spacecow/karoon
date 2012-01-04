@@ -1,0 +1,13 @@
+<%= form_tag sessions_path do %>
+<li>
+  <%= label_tag :email, ft(:email) %>
+  <%= text_field_tag :email %>
+</li>
+<li>
+  <%= label_tag :password, ft(:password) %>
+  <%= text_field_tag :password %>
+</li>
+<li>
+  <%= submit_tag t(:login) %>
+</li>
+<% end %>
