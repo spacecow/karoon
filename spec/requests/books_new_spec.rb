@@ -5,21 +5,21 @@ describe "Books" do
     before(:each) do
       create_admin(:email=>'admin@example.com')
       login('admin@example.com')
-      Factory(:author,:first_name=>"Test",:last_name=>"Author")
+      @author = Factory(:author,:name=>"Test Author")
       visit new_book_path
     end
 
     it "layout" do
       page.should have_title('New Book')
       find_field('Title').value.should be_nil 
-      options('Author').should eq "BLANK, Test Author"
+      find_field('Author').value.should be_nil 
       page.should have_button('Create Book')
     end
 
     context "create book" do
       before(:each) do
         fill_in 'Title', :with => 'New Title'
-        select 'Test Author', :from => 'Author'
+        fill_in 'Author', :with => @author.id 
       end
 
       it "adds a book to the database" do

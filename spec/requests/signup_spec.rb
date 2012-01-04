@@ -1,1 +1,1 @@
-/Users/johan/apps/basiq/spec/request/signup_spec.rb
+/home/johan/apps/basiq/spec/request/signup_spec.rb

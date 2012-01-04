@@ -10,6 +10,7 @@ en:
       email: 'Login'
       password_confirmation: "Confirmation"
   labels:
+    edit: 'Edit %{o}'
     new: 'New %{o}'
   notices:
     logged_in: "Logged in."

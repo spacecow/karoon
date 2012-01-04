@@ -1,0 +1,8 @@
+<%= semantic_form_for @book do |f| %>
+  <%= f.input :title %>
+  <%# f.semantic_fields_for :authorships do |ref| %>
+    <%# ref.input :author_id, :as => :select, :collection => @authors %>
+  <%# end %>
+  <%= f.input :author_tokens, :label => ft(:author), :input_html => {"data-pre" => @book.authors.map(&:attributes).to_json} %>
+  <%= f.submit %>
+<% end %>

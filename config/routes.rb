@@ -7,6 +7,8 @@ Karoon::Application.routes.draw do
   resources :users, :only => [:new,:create]
 
   get 'welcome' => 'books#index'
-  resources :books, :only => [:index,:new,:create]
+  resources :books, :only => [:index,:new,:create,:edit,:update]
   root :to => 'books#index'
+
+  resources :authors, :only => :index
 end

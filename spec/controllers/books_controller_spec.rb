@@ -12,7 +12,7 @@ describe BooksController do
       if %(index).include?(action)
         it "should reach the #{action} page" do
           send("#{req}", "#{action}", :id => @model.id)
-          response.redirect_url.should be_nil
+          response.redirect_url.should_not eq welcome_url
         end
       else
         it "should not reach the #{action} page" do
@@ -32,7 +32,7 @@ describe BooksController do
         if %(index).include?(action)
           it "should reach the #{action} page" do
             send(req, action, :id => @model.id)
-            response.redirect_url.should be_nil
+            response.redirect_url.should_not eq welcome_url
           end
         else
           it "should not reach the #{action} page" do
@@ -51,7 +51,7 @@ describe BooksController do
         if %(index).include?(action)
           it "should reach the #{action} page" do
             send(req, action, :id => @model.id)
-            response.redirect_url.should be_nil
+            response.redirect_url.should_not eq welcome_url
           end
         else
           it "should not reach the #{action} page" do
@@ -67,10 +67,10 @@ describe BooksController do
         session[:userid] = create_admin.id
       end
       controller_actions.each do |action,req|
-        if %(index new create).include?(action)
+        if %(index new create edit update).include?(action)
           it "should reach the #{action} page" do
             send(req, action, :id => @model.id)
-            response.redirect_url.should be_nil
+            response.redirect_url.should_not eq welcome_url
           end
         else
           it "should not reach the #{action} page" do
@@ -86,10 +86,10 @@ describe BooksController do
         session[:userid] = create_god.id
       end
       controller_actions.each do |action,req|
-        if %(index new create).include?(action)
+        if %(index new create edit update).include?(action)
           it "should reach the #{action} page" do
             send(req, action, :id => @model.id)
-            response.redirect_url.should be_nil
+            response.redirect_url.should_not eq welcome_url
           end
         else
           it "should not reach the #{action} page" do

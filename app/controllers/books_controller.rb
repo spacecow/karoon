@@ -16,4 +16,11 @@ class BooksController < ApplicationController
       render :new
     end
   end
+
+  def edit
+  end
+
+  def update
+    redirect_to @book
+  end
 end
