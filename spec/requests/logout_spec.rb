@@ -1,0 +1,1 @@
+/Users/johan/apps/basiq/spec/request/logout_spec.rb
