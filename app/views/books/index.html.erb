@@ -8,4 +8,6 @@
   </div>
 <% end %>
 
-<%= link_to new(:book), new_book_path if can? :new, Book %>
+<div id="bottom_links">
+  <%= link_to new(:book), new_book_path if can? :new, Book %>
+</div>

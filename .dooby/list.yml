@@ -7,3 +7,5 @@ b849eb: !ruby/object:Dooby::Task
   todo: " :done"
 06552c: !ruby/object:Dooby::Task 
   todo: add categories to books :done
+b1788b: !ruby/object:Dooby::Task 
+  todo: some layout of buttons and links :done
