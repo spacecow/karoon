@@ -17,16 +17,32 @@ class CategoriesController < ApplicationController
   
   def create
     if @category.save
-      flash[:notice] = created_adv(:category,@category.name)
-      redirect_to new_category_path
+      redirect_to new_category_path, :notice => created_adv(:category,@category.name)
     else
       render :new
     end
   end
 
+  def edit
+  end
+  
+  def update
+    if @category.update_attributes(params[:category])
+      redirect_to @category, :notice => updated_adv(:category,@category.name)
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    name = @category.name
+    @category.destroy
+    redirect_to categories_path, :notice => deleted_adv(:category,name)
+  end
+
   private
 
     def load_categories
-      @categories = Category.order(:name) 
+      @categories = Category.where('name like ?',"%#{params[:q]}%").order(:name) 
     end
 end

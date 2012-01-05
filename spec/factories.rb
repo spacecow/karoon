@@ -6,6 +6,7 @@ Factory.define :book do |f|
 end
 
 Factory.define :category do |f|
+  f.name 'Factory name'
 end
 
 Factory.define :user do |f|

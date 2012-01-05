@@ -1,18 +1,18 @@
 require 'spec_helper'
 
-describe "Authors" do
+describe "Categories" do
   describe "show" do
     before(:each) do
       @way = create_book('This is the Way')
       @road = create_book('The Lonely Road')
-      @author = create_author('Stephen King')
-      @author.books << @way 
-      @author.books << @road
+      @category = create_category('science')
+      @category.books << @way 
+      @category.books << @road
     end 
 
-    it "layout" do
-      visit author_path(@author)
-      page.should have_title('Stephen King') 
+    it "general layout" do
+      visit category_path(@category)
+      page.should have_title('science') 
       page.should have_content('Book: This is the Way, The Lonely Road')
       page.should have_link('This is the Way')
       page.should have_link('The Lonely Road')
@@ -23,7 +23,7 @@ describe "Authors" do
     it "admin layout" do
       create_admin(:email=>'admin@example.com')
       login('admin@example.com')
-      visit author_path(@author)
+      visit category_path(@category)
       bottom_links.should have_link('Edit')
       bottom_links.should have_link('Delete')
     end
@@ -32,24 +32,24 @@ describe "Authors" do
       before(:each) do
         create_admin(:email=>'admin@example.com')
         login('admin@example.com')
-        visit author_path(@author)
+        visit category_path(@category)
       end
   
-      it "edit author" do 
+      it "edit category" do 
         bottom_links.click_link 'Edit'
-        page.current_path.should eq edit_author_path(@author) 
+        page.current_path.should eq edit_category_path(@category) 
       end
-      it "delete author" do 
+      it "delete category" do 
         lambda do
           bottom_links.click_link 'Delete'
-        end.should change(Author,:count).by(-1)
-        page.current_path.should eq authors_path
+        end.should change(Category,:count).by(-1)
+        page.current_path.should eq categories_path
       end
     end
 
     context "general links to" do
       before(:each) do
-        visit author_path(@author)
+        visit category_path(@category)
       end
 
       it "This is the Way" do

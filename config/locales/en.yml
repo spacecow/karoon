@@ -6,6 +6,8 @@ en:
   category: 'Category'
   categories: 'Categories'
   del: 'Del'
+  delete: 'Delete'
+  edit: 'Edit'
   login: 'Login'
   signup: 'Signup'
   

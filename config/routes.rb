@@ -11,5 +11,5 @@ Karoon::Application.routes.draw do
   root :to => 'books#index'
 
   resources :authors
-  resources :categories, :only => [:show,:index,:new,:create]
+  resources :categories
 end

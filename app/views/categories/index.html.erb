@@ -4,6 +4,7 @@
   <% @categories.each do |category| %>
     <tr>
       <td><%= link_to category.name, category %></td>
+      <td id="actions"><%= link_to t(:edit), edit_category_path(category) if can? :edit, category %> <%= link_to t(:del), category, :confirm => sure?, :method => :delete if can? :destroy, category %></td>
     </tr>
   <% end %>
 </table>

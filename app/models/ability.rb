@@ -9,7 +9,7 @@ class Ability
       if user.role? :admin
         can [:create,:update,:destroy], Book
         can [:create,:update,:destroy], Author
-        can :create, Category
+        can [:create,:update,:destroy], Category
       elsif user.role? :god
         can :manage, :all
       end 
