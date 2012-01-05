@@ -11,7 +11,7 @@
 $(function() {
   $("#book_author_tokens").tokenInput("/authors.json", {
     crossDomain: false,
-    prePopulate: $("#book_author_tokens").data("pre")
-    //theme: "facebook"
+    prePopulate: $("#book_author_tokens").data("pre"),
+    theme: ""
   });
 });
