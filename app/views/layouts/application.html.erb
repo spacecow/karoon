@@ -8,20 +8,37 @@
 </head>
 <body>
 
-<% flash.each do |name,msg| %>
-  <%= content_tag :div, msg, :id => "flash_#{name}" %>
-<% end %>
+<div id="container">
+  <div id="site_nav_container">
+    <div id="site_nav">
+      <ul>
+        <li><%= link_to t(:books), books_path %></li>
+        <li><%= link_to t(:authors), authors_path %></li>
+      </ul>
+    </div>
+  </div>
 
-<div id="user_nav">
-  <% if current_user %>
-    <%= link_to t(:logout) %>
-  <% else %>
-    <%= link_to t(:login), login_path %>
-  <% end %>
-  <%= link_to t(:signup), signup_path %>
+  <div id="main_container">
+    <div id="flash_container">
+      <% flash.each do |name,msg| %>
+        <%= content_tag :div, msg, :id => "flash_#{name}" %>
+      <% end %>
+    </div>
+
+    <div id="user_nav">
+      <% if current_user %>
+        <%= link_to t(:logout), logout_path %>
+      <% else %>
+        <%= link_to t(:login), login_path %>
+      <% end %>
+      <%= link_to t(:signup), signup_path %>
+    </div>
+
+    <div id="main">
+      <%= yield %>
+    </div>
+  </div>
+  <div class="clear"></div>
 </div>
-
-<%= yield %>
-
 </body>
 </html>

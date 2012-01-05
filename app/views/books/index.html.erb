@@ -2,7 +2,7 @@
 
 <% @books.each do |book| %>
   <div class="book">
-    <%= book.title %>
+    <%= link_to book.title, book %>
     <%= link_to t(:edit), edit_book_path(book) if can? :edit, book %>
     <%= link_to t(:del), book, :confirm => sure?, :method => :delete if can? :destroy, book %>
   </div>

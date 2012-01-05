@@ -7,6 +7,7 @@ gem 'therubyracer'
 gem 'jquery-rails'
 gem 'formtastic'
 gem 'cancan'
+gem 'compass', '>= 0.12.alpha.0'
 
 group :assets do
   gem 'sass-rails', "  ~> 3.1.0"

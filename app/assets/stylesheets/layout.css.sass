@@ -1,0 +1,86 @@
+@import "compass/css3/border-radius"
+@import "compass/css3/gradient"
+
+body
+  font: normal 14px "Helvetica Neue", Arial, Helvetica, sans-serif
+a
+  text-decoration: none 
+
+div.clear
+  clear: both
+  height: 0
+  overflow: hidden
+
+$notice_dark: #396
+$notice_light: #4CC417
+@mixin custom_gradient($light, $dark, $corner: 10px)
+  color: white
+  font-weight: bold
+  padding: 5px
+  +border-radius($corner)
+  +linear-gradient(color-stops($light, $dark))
+
+$padding: 10px
+$container_width: 800px
+$site_nav_container_width: 130px
+$main_container_width: 670px
+
+$site_nav_width: 110px 
+$flash_container_height: 35px
+$main_width: 650px
+$user_nav_width: 150px
+$user_nav_height: 20px
+$padding: 10px
+
+div#container
+  background: lightGray
+  width: 800px
+  margin: auto
+  padding: 10px
+
+div#site_nav_container
+  padding: $padding 
+  margin-top: $flash_container_height + $user_nav_height 
+  float: left
+  width: $site_nav_width
+  div#site_nav
+    width: $site_nav_width
+    ul
+      margin: 0
+      padding: 0
+      li
+        text-align: right
+        list-style-type: none
+        a
+          font-size: 18px
+
+div#main_container
+  padding: $padding
+  width: $main_width
+  float: left
+
+div#flash_container
+  height: $flash_container_height 
+  display: block
+  div#flash_notice
+    float: left
+    margin-bottom: 5px
+    padding: 3px 10px
+    border: 1px solid black
+    +custom_gradient($notice_light,$notice_dark)
+
+div#user_nav
+  width: $user_nav_width
+  height: $user_nav_height
+  float: right
+
+div#main
+  width: $main_width
+
+form
+  li
+    list-style-type: none
+    label
+      display: block
+  input.submit
+    margin: 10px 0 0 85px 
