@@ -3,6 +3,8 @@ en:
   authors: 'Authors'
   book: 'Book'
   books: 'Books'
+  category: 'Category'
+  categories: 'Categories'
   del: 'Del'
   login: 'Login'
   signup: 'Signup'

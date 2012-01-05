@@ -9,6 +9,7 @@ describe "Sessions" do
     it "layout" do
       site_nav.should have_link('Books')
       site_nav.should have_link('Authors')
+      site_nav.should have_link('Categories')
     end
 
     context "links to" do
@@ -19,6 +20,10 @@ describe "Sessions" do
       it "authors" do
         site_nav.click_link('Authors')
         page.current_path.should eq authors_path
+      end
+      it "categories" do
+        site_nav.click_link('Categories')
+        page.current_path.should eq categories_path
       end
     end
   end

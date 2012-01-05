@@ -5,3 +5,5 @@ b849eb: !ruby/object:Dooby::Task
   todo: create authors on the fly :done
 80bdac: !ruby/object:Dooby::Task 
   todo: " :done"
+06552c: !ruby/object:Dooby::Task 
+  todo: add categories to books :done
