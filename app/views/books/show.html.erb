@@ -1,0 +1,3 @@
+<%= title @book.title %>
+
+Author: <%= raw @book.authors.map{|e| link_to e.name,e}.join(', ') %>

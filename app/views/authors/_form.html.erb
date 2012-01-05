@@ -1,0 +1,7 @@
+<%= semantic_form_for @author do |f| %>
+  <%= f.input :first_name %>
+  <%= f.input :middle_names %>
+  <%= f.input :last_name %>
+  <%= hidden_field_tag :back, back %>
+  <%= f.submit %>
+<% end %>

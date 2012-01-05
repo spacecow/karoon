@@ -11,4 +11,14 @@ class ApplicationController < ActionController::Base
       redirect_to login_url
     end
   end
+
+  def created_adv(o,name)
+    t("successes.created_adv",:o=>t(o),:name=>name)
+  end
+  def deleted_adv(o,name)
+    t("successes.deleted_adv",:o=>t(o),:name=>name) 
+  end
+  def updated_adv(o,name)
+    t("successes.updated_adv",:o=>t(o),:name=>name) 
+  end
 end
