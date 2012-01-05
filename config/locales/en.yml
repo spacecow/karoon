@@ -24,7 +24,7 @@ en:
   notices:
     logged_in: "Logged in."
     logged_out: "Logged out."
-    signed_up: "Signed up."
+    signed_up_and_logged_in: "Signed up and logged in."
   successes:
     created: "Successfully created %{o}."
     created_adv: "%{o}: '%{name}' was successfully created."
