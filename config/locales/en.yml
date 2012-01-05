@@ -1,6 +1,8 @@
 en:
+  author: 'Author'
   book: 'Book'
   books: 'Books'
+  del: 'Del'
   login: 'Login'
   
   alerts:
@@ -8,13 +10,21 @@ en:
   formtastic:
     labels:
       email: 'Login'
+      first_name: 'First Name'
+      last_name: 'Last Name'
+      middle_names: 'Middle Names'
       password_confirmation: "Confirmation"
   labels:
     edit: 'Edit %{o}'
     new: 'New %{o}'
+  messages:
+    sure?: 'Are you sure?'
   notices:
     logged_in: "Logged in."
     logged_out: "Logged out."
     signed_up: "Signed up."
   successes:
     created: "Successfully created %{o}."
+    created_adv: "%{o}: '%{name}' was successfully created."
+    deleted_adv: "%{o}: '%{name}' was successfully deleted."
+    updated_adv: "%{o}: '%{name}' was successfully updated."

@@ -1,0 +1,10 @@
+<table>
+<% @authors.each do |author| %>
+  <tr>
+    <td><%= author.name %></td>
+    <td><%= link_to t(:edit), edit_author_path(author) if can? :edit, author %> <%= link_to t(:del), author, :confirm => sure?, :method => :delete if can? :destroy, author %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to new(:author), new_author_path if can? :new, Author %>

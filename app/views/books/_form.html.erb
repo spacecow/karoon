@@ -6,3 +6,7 @@
   <%= f.input :author_tokens, :label => ft(:author), :input_html => {"data-pre" => @book.authors.map(&:attributes).to_json} %>
   <%= f.submit %>
 <% end %>
+
+<h1><%= new(:author) %></h1>
+
+<%= render 'authors/form', :back => :book %>

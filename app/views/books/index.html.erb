@@ -1,2 +1,11 @@
 <%= title t(:books) %>
+
+<% @books.each do |book| %>
+  <div class="book">
+    <%= book.title %>
+    <%= link_to t(:edit), edit_book_path(book) if can? :edit, book %>
+    <%= link_to t(:del), book, :confirm => sure?, :method => :delete if can? :destroy, book %>
+  </div>
+<% end %>
+
 <%= link_to new(:book), new_book_path if can? :new, Book %>
