@@ -1,3 +1,5 @@
 --- 
 c6fd85: !ruby/object:Dooby::Task 
   todo: jquery tokeninput and edit book page :done
+b849eb: !ruby/object:Dooby::Task 
+  todo: create authors on the fly :done

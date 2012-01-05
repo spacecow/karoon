@@ -11,6 +11,14 @@ class Book < ActiveRecord::Base
   def author; authors.first == authors.last ? authors.first : nil end
 
   def author_tokens=(ids)
-    self.author_ids = ids.split(',')
+    tokens = []
+    ids.split(',').map(&:strip).each do |id|
+      if id =~ /^\d+$/
+        tokens.push id
+      else
+        tokens.push Author.create!(:name=>id).id
+      end
+    end
+    self.author_ids = tokens
   end
 end

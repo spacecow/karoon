@@ -11,6 +11,8 @@
 $(function() {
   $("#book_author_tokens").tokenInput("/authors.json", {
     crossDomain: false,
+    preventDuplicates: true,
+    allowCreation: true,
     prePopulate: $("#book_author_tokens").data("pre"),
     theme: ""
   });

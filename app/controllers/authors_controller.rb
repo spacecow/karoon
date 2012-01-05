@@ -18,8 +18,7 @@ class AuthorsController < ApplicationController
   def create
     if @author.save
       flash[:notice] = created_adv(:author,@author.name)
-      redirect_to new_author_path and return if params[:back] == 'author'
-      redirect_to new_book_path 
+      redirect_to new_author_path
     end
   end
 

@@ -4,6 +4,7 @@ en:
   books: 'Books'
   del: 'Del'
   login: 'Login'
+  signup: 'Signup'
   
   alerts:
     invalid_login_or_password: "Invalid login or password."

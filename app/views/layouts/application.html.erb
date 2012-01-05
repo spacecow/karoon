@@ -12,6 +12,15 @@
   <%= content_tag :div, msg, :id => "flash_#{name}" %>
 <% end %>
 
+<div id="user_nav">
+  <% if current_user %>
+    <%= link_to t(:logout) %>
+  <% else %>
+    <%= link_to t(:login), login_path %>
+  <% end %>
+  <%= link_to t(:signup), signup_path %>
+</div>
+
 <%= yield %>
 
 </body>
