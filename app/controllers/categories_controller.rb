@@ -8,7 +8,7 @@ class CategoriesController < ApplicationController
   def index
     respond_to do |f|
       f.html
-      f.json {render :json => @categories.map(&:attributes)}
+      f.json {render :json => @categories.map{|e| e.name=e.names_depth_cache; e}.map(&:attributes)}
     end
   end
 
@@ -24,10 +24,12 @@ class CategoriesController < ApplicationController
   end
 
   def edit
+    @categories = Category.all
   end
   
   def update
     if @category.update_attributes(params[:category])
+      @category.descendants.map(&:save) #update names_depth_cache
       redirect_to @category, :notice => updated_adv(:category,@category.name)
     else
       render :edit
@@ -43,6 +45,6 @@ class CategoriesController < ApplicationController
   private
 
     def load_categories
-      @categories = Category.where('name like ?',"%#{params[:q]}%").order(:name) 
+      @categories = Category.where('names_depth_cache like ?',"%#{params[:q]}%").order(:names_depth_cache) 
     end
 end

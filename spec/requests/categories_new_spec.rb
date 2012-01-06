@@ -11,6 +11,7 @@ describe "Categories" do
     it "layout" do
       page.should have_title('New Category')
       find_field('Name').value.should be_nil
+      options('Parent')
       page.should have_button('Create Category')
     end
 

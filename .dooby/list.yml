@@ -11,3 +11,5 @@ b1788b: !ruby/object:Dooby::Task
   todo: some layout of buttons and links :done
 "134564": !ruby/object:Dooby::Task 
   todo: finish testing categories :done
+b011ab: !ruby/object:Dooby::Task 
+  todo: editing root category should change its descendants too :done

@@ -1,1 +1,3 @@
-def create_category(s); Factory(:category,:name=>s) end
+def create_category(s,id=nil)
+  Factory(:category,:name=>s,:parent_id=>id) 
+end
