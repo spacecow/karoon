@@ -15,3 +15,5 @@ b011ab: !ruby/object:Dooby::Task
   todo: editing root category should change its descendants too :done
 d27e33: !ruby/object:Dooby::Task 
   todo: don't show itself of children as parent option on form page for categories :done
+"142471": !ruby/object:Dooby::Task 
+  todo: list nested categories on the index page :done
