@@ -1,14 +1,16 @@
 class CategoriesController < ApplicationController
-  before_filter :load_categories, :only => :index
   load_and_authorize_resource
+  before_filter :load_all_categories, :only => :new
+  before_filter :load_min_categories, :only => :edit
 
   def show
   end
 
   def index
+    @categories = Category.arrange(:order => :names_depth_cache)
     respond_to do |f|
       f.html
-      f.json {render :json => @categories.map{|e| e.name=e.names_depth_cache; e}.map(&:attributes)}
+      f.json {render :json => load_selected_categories.map{|e| e.name=e.names_depth_cache; e}.map(&:attributes)}
     end
   end
 
@@ -19,12 +21,12 @@ class CategoriesController < ApplicationController
     if @category.save
       redirect_to new_category_path, :notice => created_adv(:category,@category.name)
     else
+      load_all_categories
       render :new
     end
   end
 
   def edit
-    @categories = Category.all
   end
   
   def update
@@ -32,6 +34,7 @@ class CategoriesController < ApplicationController
       @category.descendants.map(&:save) #update names_depth_cache
       redirect_to @category, :notice => updated_adv(:category,@category.name)
     else
+      load_min_categories
       render :edit
     end
   end
@@ -44,7 +47,13 @@ class CategoriesController < ApplicationController
 
   private
 
-    def load_categories
+    def load_all_categories
+      @categories = Category.all.map{|e| [e.names_depth_cache,e.id]}
+    end
+    def load_min_categories
+      @categories = Category.all.reject{|e| @category.subtree_ids.include? e.id}.map{|e| [e.names_depth_cache,e.id]}
+    end
+    def load_selected_categories
       @categories = Category.where('names_depth_cache like ?',"%#{params[:q]}%").order(:names_depth_cache) 
     end
 end

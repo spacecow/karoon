@@ -10,9 +10,9 @@ class Category < ActiveRecord::Base
   validate :ancestry_exclude_self
 
   def cache_ancestry
-    ancestors = path.map(&:name)
-    ancestors.pop unless new_record?
-    self.names_depth_cache = ancestors.push(name).join('/')
+    #jp ancestors = ancestors.map(&:name)
+    #ancestors.pop unless new_record?
+    self.names_depth_cache = ancestors.map(&:name).push(name).join('/')
   end
   
   private
