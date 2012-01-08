@@ -6,28 +6,23 @@ class BooksController < ApplicationController
 
   def new
     @book.authorships.build
-    @authors = Author.all
-    @author = Author.new
   end
 
   def create
     if @book.save
       redirect_to new_book_path, :notice => created_adv(:book,@book.title)
     else
-      @author = Author.new
       render :new
     end
   end
 
   def edit
-    @author = Author.new
   end
 
   def update
     if @book.update_attributes(params[:book])
       redirect_to @book, :notice => updated_adv(:book,@book.title)
     else
-      @author = Author.new
       render :edit
     end
   end

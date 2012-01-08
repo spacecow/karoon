@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include BasicApplicationController
   protect_from_forgery
-  helper_method :pt
+  helper_method :pt,:current_user
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:alert] = alertify(:unauthorized_access)

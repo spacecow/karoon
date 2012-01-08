@@ -4,9 +4,6 @@
     <%# ref.input :author_id, :as => :select, :collection => @authors %>
   <%# end %>
   <%= f.input :author_tokens, :label => ft(:author), :input_html => {"data-pre" => @book.authors.map(&:attributes).to_json} %>
-  <%= f.submit %>
+  <%= f.input :category_tokens, :label => ft(:category), :input_html => {"data-pre" => @book.categories.map(&:attributes).to_json} %>
+  <%= f.submit :class => :submit %>
 <% end %>
-
-<h1><%= new(:author) %></h1>
-
-<%= render 'authors/form', :back => :book %>

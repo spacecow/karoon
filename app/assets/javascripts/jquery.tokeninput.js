@@ -1,56 +1,56 @@
 /*
- * jQuery Plugin: Tokenizing Autocomplete Text Entry
- * Version 1.6.0
- *
- * Copyright (c) 2009 James Smith (http://loopj.com)
- * Licensed jointly under the GPL and MIT licenses,
- * choose which one suits your project best!
- *
- */
+* jQuery Plugin: Tokenizing Autocomplete Text Entry
+* Version 1.6.0
+*
+* Copyright (c) 2009 James Smith (http://loopj.com)
+* Licensed jointly under the GPL and MIT licenses,
+* choose which one suits your project best!
+*
+*/
 
 (function ($) {
 // Default settings
 var DEFAULT_SETTINGS = {
-	// Search settings
+    // Search settings
     method: "GET",
-    contentType: "json",
     queryParam: "q",
     searchDelay: 300,
     minChars: 1,
     propertyToSearch: "name",
     jsonContainer: null,
+    contentType: "json",
+    allowCreation: false,
 
-	// Display settings
+    // Prepopulation settings
+    prePopulate: null,
+    processPrePopulate: false,
+
+    // Display settings
     hintText: "Type in a search term",
     noResultsText: "No results",
     searchingText: "Searching...",
     deleteText: "&times;",
+    createTokenText: "(Create new token)",
     animateDropdown: true,
-
-	// Tokenization settings
-    tokenLimit: null,
-    tokenDelimiter: ",",
-    preventDuplicates: false,
-
-	// Output settings
-    tokenValue: "id",
-
-	// Prepopulation settings
-    prePopulate: null,
-    processPrePopulate: false,
-
-	// Manipulation settings
-    idPrefix: "token-input-",
-
-	// Formatters
+    theme: null,
     resultsFormatter: function(item){ return "<li>" + item[this.propertyToSearch]+ "</li>" },
     tokenFormatter: function(item) { return "<li><p>" + item[this.propertyToSearch] + "</p></li>" },
 
-	// Callbacks
+    // Tokenization settings
+    tokenLimit: null,
+    tokenDelimiter: ",",
+    preventDuplicates: false,
+    tokenValue: "id",
+
+    // Callbacks
     onResult: null,
+    onCreate: null,
     onAdd: null,
     onDelete: null,
-    onReady: null
+    onReady: null,
+
+    // Other settings
+    idPrefix: "token-input-"
 };
 
 // Default classes to use when theming
@@ -115,8 +115,8 @@ var methods = {
         return this;
     },
     get: function() {
-    	return this.data("tokenInputObject").getTokens();
-   	}
+        return this.data("tokenInputObject").getTokens();
+    }
 }
 
 // Expose the .tokenInput function to jQuery as a plugin
@@ -185,7 +185,7 @@ $.TokenList = function (input, url_or_data, settings) {
     var input_val;
 
     // Create a new text input an attach keyup events
-    var input_box = $("<input type=\"text\"  autocomplete=\"off\">")
+    var input_box = $("<input type=\"text\" autocomplete=\"off\">")
         .css({
             outline: "none"
         })
@@ -412,10 +412,10 @@ $.TokenList = function (input, url_or_data, settings) {
             }
         });
     }
-    
+
     this.getTokens = function() {
-   		return saved_tokens;
-   	}
+        return saved_tokens;
+    }
 
     //
     // Private functions
@@ -439,10 +439,10 @@ $.TokenList = function (input, url_or_data, settings) {
     }
 
     function is_printable_character(keycode) {
-        return ((keycode >= 48 && keycode <= 90) ||     // 0-1a-z
-                (keycode >= 96 && keycode <= 111) ||    // numpad 0-9 + - / * .
-                (keycode >= 186 && keycode <= 192) ||   // ; = , - . / ^
-                (keycode >= 219 && keycode <= 222));    // ( \ ) '
+        return ((keycode >= 48 && keycode <= 90) || // 0-1a-z
+                (keycode >= 96 && keycode <= 111) || // numpad 0-9 + - / * .
+                (keycode >= 186 && keycode <= 192) || // ; = , - . / ^
+                (keycode >= 219 && keycode <= 222)); // ( \ ) '
     }
 
     // Inner function to a token to the list
@@ -463,8 +463,7 @@ $.TokenList = function (input, url_or_data, settings) {
             });
 
         // Store data on the token
-        var token_data = {"id": item.id};
-        token_data[settings.propertyToSearch] = item[settings.propertyToSearch];
+        var token_data = item;
         $.data(this_token.get(0), "tokeninput", item);
 
         // Save this token for duplicate checking
@@ -495,7 +494,7 @@ $.TokenList = function (input, url_or_data, settings) {
             token_list.children().each(function () {
                 var existing_token = $(this);
                 var existing_data = $.data(existing_token.get(0), "tokeninput");
-                if(existing_data && existing_data.id === item.id) {
+                if(existing_data && (existing_data.id === item.id || item.wasCreated && existing_data.name === item.name)) {
                     found_existing_token = existing_token;
                     return false;
                 }
@@ -507,6 +506,11 @@ $.TokenList = function (input, url_or_data, settings) {
                 input_box.focus();
                 return;
             }
+        }
+
+        // For newly created tokens, restore the original name without the text saying it is a new token
+        if(settings.allowCreation && item.wasCreated) {
+            (settings.tokenValue == "id") ? item.name = item.id : item.name = item[settings.tokenValue]; // restore the name without the token creation text
         }
 
         // Insert the new tokens
@@ -615,6 +619,9 @@ $.TokenList = function (input, url_or_data, settings) {
     // Update the hidden input box value
     function update_hidden_input(saved_tokens, hidden_input) {
         var token_values = $.map(saved_tokens, function (el) {
+            if(typeof settings.tokenValue == 'function')
+              return settings.tokenValue.call(this, el);
+
             return el[settings.tokenValue];
         });
         hidden_input.val(token_values.join(settings.tokenDelimiter));
@@ -633,7 +640,7 @@ $.TokenList = function (input, url_or_data, settings) {
                 position: "absolute",
                 top: $(token_list).offset().top + $(token_list).outerHeight(),
                 left: $(token_list).offset().left,
-                zindex: 999
+                'z-index': 999
             })
             .show();
     }
@@ -654,9 +661,9 @@ $.TokenList = function (input, url_or_data, settings) {
 
     // Highlight the query part of the search term
     function highlight_term(value, term) {
-        return value.replace(new RegExp("(?![^&;]+;)(?!<[^<>]*)(" + term + ")(?![^<>]*>)(?![^&;]+;)", "gi"), "<b>$1</b>");
+        return value.replace(new RegExp("(?![^&;]+;)(?!<[^<>]*)(" + term + ")(?![^<>]*>)(?![^&;]+;)", "gi"), "<strong>$1</strong>");
     }
-    
+
     function find_value_and_highlight_term(template, value, term) {
         return template.replace(new RegExp("(?![^&;]+;)(?!<[^<>]*)(" + value + ")(?![^<>]*>)(?![^&;]+;)", "g"), highlight_term(value, term));
     }
@@ -679,11 +686,11 @@ $.TokenList = function (input, url_or_data, settings) {
 
             $.each(results, function(index, value) {
                 var this_li = settings.resultsFormatter(value);
-                
-                this_li = find_value_and_highlight_term(this_li ,value[settings.propertyToSearch], query);            
-                
+
+                this_li = find_value_and_highlight_term(this_li ,value[settings.propertyToSearch], query);
+
                 this_li = $(this_li).appendTo(dropdown_ul);
-                
+
                 if(index % 2) {
                     this_li.addClass(settings.classes.dropdownItem);
                 } else {
@@ -733,7 +740,7 @@ $.TokenList = function (input, url_or_data, settings) {
     // Do a search and show the "searching" dropdown if the input is longer
     // than settings.minChars
     function do_search() {
-        var query = input_box.val().toLowerCase();
+        var query = input_box.val();
 
         if(query && query.length) {
             if(selected_token) {
@@ -792,10 +799,14 @@ $.TokenList = function (input, url_or_data, settings) {
                   if($.isFunction(settings.onResult)) {
                       results = settings.onResult.call(hidden_input, results);
                   }
-                  cache.add(cache_key, settings.jsonContainer ? results[settings.jsonContainer] : results);
+                  if(settings.allowCreation) {
+                      handleCreation(results);
+                  } else {
+                      cache.add(cache_key, settings.jsonContainer ? results[settings.jsonContainer] : results);
+                  }
 
                   // only populate the dropdown if the results are associated with the active search query
-                  if(input_box.val().toLowerCase() === query) {
+                  if(input_box.val().toLowerCase() === query.toLowerCase()) {
                       populate_dropdown(query, settings.jsonContainer ? results[settings.jsonContainer] : results);
                   }
                 };
@@ -811,9 +822,28 @@ $.TokenList = function (input, url_or_data, settings) {
                 if($.isFunction(settings.onResult)) {
                     results = settings.onResult.call(hidden_input, results);
                 }
-                cache.add(cache_key, results);
+                if(settings.allowCreation) {
+                    handleCreation(results);
+                } else {
+                    cache.add(cache_key, results);
+                }
                 populate_dropdown(query, results);
             }
+        }
+    }
+
+    function handleCreation(results) {
+        var displayedItem = {};
+        displayedItem['name'] = input_box.val() + ' ' + settings.createTokenText;
+        displayedItem[settings.tokenValue] = input_box.val();
+        displayedItem['wasCreated'] = true;
+        results.push(displayedItem);
+
+        if($.isFunction(settings.onCreate)) {
+            var item = {};
+            item['name'] = input_box.val();
+            item[settings.tokenValue] = input_box.val();
+            settings.onCreate.call(hidden_input, item);
         }
     }
 

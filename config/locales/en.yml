@@ -1,9 +1,15 @@
 en:
   author: 'Author'
+  authors: 'Authors'
   book: 'Book'
   books: 'Books'
+  category: 'Category'
+  categories: 'Categories'
   del: 'Del'
+  delete: 'Delete'
+  edit: 'Edit'
   login: 'Login'
+  signup: 'Signup'
   
   alerts:
     invalid_login_or_password: "Invalid login or password."
@@ -22,7 +28,7 @@ en:
   notices:
     logged_in: "Logged in."
     logged_out: "Logged out."
-    signed_up: "Signed up."
+    signed_up_and_logged_in: "Signed up and logged in."
   successes:
     created: "Successfully created %{o}."
     created_adv: "%{o}: '%{name}' was successfully created."

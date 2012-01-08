@@ -11,7 +11,16 @@
 $(function() {
   $("#book_author_tokens").tokenInput("/authors.json", {
     crossDomain: false,
-    prePopulate: $("#book_author_tokens").data("pre")
-    //theme: "facebook"
+    preventDuplicates: true,
+    allowCreation: true,
+    prePopulate: $("#book_author_tokens").data("pre"),
+    theme: ""
+  });
+  $("#book_category_tokens").tokenInput("/categories.json", {
+    crossDomain: false,
+    preventDuplicates: true,
+    allowCreation: true,
+    prePopulate: $("#book_category_tokens").data("pre"),
+    theme: "facebook"
   });
 });

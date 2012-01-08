@@ -3,10 +3,12 @@ source 'http://rubygems.org'
 gem 'rails', '3.1.0'
 gem 'mysql2'
 gem 'execjs'
+gem 'ancestry'
 gem 'therubyracer'
 gem 'jquery-rails'
 gem 'formtastic'
 gem 'cancan'
+gem 'compass', '>= 0.12.alpha.0'
 
 group :assets do
   gem 'sass-rails', "  ~> 3.1.0"

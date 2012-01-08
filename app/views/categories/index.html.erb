@@ -1,0 +1,9 @@
+<%= title t(:categories) %>
+
+<div id="categories">
+  <%= nested_categories @categories %>
+</div>
+
+<div id="bottom_links">
+  <%= link_to new(:category), new_category_path if can? :new, Category %>
+</div>

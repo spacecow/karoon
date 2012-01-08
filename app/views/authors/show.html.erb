@@ -1,3 +1,7 @@
 <%= title @author.name %>
 
 Book: <%= raw @author.books.map{|e| link_to e.title,e}.join(', ') %>
+
+<div id="bottom_links">
+  <%= link_to t(:edit), edit_author_path(@author) if can? :edit, @author %> <%= link_to t(:delete), @author, :confirm => sure?, :method => :delete if can? :destroy, @author %>
+</div>

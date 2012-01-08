@@ -3,14 +3,15 @@ require 'spec_helper'
 describe "Authors" do
   describe "index" do
     before(:each) do
-      create_author 'Dean R. Koontz'
+      @koontz = create_author 'Dean R. Koontz'
       @king = create_author 'Stephen King'
     end
 
     it "general layout" do
       visit authors_path
-      tablecell(0,0).should eq 'Stephen King' 
-      tablecell(1,0).should eq 'Dean R. Koontz' 
+      page.should have_title('Authors')
+      row(0).should have_link('Stephen King') 
+      row(1).should have_link('Dean R. Koontz')
       page.should_not have_link('New Author')
       table.should_not have_link('Edit')
       table.should_not have_link('Del')
@@ -23,6 +24,19 @@ describe "Authors" do
       table.should have_link('Edit')
       table.should have_link('Del')
       page.should have_link('New Author')
+    end
+
+    context "general links to" do
+      it "Stephen King" do
+        visit authors_path
+        row(0).click_link 'Stephen King'
+        page.current_path.should eq author_path(@king)
+      end
+      it "Dean R. Koontz" do
+        visit authors_path
+        row(1).click_link 'Dean R. Koontz'
+        page.current_path.should eq author_path(@koontz)
+      end
     end
 
     context "admin links to" do

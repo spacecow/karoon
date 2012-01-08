@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120101140943) do
+ActiveRecord::Schema.define(:version => 20120106011456) do
 
   create_table "authors", :force => true do |t|
     t.string   "name"
@@ -28,6 +28,23 @@ ActiveRecord::Schema.define(:version => 20120101140943) do
 
   create_table "books", :force => true do |t|
     t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "categories", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "ancestry"
+    t.string   "names_depth_cache"
+  end
+
+  add_index "categories", ["ancestry"], :name => "index_categories_on_ancestry"
+
+  create_table "categorizations", :force => true do |t|
+    t.integer  "category_id"
+    t.integer  "book_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

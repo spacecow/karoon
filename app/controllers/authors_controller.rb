@@ -1,11 +1,11 @@
 class AuthorsController < ApplicationController
+  before_filter :load_authors, :only => :index
   load_and_authorize_resource
 
   def show
   end
 
   def index
-    @authors = Author.where('name like ?',"%#{params[:q]}%").sort_by(&:last_name)
     respond_to do |f|
       f.html
       f.json {render :json => @authors.map(&:attributes)}
@@ -17,9 +17,7 @@ class AuthorsController < ApplicationController
 
   def create
     if @author.save
-      flash[:notice] = created_adv(:author,@author.name)
-      redirect_to new_author_path and return if params[:back] == 'author'
-      redirect_to new_book_path 
+      redirect_to new_author_path, :notice => created_adv(:author,@author.name)
     end
   end
 
@@ -37,4 +35,10 @@ class AuthorsController < ApplicationController
     @author.destroy
     redirect_to authors_path, :notice => deleted_adv(:author,name)
   end
+
+  private
+
+    def load_authors
+      @authors = Author.where('name like ?',"%#{params[:q]}%").sort_by(&:last_name)
+    end
 end

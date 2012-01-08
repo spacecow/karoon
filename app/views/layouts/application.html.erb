@@ -8,11 +8,38 @@
 </head>
 <body>
 
-<% flash.each do |name,msg| %>
-  <%= content_tag :div, msg, :id => "flash_#{name}" %>
-<% end %>
+<div id="container">
+  <div id="site_nav_container">
+    <div id="site_nav">
+      <ul>
+        <li><%= link_to t(:books), books_path %></li>
+        <li><%= link_to t(:authors), authors_path %></li>
+        <li><%= link_to t(:categories), categories_path %></li>
+      </ul>
+    </div>
+  </div>
 
-<%= yield %>
+  <div id="main_container">
+    <div id="flash_container">
+      <% flash.each do |name,msg| %>
+        <%= content_tag :div, msg, :id => "flash_#{name}" %>
+      <% end %>
+    </div>
 
+    <div id="main">
+      <%= yield %>
+    </div>
+  </div>
+  <div id="user_nav">
+    <% if current_user %>
+      Logged in as <%= current_user.email %><br>
+      <%= link_to t(:logout), logout_path %>
+    <% else %>
+      <%= link_to t(:login), login_path %>
+    <% end %>
+    <%= link_to t(:signup), signup_path %>
+  </div>
+  <div class="clear"></div>
+</div>
 </body>
 </html>
