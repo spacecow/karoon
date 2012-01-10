@@ -61,14 +61,24 @@ describe "Books" do
           li(:regular_price).should have_blank_error
         end
         it "regular price must be a number" do
+          Setting.singleton.update_attribute(:currency,Setting::TOMAN)
           fill_in 'Price', :with => 'letters'
           click_button 'Update Book'
           li(:regular_price).should have_greater_than_error(50)
         end
-        it "regular price cannot be less than 50 tomen" do
-          fill_in 'Price', :with => 49 
-          click_button 'Update Book'
-          li(:regular_price).should have_error('must be greater than 50')
+        context "regular price cannot be less than" do
+          it "50 tomen" do
+            Setting.singleton.update_attribute(:currency,Setting::TOMAN)
+            fill_in 'Price', :with => 49 
+            click_button 'Update Book'
+            li(:regular_price).should have_greater_than_error(50)
+          end
+          it "500 Riel" do
+            Setting.singleton.update_attribute(:currency,Setting::RIEL)
+            fill_in 'Price', :with => 499 
+            click_button 'Update Book'
+            li(:regular_price).should have_greater_than_error(500)
+          end
         end
       end
 

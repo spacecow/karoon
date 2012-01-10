@@ -37,8 +37,7 @@ class Book < ActiveRecord::Base
       if id =~ /^\d+$/
         tokens.push id
       else
-        tokens.push Category.create!(:name=>id).id
-      end
+        tokens.push Category.create!(:name=>id).id end
     end
     self.category_ids = tokens
   end
@@ -50,6 +49,13 @@ class Book < ActiveRecord::Base
   private
 
     def lowest_price
-      errors.add(:regular_price,I18n.t('activerecord.errors.messages.greater_than',:count => 50)) if regular_price && regular_price < 50
+      if regular_price
+        if Setting.currency_in_riel?
+          error = I18n.t('activerecord.errors.messages.greater_than',:count => 500) if regular_price < 500 
+        elsif Setting.currency_in_toman?
+          error = I18n.t('activerecord.errors.messages.greater_than',:count => 50) if regular_price < 50 
+        end
+        errors.add(:regular_price,error) if error
+      end
     end
 end

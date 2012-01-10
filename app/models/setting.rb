@@ -7,6 +7,9 @@ class Setting < ActiveRecord::Base
     def currency_in_riel?;
       singleton.currency == RIEL
     end
+    def currency_in_toman?;
+      singleton.currency == TOMAN 
+    end
     def in_currency; "in #{singleton.currency}" end 
     def singleton; Setting.first end
   end
