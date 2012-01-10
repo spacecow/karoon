@@ -1,8 +1,9 @@
 <%= semantic_form_for @book do |f| %>
   <%= f.input :title %>
-  <%# f.semantic_fields_for :authorships do |ref| %>
-    <%# ref.input :author_id, :as => :select, :collection => @authors %>
-  <%# end %>
+  <%= f.input :summary %>
+  <%= f.input :regular_price,:input_html => {:class => :short} %>
+  <div class="clear"></div>
+  <%= f.input :image %>
   <%= f.input :author_tokens, :label => ft(:author), :input_html => {"data-pre" => @book.authors.map(&:attributes).to_json} %>
   <%= f.input :category_tokens, :label => ft(:category), :input_html => {"data-pre" => @book.categories.map(&:attributes).to_json} %>
   <%= f.submit :class => :submit %>

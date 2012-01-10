@@ -10,6 +10,8 @@ Karoon::Application.routes.draw do
   resources :books
   root :to => 'books#index'
 
+  resources :settings, :only => [:edit,:update]
+
   resources :authors
   resources :categories
 end

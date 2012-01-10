@@ -4,15 +4,21 @@ describe "Books" do
   describe "index" do
     before(:each) do
       @book = create_book("This is the Way")
+      @book.authors << create_author('Stephen King')
+      @book.categories << create_category('religion')
     end
 
     context "layout" do
       it "general" do
         visit books_path
         page.should have_title('Books')
+        div('book',0).should have_image('Books-pile')
+        div('book',0).should have_content("This is the Way by Stephen King")
         div('book',0).should have_link("This is the Way")
-        div('book',0).should_not have_link('Edit')
-        div('book',0).should_not have_link('Del')
+        div('book',0).should have_link("Stephen King")
+        div('book',0).should have_link("religion")
+        div('books').should_not have_link('Edit')
+        div('books').should_not have_link('Del')
         page.should_not have_link('New Book')
       end
 
@@ -20,8 +26,8 @@ describe "Books" do
         create_admin(:email=>'admin@example.com')
         login('admin@example.com')
         visit books_path
-        div('book',0).should have_link('Edit')
-        div('book',0).should have_link('Del')
+        div('books').should have_link('Edit')
+        div('books').should have_link('Del')
         page.should have_link('New Book')
       end
     end

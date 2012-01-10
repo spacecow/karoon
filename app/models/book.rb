@@ -6,9 +6,12 @@ class Book < ActiveRecord::Base
 
   attr_reader :author_tokens
   attr_reader :category_tokens
-  attr_accessible :title,:author_tokens,:category_tokens
+  attr_accessible :title,:author_tokens,:category_tokens,:image,:summary,:regular_price
 
-  validates_presence_of :title
+  validates_presence_of :title,:regular_price,:categories
+  validate :lowest_price
+
+  mount_uploader :image, ImageUploader
 
   def author
     authors.first == authors.last ? authors.first : nil 
@@ -39,4 +42,10 @@ class Book < ActiveRecord::Base
     end
     self.category_ids = tokens
   end
+
+  private
+
+    def lowest_price
+      errors.add(:regular_price,I18n.t('activerecord.errors.messages.greater_than',:count => 50)) if regular_price && regular_price < 50
+    end
 end

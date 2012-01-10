@@ -63,6 +63,14 @@ describe "Categories" do
         page.current_path.should eq categories_path
         page.should have_notice("Category: 'science' was successfully deleted.")
       end
+
+      it "destroy parent category does not destory chilfren" do
+        rocket = create_category('rocket',@space.id)        
+        fuel = create_category('fuel',rocket.id)
+        div('category',1).click_link 'Del'
+        Category.find(rocket.id).names_depth_cache.should eq 'rocket'
+        Category.find(fuel.id).names_depth_cache.should eq 'rocket/fuel'
+      end
     end
   end
 end

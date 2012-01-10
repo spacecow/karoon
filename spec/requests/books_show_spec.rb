@@ -9,17 +9,18 @@ describe "Books" do
       @science = create_category('science')
       @book.authors << @king
       @book.authors << @koontz
+      @book.categories.destroy_all
       @book.categories << @science
     end 
 
     it "layout" do
       visit book_path(@book)
-      page.should have_title('This is the Way') 
-      page.should have_content('Author: Stephen King, Dean R. Koontz')
-      page.should have_link('Stephen King')
-      page.should have_link('Dean R. Koontz')
-      page.should have_content('Category: science')
-      page.should have_link('science')
+      div('book').should have_title('This is the Way') 
+      div('book').should have_content('Author: Stephen King, Dean R. Koontz')
+      div('book').should have_link('Stephen King')
+      div('book').should have_link('Dean R. Koontz')
+      div('book').should have_content('Category: science')
+      div('book').should have_link('science')
       bottom_links.should_not have_link('Edit')
       bottom_links.should_not have_link('Delete')
     end
@@ -57,15 +58,15 @@ describe "Books" do
       end
 
       it "Stephen King" do
-        click_link('Stephen King')
+        div('book').click_link('Stephen King')
         page.current_path.should eq author_path(@king)
       end
       it "Dean R. Koontz" do
-        click_link 'Dean R. Koontz'
+        div('book').click_link 'Dean R. Koontz'
         page.current_path.should eq author_path(@koontz)
       end
       it "science" do
-        click_link 'science'
+        div('book').click_link 'science'
         page.current_path.should eq category_path(@science)
       end
     end

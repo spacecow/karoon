@@ -1,7 +1,7 @@
 class Category < ActiveRecord::Base
   has_many :categorizations, :dependent => :destroy
   has_many :books, :through => :categorizations
-  has_ancestry
+  has_ancestry :orphan_strategy => :rootify
   before_save :cache_ancestry
 
   attr_accessor :recursion

@@ -9,6 +9,8 @@ gem 'jquery-rails'
 gem 'formtastic'
 gem 'cancan'
 gem 'compass', '>= 0.12.alpha.0'
+gem 'carrierwave'
+gem 'rmagick'
 
 group :assets do
   gem 'sass-rails', "  ~> 3.1.0"

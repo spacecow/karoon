@@ -9,7 +9,7 @@ describe AuthorsController do
 
   describe "a user is not logged in" do
     controller_actions.each do |action,req|
-      if %(show index).include?(action)
+      if %w(show index).include?(action)
         it "should reach the #{action} page" do
           send("#{req}", "#{action}", :id => @model.id)
           response.redirect_url.should_not eq welcome_url
@@ -29,7 +29,7 @@ describe AuthorsController do
         session[:userid] = create_member.id
       end
       controller_actions.each do |action,req|
-        if %(show index).include?(action)
+        if %w(show index).include?(action)
           it "should reach the #{action} page" do
             send(req, action, :id => @model.id)
             response.redirect_url.should_not eq welcome_url
@@ -48,7 +48,7 @@ describe AuthorsController do
         session[:userid] = create_vip.id
       end
       controller_actions.each do |action,req|
-        if %(show index).include?(action)
+        if %w(show index).include?(action)
           it "should reach the #{action} page" do
             send(req, action, :id => @model.id)
             response.redirect_url.should_not eq welcome_url
@@ -67,7 +67,7 @@ describe AuthorsController do
         session[:userid] = create_admin.id
       end
       controller_actions.each do |action,req|
-        if %(show index new create edit update destroy).include?(action)
+        if %w(show index new create edit update destroy).include?(action)
           it "should reach the #{action} page" do
             send(req, action, :id => @model.id)
             response.redirect_url.should_not eq welcome_url
@@ -86,7 +86,7 @@ describe AuthorsController do
         session[:userid] = create_god.id
       end
       controller_actions.each do |action,req|
-        if %(show index new create edit update destroy).include?(action)
+        if %w(show index new create edit update destroy).include?(action)
           it "should reach the #{action} page" do
             send(req, action, :id => @model.id)
             response.redirect_url.should_not eq welcome_url

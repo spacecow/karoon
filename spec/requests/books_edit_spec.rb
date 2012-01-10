@@ -5,20 +5,26 @@ describe "Books" do
     before(:each) do
       create_admin(:email=>'admin@example.com')
       login('admin@example.com')
-      @book = Factory(:book,:title=>"This is the Way")
+      @book = Factory(:book,:title=>"This is the Way",:summary => 'Test Summary',:regular_price=>1000)
+      @book.categories << create_category('science')
       visit edit_book_path(@book)
     end
 
     it "layout" do
       page.should have_title('Edit Book')
       find_field('Title').value.should eq "This is the Way"
+      find_field('Summary').value.should eq 'Test Summary'
+      find_field('Regular Price').value.should eq '1000'
       find_field('Author').value.should be_nil 
       page.should have_button('Update Book')
     end
 
     context "edit book" do
       before(:each) do
-        fill_in 'Title', :with => "No Way" 
+        fill_in 'Title', :with => "No Way"
+        fill_in 'Summary', :with => 'Edited Summary'
+        fill_in 'Regular Price', :with => '900'
+        fill_in 'Category', :with => 'rocket'
       end
 
       it "new version is saved to database" do
@@ -26,16 +32,44 @@ describe "Books" do
         author2 = create_author("Mark Twain")
         fill_in 'Author', :with => "#{author1.id}, #{author2.id}"
         lambda do
-          click_button 'Update Book'
+          lambda do
+            click_button 'Update Book'
+          end.should change(Category,:count).by(1)
         end.should change(Book,:count).by(0)
-        Book.last.title.should eq 'No Way'
-        Book.last.authors.map(&:name).should eq ["Stephen King", "Mark Twain"]
+        book = Book.last
+        book.title.should eq 'No Way'
+        book.summary.should eq 'Edited Summary'
+        book.regular_price.should eq 900
+        book.categories.map(&:name).should eq ["rocket"]
+        book.authors.map(&:name).should eq ["Stephen King", "Mark Twain"]
       end
 
-      it "title cannot be blank" do
-        fill_in 'Title', :with => ''
-        click_button 'Update Book'
-        li(:title).should have_blank_error
+      context "error" do
+        it "title cannot be blank" do
+          fill_in 'Title', :with => ''
+          click_button 'Update Book'
+          li(:title).should have_blank_error
+        end
+        it "category cannot be left blank" do
+          fill_in 'Category', :with => ''
+          click_button 'Update Book'
+          li(:category_tokens).should have_blank_error
+        end
+        it "regular price cannot be blank" do
+          fill_in 'Price', :with => ''
+          click_button 'Update Book'
+          li(:regular_price).should have_blank_error
+        end
+        it "regular price must be a number" do
+          fill_in 'Price', :with => 'letters'
+          click_button 'Update Book'
+          li(:regular_price).should have_greater_than_error(50)
+        end
+        it "regular price cannot be less than 50 tomen" do
+          fill_in 'Price', :with => 49 
+          click_button 'Update Book'
+          li(:regular_price).should have_error('must be greater than 50')
+        end
       end
 
       it "shows a flash message" do

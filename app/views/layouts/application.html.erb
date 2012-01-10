@@ -8,38 +8,49 @@
 </head>
 <body>
 
-<div id="container">
-  <div id="site_nav_container">
-    <div id="site_nav">
-      <ul>
-        <li><%= link_to t(:books), books_path %></li>
-        <li><%= link_to t(:authors), authors_path %></li>
-        <li><%= link_to t(:categories), categories_path %></li>
-      </ul>
+<div id="background_container">
+  <div id="container">
+    <div id="site_nav_container">
+      <div id="site_nav">
+        <ul>
+          <li><%= link_to t(:books), books_path %></li>
+          <li>
+            <ul>
+              <% Category.order(:names_depth_cache).each do |category| %>
+                <li><%= link_to category.name %>
+              <% end %>
+            </ul>
+          </li>
+          <li><%= link_to t(:authors), authors_path %></li>
+          <li><%= link_to t(:categories), categories_path %></li>
+        </ul>
+      </div>
     </div>
-  </div>
 
-  <div id="main_container">
-    <div id="flash_container">
-      <% flash.each do |name,msg| %>
-        <%= content_tag :div, msg, :id => "flash_#{name}" %>
-      <% end %>
-    </div>
+    <div id="main_container">
+      <div id="flash_container">
+        <% flash.each do |name,msg| %>
+          <%= content_tag :div, msg, :id => "flash_#{name}" %>
+        <% end %>
+        <div id="user_nav">
+          <% if current_user %>
+            Logged in as <%= current_user.email %><br>
+            <%= link_to t(:logout), logout_path %>
+          <% else %>
+            <%= link_to t(:login), login_path %>
+          <% end %>
+          <%= link_to t(:signup), signup_path %>
+          <%= link_to t(:settings), edit_setting_path(Setting.singleton) %>
+        </div>
+      </div>
 
-    <div id="main">
-      <%= yield %>
+      <div id="main">
+        <%= yield %>
+      </div>
     </div>
+    <div class="clear"></div>
   </div>
-  <div id="user_nav">
-    <% if current_user %>
-      Logged in as <%= current_user.email %><br>
-      <%= link_to t(:logout), logout_path %>
-    <% else %>
-      <%= link_to t(:login), login_path %>
-    <% end %>
-    <%= link_to t(:signup), signup_path %>
-  </div>
-  <div class="clear"></div>
 </div>
+
 </body>
 </html>
