@@ -8,3 +8,4 @@ config/database.yml
 *.swo
 *.swn
 *.DS_Store
+public/uploads

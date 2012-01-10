@@ -5,25 +5,39 @@ describe "Books" do
     before(:each) do
       create_admin(:email=>'admin@example.com')
       login('admin@example.com')
-      visit new_book_path
     end
+    
+    context "layout" do
+      it "regular" do
+        visit new_book_path
+        page.should have_title('New Book')
+        find_field('Title').value.should be_nil 
+        find_field('Summary').value.should be_empty
+        find_field('Regular Price').value.should be_nil
+        find_field('Image').value.should be_nil
+        find_field('Author').value.should be_nil 
+        find_field('Category').value.should be_nil 
+        page.should have_button('Create Book')
+      end
 
-    it "book layout" do
-      page.should have_title('New Book')
-      find_field('Title').value.should be_nil 
-      find_field('Summary').value.should be_empty
-      find_field('Regular Price').value.should be_nil
-      li(:regular_price).should have_hint('in toman')
-      find_field('Image').value.should be_nil
-      find_field('Author').value.should be_nil 
-      find_field('Category').value.should be_nil 
-      page.should have_button('Create Book')
+      it "currency in Toman" do
+        Setting.singleton.update_attribute(:currency,Setting::TOMAN)
+        visit new_book_path
+        li(:regular_price).should have_hint('in Toman')
+      end
+
+      it "currency in Riel" do
+        Setting.singleton.update_attribute(:currency,Setting::RIEL)
+        visit new_book_path
+        li(:regular_price).should have_hint('in Riel')
+      end
     end
 
     context "create book" do
       before(:each) do
         @author = create_author("Test Author")
         @category =  create_category("science")
+        visit new_book_path
         fill_in 'Title', :with => 'New Title'
         fill_in 'Summary', :with => 'A stupid summary.'
         fill_in 'Regular Price', :with => 10000
@@ -34,16 +48,28 @@ describe "Books" do
 
       it "adds a book to the database" do
         lambda do
-          click_button('Create Book')
+          click_button 'Create Book'
         end.should change(Book,:count).by(1)
         book = Book.last
         book.title.should eq 'New Title'
         book.summary.should eq 'A stupid summary.'
-        book.regular_price.should eq 10000
         book.image_url.should eq "/uploads/book/image/#{book.id}/tree.png"
         book.image_url(:thumb).should eq "/uploads/book/image/#{book.id}/thumb_tree.png"
         book.author.name.should eq 'Test Author'
         book.category.name.should eq 'science'
+      end
+
+      context "saves the price in Toman for" do
+        it "Toman input" do
+          Setting.singleton.update_attribute(:currency,Setting::TOMAN)
+          click_button 'Create Book'
+          Book.last.regular_price.should eq 10000
+        end
+        it "Riel input" do
+          Setting.singleton.update_attribute(:currency,Setting::RIEL)
+          click_button 'Create Book'
+          Book.last.regular_price.should eq 1000
+        end
       end
 
       context "error" do

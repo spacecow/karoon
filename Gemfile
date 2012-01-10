@@ -10,7 +10,7 @@ gem 'formtastic'
 gem 'cancan'
 gem 'compass', '>= 0.12.alpha.0'
 gem 'carrierwave'
-gem 'rmagick'
+gem 'rmagick', '2.12.2'
 
 group :assets do
   gem 'sass-rails', "  ~> 3.1.0"
@@ -19,7 +19,7 @@ group :assets do
 end
 
 group :development do
-  gem 'rspec-rails'
+  gem 'rspec-rails', '2.7.0'
 end
 
 group :test do

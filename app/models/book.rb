@@ -42,6 +42,10 @@ class Book < ActiveRecord::Base
     end
     self.category_ids = tokens
   end
+  def regular_price=(i)
+    i = i.to_i / 10 if Setting.currency_in_riel?
+    write_attribute(:regular_price,i) 
+  end
 
   private
 

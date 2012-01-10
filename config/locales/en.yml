@@ -8,6 +8,7 @@ en:
   del: 'Del'
   delete: 'Delete'
   edit: 'Edit'
+  in_toman: 'in Toman'
   login: 'Login'
   settings: 'Settings'
   signup: 'Signup'
@@ -24,12 +25,13 @@ en:
     labels:
       email: 'Login'
       first_name: 'First Name'
+      image: 'Image'
       last_name: 'Last Name'
       middle_names: 'Middle Names'
       password_confirmation: "Confirmation"
       regular_price: 'Regular Price'
-    hints:
-      regular_price: 'in Toman'
+      summary: 'Summary'
+      title: 'Title'
   labels:
     edit: 'Edit %{o}'
     new: 'New %{o}'
@@ -41,7 +43,8 @@ en:
     logged_out: "Logged out."
     signed_up_and_logged_in: "Signed up and logged in."
   successes:
-    created: "Successfully created %{o}."
+    created: "%{o} was successfully created."
     created_adv: "%{o}: '%{name}' was successfully created."
     deleted_adv: "%{o}: '%{name}' was successfully deleted."
+    updated: "%{o} was successfully updated."
     updated_adv: "%{o}: '%{name}' was successfully updated."

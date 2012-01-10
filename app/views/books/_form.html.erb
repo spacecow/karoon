@@ -1,7 +1,7 @@
 <%= semantic_form_for @book do |f| %>
   <%= f.input :title %>
   <%= f.input :summary %>
-  <%= f.input :regular_price,:input_html => {:class => :short} %>
+  <%= f.input :regular_price,:hint=>Setting.in_currency,:input_html => {:class => :short} %>
   <div class="clear"></div>
   <%= f.input :image %>
   <%= f.input :author_tokens, :label => ft(:author), :input_html => {"data-pre" => @book.authors.map(&:attributes).to_json} %>

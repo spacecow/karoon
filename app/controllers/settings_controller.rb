@@ -6,7 +6,7 @@ class SettingsController < ApplicationController
 
   def update
     if @setting.update_attributes(params[:setting])
-      redirect_to edit_setting_path(@setting)
+      redirect_to edit_setting_path(@setting), :notice => updated(:settings)
     end
   end
 end
