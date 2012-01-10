@@ -1,3 +1,8 @@
 <%= title new(:book) %>
 
-<%= render 'form' %>
+<%= current_user.books %>
+<%= semantic_form_for current_user do |f| %>
+  <%= f.semantic_fields_for :blank_books do |ref| %>
+    <%= render 'books/form', :f => ref %>
+  <% end %>
+<% end %>

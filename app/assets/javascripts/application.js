@@ -9,14 +9,14 @@
 //= require_tree .
 
 $(function() {
-  $("#book_author_tokens").tokenInput("/authors.json", {
+  $("#user_books_attributes_0_author_tokens").tokenInput("/authors.json", {
     crossDomain: false,
     preventDuplicates: true,
     allowCreation: true,
     prePopulate: $("#book_author_tokens").data("pre"),
     theme: ""
   });
-  $("#book_category_tokens").tokenInput("/categories.json", {
+  $("#user_books_attributes_0_category_tokens").tokenInput("/categories.json", {
     crossDomain: false,
     preventDuplicates: true,
     allowCreation: true,

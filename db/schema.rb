@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120109123118) do
+ActiveRecord::Schema.define(:version => 20120110070703) do
 
   create_table "authors", :force => true do |t|
     t.string   "name"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20120109123118) do
     t.string   "image"
     t.integer  "regular_price"
     t.text     "summary"
+    t.integer  "user_id"
   end
 
   create_table "categories", :force => true do |t|

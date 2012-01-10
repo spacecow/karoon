@@ -1,4 +1,8 @@
 class User < ActiveRecord::Base
+  has_many :books
+  has_many :blank_books, :class_name => 'Book', :conditions => {:user_id => nil}
+  accepts_nested_attributes_for :blank_books
+
   attr_accessor :password
   before_create :set_role
   before_save :encrypt_password

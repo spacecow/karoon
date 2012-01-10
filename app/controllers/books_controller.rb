@@ -5,14 +5,14 @@ class BooksController < ApplicationController
   end
 
   def new
-    @book.authorships.build
+    current_user.blank_books.build
   end
 
   def create
     if @book.save
       redirect_to new_book_path, :notice => created_adv(:book,@book.title)
     else
-      @book.errors.add(:category_tokens,@book.errors_on(:categories)) if @book.errors_on(:categories)
+      @book.errors.add(:category_tokens,@book.errors[:categories]) if @book.errors[:categories]
       render :new
     end
   end
@@ -24,7 +24,7 @@ class BooksController < ApplicationController
     if @book.update_attributes(params[:book])
       redirect_to @book, :notice => updated_adv(:book,@book.title)
     else
-      @book.errors.add(:category_tokens,@book.errors_on(:categories)) if @book.errors_on(:categories)
+      @book.errors.add(:category_tokens,@book.errors[:categories]) if @book.errors[:categories]
       render :edit
     end
   end

@@ -19,3 +19,5 @@ d27e33: !ruby/object:Dooby::Task
   todo: list nested categories on the index page :done
 63c6a6: !ruby/object:Dooby::Task 
   todo: edit settings :done
+dca459: !ruby/object:Dooby::Task 
+  todo: add more book forms :doing

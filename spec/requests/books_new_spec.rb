@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Books" do
+describe "Books", :focus=>true do
   describe "new" do
     before(:each) do
       create_admin(:email=>'admin@example.com')

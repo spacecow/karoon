@@ -4,7 +4,7 @@ Karoon::Application.routes.draw do
   resources :sessions, :only => [:new,:create,:destroy]
 
   get 'signup' => 'users#new'
-  resources :users, :only => [:new,:create]
+  resources :users, :only => [:new,:create,:update]
 
   get 'welcome' => 'books#index'
   resources :books

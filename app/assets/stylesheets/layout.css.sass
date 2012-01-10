@@ -49,8 +49,6 @@ form
     input.submit
       width: auto
       margin: 10px 0 0 0
-    input#book_regular_price
-      float: left
     textarea
       width: 400px
       height: 100px
@@ -61,8 +59,19 @@ form
       margin: 0
       color: gray
       font-style: italic
+    p.inline-errors
+      font-style: italic
+      color: red
+      margin: 0
+  li#book_regular_price_input
+    input
       float: left
-      margin-left: 5px
+    p.inline-hints
+      float: left
+      margin: 4px 0 0 5px
+    p.inline-errors
+      float: left
+      width: 740px
 
 div#background_container
   width: $background_container_width 

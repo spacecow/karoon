@@ -1,4 +1,5 @@
 class Book < ActiveRecord::Base
+  belongs_to :user
   has_many :authorships, :dependent => :destroy
   has_many :authors, :through => :authorships
   has_many :categorizations, :dependent => :destroy
