@@ -1,0 +1,13 @@
+class CreateSettings < ActiveRecord::Migration
+  def self.up 
+    create_table :settings do |t|
+      t.string :currency
+      t.timestamps
+    end
+    Setting.create!
+  end
+
+  def self.down
+    drop_table :settings
+  end
+end

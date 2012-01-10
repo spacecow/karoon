@@ -1,0 +1,20 @@
+<div class="book">
+  <div id="image">
+    <% if book.image_url.nil? %>
+      <%= image_tag 'books-pile.jpg' %>
+    <% else %>
+      <%= image_tag book.image_url(:thumb) %>
+    <% end %>
+  </div>
+  <div id="title">
+    <span id="title"><%= link_to book.title, book %></span> by <%= link_to_authors book.authors %>
+  </div>
+  <div id="categories">
+    <%= link_to_categories book.categories %>
+  </div>
+  <div id="actions">
+    <%= link_to t(:edit), edit_book_path(book) if can? :edit, book %>
+    <%= link_to t(:del), book, :confirm => sure?, :method => :delete if can? :destroy, book %>
+  </div>
+  <div class="clear"></div>
+</div>

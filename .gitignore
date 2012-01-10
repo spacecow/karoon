@@ -7,3 +7,4 @@ config/database.yml
 *.swp
 *.swo
 *.swn
+*.DS_Store

@@ -1,0 +1,104 @@
+@import "compass/css3/border-radius"
+@import "compass/css3/gradient"
+
+$background_container_width: 1000px
+$container_width: 900px
+$site_nav_container_width: 150px
+$site_nav_width: 130px
+$main_container_width: 750px - 4px
+$flash_container_height: 35px
+$flash_container_width: 200px
+$blue: #4B7399
+
+body
+  font: normal 14px "Helvetica Neue", Arial, Helvetica, sans-serif
+a
+  text-decoration: none 
+  color: $blue
+  text-shadow: 1px 1px 1px #aaa
+  &:hover
+    color: #eee
+    text-shadow: 1px 1px 1px $blue 
+
+div.clear
+  clear: both
+  height: 0
+  overflow: hidden
+
+$notice_dark: #396
+$notice_light: #4CC417
+@mixin custom_gradient($light, $dark, $corner: 10px)
+  color: white
+  font-weight: bold
+  padding: 5px
+  +border-radius($corner)
+  +linear-gradient(color-stops($light, $dark))
+
+ul
+  margin: 0
+  padding: 0
+  li
+    list-style-type: none
+
+form
+  li
+    input
+      width: 400px
+    input.short
+      width: 200px
+    input.submit
+      width: auto
+      margin: 10px 0 0 0
+    input#book_regular_price
+      float: left
+    textarea
+      width: 400px
+      height: 100px
+    list-style-type: none
+    label
+      display: block
+    p.inline-hints
+      margin: 0
+      color: gray
+      font-style: italic
+      float: left
+      margin-left: 5px
+
+div#background_container
+  width: $background_container_width 
+  margin: 0 auto
+  div#container
+    width: $container_width
+    margin: 0 auto
+    div#site_nav_container
+      float: left
+      width: $site_nav_container_width
+      div#site_nav
+        width: $site_nav_width
+        margin: 66px auto 0 auto
+        font-size: 18px
+        text-align: right
+        ul
+          li
+            a
+              font-size: 20px
+            ul
+              li
+                a
+                  font-size: 16px
+    div#main_container
+      width: $main_container_width
+      float: left
+      div#flash_container
+        padding: 2px
+        height: $flash_container_height
+        div#flash_notice
+          border: 1px solid black
+          float: left
+          margin-top: 2px
+          +custom_gradient($notice_light,$notice_dark)
+        div#user_nav
+          float: right
+      div#main
+        div#bottom_links
+          margin-top: 10px
