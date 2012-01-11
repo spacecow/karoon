@@ -67,9 +67,9 @@ describe BooksController do
         session[:userid] = create_admin.id
       end
       controller_actions.each do |action,req|
-        if %w(show index new create edit update destroy).include?(action)
+        if %w(show index new create edit update destroy create_individual).include?(action)
           it "should reach the #{action} page" do
-            send(req, action, :id => @model.id)
+            send(req, action, :id => @model.id, :books => {"0" => {:title => "Title"}})
             response.redirect_url.should_not eq welcome_url
           end
         else
@@ -86,9 +86,9 @@ describe BooksController do
         session[:userid] = create_god.id
       end
       controller_actions.each do |action,req|
-        if %w(show index new create edit update destroy).include?(action)
+        if %w(show index new create edit update destroy create_individual).include?(action)
           it "should reach the #{action} page" do
-            send(req, action, :id => @model.id)
+            send(req, action, :id => @model.id, :books => {"0" => {:title => "Title"}})
             response.redirect_url.should_not eq welcome_url
           end
         else

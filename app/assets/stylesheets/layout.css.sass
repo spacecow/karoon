@@ -25,6 +25,8 @@ div.clear
   height: 0
   overflow: hidden
 
+$alert_dark: #933
+$alert_light: #f33
 $notice_dark: #396
 $notice_light: #4CC417
 @mixin custom_gradient($light, $dark, $corner: 10px)
@@ -106,6 +108,11 @@ div#background_container
           float: left
           margin-top: 2px
           +custom_gradient($notice_light,$notice_dark)
+        div#flash_alert
+          border: 1px solid black
+          float: left
+          margin-top: 2px
+          +custom_gradient($alert_light,$alert_dark)
         div#user_nav
           float: right
       div#main

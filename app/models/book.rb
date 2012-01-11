@@ -10,9 +10,15 @@ class Book < ActiveRecord::Base
   attr_accessible :title,:author_tokens,:category_tokens,:image,:summary,:regular_price
 
   validates_presence_of :title,:regular_price,:categories
+  validates_uniqueness_of :title
+  validates_numericality_of :regular_price, :unless => :errors_on_regular_price?
   validate :lowest_price
 
   mount_uploader :image, ImageUploader
+
+  def all_fields_emtpy?
+    title.blank? && summary.blank? && regular_price.blank? && image.blank? && authors.empty? && categories.empty?
+  end
 
   def author
     authors.first == authors.last ? authors.first : nil 
@@ -38,25 +44,28 @@ class Book < ActiveRecord::Base
       if id =~ /^\d+$/
         tokens.push id
       else
-        tokens.push Category.create!(:name=>id).id end
+        tokens.push Category.create(:name=>id).id end
     end
     self.category_ids = tokens
   end
   def regular_price=(i)
-    i = i.to_i / 10 if Setting.currency_in_riel?
+    i = i.to_i / 10 if Setting.currency_in_riel? && i =~ /^\d+$/
     write_attribute(:regular_price,i) 
   end
 
   private
 
+    def errors_on_regular_price?
+      errors[:regular_price].present?
+    end
     def lowest_price
       if regular_price
         if Setting.currency_in_riel?
-          error = I18n.t('activerecord.errors.messages.greater_than',:count => 500) if regular_price < 500 
+          error = I18n.t('activerecord.errors.messages.greater_than',:count => 500) if regular_price.to_i < 500 
         elsif Setting.currency_in_toman?
-          error = I18n.t('activerecord.errors.messages.greater_than',:count => 50) if regular_price < 50 
+          error = I18n.t('activerecord.errors.messages.greater_than',:count => 50) if regular_price.to_i < 50 
         end
-        errors.add(:regular_price,error) if error
+        errors.add(:regular_price,error) if error && !errors_on_regular_price?
       end
     end
 end

@@ -1,0 +1,37 @@
+<li id="book_title_input">
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <p class="inline-errors">
+    <%= book.errors[:title].join %>
+  </p>
+</li>
+<li id="book_summary_input">
+  <%= f.label :summary %>
+  <%= f.text_area :summary %>
+</li>
+<li id="book_regular_price_input">
+  <%= f.label :regular_price, ft(:regular_price) %>
+  <%= f.text_field :regular_price, {:class => :short} %>
+  <p class="inline-hints">
+    <%= Setting.in_currency %>
+  </p>
+  <p class="inline-errors">
+    <%= book.errors[:regular_price].join %>
+  </p>
+</li>
+<div class="clear"></div>
+<li id="book_image_input">
+  <%= f.label :image %>
+  <%= f.file_field :image %>
+</li>
+<li id="book_author_tokens_input">
+  <%= f.label :author_tokens, ft(:author), "data-pre" => book.authors.map(&:attributes).to_json %>
+  <%= f.text_field :author_tokens %>
+</li>
+<li id="book_category_tokens_input">
+  <%= f.label :category_tokens, ft(:category), "data-pre" => book.categories.map(&:attributes).to_json %>
+  <%= f.text_field :category_tokens %>
+  <p class="inline-errors">
+    <%= book.errors[:categories].join %>
+  </p>
+</li>

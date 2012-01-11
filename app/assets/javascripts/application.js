@@ -9,18 +9,18 @@
 //= require_tree .
 
 $(function() {
-  $("#user_books_attributes_0_author_tokens").tokenInput("/authors.json", {
+  $("#books_0_author_tokens").tokenInput("/authors.json", {
     crossDomain: false,
     preventDuplicates: true,
     allowCreation: true,
-    prePopulate: $("#book_author_tokens").data("pre"),
+    prePopulate: $("#books_0_author_tokens").data("pre"),
     theme: ""
   });
-  $("#user_books_attributes_0_category_tokens").tokenInput("/categories.json", {
+  $("#books_0_category_tokens").tokenInput("/categories.json", {
     crossDomain: false,
     preventDuplicates: true,
     allowCreation: true,
-    prePopulate: $("#book_category_tokens").data("pre"),
+    prePopulate: $("#books_0_category_tokens").data("pre"),
     theme: "facebook"
   });
 });

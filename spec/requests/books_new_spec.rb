@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Books", :focus=>true do
+describe "Books" do
   describe "new" do
     before(:each) do
       create_admin(:email=>'admin@example.com')
@@ -48,7 +48,7 @@ describe "Books", :focus=>true do
 
       it "adds a book to the database" do
         lambda do
-          click_button 'Create Book'
+          click_button 'Create Books'
         end.should change(Book,:count).by(1)
         book = Book.last
         book.title.should eq 'New Title'
@@ -63,12 +63,12 @@ describe "Books", :focus=>true do
         it "Toman input" do
           Setting.singleton.update_attribute(:currency,Setting::TOMAN)
           click_button 'Create Book'
-          Book.last.regular_price.should eq 10000
+          Book.last.regular_price.should eq "10000"
         end
         it "Riel input" do
           Setting.singleton.update_attribute(:currency,Setting::RIEL)
           click_button 'Create Book'
-          Book.last.regular_price.should eq 1000
+          Book.last.regular_price.should eq "1000"
         end
       end
 
@@ -77,6 +77,11 @@ describe "Books", :focus=>true do
           fill_in 'Title', :with => ''
           click_button 'Create Book'
           li(:title).should have_blank_error
+        end
+        it "title has to be unique" do
+          create_book('New Title') 
+          click_button 'Create Book'
+          li(:title).should have_duplication_error
         end
         it "category cannot be left blank" do
           fill_in 'Category', :with => ''
@@ -88,12 +93,21 @@ describe "Books", :focus=>true do
           click_button 'Create Book'
           li(:regular_price).should have_blank_error
         end
-        it "regular price must be a number" do
-          Setting.singleton.update_attribute(:currency,Setting::TOMAN)
-          fill_in 'Price', :with => 'letters'
-          click_button 'Create Book'
-          li(:regular_price).should have_greater_than_error(50)
+        context "regular price must be a number" do
+          it "in Toman" do
+            Setting.singleton.update_attribute(:currency,Setting::TOMAN)
+          end
+          it "in Riel" do
+            Setting.singleton.update_attribute(:currency,Setting::TOMAN)
+          end
+          after(:each) do
+            fill_in 'Price', :with => 'letters'
+            click_button 'Create Book'
+            li(:regular_price).should have_numericality_error
+            li(:regular_price).should_not have_greater_than_error(50)
+          end
         end
+
         context "regular price cannot be less than" do
           it "50 tomen" do
             Setting.singleton.update_attribute(:currency,Setting::TOMAN)
@@ -125,16 +139,6 @@ describe "Books", :focus=>true do
           end.should change(Category,:count).by(1)
           Book.last.categories.map(&:name).sort.should eq ['science','space']
         end
-      end
-
-      it "shows a flash message" do
-        click_button 'Create Book'
-        page.should have_notice("Book: 'New Title' was successfully created.")
-      end
-
-      it "gets redirected back to the new book page" do
-        click_button 'Create Book'
-        page.current_path.should eq new_book_path
       end
     end
   end

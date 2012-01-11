@@ -7,6 +7,7 @@ describe "Sessions" do
       site_nav.should have_link('Books')
       site_nav.should have_link('Authors')
       site_nav.should have_link('Categories')
+      user_nav.should_not have_link('Settings')
     end
 
     it "admin layout" do

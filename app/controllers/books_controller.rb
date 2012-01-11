@@ -5,7 +5,7 @@ class BooksController < ApplicationController
   end
 
   def new
-    current_user.blank_books.build
+    @books = [Book.new,Book.new,Book.new,Book.new,Book.new,Book.new,Book.new,Book.new,Book.new,Book.new]
   end
 
   def create
@@ -14,6 +14,24 @@ class BooksController < ApplicationController
     else
       @book.errors.add(:category_tokens,@book.errors[:categories]) if @book.errors[:categories]
       render :new
+    end
+  end
+
+  def create_individual
+    @books = Book.create(params[:books].values).reject{|e| e.errors.empty?} 
+    i = params[:books].count - @books.count
+    @books.reject!(&:all_fields_emtpy?)
+    if @books.empty? 
+      if i == 0
+        @books = [Book.new]
+        @books.map(&:save)
+        flash[:alert] = not_created(:book)
+        render :new
+      else
+        redirect_to new_book_path, :notice => created(:book,i)
+      end
+    else
+      render :new, :notice => created(:book,i)
     end
   end
 

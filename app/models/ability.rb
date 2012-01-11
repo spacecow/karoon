@@ -7,7 +7,7 @@ class Ability
     can [:show,:index], Category
     if user
       if user.role? :admin
-        can [:create,:update,:destroy], Book
+        can [:create,:update,:destroy,:create_individual], Book
         can [:create,:update,:destroy], Author
         can [:create,:update,:destroy], Category
         can [:update], Setting

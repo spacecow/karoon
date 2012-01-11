@@ -19,8 +19,10 @@ en:
         blank: "can't be blank"
         confirmation: "doesn't match confirmation"
         greater_than: "must be greater than %{count}"
+        numericality: "is not a number"
   alerts:
     invalid_login_or_password: "Invalid login or password."
+    not_created: 'No %{o} was created.'
   formtastic:
     labels:
       email: 'Login'
@@ -33,6 +35,7 @@ en:
       summary: 'Summary'
       title: 'Title'
   labels:
+    create: 'Create %{o}'
     edit: 'Edit %{o}'
     new: 'New %{o}'
     update: 'Update %{o}'
@@ -45,6 +48,7 @@ en:
   successes:
     created: "%{o} was successfully created."
     created_adv: "%{o}: '%{name}' was successfully created."
+    created_nos: "%{i} %{o} was successfully created."
     deleted_adv: "%{o}: '%{name}' was successfully deleted."
     updated: "%{o} was successfully updated."
     updated_adv: "%{o}: '%{name}' was successfully updated."

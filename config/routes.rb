@@ -4,10 +4,14 @@ Karoon::Application.routes.draw do
   resources :sessions, :only => [:new,:create,:destroy]
 
   get 'signup' => 'users#new'
-  resources :users, :only => [:new,:create,:update]
+  resources :users, :only => [:new,:create]
 
   get 'welcome' => 'books#index'
-  resources :books
+  resources :books do
+    collection do
+      post 'create_individual' 
+    end
+  end
   root :to => 'books#index'
 
   resources :settings, :only => [:edit,:update]

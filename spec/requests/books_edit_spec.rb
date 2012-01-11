@@ -39,7 +39,7 @@ describe "Books" do
         book = Book.last
         book.title.should eq 'No Way'
         book.summary.should eq 'Edited Summary'
-        book.regular_price.should eq 900
+        book.regular_price.should eq "900"
         book.categories.map(&:name).should eq ["rocket"]
         book.authors.map(&:name).should eq ["Stephen King", "Mark Twain"]
       end
@@ -60,11 +60,18 @@ describe "Books" do
           click_button 'Update Book'
           li(:regular_price).should have_blank_error
         end
-        it "regular price must be a number" do
-          Setting.singleton.update_attribute(:currency,Setting::TOMAN)
-          fill_in 'Price', :with => 'letters'
-          click_button 'Update Book'
-          li(:regular_price).should have_greater_than_error(50)
+        context "regular price must be a number" do
+          it "in Toman" do
+            Setting.singleton.update_attribute(:currency,Setting::TOMAN)
+          end
+          it "in Riel" do
+            Setting.singleton.update_attribute(:currency,Setting::RIEL)
+          end
+          after(:each) do
+            fill_in 'Price', :with => 'letters'
+            click_button 'Update Book'
+            li(:regular_price).should have_numericality_error
+          end
         end
         context "regular price cannot be less than" do
           it "50 tomen" do

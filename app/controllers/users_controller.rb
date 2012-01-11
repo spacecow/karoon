@@ -12,14 +12,4 @@ class UsersController < ApplicationController
       render :new
     end
   end
-
-  def update
-    @user = User.find(params[:id])
-    if @user.update_attributes(params[:user])
-      redirect_to new_book_path
-    else
-      current_user.blank_books.build
-      render 'books/new' 
-    end
-  end
 end

@@ -40,6 +40,5 @@ describe "Authors" do
         page.should have_notice("Author: 'Dean R. Koontz' was successfully created.")
       end
     end
-
   end
 end
