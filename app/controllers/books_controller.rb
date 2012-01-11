@@ -31,11 +31,13 @@ class BooksController < ApplicationController
         redirect_to new_book_path, :notice => created(:book,i)
       end
     else
+      @books.map!{|e| e.regular_price = e.regular_price_in_riel; e}
       render :new, :notice => created(:book,i)
     end
   end
 
   def edit
+    @book.regular_price = @book.regular_price_in_riel
   end
 
   def update
@@ -43,6 +45,7 @@ class BooksController < ApplicationController
       redirect_to @book, :notice => updated_adv(:book,@book.title)
     else
       @book.errors.add(:category_tokens,@book.errors[:categories]) if @book.errors[:categories]
+      @book.regular_price = @book.regular_price_in_riel
       render :edit
     end
   end

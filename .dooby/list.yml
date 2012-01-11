@@ -21,3 +21,5 @@ d27e33: !ruby/object:Dooby::Task
   todo: edit settings :done
 2b7f31: !ruby/object:Dooby::Task 
   todo: create many books at the same time :done
+afd01e: !ruby/object:Dooby::Task 
+  todo: form check :done

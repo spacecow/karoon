@@ -50,7 +50,14 @@ class Book < ActiveRecord::Base
   end
   def regular_price=(i)
     i = i.to_i / 10 if Setting.currency_in_riel? && i =~ /^\d+$/
-    write_attribute(:regular_price,i) 
+    write_attribute(:regular_price,i.to_s) 
+  end
+  def regular_price_in_riel
+    if Setting.currency_in_riel? && regular_price =~ /^\d+$/
+      regular_price.to_i * 10
+    else
+      regular_price
+    end
   end
 
   private

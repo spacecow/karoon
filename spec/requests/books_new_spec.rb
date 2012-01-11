@@ -122,6 +122,36 @@ describe "Books" do
             li(:regular_price).should have_greater_than_error(500)
           end
         end
+
+        context "on error form, numerical regular price shows up as" do
+          it "Toman" do
+            Setting.singleton.update_attribute(:currency,Setting::TOMAN)
+          end
+          it "Riel" do
+            Setting.singleton.update_attribute(:currency,Setting::RIEL)
+          end 
+          after(:each) do
+            fill_in 'Title', :with => ''
+            fill_in 'Regular Price', :with => '1000' 
+            click_button 'Create Book'
+            find_field('Regular Price').value.should eq '1000'  
+          end
+        end
+
+        context "on error form, alphabetical regular price shows up as" do
+          it "Toman" do
+            Setting.singleton.update_attribute(:currency,Setting::TOMAN)
+          end
+          it "Riel" do
+            Setting.singleton.update_attribute(:currency,Setting::RIEL)
+          end 
+          after(:each) do
+            fill_in 'Title', :with => ''
+            fill_in 'Regular Price', :with => 'letters' 
+            click_button 'Create Book'
+            find_field('Regular Price').value.should eq 'letters'  
+          end
+        end
       end
 
       context "create on the fly" do

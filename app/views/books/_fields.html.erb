@@ -25,12 +25,12 @@
   <%= f.file_field :image %>
 </li>
 <li id="book_author_tokens_input">
-  <%= f.label :author_tokens, ft(:author), "data-pre" => book.authors.map(&:attributes).to_json %>
-  <%= f.text_field :author_tokens %>
+  <%= f.label :author_tokens, ft(:author) %>
+  <%= f.text_field :author_tokens, "data-pre" => book.authors.map(&:attributes).to_json %>
 </li>
 <li id="book_category_tokens_input">
-  <%= f.label :category_tokens, ft(:category), "data-pre" => book.categories.map(&:attributes).to_json %>
-  <%= f.text_field :category_tokens %>
+  <%= f.label :category_tokens, ft(:category) %>
+  <%= f.text_field :category_tokens, "data-pre" => book.categories.map(&:attributes).to_json  %>
   <p class="inline-errors">
     <%= book.errors[:categories].join %>
   </p>

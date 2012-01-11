@@ -56,6 +56,7 @@ describe "Books" do
         end
       end
     end
+    it "should have correct plural flash message"
 
     context "book is partially filled in" do
       before(:each) do
