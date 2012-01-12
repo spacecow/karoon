@@ -21,4 +21,11 @@ class ApplicationController < ActionController::Base
   def updated_adv(o,name)
     t("successes.updated_adv",:o=>t(o),:name=>name) 
   end
+
+  def currency
+    session[:currency] ||= Setting.singleton.currency
+  end
+  def currency_in_riel?
+    currency == Setting::RIEL
+  end
 end

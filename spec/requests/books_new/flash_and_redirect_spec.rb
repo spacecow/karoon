@@ -58,14 +58,13 @@ describe "Books" do
         end
 
         it "displays a plural flash message" do
-          page.should have_notice("2 Book was successfully created")
+          page.should have_notice("2 Books were successfully created")
         end
         it "redirects back" do
           page.current_path.should eq new_book_path
         end
       end
     end
-    it "should have correct plural flash message"
 
     context "book is partially filled in" do
       before(:each) do

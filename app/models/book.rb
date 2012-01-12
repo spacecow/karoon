@@ -48,16 +48,16 @@ class Book < ActiveRecord::Base
     end
     self.category_ids = tokens
   end
-  def regular_price=(i)
-    i = i.to_i / 10 if Setting.currency_in_riel? && i =~ /^\d+$/
-    write_attribute(:regular_price,i.to_s) 
-  end
+
   def regular_price_in_riel
-    if Setting.currency_in_riel? && regular_price =~ /^\d+$/
-      regular_price.to_i * 10
-    else
-      regular_price
-    end
+    regular_price =~ /^\d+$/ ? regular_price.to_i*10 : regular_price
+  end
+
+  def convert_to_riel
+    self.regular_price = regular_price_in_riel
+    errors[:regular_price].map! do |err|
+      err.gsub(/50/,'500') 
+    end 
   end
 
   private
@@ -67,11 +67,7 @@ class Book < ActiveRecord::Base
     end
     def lowest_price
       if regular_price
-        if Setting.currency_in_riel?
-          error = I18n.t('activerecord.errors.messages.greater_than',:count => 500) if regular_price.to_i < 500 
-        elsif Setting.currency_in_toman?
-          error = I18n.t('activerecord.errors.messages.greater_than',:count => 50) if regular_price.to_i < 50 
-        end
+        error = I18n.t('activerecord.errors.messages.greater_than',:count => 50) if regular_price.to_i < 50 
         errors.add(:regular_price,error) if error && !errors_on_regular_price?
       end
     end

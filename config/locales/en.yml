@@ -13,6 +13,8 @@ en:
   login: 'Login'
   settings: 'Settings'
   signup: 'Signup'
+  was: 'was'
+  were: 'were'
   
   activerecord:
     errors:
@@ -50,7 +52,7 @@ en:
   successes:
     created: "%{o} was successfully created."
     created_adv: "%{o}: '%{name}' was successfully created."
-    created_nos: "%{i} %{o} was successfully created."
+    created_nos: "%{i} %{o} %{v} successfully created."
     deleted_adv: "%{o}: '%{name}' was successfully deleted."
     updated: "%{o} was successfully updated."
     updated_adv: "%{o}: '%{name}' was successfully updated."

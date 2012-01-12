@@ -6,11 +6,7 @@ class BooksController < ApplicationController
 
   def new
     @books = [Book.new]
-    9.times do
-      book = Book.new
-      book.hide = true
-      @books << book
-    end
+    load_hidden_book(9)
   end
 
   def create
@@ -23,6 +19,12 @@ class BooksController < ApplicationController
   end
 
   def create_individual
+    if currency_in_riel?
+      params[:books].each do |k,v|
+        val = params[:books][k]["regular_price"]
+        params[:books][k]["regular_price"] = val.to_i/10 if val =~ /^\d+$/
+      end
+    end
     @books = Book.create(params[:books].values).reject{|e| e.errors.empty?} 
     i = params[:books].count - @books.count
     @books.reject!(&:all_fields_emtpy?)
@@ -30,37 +32,39 @@ class BooksController < ApplicationController
       if i == 0
         @books << Book.new
         @books.map(&:save)
-        9.times do
-          book = Book.new
-          book.hide = true
-          @books << book
-        end
+        load_hidden_book(9)
         flash[:alert] = not_created(:book)
         render :new
       else
-        redirect_to new_book_path, :notice => created(:book,i)
+        redirect_to new_book_path, :notice => created(:book,i,:books)
       end
     else
-      @books.map!{|e| e.regular_price = e.regular_price_in_riel; e}
-      (10-@books.count).times do
-        book = Book.new
-        book.hide = true
-        @books << book
+      if currency_in_riel?
+        @books.map! do |book|
+          book.convert_to_riel; book
+        end 
       end
-      render :new, :notice => created(:book,i)
+      load_hidden_book(10-@books.count)
+      render :new, :notice => created(:book,i,:books)
     end
   end
 
   def edit
-    @book.regular_price = @book.regular_price_in_riel
+    if currency_in_riel?
+      @book.regular_price = @book.regular_price_in_riel
+    end
   end
 
   def update
+    if currency_in_riel?
+      val = params[:book]["regular_price"]
+      params[:book]["regular_price"] = (val.to_i/10).to_s if val =~ /^\d+$/
+    end
     if @book.update_attributes(params[:book])
       redirect_to @book, :notice => updated_adv(:book,@book.title)
     else
       @book.errors.add(:category_tokens,@book.errors[:categories]) if @book.errors[:categories]
-      @book.regular_price = @book.regular_price_in_riel
+      @book.convert_to_riel if currency_in_riel?
       render :edit
     end
   end
@@ -70,4 +74,14 @@ class BooksController < ApplicationController
     @book.destroy
     redirect_to books_path, :notice => deleted_adv(:book,title)
   end
+
+  private
+
+    def load_hidden_book(i)
+      i.times do
+        book = Book.new
+        book.hide = true
+        @books << book
+      end
+    end
 end
