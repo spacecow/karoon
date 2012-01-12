@@ -2,6 +2,7 @@ en:
   author: 'Author'
   authors: 'Authors'
   book: 'Book'
+  book_form: 'Book Form'
   books: 'Books'
   category: 'Category'
   categories: 'Categories'
@@ -35,6 +36,7 @@ en:
       summary: 'Summary'
       title: 'Title'
   labels:
+    add: 'Add %{o}'
     create: 'Create %{o}'
     edit: 'Edit %{o}'
     new: 'New %{o}'

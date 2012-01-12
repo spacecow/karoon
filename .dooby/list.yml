@@ -23,3 +23,7 @@ d27e33: !ruby/object:Dooby::Task
   todo: create many books at the same time :done
 afd01e: !ruby/object:Dooby::Task 
   todo: form check :done
+2d93ed: !ruby/object:Dooby::Task 
+  todo: author name must be unique
+b009f5: !ruby/object:Dooby::Task 
+  todo: javascript update :done
