@@ -2,13 +2,15 @@
 
 <%= form_tag create_individual_books_path, :method => :post, :multipart => true, :id => 'book' do %>
   <% @books.each_with_index do |book,i| %>
-    <div class="book">
+    <div class='<%= book.hide ? 'hide book' : 'book' %>' id='<%= "book_#{i}" %>'>
       <%= fields_for "books[#{i}]", book do |f| %>
         <%= render "fields", :f => f, :book => book %>
       <% end %>
     </div>
   <% end %>
+  <%= link_to add(:book_form), nil, :id => "add_book_form", :remote => true %>
   <li>
     <%= submit_tag create(:books), :class => :submit %>
   </li>
 <% end %>
+

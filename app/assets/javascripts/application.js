@@ -24,153 +24,33 @@ $(function() {
     theme: "facebook"
   });
 
-  $("#books_0_author_tokens").tokenInput("/authors.json", {
-    crossDomain: false,
-    preventDuplicates: true,
-    allowCreation: true,
-    prePopulate: $("#books_0_author_tokens").data("pre"),
-    theme: ""
-  });
-  $("#books_0_category_tokens").tokenInput("/categories.json", {
-    crossDomain: false,
-    preventDuplicates: true,
-    allowCreation: true,
-    prePopulate: $("#books_0_category_tokens").data("pre"),
-    theme: "facebook"
+  for(i=0; i<10; i++){
+    var author_id = "#books_"+i+"_author_tokens";
+    $(author_id).tokenInput("/authors.json", {
+      crossDomain: false,
+      preventDuplicates: true,
+      allowCreation: true,
+      prePopulate: $(author_id).data("pre"),
+      theme: ""
+    });
+
+    var category_id = "#books_"+i+"_category_tokens";
+    $(category_id).tokenInput("/categories.json", {
+      crossDomain: false,
+      preventDuplicates: true,
+      allowCreation: true,
+      prePopulate: $(category_id).data("pre"),
+      theme: "facebook"
+    });
+  }
+
+  for(i=1; i<10; i++){
+    $("div.hide").hide();
+  }
+
+  $("a#add_book_form").click(function(){
+    var i = $("div.book").filter(":visible").size();
+    $("div#book_"+i).show();
   });
 
-  $("#books_1_author_tokens").tokenInput("/authors.json", {
-    crossDomain: false,
-    preventDuplicates: true,
-    allowCreation: true,
-    prePopulate: $("#books_1_author_tokens").data("pre"),
-    theme: ""
-  });
-  $("#books_1_category_tokens").tokenInput("/categories.json", {
-    crossDomain: false,
-    preventDuplicates: true,
-    allowCreation: true,
-    prePopulate: $("#books_1_category_tokens").data("pre"),
-    theme: "facebook"
-  });
-
-  $("#books_2_author_tokens").tokenInput("/authors.json", {
-    crossDomain: false,
-    preventDuplicates: true,
-    allowCreation: true,
-    prePopulate: $("#books_2_author_tokens").data("pre"),
-    theme: ""
-  });
-  $("#books_2_category_tokens").tokenInput("/categories.json", {
-    crossDomain: false,
-    preventDuplicates: true,
-    allowCreation: true,
-    prePopulate: $("#books_2_category_tokens").data("pre"),
-    theme: "facebook"
-  });
-
-  $("#books_3_author_tokens").tokenInput("/authors.json", {
-    crossDomain: false,
-    preventDuplicates: true,
-    allowCreation: true,
-    prePopulate: $("#books_3_author_tokens").data("pre"),
-    theme: ""
-  });
-  $("#books_3_category_tokens").tokenInput("/categories.json", {
-    crossDomain: false,
-    preventDuplicates: true,
-    allowCreation: true,
-    prePopulate: $("#books_3_category_tokens").data("pre"),
-    theme: "facebook"
-  });
-
-  $("#books_4_author_tokens").tokenInput("/authors.json", {
-    crossDomain: false,
-    preventDuplicates: true,
-    allowCreation: true,
-    prePopulate: $("#books_4_author_tokens").data("pre"),
-    theme: ""
-  });
-  $("#books_4_category_tokens").tokenInput("/categories.json", {
-    crossDomain: false,
-    preventDuplicates: true,
-    allowCreation: true,
-    prePopulate: $("#books_4_category_tokens").data("pre"),
-    theme: "facebook"
-  });
-
-  $("#books_5_author_tokens").tokenInput("/authors.json", {
-    crossDomain: false,
-    preventDuplicates: true,
-    allowCreation: true,
-    prePopulate: $("#books_5_author_tokens").data("pre"),
-    theme: ""
-  });
-  $("#books_5_category_tokens").tokenInput("/categories.json", {
-    crossDomain: false,
-    preventDuplicates: true,
-    allowCreation: true,
-    prePopulate: $("#books_5_category_tokens").data("pre"),
-    theme: "facebook"
-  });
-
-  $("#books_6_author_tokens").tokenInput("/authors.json", {
-    crossDomain: false,
-    preventDuplicates: true,
-    allowCreation: true,
-    prePopulate: $("#books_6_author_tokens").data("pre"),
-    theme: ""
-  });
-  $("#books_6_category_tokens").tokenInput("/categories.json", {
-    crossDomain: false,
-    preventDuplicates: true,
-    allowCreation: true,
-    prePopulate: $("#books_6_category_tokens").data("pre"),
-    theme: "facebook"
-  });
-
-  $("#books_7_author_tokens").tokenInput("/authors.json", {
-    crossDomain: false,
-    preventDuplicates: true,
-    allowCreation: true,
-    prePopulate: $("#books_7_author_tokens").data("pre"),
-    theme: ""
-  });
-  $("#books_7_category_tokens").tokenInput("/categories.json", {
-    crossDomain: false,
-    preventDuplicates: true,
-    allowCreation: true,
-    prePopulate: $("#books_7_category_tokens").data("pre"),
-    theme: "facebook"
-  });
-
-  $("#books_8_author_tokens").tokenInput("/authors.json", {
-    crossDomain: false,
-    preventDuplicates: true,
-    allowCreation: true,
-    prePopulate: $("#books_8_author_tokens").data("pre"),
-    theme: ""
-  });
-  $("#books_8_category_tokens").tokenInput("/categories.json", {
-    crossDomain: false,
-    preventDuplicates: true,
-    allowCreation: true,
-    prePopulate: $("#books_8_category_tokens").data("pre"),
-    theme: "facebook"
-  });
-
-  $("#books_9_author_tokens").tokenInput("/authors.json", {
-    crossDomain: false,
-    preventDuplicates: true,
-    allowCreation: true,
-    prePopulate: $("#books_9_author_tokens").data("pre"),
-    theme: ""
-  });
-  $("#books_9_category_tokens").tokenInput("/categories.json", {
-    crossDomain: false,
-    preventDuplicates: true,
-    allowCreation: true,
-    prePopulate: $("#books_9_category_tokens").data("pre"),
-    theme: "facebook"
-  });
 });

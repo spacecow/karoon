@@ -5,9 +5,9 @@ class Book < ActiveRecord::Base
   has_many :categorizations, :dependent => :destroy
   has_many :categories, :through => :categorizations
 
-  attr_reader :author_tokens
-  attr_reader :category_tokens
+  attr_reader :author_tokens, :category_tokens
   attr_accessible :title,:author_tokens,:category_tokens,:image,:summary,:regular_price
+  attr_accessor :hide
 
   validates_presence_of :title,:regular_price,:categories
   validates_uniqueness_of :title

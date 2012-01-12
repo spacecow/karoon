@@ -5,7 +5,12 @@ class BooksController < ApplicationController
   end
 
   def new
-    @books = [Book.new,Book.new,Book.new,Book.new,Book.new,Book.new,Book.new,Book.new,Book.new,Book.new]
+    @books = [Book.new]
+    9.times do
+      book = Book.new
+      book.hide = true
+      @books << book
+    end
   end
 
   def create
@@ -23,8 +28,13 @@ class BooksController < ApplicationController
     @books.reject!(&:all_fields_emtpy?)
     if @books.empty? 
       if i == 0
-        @books = [Book.new]
+        @books << Book.new
         @books.map(&:save)
+        9.times do
+          book = Book.new
+          book.hide = true
+          @books << book
+        end
         flash[:alert] = not_created(:book)
         render :new
       else
@@ -32,6 +42,11 @@ class BooksController < ApplicationController
       end
     else
       @books.map!{|e| e.regular_price = e.regular_price_in_riel; e}
+      (10-@books.count).times do
+        book = Book.new
+        book.hide = true
+        @books << book
+      end
       render :new, :notice => created(:book,i)
     end
   end

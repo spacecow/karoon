@@ -77,22 +77,22 @@ describe "Books" do
         it "title cannot be blank" do
           fill_in 'Title', :with => ''
           click_button 'Create Book'
-          li(:title).should have_blank_error
+          li(:title,0).should have_blank_error
         end
         it "title has to be unique" do
           create_book('New Title') 
           click_button 'Create Book'
-          li(:title).should have_duplication_error
+          li(:title,0).should have_duplication_error
         end
         it "category cannot be left blank" do
           fill_in 'Category', :with => ''
           click_button 'Create Book'
-          li(:category_tokens).should have_blank_error
+          li(:category_tokens,0).should have_blank_error
         end
         it "regular price cannot be blank" do
           fill_in 'Price', :with => ''
           click_button 'Create Book'
-          li(:regular_price).should have_blank_error
+          li(:regular_price,0).should have_blank_error
         end
         context "regular price must be a number" do
           it "in Toman" do
@@ -104,8 +104,8 @@ describe "Books" do
           after(:each) do
             fill_in 'Price', :with => 'letters'
             click_button 'Create Book'
-            li(:regular_price).should have_numericality_error
-            li(:regular_price).should_not have_greater_than_error(50)
+            li(:regular_price,0).should have_numericality_error
+            li(:regular_price,0).should_not have_greater_than_error(50)
           end
         end
 
@@ -114,13 +114,13 @@ describe "Books" do
             Setting.singleton.update_attribute(:currency,Setting::TOMAN)
             fill_in 'Price', :with => 49 
             click_button 'Create Book'
-            li(:regular_price).should have_greater_than_error(50)
+            li(:regular_price,0).should have_greater_than_error(50)
           end
           it "500 Riel" do
             Setting.singleton.update_attribute(:currency,Setting::RIEL)
             fill_in 'Price', :with => 499 
             click_button 'Create Book'
-            li(:regular_price).should have_greater_than_error(500)
+            li(:regular_price,0).should have_greater_than_error(500)
           end
         end
 

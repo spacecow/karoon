@@ -20,10 +20,10 @@ describe "Books" do
         page.current_path.should eq create_individual_books_path
       end
       it "shows all errors" do
-        li(:title).should have_blank_error 
-        li(:regular_price).should have_blank_error 
-        li(:regular_price).should_not have_numericality_error 
-        li(:category).should have_blank_error 
+        li(:title,0).should have_blank_error 
+        li(:regular_price,0).should have_blank_error 
+        li(:regular_price,0).should_not have_numericality_error 
+        li(:category,0).should have_blank_error 
       end
       it "10 forms should be shown" do
         divs(:book).count.should be(10) 
@@ -44,25 +44,25 @@ describe "Books" do
         after(:each) do
           page.should have_notice("1 Book was successfully created")
           page.current_path.should eq new_book_path
+          divs(:book).count.should be(10) 
         end
-      end
-      it "10 forms should be shown" do
-        divs(:book).count.should be(10) 
       end
     end
 
     context "2 books are created" do
       context "displays a flash message from" do
-        it "new" do
+        before(:each) do
           fill_in_book(0,"A","1000","A")
           fill_in_book(1,"B","1000","B")
           click_button 'Create Book'
+        end
+
+        it "displays a plural flash message" do
           page.should have_notice("2 Book was successfully created")
+        end
+        it "redirects back" do
           page.current_path.should eq new_book_path
         end
-      end
-      it "10 forms should be shown" do
-        divs(:book).count.should be(10) 
       end
     end
     it "should have correct plural flash message"
@@ -94,10 +94,8 @@ describe "Books" do
         after(:each) do
           click_button 'Create Book'
           page.current_path.should eq create_individual_books_path
+          divs(:book).count.should be(10) 
         end
-      end
-      it "10 forms should be shown" do
-        divs(:book).count.should be(10) 
       end
     end
   end
