@@ -11,6 +11,7 @@ describe "Books" do
       it "regular" do
         visit new_book_path
         page.should have_title('New Book')
+        divs(:book).count.should be(10)
         find_field('Title').value.should be_nil 
         find_field('Summary').value.should be_empty
         find_field('Regular Price').value.should be_nil

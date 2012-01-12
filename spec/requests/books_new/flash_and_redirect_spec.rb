@@ -25,6 +25,9 @@ describe "Books" do
         li(:regular_price).should_not have_numericality_error 
         li(:category).should have_blank_error 
       end
+      it "10 forms should be shown" do
+        divs(:book).count.should be(10) 
+      end
     end
 
     context "1 book is created" do
@@ -43,6 +46,9 @@ describe "Books" do
           page.current_path.should eq new_book_path
         end
       end
+      it "10 forms should be shown" do
+        divs(:book).count.should be(10) 
+      end
     end
 
     context "2 books are created" do
@@ -54,6 +60,9 @@ describe "Books" do
           page.should have_notice("2 Book was successfully created")
           page.current_path.should eq new_book_path
         end
+      end
+      it "10 forms should be shown" do
+        divs(:book).count.should be(10) 
       end
     end
     it "should have correct plural flash message"
@@ -86,6 +95,9 @@ describe "Books" do
           click_button 'Create Book'
           page.current_path.should eq create_individual_books_path
         end
+      end
+      it "10 forms should be shown" do
+        divs(:book).count.should be(10) 
       end
     end
   end
