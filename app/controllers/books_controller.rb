@@ -38,7 +38,7 @@ class BooksController < ApplicationController
         flash[:alert] = not_created(:book)
         render :new
       else
-        redirect_to new_book_path, :notice => created(:book,i)
+        redirect_to new_book_path, :notice => created(:book,i,:books)
       end
     else
       @books.map!{|e| e.regular_price = e.regular_price_in_riel; e}
@@ -47,7 +47,7 @@ class BooksController < ApplicationController
         book.hide = true
         @books << book
       end
-      render :new, :notice => created(:book,i)
+      render :new, :notice => created(:book,i,:books)
     end
   end
 
