@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_filter :load_books_with_associations, :only => :index
   load_and_authorize_resource
 
   def index
@@ -77,6 +78,9 @@ class BooksController < ApplicationController
 
   private
 
+    def load_books_with_associations
+      @books = Book.includes(:categories,:authors)
+    end
     def load_hidden_book(i)
       i.times do
         book = Book.new
