@@ -2,9 +2,44 @@ require 'spec_helper'
 
 describe "Books" do
   describe "edit" do
+    context "Toman" do
+      before(:each) do
+        Setting.singleton.update_attribute(:currency,Setting::TOMAN)
+        create_admin(:email=>'admin@example.com')
+        login('admin@example.com')
+        book = Factory(:book,:regular_price=>1000)
+        visit edit_book_path(book)
+      end
+
+      it "regular price layout" do
+        find_field('Regular Price').value.should eq '1000'
+      end
+      it "regular price layout on error page" do
+        click_button 'Update Book'
+        find_field('Regular Price').value.should eq '1000'  
+      end
+    end
+    context "Riel" do
+      before(:each) do
+        Setting.singleton.update_attribute(:currency,Setting::RIEL)
+        create_admin(:email=>'admin@example.com')
+        login('admin@example.com')
+        book = Factory(:book,:regular_price=>100)
+        visit edit_book_path(book)
+      end
+
+      it "regular price layout" do
+        find_field('Regular Price').value.should eq '1000'
+      end
+      it "regular price layout on error page" do
+        click_button 'Update Book'
+        find_field('Regular Price').value.should eq '1000'  
+      end
+    end
+
     before(:each) do
-      create_admin(:email=>'admin@example.com')
-      login('admin@example.com')
+      create_admin(:email=>'admin2@example.com')
+      login('admin2@example.com')
       @book = Factory(:book,:title=>"This is the Way",:summary => 'Test Summary',:regular_price=>1000)
       @book.categories << create_category('science')
     end
@@ -16,19 +51,6 @@ describe "Books" do
       find_field('Summary').value.should eq 'Test Summary'
       find_field('Author').value.should be_nil 
       page.should have_button('Update Book')
-    end
-
-    context "regular price layout for" do
-      it "Toman" do
-        Setting.singleton.update_attribute(:currency,Setting::TOMAN)
-        visit edit_book_path(@book)
-        find_field('Regular Price').value.should eq '1000'
-      end
-      it "Riel" do
-        Setting.singleton.update_attribute(:currency,Setting::RIEL)
-        visit edit_book_path(@book)
-        find_field('Regular Price').value.should eq '10000'
-      end
     end
 
     context "edit book" do
@@ -55,7 +77,6 @@ describe "Books" do
         book.categories.map(&:name).should eq ["rocket"]
         book.authors.map(&:name).should eq ["Stephen King", "Mark Twain"]
       end
-
 
       context "error" do
         it "title cannot be blank" do
@@ -101,21 +122,6 @@ describe "Books" do
           end
         end
 
-        context "on error form, numerical regular price shows up as" do
-          it "Toman" do
-            
-            Setting.singleton.update_attribute(:currency,Setting::TOMAN)
-          end
-          it "Riel" do
-            Setting.singleton.update_attribute(:currency,Setting::RIEL)
-          end 
-          after(:each) do
-            fill_in 'Title', :with => ''
-            fill_in 'Regular Price', :with => '1000' 
-            click_button 'Update Book'
-            find_field('Regular Price').value.should eq '1000'  
-          end
-        end
 
         context "on error form, alphabetical regular price shows up as" do
           it "Toman" do

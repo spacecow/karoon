@@ -1,16 +1,34 @@
 <div class="book">
   <div id="image">
     <% if book.image_url.nil? %>
-      <%= image_tag 'books-pile.jpg' %>
+      <%= link_to image_tag('books-pile.jpg'), book %>
     <% else %>
-      <%= image_tag book.image_url(:thumb) %>
+      <%= link_to image_tag(book.image_url(:thumb)), book %>
     <% end %>
   </div>
-  <div id="title">
     <span id="title"><%= link_to book.title, book %></span> by <%= link_to_authors book.authors %>
+  <div id="title">
   </div>
   <div id="categories">
-    <%= link_to_categories book.categories %>
+    <span class="label">
+      <%= book.categories.count > 1 ? t(:categories) : t(:category) %>:
+    </span>
+    <span class="content">
+      <%= link_to_categories book.categories %>
+    </span>
+  </div>
+  <div id="price">
+    <span class="label">
+      <%= t(:price) %>:
+    </span>
+    <span class="content">
+      <%= currency_in_riel? ? book.regular_price_in_riel : book.regular_price %> <%= currency %>
+    </span>
+  </div>
+  <div id="summary">
+    <% if book.summary.present? %>
+      "<%= book.summary.truncate(200) %>"
+    <% end %>
   </div>
   <div id="actions">
     <%= link_to t(:edit), edit_book_path(book) if can? :edit, book %>

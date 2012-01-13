@@ -2,9 +2,50 @@ require 'spec_helper'
 
 describe "Books" do
   describe "new" do
+
+    context "Toman on error form" do
+      before(:each) do
+        Setting.singleton.update_attribute(:currency,Setting::TOMAN)
+        create_admin(:email=>'admin@example.com')
+        login('admin@example.com')
+        visit new_book_path
+      end
+
+      it "regular price shows up in Toman" do
+        fill_in 'Regular Price', :with => '1000' 
+        click_button 'Create Book'
+        find_field('Regular Price').value.should eq '1000'  
+      end
+      it "cannot be less than 50 tomen" do
+        fill_in 'Price', :with => 49 
+        click_button 'Create Book'
+        li(:regular_price,0).should have_greater_than_error(50)
+      end
+    end
+  
+    context "Riel on error form" do
+      before(:each) do
+        Setting.singleton.update_attribute(:currency,Setting::RIEL)
+        create_admin(:email=>'admin@example.com')
+        login('admin@example.com')
+        visit new_book_path
+      end
+
+      it "regular price shows up in Riel" do
+        fill_in 'Regular Price', :with => '10000' 
+        click_button 'Create Book'
+        find_field('Regular Price').value.should eq '1000'  
+      end 
+      it "cannot be less than 500 Riel" do
+        fill_in 'Price', :with => 499 
+        click_button 'Create Book'
+        li(:regular_price,0).should have_greater_than_error(500)
+      end
+    end
+
     before(:each) do
-      create_admin(:email=>'admin@example.com')
-      login('admin@example.com')
+      create_admin(:email=>'admin2@example.com')
+      login('admin2@example.com')
     end
     
     context "layout" do
@@ -109,35 +150,7 @@ describe "Books" do
           end
         end
 
-        context "regular price cannot be less than" do
-          it "50 tomen" do
-            Setting.singleton.update_attribute(:currency,Setting::TOMAN)
-            fill_in 'Price', :with => 49 
-            click_button 'Create Book'
-            li(:regular_price,0).should have_greater_than_error(50)
-          end
-          it "500 Riel" do
-            Setting.singleton.update_attribute(:currency,Setting::RIEL)
-            fill_in 'Price', :with => 499 
-            click_button 'Create Book'
-            li(:regular_price,0).should have_greater_than_error(500)
-          end
-        end
 
-        context "on error form, numerical regular price shows up as" do
-          it "Toman" do
-            Setting.singleton.update_attribute(:currency,Setting::TOMAN)
-          end
-          it "Riel" do
-            Setting.singleton.update_attribute(:currency,Setting::RIEL)
-          end 
-          after(:each) do
-            fill_in 'Title', :with => ''
-            fill_in 'Regular Price', :with => '1000' 
-            click_button 'Create Book'
-            find_field('Regular Price').value.should eq '1000'  
-          end
-        end
 
         context "on error form, alphabetical regular price shows up as" do
           it "Toman" do

@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include BasicApplicationController
   protect_from_forgery
-  helper_method :pt,:current_user
+  helper_method :pt,:current_user,:currency_in_riel?,:currency
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:alert] = alertify(:unauthorized_access)
@@ -20,5 +20,12 @@ class ApplicationController < ActionController::Base
   end
   def updated_adv(o,name)
     t("successes.updated_adv",:o=>t(o),:name=>name) 
+  end
+
+  def currency
+    session[:currency] ||= Setting.singleton.currency
+  end
+  def currency_in_riel?
+    currency == Setting::RIEL
   end
 end
