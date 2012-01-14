@@ -13,9 +13,6 @@ describe "Categories" do
     it "general layout" do
       visit category_path(@category)
       page.should have_title('science') 
-      page.should have_content('Book: This is the Way, The Lonely Road')
-      page.should have_link('This is the Way')
-      page.should have_link('The Lonely Road')
       bottom_links.should_not have_link('Edit')
       bottom_links.should_not have_link('Delete')
     end

@@ -6,6 +6,7 @@ class AuthorsController < ApplicationController
   end
 
   def index
+    @selection = t(:authors)
     respond_to do |f|
       f.html
       f.json {render :json => @authors.map(&:attributes)}

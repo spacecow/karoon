@@ -4,10 +4,13 @@ class CategoriesController < ApplicationController
   before_filter :load_min_categories, :only => :edit
 
   def show
+    @site_nav_categories = Category.where('id = ? or ancestry = ?', @category.id, @category.id)
+    @selection = @category.name
   end
 
   def index
     @categories = Category.arrange(:order => :names_depth_cache)
+    @selection = t(:categories)
     respond_to do |f|
       f.html
       f.json {render :json => load_selected_categories.map{|e| e.name=e.names_depth_cache; e}.map(&:attributes)}

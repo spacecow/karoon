@@ -1,6 +1,8 @@
 <%= title @category.name %>
 
-Book: <%= raw @category.books.map{|e| link_to e.title,e}.join(', ') %>
+<div id="books">
+  <%= render @category.books %>
+</div>
 
 <div id="bottom_links">
   <%= link_to t(:edit), edit_category_path(@category) if can? :edit, @category %> <%= link_to t(:delete), @category, :confirm => sure?, :method => :delete if can? :destroy, @category %>

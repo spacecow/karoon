@@ -13,16 +13,16 @@
     <div id="site_nav_container">
       <div id="site_nav">
         <ul>
-          <li><%= link_to t(:books), books_path %></li>
+          <li <%= class_selection(:books) %> ><%= link_to t(:books), books_path %></li>
           <li>
             <ul>
-              <% Category.order(:names_depth_cache).each do |category| %>
-                <li><%= link_to category.name %>
+              <% (@site_nav_categories || []).each do |cat| %>
+                <li <%= class_selection(cat.name) %> ><%= link_to cat.name, cat %></li>
               <% end %>
             </ul>
           </li>
-          <li><%= link_to t(:authors), authors_path %></li>
-          <li><%= link_to t(:categories), categories_path %></li>
+          <li <%= class_selection(:authors) %> ><%= link_to t(:authors), authors_path %></li>
+          <li <%= class_selection(:categories) %> ><%= link_to t(:categories), categories_path %></li>
         </ul>
       </div>
     </div>

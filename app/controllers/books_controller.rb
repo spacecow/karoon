@@ -3,6 +3,8 @@ class BooksController < ApplicationController
   load_and_authorize_resource
 
   def index
+    @site_nav_categories = Category.where(:ancestry => nil)
+    @selection = t(:books)
   end
 
   def new
