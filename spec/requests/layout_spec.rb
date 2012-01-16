@@ -16,15 +16,63 @@ describe "Sessions" do
         create_category('islam',@religion.id)
         @space = create_category('space')
         create_category('rocket',@space.id)
-        create_category('planet',@space.id)
+        @planet = create_category('planet',@space.id)
+        create_category('Mars',@planet.id)
       end
 
       it "list base categories" do
         visit root_path
         site_nav.should have_link('religion') 
+        site_nav.should_not have_link('islam') 
         site_nav.should have_link('space') 
         site_nav.should_not have_link('rocket') 
+        site_nav.should_not have_link('planet') 
+        site_nav.should_not have_link('Mars') 
       end
+
+      context "list tree:" do
+        before(:each){ visit root_path }
+
+        it "religion -" do
+          site_nav.click_link 'religion'
+          site_nav.should have_link('religion') 
+          site_nav.should_not have_link('space') 
+          site_nav.should have_link('islam') 
+          site_nav.should_not have_link('rocket') 
+          site_nav.should_not have_link('planet') 
+          site_nav.should_not have_link('Mars') 
+        end
+        it "space -" do
+          site_nav.click_link 'space'
+          site_nav.should have_link('space') 
+          site_nav.should_not have_link('religion') 
+          site_nav.should_not have_link('islam') 
+          site_nav.should have_link('rocket') 
+          site_nav.should have_link('planet') 
+          site_nav.should_not have_link('Mars') 
+        end
+        context "space - planet" do
+          before(:each) do
+            site_nav.click_link 'space'
+            site_nav.click_link 'planet'
+          end
+
+          it "-" do end
+          it "- Mars" do
+            site_nav.click_link 'Mars'
+          end
+
+          after(:each) do
+            site_nav.should have_link('space') 
+            site_nav.should_not have_link('religion') 
+            site_nav.should_not have_link('islam') 
+            site_nav.should have_link('planet') 
+            site_nav.should_not have_link('rocket') 
+            site_nav.should have_link('Mars') 
+          end
+        end
+      end
+
 
       context "link to" do
         context "base category" do
@@ -95,26 +143,6 @@ describe "Sessions" do
         end
       end
 
-      context "list child categories for" do
-        before(:each){ visit root_path }
-
-        it "religion" do
-          site_nav.click_link 'religion'
-          site_nav.should have_link('religion') 
-          site_nav.should_not have_link('space') 
-          site_nav.should have_link('islam') 
-          site_nav.should_not have_link('rocket') 
-          site_nav.should_not have_link('planet') 
-        end
-        it "space" do
-          site_nav.click_link 'space'
-          site_nav.should have_link('space') 
-          site_nav.should_not have_link('religion') 
-          site_nav.should have_link('rocket') 
-          site_nav.should have_link('planet') 
-          site_nav.should_not have_link('islam') 
-        end
-      end
     end
 
     it "admin layout" do

@@ -15,11 +15,7 @@
         <ul>
           <li <%= class_selection(:books) %> ><%= link_to t(:books), books_path %></li>
           <li>
-            <ul>
-              <% (@site_nav_categories || []).each do |cat| %>
-                <li <%= class_selection(cat.name) %> ><%= link_to cat.name, cat %></li>
-              <% end %>
-            </ul>
+              <%= listed_categories @site_nav_categories %>
           </li>
           <li <%= class_selection(:authors) %> ><%= link_to t(:authors), authors_path %></li>
           <li <%= class_selection(:categories) %> ><%= link_to t(:categories), categories_path %></li>

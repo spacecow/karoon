@@ -4,7 +4,13 @@ class CategoriesController < ApplicationController
   before_filter :load_min_categories, :only => :edit
 
   def show
-    @site_nav_categories = Category.where('id = ? or ancestry = ?', @category.id, @category.id)
+    if @category.parent
+      @site_nav_categories = @category.ancestors.arrange(:order => :names_depth_cache)
+      @site_nav_categories[@category.parent] = @category.subtree.arrange(:order => :names_depth_cache)
+    else
+      @site_nav_categories = @category.subtree.arrange(:order => :names_depth_cache)
+    end
+      
     @selection = @category.name
   end
 
