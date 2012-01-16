@@ -20,9 +20,9 @@ describe "Sessions" do
         create_category('Mars',@planet.id)
       end
 
-      it "list base categories" do
+      it "list base categories", :focus=>true do
         visit root_path
-        site_nav.should have_link('religion') 
+        site_nav.ul.should have_link('religion') 
         site_nav.should_not have_link('islam') 
         site_nav.should have_link('space') 
         site_nav.should_not have_link('rocket') 

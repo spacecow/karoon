@@ -6,9 +6,13 @@ class CategoriesController < ApplicationController
   def show
     if @category.parent
       @site_nav_categories = @category.ancestors.arrange(:order => :names_depth_cache)
-      @site_nav_categories[@category.parent] = @category.subtree.arrange(:order => :names_depth_cache)
+      p @site_nav_categories
+      hash = ActiveSupport::OrderedHash.new
+      hash[@category] = @category.children.arrange(:order => :names_depth_cache)
+      @site_nav_categories[@category.parent] = hash
     else
-      @site_nav_categories = @category.subtree.arrange(:order => :names_depth_cache)
+      @site_nav_categories = ActiveSupport::OrderedHash.new
+      @site_nav_categories[@category] = @category.children.arrange(:order => :names_depth_cache)
     end
       
     @selection = @category.name

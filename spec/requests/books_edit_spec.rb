@@ -18,7 +18,24 @@ describe "Books" do
         click_button 'Update Book'
         find_field('Regular Price').value.should eq '1000'  
       end
+      it "regular price cannot be less than 50 Toman" do
+        fill_in 'Price', :with => 49 
+        click_button 'Update Book'
+        li(:regular_price).should have_greater_than_error(50)
+      end
+      it "regular price must be a number" do
+        fill_in 'Price', :with => 'letters'
+        click_button 'Update Book'
+        li(:regular_price).should have_numericality_error
+      end
+      it "on error form, alphabetical regular price shows up in Toman" do
+        fill_in 'Title', :with => ''
+        fill_in 'Regular Price', :with => 'letters' 
+        click_button 'Update Book'
+        find_field('Regular Price').value.should eq 'letters'  
+      end
     end
+
     context "Riel" do
       before(:each) do
         Setting.singleton.update_attribute(:currency,Setting::RIEL)
@@ -34,6 +51,22 @@ describe "Books" do
       it "regular price layout on error page" do
         click_button 'Update Book'
         find_field('Regular Price').value.should eq '1000'  
+      end
+      it "regular price cannot be less than 500 Riel" do
+        fill_in 'Price', :with => 499 
+        click_button 'Update Book'
+        li(:regular_price).should have_greater_than_error(500)
+      end
+      it "regular price must be a number" do
+        fill_in 'Price', :with => 'letters'
+        click_button 'Update Book'
+        li(:regular_price).should have_numericality_error
+      end
+      it "on error form, alphabetical regular price shows up in Riel" do
+        fill_in 'Title', :with => ''
+        fill_in 'Regular Price', :with => 'letters' 
+        click_button 'Update Book'
+        find_field('Regular Price').value.should eq 'letters'  
       end
     end
 
@@ -94,49 +127,8 @@ describe "Books" do
           click_button 'Update Book'
           li(:regular_price).should have_blank_error
         end
-        context "regular price must be a number" do
-          it "in Toman" do
-            Setting.singleton.update_attribute(:currency,Setting::TOMAN)
-          end
-          it "in Riel" do
-            Setting.singleton.update_attribute(:currency,Setting::RIEL)
-          end
-          after(:each) do
-            fill_in 'Price', :with => 'letters'
-            click_button 'Update Book'
-            li(:regular_price).should have_numericality_error
-          end
-        end
-        context "regular price cannot be less than" do
-          it "50 tomen" do
-            Setting.singleton.update_attribute(:currency,Setting::TOMAN)
-            fill_in 'Price', :with => 49 
-            click_button 'Update Book'
-            li(:regular_price).should have_greater_than_error(50)
-          end
-          it "500 Riel" do
-            Setting.singleton.update_attribute(:currency,Setting::RIEL)
-            fill_in 'Price', :with => 499 
-            click_button 'Update Book'
-            li(:regular_price).should have_greater_than_error(500)
-          end
-        end
 
 
-        context "on error form, alphabetical regular price shows up as" do
-          it "Toman" do
-            Setting.singleton.update_attribute(:currency,Setting::TOMAN)
-          end
-          it "Riel" do
-            Setting.singleton.update_attribute(:currency,Setting::RIEL)
-          end 
-          after(:each) do
-            fill_in 'Title', :with => ''
-            fill_in 'Regular Price', :with => 'letters' 
-            click_button 'Update Book'
-            find_field('Regular Price').value.should eq 'letters'  
-          end
-        end
       end
 
       it "shows a flash message" do

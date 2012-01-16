@@ -5,18 +5,38 @@ describe "Settings" do
     before(:each) do
       create_admin(:email=>'admin@example.com')
       login('admin@example.com')
-      visit edit_setting_path(Setting.singleton)
     end
 
-    it "layout" do
-      page.should have_title("Edit Settings")
-      options(:currency).should eq "BLANK, Riel, Toman" 
-      selected_value('Currency').should be_nil
-      page.should have_button("Update Settings")
+    context "layout" do
+      it "general" do
+        visit edit_setting_path(Setting.singleton)
+        page.should have_title("Edit Settings")
+        options(:currency).should eq "BLANK, Riel, Toman" 
+        page.should have_button("Update Settings")
+      end
+      
+      context "selected currency" do
+        it "in Toman" do
+          Setting.singleton.update_attribute(:currency,Setting::TOMAN)
+          visit edit_setting_path(Setting.singleton)
+          selected_value('Currency').should eq "Toman"
+        end
+        it "in Riel" do
+          Setting.singleton.update_attribute(:currency,Setting::RIEL)
+          visit edit_setting_path(Setting.singleton)
+          selected_value('Currency').should eq "Riel"
+        end
+        it "nil" do
+          Setting.singleton.update_attribute(:currency,nil)
+          visit edit_setting_path(Setting.singleton)
+          selected_value('Currency').should be_nil 
+        end
+      end
     end 
 
     context "edit settings" do
       before(:each) do
+        visit edit_setting_path(Setting.singleton)
         select 'Riel', :from => 'Currency'
       end
 
