@@ -154,8 +154,6 @@ describe "Sessions" do
   
     it "admin should be able to change from real to tomen in user profile"
 
-    it "list categoris with indent in site nav"
-
     context "admin links to" do
       it "settings" do
         create_admin(:email=>'admin@example.com')

@@ -27,3 +27,5 @@ afd01e: !ruby/object:Dooby::Task
   todo: author name must be unique
 b009f5: !ruby/object:Dooby::Task 
   todo: javascript update :done
+6fb1b6: !ruby/object:Dooby::Task 
+  todo: show book layout :done
