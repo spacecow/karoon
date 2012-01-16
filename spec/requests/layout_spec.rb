@@ -20,11 +20,11 @@ describe "Sessions" do
         create_category('Mars',@planet.id)
       end
 
-      it "list base categories", :focus=>true do
+      it "list base categories" do
         visit root_path
-        site_nav.ul.should have_link('religion') 
+        li(li(site_nav,1)).should have_link('religion') 
         site_nav.should_not have_link('islam') 
-        site_nav.should have_link('space') 
+        li(li(site_nav,1),1).should have_link('space') 
         site_nav.should_not have_link('rocket') 
         site_nav.should_not have_link('planet') 
         site_nav.should_not have_link('Mars') 
@@ -35,20 +35,20 @@ describe "Sessions" do
 
         it "religion -" do
           site_nav.click_link 'religion'
-          site_nav.should have_link('religion') 
+          li(li(site_nav,1)).should have_link('religion') 
           site_nav.should_not have_link('space') 
-          site_nav.should have_link('islam') 
+          li(li(li(site_nav,1),1)).should have_link('islam') 
           site_nav.should_not have_link('rocket') 
           site_nav.should_not have_link('planet') 
           site_nav.should_not have_link('Mars') 
         end
         it "space -" do
           site_nav.click_link 'space'
-          site_nav.should have_link('space') 
+          li(li(site_nav,1)).should have_link('space') 
           site_nav.should_not have_link('religion') 
           site_nav.should_not have_link('islam') 
-          site_nav.should have_link('rocket') 
-          site_nav.should have_link('planet') 
+          li(li(li(site_nav,1),1)).should have_link('planet') 
+          li(li(li(site_nav,1),1),1).should have_link('rocket') 
           site_nav.should_not have_link('Mars') 
         end
         context "space - planet" do
@@ -63,12 +63,12 @@ describe "Sessions" do
           end
 
           after(:each) do
-            site_nav.should have_link('space') 
+            li(li(site_nav,1)).should have_link('space') 
             site_nav.should_not have_link('religion') 
             site_nav.should_not have_link('islam') 
-            site_nav.should have_link('planet') 
+            li(li(li(site_nav,1),1)).should have_link('planet') 
             site_nav.should_not have_link('rocket') 
-            site_nav.should have_link('Mars') 
+            li(li(li(li(site_nav,1),1),1)).should have_link('Mars') 
           end
         end
       end

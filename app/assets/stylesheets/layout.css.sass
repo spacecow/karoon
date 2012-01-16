@@ -91,16 +91,15 @@ div#background_container
         text-align: right
         ul
           li.selected
-            background: $blue
+            margin-right: -5px
+            padding-right: 5px
+            border: 1px solid $blue
+            +border-radius(5px)
           li
             font-size: 20px
             ul
               li
                 font-size: 16px
-                margin-right: 5px
-                ul
-                  li
-                    margin-right: 10px
     div#main_container
       width: $main_container_width
       float: left
@@ -122,3 +121,6 @@ div#background_container
       div#main
         div#bottom_links
           margin-top: 10px
+
+ul.nested_category
+  margin-right: 10px

@@ -3,13 +3,13 @@ class CategoriesController < ApplicationController
   before_filter :load_all_categories, :only => :new
   before_filter :load_min_categories, :only => :edit
 
+
   def show
     if @category.parent
       @site_nav_categories = @category.ancestors.arrange(:order => :names_depth_cache)
-      p @site_nav_categories
       hash = ActiveSupport::OrderedHash.new
       hash[@category] = @category.children.arrange(:order => :names_depth_cache)
-      @site_nav_categories[@category.parent] = hash
+      attach_children(@site_nav_categories,hash)
     else
       @site_nav_categories = ActiveSupport::OrderedHash.new
       @site_nav_categories[@category] = @category.children.arrange(:order => :names_depth_cache)
@@ -60,6 +60,15 @@ class CategoriesController < ApplicationController
 
   private
 
+    def attach_children(hash,value)
+      hash.each do |k,v|
+        if v.empty? 
+          hash[k] = value 
+        else
+          attach_children(hash[k],value)
+        end 
+      end
+    end
     def load_all_categories
       @categories = Category.all.map{|e| [e.names_depth_cache,e.id]}
     end

@@ -10,6 +10,6 @@ module ApplicationHelper
     return if categories.empty?
     content_tag(:ul,categories.map{|cat,subcat|
       content_tag(:li,link_to(cat.name,cat),:class=>class_selection(cat.name)) + (subcat.present? ? content_tag(:li,listed_categories(subcat)) : '')
-    }.join.html_safe)
+    }.join.html_safe,:class=>'nested_category')
   end
 end
