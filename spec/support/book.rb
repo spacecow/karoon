@@ -5,6 +5,8 @@ def fill_in_book(i=0,title="A",price="1000",cat="B")
       label = k.to_s.split('_').map(&:capitalize).join(' ')
       if label == "Image"
         li(k,i).attach_file label, v
+      elsif label == "Category"
+        li(:category_tokens,i).fill_in label, :with => v 
       else
         li(k,i).fill_in label, :with => v
       end

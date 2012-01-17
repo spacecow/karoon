@@ -33,3 +33,5 @@ dd5c77: !ruby/object:Dooby::Task
   todo: search form :done
 ca924e: !ruby/object:Dooby::Task 
   todo: display searches :done
+fe4c42: !ruby/object:Dooby::Task 
+  todo: add flash from error page of new books

@@ -23,7 +23,7 @@ describe "Books" do
         li(:title,0).should have_blank_error 
         li(:regular_price,0).should have_blank_error 
         li(:regular_price,0).should_not have_numericality_error 
-        li(:category,0).should have_blank_error 
+        li(:category_tokens,0).should have_blank_error 
       end
       it "10 forms should be shown" do
         divs(:book).count.should be(10) 

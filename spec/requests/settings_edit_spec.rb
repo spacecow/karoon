@@ -11,7 +11,7 @@ describe "Settings" do
       it "general" do
         visit edit_setting_path(Setting.singleton)
         page.should have_title("Edit Settings")
-        options(:currency).should eq "BLANK, Riel, Toman" 
+        options('Currency').should eq "BLANK, Riel, Toman" 
         page.should have_button("Update Settings")
       end
       
