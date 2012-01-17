@@ -89,6 +89,8 @@ div#background_container
         margin: 66px auto 0 auto
         font-size: 18px
         text-align: right
+        img
+          height: 100px
         ul
           li.selected
             margin-right: -5px
@@ -121,6 +123,14 @@ div#background_container
       div#search_bar
         border: 1px solid $blue
         +custom_gradient(#fff,$blue)
+        form
+          li
+            float: left
+            label
+              float: left
+              margin: 5px 10px 0 10px 
+            select
+              width: 200px
       div#main
         div#bottom_links
           margin-top: 10px

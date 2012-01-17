@@ -12,6 +12,7 @@
   <div id="container">
     <div id="site_nav_container">
       <div id="site_nav">
+        <%= image_tag 'blue_logo.png' %>
         <ul>
           <li class='<%= class_selection(:books) %>' ><%= link_to t(:books), books_path %></li>
           <li>
@@ -40,9 +41,7 @@
         </div>
       </div>
 
-      <div id="search_bar">
-        Search
-      </div>
+      <%= render 'layouts/search_bar' %>
 
       <div id="main">
         <%= yield %>
