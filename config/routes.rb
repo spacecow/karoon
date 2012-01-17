@@ -18,5 +18,5 @@ Karoon::Application.routes.draw do
 
   resources :authors
   resources :categories
-  resources :searches, :only => :create
+  resources :searches, :only => [:show,:create]
 end

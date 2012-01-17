@@ -10,6 +10,8 @@ en:
   delete: 'Delete'
   edit: 'Edit'
   go: 'Go'
+  hit: 'Hit'
+  hits: 'Hits'
   in_toman: 'in Toman'
   login: 'Login'
   price: 'Price'

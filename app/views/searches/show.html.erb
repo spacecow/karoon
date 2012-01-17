@@ -1,0 +1,6 @@
+<%= title @search.category.nil? ? t(:books) : @search.category.name %>
+<%= subtitle("#{t(:search)}: '#{@search.keywords}'. #{@search.books.count} #{@search.books.count == 1 ? t(:hit) : t(:hits)}.") %>
+
+<div id="books">
+  <%= render @search.books %>
+</div>

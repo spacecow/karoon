@@ -31,3 +31,5 @@ b009f5: !ruby/object:Dooby::Task
   todo: show book layout :done
 dd5c77: !ruby/object:Dooby::Task 
   todo: search form :done
+ca924e: !ruby/object:Dooby::Task 
+  todo: display searches :done

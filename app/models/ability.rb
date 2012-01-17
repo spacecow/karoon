@@ -5,7 +5,7 @@ class Ability
     can [:show,:index], Book
     can [:show,:index], Author
     can [:show,:index], Category
-    can :create, Search
+    can [:show,:create], Search
     if user
       if user.role? :admin
         can [:create,:update,:destroy,:create_individual], Book
