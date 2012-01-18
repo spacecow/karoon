@@ -48,7 +48,8 @@ class BooksController < ApplicationController
         end 
       end
       load_hidden_book(10-@books.count)
-      render :new, :notice => created(:book,i,:books)
+      flash[:notice] = created(:book,i,:books)
+      render :new
     end
   end
 

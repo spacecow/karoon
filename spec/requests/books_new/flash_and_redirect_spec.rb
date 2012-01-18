@@ -35,15 +35,23 @@ describe "Books" do
         it "new" do
           fill_in_book
           click_button 'Create Book'
+          page.current_path.should eq new_book_path
+        end
+        it "error" do
+          click_button 'Create Book'
+          fill_in_book
+          div('book',1).fill_in :title, :with => "something"
+          click_button 'Create Book'
+          page.current_path.should eq create_individual_books_path
         end
         it "create" do
           click_button 'Create Book'
           fill_in_book
           click_button 'Create Book'
+          page.current_path.should eq new_book_path
         end
         after(:each) do
           page.should have_notice("1 Book was successfully created")
-          page.current_path.should eq new_book_path
           divs(:book).count.should be(10) 
         end
       end

@@ -2,6 +2,8 @@ class SearchesController < ApplicationController
   load_and_authorize_resource
 
   def show
+    @new_search.keywords = @search ? @search.keywords : nil 
+    @new_search.category_id = @search ? @search.category_id : nil
   end
 
   def create

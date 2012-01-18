@@ -11,6 +11,10 @@ describe "Searches" do
         visit root_path
         search_bar.find_field('Search').value.should eq nil
       end
+      it "the category is not selected" do
+        visit root_path
+        selected_value('search_category_id').should be_nil 
+      end
 
       context "category options" do
         it "just contains 'Books' if no categories exists" do

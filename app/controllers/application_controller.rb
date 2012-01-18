@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include BasicApplicationController
   protect_from_forgery
   helper_method :pt,:current_user,:currency_in_riel?,:currency
+  before_filter :load_new_search
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:alert] = alertify(:unauthorized_access)
@@ -28,4 +29,10 @@ class ApplicationController < ActionController::Base
   def currency_in_riel?
     currency == Setting::RIEL
   end
+
+  private
+
+    def load_new_search
+      @new_search = Search.new
+    end
 end
