@@ -3,6 +3,10 @@ class AuthorsController < ApplicationController
   load_and_authorize_resource
 
   def show
+    if params[:search]
+      search = Search.find(params[:search])
+      search.add_and_save_author_match(@author.id,@author.name)
+    end
   end
 
   def index

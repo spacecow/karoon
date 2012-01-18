@@ -5,6 +5,10 @@ class CategoriesController < ApplicationController
 
 
   def show
+    if params[:search]
+      search = Search.find(params[:search])
+      search.add_and_save_category_match(@category.id,@category.name)
+    end
     if @category.parent
       @site_nav_categories = @category.ancestors.arrange(:order => :names_depth_cache)
       hash = ActiveSupport::OrderedHash.new

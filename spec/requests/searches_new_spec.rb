@@ -39,6 +39,7 @@ describe "Searches" do
       @user = create_member(:email=>'member@example.com')
       login('member@example.com')
       visit root_path
+      fill_in 'Search', :with => 'Hood'
       click_button 'Go'
       Search.last.user_id.should eq @user.id 
     end
@@ -81,14 +82,14 @@ describe "Searches" do
       context "category filled in, search not," do
         before(:each) do
           fill_in 'Search', :with => ''
-          click_button 'Go' 
         end
-        it "saves category to the database" do
-          search = Search.last
-          search.keywords.should be_blank 
-          search.category_id.should eq @science.id 
+        it "saves no category to the database" do
+          lambda do
+            click_button 'Go' 
+          end.should change(Search,:count).by(0)
         end
         it "redirects to that category page" do
+          click_button 'Go' 
           current_path.should eq category_path(@science)
         end 
       end
@@ -110,14 +111,14 @@ describe "Searches" do
         before(:each) do
           fill_in 'Search', :with => ''
           select 'Books', :from => 'search_category_id'
-          click_button 'Go' 
         end
-        it "saves category to the database" do
-          search = Search.last
-          search.keywords.should be_blank 
-          search.category_id.should be_nil 
+        it "saves no category to the database" do
+          lambda do
+            click_button 'Go' 
+          end.should change(Search,:count).by(0)
         end
         it "redirects to that category page" do
+          click_button 'Go' 
           current_path.should eq books_path 
         end 
       end

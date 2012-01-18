@@ -12,6 +12,8 @@ Factory.define :category do |f|
 end
 
 Factory.define :search do |f|
+  f.keywords 'Factory Keywords'
+  f.ip '1.2.3.4'
 end
 
 Factory.define :user do |f|

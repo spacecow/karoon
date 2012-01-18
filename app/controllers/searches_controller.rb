@@ -7,15 +7,14 @@ class SearchesController < ApplicationController
   end
 
   def create
+    if @search.keywords.blank?
+      redirect_to @search.category and return if @search.category 
+      redirect_to books_path and return
+    end
     @search.ip = request.remote_ip
     @search.user = current_user if current_user
     if @search.save
-      if @search.keywords.blank?
-        redirect_to @search.category and return if @search.category 
-        redirect_to books_path
-      else
-        redirect_to @search
-      end
+      redirect_to @search
     end
   end
 end

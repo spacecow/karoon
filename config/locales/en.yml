@@ -1,11 +1,13 @@
 en:
   author: 'Author'
+  author_match: 'Author Match'
   authors: 'Authors'
   book: 'Book'
   book_form: 'Book Form'
   book_match: 'Book Match'
   books: 'Books'
   category: 'Category'
+  category_match: 'Category Match'
   categories: 'Categories'
   del: 'Del'
   delete: 'Delete'

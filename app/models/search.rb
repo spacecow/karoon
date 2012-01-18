@@ -4,19 +4,16 @@ class Search < ActiveRecord::Base
 
   attr_accessible :keywords,:category_id
 
-  def add_and_save_book_link(id,title)
-    add_book_link(id,title)
-    save
+  validates_presence_of :keywords, :ip
+
+  def add_and_save_author_match(id,name)
+    add_and_save_match(:author,id,name)
   end
-  def add_book_link(id,title)
-    if self.book_links.nil?
-      arr = [id,title]
-    else 
-      arr = eval(self.book_links)
-      arr.push id
-      arr.push title
-    end
-    self.book_links = arr.to_json
+  def add_and_save_book_match(id,title)
+    add_and_save_match(:book,id,title)
+  end
+  def add_and_save_category_match(id,name)
+    add_and_save_match(:category,id,name)
   end
 
   def books
@@ -24,4 +21,22 @@ class Search < ActiveRecord::Base
     @books = @books.includes(:categories).where("categories.id = ?",category_id) if category_id
     @books = @books.where("title LIKE ?","%#{keywords}%")
   end
+
+  private
+
+    def add_and_save_match(assoc,id,text)
+      add_match(assoc,id,text)
+      save
+    end
+
+    def add_match(assoc,id,text)
+      if send("#{assoc}_match".to_sym).nil?
+        arr = [id,text]
+      else 
+        arr = eval(send("#{assoc}_match".to_sym))
+        arr.push id
+        arr.push text
+      end
+      send("#{assoc}_match=".to_sym,arr.to_json)
+    end
 end
