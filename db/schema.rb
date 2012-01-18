@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20120117043724) do
     t.string   "ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "book_match"
   end
 
   create_table "settings", :force => true do |t|

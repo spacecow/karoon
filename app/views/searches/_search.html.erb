@@ -1,6 +1,30 @@
 <div class="search">
-  <div id="ip"><%= search.ip %></div>
+  <div id="ip">
+    <span class="label">
+      <%= t(:ip) %>:
+    </span>
+    <span class="content">
+      <%= search.ip %>
+    </span>
+  </div>
   <% if search.user %>
-    <div id="userid"><%= search.user.email %></div>
+    <div id="userid">
+      <span class="label">
+        <%= t(:userid) %>:
+      </span>
+      <span class="content">
+        <%= search.user.email %>
+      </span>
+    </div>
+  <% end %>
+  <% if search.book_match %>
+    <div id="book_match">
+      <span class="label">
+        <%= t(:book_match) %>:
+      </span>
+      <span class="content">
+        <%= search.book_match %>
+      </span>
+    </div>
   <% end %>
 </div>
