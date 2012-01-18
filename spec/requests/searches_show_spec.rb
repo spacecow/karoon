@@ -44,7 +44,7 @@ describe "Searches" do
           visit search_path(search)
           page.should have_subtitle("Search: 'Santa'. 0 Hits.")
         end
-        it "1 general", :focus=>true do
+        it "1 general" do
           search = create_search('Robin Hood')
           visit search_path(search)
           page.should have_subtitle("Search: 'Robin Hood'. 1 Hit.")
@@ -62,7 +62,28 @@ describe "Searches" do
       end
     end
 
-    context "links", :focus=>true do
+    context "links" do
+      context "navigation to an author saves that action to" do
+        it "a new search" do
+          hood = create_book('Robin Hood')
+          king = create_author('Stephen King')
+          hood.authors << king
+          search = create_search('Hood')
+          visit search_path(search)
+          click_link 'Stephen King'
+          Search.last.author_match.should eq [king.id,'Stephen King'].to_json
+        end
+        it "an old search" do
+          hood = create_book('Robin Hood')
+          king = create_author('Stephen King')
+          hood.authors << king
+          search = create_search('Hood')
+          search.update_attribute(:author_match,[1,'Yeah'].to_json)
+          visit search_path(search)
+          click_link 'Stephen King'
+          Search.last.author_match.should eq [1,'Yeah',king.id,'Stephen King'].to_json
+        end
+      end
       context "navigation to a book saves that action to" do
         it "a new search" do
           hood = create_book('Robin Hood')
@@ -78,6 +99,27 @@ describe "Searches" do
           visit search_path(search)
           click_link 'Robin Hood'
           Search.last.book_match.should eq [1,'Yeah',hood.id,'Robin Hood'].to_json
+        end
+      end
+      context "navigation to a category saves that action to" do
+        it "a new search" do
+          hood = create_book('Robin Hood')
+          science = create_category('science')
+          hood.categories << science
+          search = create_search('Hood')
+          visit search_path(search)
+          click_link 'science'
+          Search.last.category_match.should eq [science.id,'science'].to_json
+        end
+        it "an old search" do
+          hood = create_book('Robin Hood')
+          science = create_category('science')
+          hood.categories << science
+          search = create_search('Hood')
+          search.update_attribute(:category_match,[1,'Yeah'].to_json)
+          visit search_path(search)
+          click_link 'science'
+          Search.last.category_match.should eq [1,'Yeah',science.id,'science'].to_json
         end
       end
     end

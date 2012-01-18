@@ -8,6 +8,7 @@ describe "Sessions" do
       site_nav.should have_link('Authors')
       site_nav.should have_link('Categories')
       user_nav.should_not have_link('Settings')
+      user_nav.should_not have_link('Searches')
     end
 
     context "category listing" do
@@ -150,6 +151,7 @@ describe "Sessions" do
       login('admin@example.com')
       visit root_path
       user_nav.should have_link('Settings')
+      user_nav.should have_link('Searches')
     end
   
     it "admin should be able to change from real to tomen in user profile"
@@ -161,6 +163,13 @@ describe "Sessions" do
         visit root_path
         user_nav.click_link 'Settings'
         page.current_path.should eq edit_setting_path(Setting.singleton)
+      end
+      it "searches" do
+        create_admin(:email=>'admin@example.com')
+        login('admin@example.com')
+        visit root_path
+        user_nav.click_link 'Searches'
+        page.current_path.should eq searches_path 
       end
     end
 

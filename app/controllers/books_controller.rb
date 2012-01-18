@@ -5,7 +5,7 @@ class BooksController < ApplicationController
   def show
     if params[:search]
       search = Search.find(params[:search])
-      search.add_and_save_book_link(@book.id,@book.title)
+      search.add_and_save_book_match(@book.id,@book.title)
     end
   end
 
