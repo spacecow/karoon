@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120118044053) do
+ActiveRecord::Schema.define(:version => 20120117043724) do
 
   create_table "authors", :force => true do |t|
     t.string   "name"
@@ -60,7 +60,6 @@ ActiveRecord::Schema.define(:version => 20120118044053) do
     t.string   "ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "book_links"
   end
 
   create_table "settings", :force => true do |t|
