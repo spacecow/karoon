@@ -15,6 +15,8 @@ en:
   in_toman: 'in Toman'
   login: 'Login'
   price: 'Price'
+  search: 'Search'
+  searches: 'Searches'
   settings: 'Settings'
   signup: 'Signup'
   was: 'was'
@@ -30,6 +32,7 @@ en:
   alerts:
     invalid_login_or_password: "Invalid login or password."
     not_created: 'No %{o} was created.'
+    unauthorized_access: "Unauthorized Access."
   formtastic:
     labels:
       email: 'Login'

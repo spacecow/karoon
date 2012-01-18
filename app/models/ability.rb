@@ -12,6 +12,7 @@ class Ability
         can [:create,:update,:destroy], Author
         can [:create,:update,:destroy], Category
         can [:update], Setting
+        can :index, Search
       elsif user.role? :god
         can :manage, :all
       end 

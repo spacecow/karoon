@@ -6,7 +6,7 @@
       <%= link_to image_tag(book.image_url(:thumb)), book %>
     <% end %>
   </div>
-    <span id="title"><%= link_to book.title, book %></span> by <%= link_to_authors book.authors %>
+    <span id="title"><%= search_link_to book.title, :book_path, book %></span> by <%= link_to_authors book.authors %>
   <div id="title">
   </div>
   <div id="categories">

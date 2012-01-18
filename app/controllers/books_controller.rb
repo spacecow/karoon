@@ -2,6 +2,13 @@ class BooksController < ApplicationController
   before_filter :load_books_with_associations, :only => :index
   load_and_authorize_resource
 
+  def show
+    if params[:search]
+      search = Search.find(params[:search])
+      search.add_and_save_book_link(@book.id,@book.title)
+    end
+  end
+
   def index
     @site_nav_categories = Category.where(:ancestry => nil)
     @selection = t(:books)

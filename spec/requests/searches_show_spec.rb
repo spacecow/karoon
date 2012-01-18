@@ -61,5 +61,25 @@ describe "Searches" do
         end
       end
     end
+
+    context "links", :focus=>true do
+      context "navigation to a book saves that action to" do
+        it "a new search" do
+          hood = create_book('Robin Hood')
+          search = create_search('Hood')
+          visit search_path(search)
+          click_link 'Robin Hood'
+          Search.last.book_links.should eq [hood.id,'Robin Hood'].to_json
+        end
+        it "an old search" do
+          hood = create_book('Robin Hood')
+          search = create_search('Hood')
+          search.update_attribute(:book_links,[1,'Yeah'].to_json)
+          visit search_path(search)
+          click_link 'Robin Hood'
+          Search.last.book_links.should eq [1,'Yeah',hood.id,'Robin Hood'].to_json
+        end
+      end
+    end
   end
 end
