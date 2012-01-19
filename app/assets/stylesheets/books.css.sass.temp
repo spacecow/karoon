@@ -1,0 +1,40 @@
+div#book
+  div#image
+    float: left
+    margin-right: 10px
+    img
+      height: 250px
+  div#category
+    span.content
+      font-style: italic
+  div#summary
+    font-style: italic
+
+form#book
+  div.book
+    border-bottom: 1px solid black
+    margin-bottom: 20px
+    padding-bottom: 20px 
+div#books
+  div.book
+    border-bottom: 1px solid #aaa
+    margin-bottom: 20px
+    padding-bottom: 20px 
+    padding-left: 170px
+    div#image
+      width: 170px
+      margin-left: -170px
+      float: left
+      img
+        height: 150px
+    div#title
+      span#title
+        font-size: 18px
+        font-weight: bold
+    div#categories
+      span.content
+        font-style: italic
+    div#summary
+      font-style: italic
+    div#actions
+      font-size: 12px

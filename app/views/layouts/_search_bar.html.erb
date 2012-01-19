@@ -1,7 +1,25 @@
 <div id="search_bar">
-  <%= semantic_form_for @new_search do |f| %>
+  <%= form_for @new_search do |f| %>
+    <div id="form">
+      <div id="label">
+        <%= f.label :keywords, t(:search) %>
+      </div>
+      <div id="left_content">
+        <%= f.text_field :keywords %>
+      </div>
+      <div id="right_content">
+        <%= f.select :category_id, Category.order(:names_depth_cache).map{|e| [e.names_depth_cache,e.id]}, :prompt => t(:books) %>
+        <%= f.submit t(:go) %>
+      </div>
+      <div class="clear"></div>
+    </div>
+  <% end %>
+</div>
+<!--
+  <%= semantic_form_for @new_search, :html=>{:class=>'inline'} do |f| %>
     <%= f.input :keywords, :label => ft(:search) %>
     <%= f.input :category, :label => false, :collection => Category.order(:names_depth_cache).map{|e| [e.names_depth_cache,e.id]}, :prompt => t(:books) %>
     <%= f.submit t(:go) %>
   <% end %>
 </div>
+-->

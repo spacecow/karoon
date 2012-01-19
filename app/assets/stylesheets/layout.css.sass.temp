@@ -24,7 +24,6 @@ ul
   padding: 0
   li
     list-style-type: none
-
 ul.nested_category
   margin-right: 10px
 
@@ -42,40 +41,10 @@ $notice_light: #4CC417
 form
   li
     list-style-type: none
-    input
-      width: 400px
-      &.short
-        width: 200px
-      &.submit
-        width: auto
-        margin-top: 10px
-    textarea
-      width: 400px
-      height: 100px
-    label
-      display: block
-    p.inline-hints
-      margin: 0
-      color: gray
-      font-style: italic
-    p.inline-errors
-      font-style: italic
-      color: red
-      margin: 0
-  li#book_regular_price_input
-    input
-      float: left
-    p.inline-hints
-      float: left
-      margin: 4px 0 0 5px
-    p.inline-errors
-      float: left
-      width: 100% 
-
-span.label
-  font-weight: bold
 
 div#top_container
+  width: 100%
+  display: block
   padding-left: 200px
   div#image_container
     float: left
@@ -124,23 +93,27 @@ div#search_bar
         width: 400px
         margin-right: -400px
 
-div#mid_container
-  padding-left: 200px
-  div#site_nav_container
-    float: left
-    width: 200px
-    margin: 7px 0 0 -200px
-    div#site_nav
-      font-size: 20px
-      text-align: right
-      margin-right: 15px
-      ul
-        li.selected
-          margin-right: -5px
-          padding-right: 5px
-          +border-radius(5px)
-          border: 1px solid $blue
-        li
-          ul
-            li
-              font-size: 16px
+div#site_nav_container
+  margin-top: 25px
+  float: left
+  width: 200px
+  div#site_nav
+    font-size: 20px
+    text-align: right
+    margin-right: 15px
+    ul
+      li.selected
+        margin-right: -5px
+        padding-right: 5px
+        border: 1px solid $blue
+        +border-radius(5px)
+      li
+        ul
+          li
+            font-size: 16px
+
+div#main_container
+  float: left
+  div#main
+    div#bottom_links
+      margin-top: 10px
