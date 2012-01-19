@@ -1,0 +1,143 @@
+@import "compass/css3/border-radius"
+@import "compass/css3/gradient"
+
+$background_container_width: 1000px
+$container_width: 900px
+$site_nav_container_width: 150px
+$site_nav_width: 130px
+$main_container_width: 750px - 4px - 5px
+$flash_container_height: 35px
+$flash_container_width: 200px
+$blue: #4B7399
+
+body
+  font: normal 14px "Helvetica Neue", Arial, Helvetica, sans-serif
+a
+  text-decoration: none 
+  color: $blue
+  text-shadow: 1px 1px 1px #aaa
+  &:hover
+    color: #eee
+    text-shadow: 1px 1px 1px $blue 
+
+div.clear
+  clear: both
+  height: 0
+  overflow: hidden
+
+span.label
+  font-weight: bold
+
+$alert_dark: #933
+$alert_light: #f33
+$notice_dark: #396
+$notice_light: #4CC417
+@mixin custom_gradient($light, $dark, $corner: 10px)
+  color: white
+  font-weight: bold
+  padding: 5px
+  +border-radius($corner)
+  +linear-gradient(color-stops($light, $dark))
+
+ul
+  margin: 0
+  padding: 0
+  li
+    list-style-type: none
+
+form
+  li
+    input
+      width: 400px
+    input.short
+      width: 200px
+    input.submit
+      width: auto
+      margin: 10px 0 0 0
+    textarea
+      width: 400px
+      height: 100px
+    list-style-type: none
+    label
+      display: block
+    p.inline-hints
+      margin: 0
+      color: gray
+      font-style: italic
+    p.inline-errors
+      font-style: italic
+      color: red
+      margin: 0
+  li#book_regular_price_input
+    input
+      float: left
+    p.inline-hints
+      float: left
+      margin: 4px 0 0 5px
+    p.inline-errors
+      float: left
+      width: 740px
+
+div#background_container
+  width: $background_container_width 
+  margin: 0 auto
+  div#container
+    width: $container_width
+    margin: 0 auto
+    div#site_nav_container
+      float: left
+      width: $site_nav_container_width
+      div#site_nav
+        width: $site_nav_width
+        margin: 0 auto 0 auto
+        font-size: 18px
+        text-align: right
+        img
+          height: 100px
+        ul
+          li.selected
+            margin-right: -5px
+            padding-right: 5px
+            border: 1px solid $blue
+            +border-radius(5px)
+          li
+            font-size: 20px
+            ul
+              li
+                font-size: 16px
+    div#main_container
+      width: $main_container_width
+      float: left
+      div#flash_container
+        padding: 2px
+        height: $flash_container_height
+        div#flash_notice
+          border: 1px solid black
+          float: left
+          margin-top: 2px
+          +custom_gradient($notice_light,$notice_dark)
+        div#flash_alert
+          border: 1px solid black
+          float: left
+          margin-top: 2px
+          +custom_gradient($alert_light,$alert_dark)
+        div#user_nav
+          float: right
+      div#search_bar
+        margin-top: 60px
+        border: 1px solid $blue
+        +custom_gradient(#fff,$blue)
+        form
+          li
+            float: left
+            label
+              float: left
+              margin: 5px 10px 0 10px 
+            select
+              width: 200px
+      div#main
+        div#bottom_links
+          margin-top: 10px
+
+ul.nested_category
+  margin-right: 10px

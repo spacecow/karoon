@@ -6,33 +6,35 @@
       <%= link_to image_tag(book.image_url(:thumb)), book %>
     <% end %>
   </div>
-    <span id="title"><%= search_link_to book.title, :book_path, book %></span> by <%= link_to_authors book.authors %>
-  <div id="title">
+  <div id="content">
+    <div id="title">
+      <span class="title"><%= search_link_to book.title, :book_path, book %></span> by <%= link_to_authors book.authors %>
+    </div>
+    <div id="categories">
+      <span class="label">
+        <%= book.categories.count > 1 ? t(:categories) : t(:category) %>:
+      </span>
+      <span class="content">
+        <%= link_to_categories book.categories %>
+      </span>
+    </div>
+    <div id="price">
+      <span class="label">
+        <%= t(:price) %>:
+      </span>
+      <span class="content">
+        <%= currency_in_riel? ? book.regular_price_in_riel : book.regular_price %> <%= currency %>
+      </span>
+    </div>
+    <div id="summary">
+      <% if book.summary.present? %>
+        "<%= book.summary.truncate(200) %>"
+      <% end %>
+    </div>
+    <div id="actions">
+      <%= link_to t(:edit), edit_book_path(book) if can? :edit, book %>
+      <%= link_to t(:del), book, :confirm => sure?, :method => :delete if can? :destroy, book %>
+    </div>
+    <div class="clear"></div>
   </div>
-  <div id="categories">
-    <span class="label">
-      <%= book.categories.count > 1 ? t(:categories) : t(:category) %>:
-    </span>
-    <span class="content">
-      <%= link_to_categories book.categories %>
-    </span>
-  </div>
-  <div id="price">
-    <span class="label">
-      <%= t(:price) %>:
-    </span>
-    <span class="content">
-      <%= currency_in_riel? ? book.regular_price_in_riel : book.regular_price %> <%= currency %>
-    </span>
-  </div>
-  <div id="summary">
-    <% if book.summary.present? %>
-      "<%= book.summary.truncate(200) %>"
-    <% end %>
-  </div>
-  <div id="actions">
-    <%= link_to t(:edit), edit_book_path(book) if can? :edit, book %>
-    <%= link_to t(:del), book, :confirm => sure?, :method => :delete if can? :destroy, book %>
-  </div>
-  <div class="clear"></div>
 </div>

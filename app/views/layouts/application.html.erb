@@ -10,42 +10,49 @@
 
 <div id="background_container">
   <div id="container">
-    <div id="site_nav_container">
-      <div id="site_nav">
+    <div id="top_container">
+      <div id="image_container">
         <%= image_tag 'blue_logo.png' %>
-        <ul>
-          <li class='<%= class_selection(:books) %>' ><%= link_to t(:books), books_path %></li>
-          <li>
-              <%= listed_categories @site_nav_categories || {} %>
-          </li>
-          <li class='<%= class_selection(:authors) %>' ><%= link_to t(:authors), authors_path %></li>
-          <li class='<%= class_selection(:categories) %>' ><%= link_to t(:categories), categories_path %></li>
-        </ul>
+      </div>
+      <div id="user_container">
+        <div id="flash_container">
+          <% flash.each do |name,msg| %>
+            <%= content_tag :div, msg, :id => "flash_#{name}" %>
+          <% end %>
+          <div id="user_nav">
+            <% if current_user %>
+              Logged in as <%= current_user.email %><br>
+              <%= link_to t(:logout), logout_path %>
+            <% else %>
+              <%= link_to t(:login), login_path %>
+            <% end %>
+            <%= link_to t(:signup), signup_path %>
+            <%= link_to t(:settings), edit_setting_path(Setting.singleton) if can? :edit, Setting.singleton %>
+            <%= link_to t(:searches), searches_path if can? :index, Search %>
+          </div>
+        </div>
+        <%= render 'layouts/search_bar' %>
       </div>
     </div>
-
-    <div id="main_container">
-      <div id="flash_container">
-        <% flash.each do |name,msg| %>
-          <%= content_tag :div, msg, :id => "flash_#{name}" %>
-        <% end %>
-        <div id="user_nav">
-          <% if current_user %>
-            Logged in as <%= current_user.email %><br>
-            <%= link_to t(:logout), logout_path %>
-          <% else %>
-            <%= link_to t(:login), login_path %>
-          <% end %>
-          <%= link_to t(:signup), signup_path %>
-          <%= link_to t(:settings), edit_setting_path(Setting.singleton) if can? :edit, Setting.singleton %>
-          <%= link_to t(:searches), searches_path if can? :index, Search %>
+    <div class="clear"></div>
+    <div id="mid_container">
+      <div id="site_nav_container">
+        <div id="site_nav">
+          <ul>
+            <li class='<%= class_selection(:books) %>' ><%= link_to t(:books), books_path %></li>
+            <li>
+                <%= listed_categories @site_nav_categories || {} %>
+            </li>
+            <li class='<%= class_selection(:authors) %>' ><%= link_to t(:authors), authors_path %></li>
+            <li class='<%= class_selection(:categories) %>' ><%= link_to t(:categories), categories_path %></li>
+          </ul>
         </div>
       </div>
 
-      <%= render 'layouts/search_bar' %>
-
-      <div id="main">
-        <%= yield %>
+      <div id="main_container">
+        <div id="main">
+          <%= yield %>
+        </div>
       </div>
     </div>
     <div class="clear"></div>
