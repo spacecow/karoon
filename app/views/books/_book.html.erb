@@ -26,11 +26,14 @@
         <%= currency_in_riel? ? book.regular_price_in_riel : book.regular_price %> <%= currency %>
       </span>
     </div>
-    <div id="summary">
-      <% if book.summary.present? %>
-        "<%= book.summary.truncate(200) %>"
-      <% end %>
+    <div id="line_item">
+      <%= button_to 'Add to Cart', line_items_path(:book_id => book) %>
     </div>
+    <% if book.summary.present? %>
+      <div id="summary">
+        "<%= book.summary.truncate(200) %>"
+      </div>
+    <% end %>
     <div id="actions">
       <%= link_to t(:edit), edit_book_path(book) if can? :edit, book %>
       <%= link_to t(:del), book, :confirm => sure?, :method => :delete if can? :destroy, book %>

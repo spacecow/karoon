@@ -39,3 +39,5 @@ fe4c42: !ruby/object:Dooby::Task
   todo: search feedback :done
 c3c9fb: !ruby/object:Dooby::Task 
   todo: search index layout :done
+e3f41a: !ruby/object:Dooby::Task 
+  todo: add a cart button to each book :done

@@ -178,6 +178,7 @@ describe "Sessions" do
         visit root_path
       end
 
+      it "root, by clicking on the logo"
       it "books" do
         site_nav.click_link('Books')
         page.current_path.should eq books_path
