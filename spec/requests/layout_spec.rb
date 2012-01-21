@@ -23,9 +23,9 @@ describe "Sessions" do
 
       it "list base categories" do
         visit root_path
-        li(li(site_nav,1)).should have_link('religion') 
+        site_nav.li(1).li.should have_link('religion')
         site_nav.should_not have_link('islam') 
-        li(li(site_nav,1),1).should have_link('space') 
+        site_nav.li(1).li(1).should have_link('space')
         site_nav.should_not have_link('rocket') 
         site_nav.should_not have_link('planet') 
         site_nav.should_not have_link('Mars') 
@@ -36,20 +36,20 @@ describe "Sessions" do
 
         it "religion -" do
           site_nav.click_link 'religion'
-          li(li(site_nav,1)).should have_link('religion') 
+          site_nav.li(1).li.should have_link('religion') 
           site_nav.should_not have_link('space') 
-          li(li(li(site_nav,1),1)).should have_link('islam') 
+          site_nav.li(1).li(1).li.should have_link('islam') 
           site_nav.should_not have_link('rocket') 
           site_nav.should_not have_link('planet') 
           site_nav.should_not have_link('Mars') 
         end
         it "space -" do
           site_nav.click_link 'space'
-          li(li(site_nav,1)).should have_link('space') 
+          site_nav.li(1).li.should have_link('space') 
           site_nav.should_not have_link('religion') 
           site_nav.should_not have_link('islam') 
-          li(li(li(site_nav,1),1)).should have_link('planet') 
-          li(li(li(site_nav,1),1),1).should have_link('rocket') 
+          site_nav.li(1).li(1).li.should have_link('planet') 
+          site_nav.li(1).li(1).li(1).should have_link('rocket') 
           site_nav.should_not have_link('Mars') 
         end
         context "space - planet" do
@@ -64,12 +64,12 @@ describe "Sessions" do
           end
 
           after(:each) do
-            li(li(site_nav,1)).should have_link('space') 
+            site_nav.li(1).li.should have_link('space') 
             site_nav.should_not have_link('religion') 
             site_nav.should_not have_link('islam') 
-            li(li(li(site_nav,1),1)).should have_link('planet') 
+            site_nav.li(1).li(1).li.should have_link('planet') 
             site_nav.should_not have_link('rocket') 
-            li(li(li(li(site_nav,1),1),1)).should have_link('Mars') 
+            site_nav.li(1).li(1).li(1).li.should have_link('Mars') 
           end
         end
       end
@@ -87,7 +87,7 @@ describe "Sessions" do
             page.current_path.should eq category_path(@space)
           end
         end
-        context "child category"
+        it "child category"
       end
 
       context "selection for" do
@@ -143,7 +143,6 @@ describe "Sessions" do
           end
         end
       end
-
     end
 
     it "admin layout" do
