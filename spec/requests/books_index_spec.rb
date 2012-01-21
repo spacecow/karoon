@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Books" do
+describe "Books", :focus=>true do
   describe "index" do
     before(:each) do
       @book = Factory(:book,:title=>"This is the Way",:regular_price=>1000,:summary=>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
@@ -48,7 +48,7 @@ describe "Books" do
             visit books_path
           end
           after(:each) do
-            div('book',0).find(:css,'div#summary').should_not have_content("\"\"")
+            div('book',0).should_not have_div("summary")
           end
         end
         it "exists" do
@@ -123,6 +123,41 @@ describe "Books" do
         visit books_path
         div('book',0).click_link "religion"
         page.current_path.should eq category_path(@religion)
+      end
+      context "add book to cart" do
+        before(:each) do
+          visit books_path
+          div('book',0).click_button 'Add to Cart'
+        end
+        it "asks for login" do
+          page.current_path.should eq login_path
+        end
+        it "shows a flash message asking for signup/login"
+      end
+    end
+
+    context "member links to" do
+      before(:each) do
+        create_member(:email=>'member@example.com')
+        login('member@example.com')
+        visit books_path
+      end
+      context "add book to existing cart" do
+        it "does not create a new cart" do
+          # create cart
+          div('book',0).click_button 'Add to Cart'
+        end
+      end
+
+      context "add book to empty cart" do
+        before(:each) do
+          div('book',0).click_button 'Add to Cart'
+        end
+        it "creates a cart"
+        it "creates a line item"
+        it "creates an associations from line item to cart and book"
+        it "redirects to the cart"
+        it "shows a flash message saying the book in question has been added to the cart"
       end
     end
 

@@ -7,12 +7,15 @@ class Ability
     can [:show,:index], Category
     can [:show,:create], Search
     if user
-      if user.role? :admin
+      if user.role? :member
+        can :create, LineItem
+      elsif user.role? :admin
         can [:create,:update,:destroy,:create_individual], Book
         can [:create,:update,:destroy], Author
         can [:create,:update,:destroy], Category
         can [:update], Setting
         can :index, Search
+        can :create, LineItem
       elsif user.role? :god
         can :manage, :all
       end 
