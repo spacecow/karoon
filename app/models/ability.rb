@@ -7,7 +7,7 @@ class Ability
     can [:show,:index], Category
     can [:show,:create], Search
     can :create, LineItem
-    can :destroy, Cart
+    can [:update,:destroy], Cart
     if user
       if user.role? :member
       elsif user.role? :admin

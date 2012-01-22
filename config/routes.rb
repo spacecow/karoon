@@ -20,6 +20,6 @@ Karoon::Application.routes.draw do
   resources :categories
   resources :searches, :only => [:show,:index,:create]
 
-  resources :carts, :only => [:show,:destroy]
+  resources :carts, :only => [:show,:update,:destroy]
   resources :line_items, :only => [:create]
 end

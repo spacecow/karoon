@@ -12,24 +12,14 @@
   <div id="container">
     <div id="top_container">
       <div id="image_container">
-        <%= image_tag 'blue_logo.png' %>
+        <%= link_to image_tag('blue_logo.png'), root_path %>
       </div>
       <div id="user_container">
         <div id="flash_container">
           <% flash.each do |name,msg| %>
             <%= content_tag :div, msg, :id => "flash_#{name}" %>
           <% end %>
-          <div id="user_nav">
-            <% if current_user %>
-              Logged in as <%= current_user.email %><br>
-              <%= link_to t(:logout), logout_path %>
-            <% else %>
-              <%= link_to t(:login), login_path %>
-            <% end %>
-            <%= link_to t(:signup), signup_path %>
-            <%= link_to t(:settings), edit_setting_path(Setting.singleton) if can? :edit, Setting.singleton %>
-            <%= link_to t(:searches), searches_path if can? :index, Search %>
-          </div>
+          <%= render 'layouts/user_nav' %>
         </div>
         <%= render 'layouts/search_bar' %>
       </div>

@@ -1,0 +1,12 @@
+<div id="user_nav">
+  <% if current_user %>
+    Logged in as <%= current_user.email %><br>
+    <%= link_to t(:logout), logout_path %>
+  <% else %>
+    <%= link_to t(:login), login_path %>
+  <% end %>
+  <%= link_to t(:signup), signup_path %>
+  <%= link_to t(:my_cart), cart_path(current_cart) %>
+  <%= link_to t(:settings), edit_setting_path(Setting.singleton) if can? :edit, Setting.singleton %>
+  <%= link_to t(:searches), searches_path if can? :index, Search %>
+</div>

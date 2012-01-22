@@ -26,9 +26,16 @@
         <%= book.price(currency_in_riel?) %> <%= currency %>
       </span>
     </div>
-    <%= semantic_form_for LineItem.new(:book_id => book.id) do |f| %>
-      <%= f.input :quantity, :as => :select, :collection => (1..10), :include_blank => false %>
-      <%= f.input :book_id, :as => :hidden %>
+    <%= form_for LineItem.new(:book_id => book.id) do |f| %>
+      <div id="quantity">
+        <span class="label">
+          <%= f.label :quantity %>:
+        </span>
+        <span class="content">
+          <%= f.select :quantity, (1..10) %>
+        </span>
+      </div>
+      <%= f.hidden_field :book_id, :as => :hidden %>
       <%= f.submit add_to(:cart) %>
     <% end %>
     <div id="actions">

@@ -7,6 +7,7 @@ describe "Sessions" do
       site_nav.should have_link('Books')
       site_nav.should have_link('Authors')
       site_nav.should have_link('Categories')
+      user_nav.should have_link('My Cart')
       user_nav.should_not have_link('Settings')
       user_nav.should_not have_link('Searches')
     end
@@ -177,18 +178,25 @@ describe "Sessions" do
         visit root_path
       end
 
-      it "root, by clicking on the logo"
+      it "root, by clicking on the logo" do
+        click_link('Blue_logo')
+        current_path.should eq root_path
+      end
       it "books" do
         site_nav.click_link('Books')
-        page.current_path.should eq books_path
+        current_path.should eq books_path
       end
       it "authors" do
         site_nav.click_link('Authors')
-        page.current_path.should eq authors_path
+        current_path.should eq authors_path
       end
       it "categories" do
         site_nav.click_link('Categories')
-        page.current_path.should eq categories_path
+        current_path.should eq categories_path
+      end
+      it "my cart" do
+        user_nav.click_link('My Cart')
+        current_path.should eq cart_path(Cart.last)
       end
     end
   end

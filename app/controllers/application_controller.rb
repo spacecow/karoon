@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include BasicApplicationController
   protect_from_forgery
-  helper_method :pt,:current_user,:currency_in_riel?,:currency
+  helper_method :pt,:current_user,:currency_in_riel?,:currency,:current_cart
   before_filter :load_new_search
 
   rescue_from CanCan::AccessDenied do |exception|

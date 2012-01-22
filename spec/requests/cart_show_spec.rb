@@ -112,11 +112,34 @@ describe "Carts" do
 
     context "update quantity of line item" do
       before(:each) do
+        book = Factory(:book)
+        @cart.line_items.create!(:book_id=>book.id)
         visit cart_path(@cart)
+        div('line_item',0).select '5', :from => 'Quantity'
       end
-      it "shows the new quantity" do
-        
+
+      it "no new cart or line items are created" do
+        lambda do
+          lambda do
+            click_button 'Update Cart'
+          end.should change(LineItem,:count).by(0)
+        end.should change(Cart,:count).by(0)
       end 
+
+      it "is updated in the database" do
+        click_button 'Update Cart'
+        LineItem.last.quantity.should be(5)
+      end 
+
+      it "redirects to the cart" do
+        click_button 'Update Cart'
+        current_path.should eq cart_path(@cart)
+      end
+
+      it "shows a flash message" do
+        click_button 'Update Cart'
+        page.should have_notice('Cart was successfully updated.')
+      end
     end
 
     context "empty cart" do
@@ -125,9 +148,9 @@ describe "Carts" do
       end
       
       it "deletes the cart" do
-        lambda do
-          click_button 'Empty Cart'
-        end.should change(Cart,:count).by(-1)
+        cart = Cart.last
+        click_button 'Empty Cart'
+        cart.should_not eq Cart.last
       end
       it "deletes all line_items" do
         book = Factory(:book)

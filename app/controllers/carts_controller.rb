@@ -11,8 +11,15 @@ class CartsController < ApplicationController
     end
   end
 
+  def update
+    if @cart.update_attributes(params[:cart])
+      redirect_to @cart, :notice => updated(:cart)
+    end
+  end
+
   def destroy
     @cart.destroy
+    session[:cart_id] = nil
     redirect_to root_url, :notice => notify(:your_cart_is_currently_empty)
   end
 end

@@ -150,6 +150,7 @@ describe "Books" do
 
       context "add the same book to existing cart" do
         before(:each) do
+          div('book',0).select '2', :from => 'Quantity'
           div('book',0).click_button 'Add to Cart'
           visit books_path 
         end
@@ -166,17 +167,19 @@ describe "Books" do
           end.should change(LineItem,:count).by(0)
         end
 
-        it "increases the quantity by 1" do
+        it "increases the quantity by 2" do
           div('book',0).click_button 'Add to Cart'
-          LineItem.last.quantity.should be(2)
+          LineItem.last.quantity.should be(3)
         end
+
+        it "flash message should be different if quantity is larger than 1"
       end
 
       context "add book to empty cart" do
-        it "creates a cart" do
+        it "a cart should already've been created" do
           lambda do
             div('book',0).click_button 'Add to Cart'
-          end.should change(Cart,:count).by(1)
+          end.should change(Cart,:count).by(0)
         end
           
         it "creates a line item" do
