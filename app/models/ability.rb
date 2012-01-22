@@ -6,9 +6,10 @@ class Ability
     can [:show,:index], Author
     can [:show,:index], Category
     can [:show,:create], Search
+    can :create, LineItem
+    can :destroy, Cart
     if user
       if user.role? :member
-        can :create, LineItem
       elsif user.role? :admin
         can [:create,:update,:destroy,:create_individual], Book
         can [:create,:update,:destroy], Author

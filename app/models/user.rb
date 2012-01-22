@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :line_items
   has_many :searches
   has_many :books
   has_many :blank_books, :class_name => 'Book', :conditions => {:user_id => nil}

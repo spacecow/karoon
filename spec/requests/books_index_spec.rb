@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Books", :focus=>true do
+describe "Books" do
   describe "index" do
     before(:each) do
       @book = Factory(:book,:title=>"This is the Way",:regular_price=>1000,:summary=>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
@@ -20,6 +20,8 @@ describe "Books", :focus=>true do
         div('book',0).should have_link("Stephen King")
         div('books').should_not have_link('Edit')
         div('books').should_not have_link('Del')
+        div('book',0).should have_button('Add to Cart')
+        div('book',0).options('Quantity').should eq "1, 2, 3, 4, 5, 6, 7, 8, 9, 10"
         page.should_not have_link('New Book')
       end
 
@@ -39,21 +41,20 @@ describe "Books", :focus=>true do
 
       context "summary" do
         context "none" do
-          it "nil" do
+          it "nil does not show listed" do
             @book.update_attribute(:summary,nil)
             visit books_path
           end
-          it "empty" do
+          it "empty does not show listed" do
             @book.update_attribute(:summary,"")
+            visit books_path
+          end
+          it "exists, still does not show listed" do
             visit books_path
           end
           after(:each) do
             div('book',0).should_not have_div("summary")
           end
-        end
-        it "exists" do
-          visit books_path
-          div('book',0).find(:css,'div#summary').should have_content("\"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ...\"")
         end
       end
 
@@ -129,35 +130,89 @@ describe "Books", :focus=>true do
           visit books_path
           div('book',0).click_button 'Add to Cart'
         end
-        it "asks for login" do
-          page.current_path.should eq login_path
+        it "redirects to the cart" do
+          page.current_path.should eq cart_path(Cart.last) 
         end
-        it "shows a flash message asking for signup/login"
+        it "shows a flash message adding a book" do
+          page.should have_notice("Book: 'This is the Way' was added to your cart.")
+        end
       end
     end
 
     context "member links to" do
       before(:each) do
-        create_member(:email=>'member@example.com')
+        @member = create_member(:email=>'member@example.com')
         login('member@example.com')
         visit books_path
       end
-      context "add book to existing cart" do
-        it "does not create a new cart" do
-          # create cart
+
+      it "the price of an added book cannot be affected afterhand"
+
+      context "add the same book to existing cart" do
+        before(:each) do
           div('book',0).click_button 'Add to Cart'
+          visit books_path 
+        end
+
+        it "does not create a new cart" do
+          lambda do
+            div('book',0).click_button 'Add to Cart'
+          end.should change(Cart,:count).by(0)
+        end
+
+        it "does not create a new line item" do
+          lambda do
+            div('book',0).click_button 'Add to Cart'
+          end.should change(LineItem,:count).by(0)
+        end
+
+        it "increases the quantity by 1" do
+          div('book',0).click_button 'Add to Cart'
+          LineItem.last.quantity.should be(2)
         end
       end
 
       context "add book to empty cart" do
-        before(:each) do
-          div('book',0).click_button 'Add to Cart'
+        it "creates a cart" do
+          lambda do
+            div('book',0).click_button 'Add to Cart'
+          end.should change(Cart,:count).by(1)
         end
-        it "creates a cart"
-        it "creates a line item"
-        it "creates an associations from line item to cart and book"
-        it "redirects to the cart"
-        it "shows a flash message saying the book in question has been added to the cart"
+          
+        it "creates a line item" do
+          lambda do
+            div('book',0).click_button 'Add to Cart'
+          end.should change(LineItem,:count).by(1)
+        end
+
+        it "creates an associations from line item to cart, book and user" do
+          div('book',0).click_button 'Add to Cart'
+          line_item = LineItem.last
+          line_item.cart.should eq Cart.last
+          line_item.book.should eq @book
+          line_item.user.should eq @member
+        end
+
+        it "sets the default quantity to 1" do
+          div('book',0).click_button 'Add to Cart'
+          LineItem.last.quantity.should be(1)
+        end
+
+        it "quantity can be set" do
+          div('book',0).select '5', :from => 'Quantity'
+          div('book',0).click_button 'Add to Cart'
+          LineItem.last.quantity.should be(5)
+        end
+
+        it "redirects to the cart" do
+          div('book',0).click_button 'Add to Cart'
+          page.current_path.should eq cart_path(Cart.last)
+        end
+
+        it "shows a flash message saying the book in question has been added to the cart" do
+          div('book',0).click_button 'Add to Cart'
+          page.should have_notice("Book: 'This is the Way' was added to your cart.")
+        end
       end
     end
 

@@ -23,16 +23,13 @@
         <%= t(:price) %>:
       </span>
       <span class="content">
-        <%= currency_in_riel? ? book.regular_price_in_riel : book.regular_price %> <%= currency %>
+        <%= book.price(currency_in_riel?) %> <%= currency %>
       </span>
     </div>
-    <div id="line_item">
-      <%= button_to 'Add to Cart', line_items_path(:book_id => book) %>
-    </div>
-    <% if book.summary.present? %>
-      <div id="summary">
-        "<%= book.summary.truncate(200) %>"
-      </div>
+    <%= semantic_form_for LineItem.new(:book_id => book.id) do |f| %>
+      <%= f.input :quantity, :as => :select, :collection => (1..10), :include_blank => false %>
+      <%= f.input :book_id, :as => :hidden %>
+      <%= f.submit add_to(:cart) %>
     <% end %>
     <div id="actions">
       <%= link_to t(:edit), edit_book_path(book) if can? :edit, book %>

@@ -6,6 +6,7 @@ en:
   book_form: 'Book Form'
   book_match: 'Book Match'
   books: 'Books'
+  cart: 'Cart'
   category: 'Category'
   category_match: 'Category Match'
   categories: 'Categories'
@@ -19,10 +20,12 @@ en:
   ip: 'IP'
   login: 'Login'
   price: 'Price'
+  quantity: 'Quantity'
   search: 'Search'
   searches: 'Searches'
   settings: 'Settings'
   signup: 'Signup'
+  total: 'Total'
   userid: 'Userid'
   was: 'was'
   were: 'were'
@@ -35,6 +38,7 @@ en:
         greater_than: "must be greater than %{count}"
         numericality: "is not a number"
   alerts:
+    invalid_cart: "Invalid cart."
     invalid_login_or_password: "Invalid login or password."
     not_created: 'No %{o} was created.'
     unauthorized_access: "Unauthorized Access."
@@ -51,8 +55,10 @@ en:
       title: 'Title'
   labels:
     add: 'Add %{o}'
+    add_to: 'Add to %{o}'
     create: 'Create %{o}'
     edit: 'Edit %{o}'
+    empty: 'Empty %{o}'
     new: 'New %{o}'
     update: 'Update %{o}'
   messages:
@@ -61,7 +67,9 @@ en:
     logged_in: "Logged in."
     logged_out: "Logged out."
     signed_up_and_logged_in: "Signed up and logged in."
+    your_cart_is_currently_empty: 'Your cart is currently empty.'
   successes:
+    added_to_cart: "%{o}: '%{name}' was added to your cart."
     created: "%{o} was successfully created."
     created_adv: "%{o}: '%{name}' was successfully created."
     created_nos: "%{i} %{o} %{v} successfully created."

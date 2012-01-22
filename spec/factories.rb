@@ -2,9 +2,12 @@ Factory.define :author do |f|
 end
 
 Factory.define :book do |f|
-  f.title 'Factory Title'
+  f.sequence(:title){|n| "Factory Title #{n}"}
   f.regular_price 1000
   f.sequence(:category_tokens){|n| "token#{n}"}
+end
+
+Factory.define :cart do |f|
 end
 
 Factory.define :category do |f|

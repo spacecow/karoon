@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
   def created_adv(o,name)
     t("successes.created_adv",:o=>t(o),:name=>name)
   end
+
   def deleted_adv(o,name)
     t("successes.deleted_adv",:o=>t(o),:name=>name) 
   end
@@ -31,6 +32,14 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+    def current_cart
+      @cart ||= Cart.find(session[:cart_id])
+    rescue ActiveRecord::RecordNotFound
+      @cart = Cart.create
+      session[:cart_id] = @cart.id
+      @cart
+    end
 
     def load_new_search
       @new_search = Search.new

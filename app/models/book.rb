@@ -10,6 +10,8 @@ class Book < ActiveRecord::Base
   attr_accessible :title,:author_tokens,:category_tokens,:image,:summary,:regular_price
   attr_accessor :hide
 
+  before_destroy :ensure_not_referenced_by_any_line_item
+
   validates_presence_of :title,:regular_price,:categories
   validates_uniqueness_of :title
   validates_numericality_of :regular_price, :unless => :errors_on_regular_price?
@@ -50,6 +52,10 @@ class Book < ActiveRecord::Base
     self.category_ids = tokens
   end
 
+  def price(riel)
+    riel ? regular_price.to_i*10 : regular_price.to_i
+  end
+
   def regular_price_in_riel
     regular_price =~ /^\d+$/ ? regular_price.to_i*10 : regular_price
   end
@@ -63,6 +69,14 @@ class Book < ActiveRecord::Base
 
   private
 
+    def ensure_not_referenced_by_any_line_item
+      if line_items.empty?
+        return true
+      else
+        errors.add(:base,'Line Item present')
+        return false
+      end
+    end
     def errors_on_regular_price?
       errors[:regular_price].present?
     end

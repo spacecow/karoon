@@ -1,0 +1,42 @@
+<div class="line_item">
+  <div id="image">
+    <% if line_item.book.image_url.nil? %>
+      <%= link_to image_tag('books-pile.jpg'), line_item.book %>
+    <% else %>
+      <%= link_to image_tag(line_item.book.image_url(:thumb)), line_item.book %>
+    <% end %>
+  </div>
+  <div id="content">
+    <div id="title">
+      <span class="title"><%= search_link_to line_item.book.title, :book_path, line_item.book %></span> by <%= link_to_authors line_item.book.authors %>
+    </div>
+    <div id="categories">
+      <span class="label">
+        <%= line_item.book.categories.count > 1 ? t(:categories) : t(:category) %>:
+      </span>
+      <span class="content">
+        <%= link_to_categories line_item.book.categories %>
+      </span>
+    </div>
+  </div>
+  <div id="expenses">
+    <div id="price">
+      <span class="label">
+        <%= t(:price) %>:
+      </span>
+      <span class="content">
+        <%= line_item.price(currency_in_riel?) %> <%= currency %>
+      </span>
+    </div>
+    <div id="quantity">
+      <span class="label">
+        <%= f.label :quantity %>:
+      </span>
+      <span class="content">
+        <%= f.select :quantity, (1..10) %>
+      </span>
+    </div>
+    <div class="clear"></div>
+  </div>
+  <div class="clear"></div>
+</div>

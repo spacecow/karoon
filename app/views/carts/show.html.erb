@@ -1,0 +1,23 @@
+<%= title 'Your Cart' %>
+
+<%= form_for @cart do |f| %>
+  <% @cart.line_items.each do |line_item| %>
+    <%= f.fields_for :line_items, line_item do |ref| %>
+      <%= render 'line_item', :line_item => line_item, :f => ref %>
+      <% end %>
+  <% end %>
+
+  <div id="total">
+    <span class="label">
+      <%= t(:total) %>:
+    </span>
+    <span class="content">
+      <%= @cart.price(currency_in_riel?) %> <%= currency %>
+    </span>
+  </div>
+
+  <%= f.submit %>
+
+<% end %>
+
+<%= button_to empty(:cart), @cart, :confirm => sure?, :method => :delete %>

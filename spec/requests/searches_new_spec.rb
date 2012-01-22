@@ -19,18 +19,18 @@ describe "Searches" do
       context "category options" do
         it "just contains 'Books' if no categories exists" do
           visit root_path
-          options("search_category_id",search_bar).should eq "Books"
+          search_bar.options("search_category_id").should eq "Books"
         end
         it "contains an existing category" do
           create_category('science')
           visit root_path
-          options("search_category_id",search_bar).should eq "Books, science"
+          search_bar.options("search_category_id").should eq "Books, science"
         end
         it "contains categories in order" do
           science = create_category('science')
           create_category('rocket',science.id)
           visit root_path
-          options("search_category_id",search_bar).should eq "Books, science, science/rocket"
+          search_bar.options("search_category_id").should eq "Books, science, science/rocket"
         end
       end
     end
