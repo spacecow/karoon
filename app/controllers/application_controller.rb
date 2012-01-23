@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
     if current_user
       redirect_to welcome_url
     else
+      session[:original_url] = request.path  
       redirect_to login_url
     end
   end

@@ -6,7 +6,13 @@ class SessionsController < ApplicationController
     user = User.authenticate(params[:email],params[:password])
     if user
       session_userid(user.id)
-      redirect_to root_url, :notice => notify(:logged_in)
+      flash[:notice] = notify(:logged_in)
+      if session[:original_url]
+        url = session[:original_url]
+        session[:original_url] = nil
+        redirect_to url and return
+      end
+      redirect_to root_url
     else
       flash.now.alert = alertify(:invalid_login_or_password)
       render :new

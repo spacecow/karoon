@@ -10,14 +10,17 @@ class Ability
     can [:update,:destroy], Cart
     if user
       if user.role? :member
-      elsif user.role? :admin
+        can :create, Order
+      end
+      if user.role? :admin
         can [:create,:update,:destroy,:create_individual], Book
         can [:create,:update,:destroy], Author
         can [:create,:update,:destroy], Category
         can [:update], Setting
         can :index, Search
         can :create, LineItem
-      elsif user.role? :god
+      end
+      if user.role? :god
         can :manage, :all
       end 
     end

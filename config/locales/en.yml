@@ -10,6 +10,7 @@ en:
   category: 'Category'
   category_match: 'Category Match'
   categories: 'Categories'
+  checkout: 'Checkout'
   del: 'Del'
   delete: 'Delete'
   edit: 'Edit'
@@ -69,6 +70,7 @@ en:
     logged_out: "Logged out."
     signed_up_and_logged_in: "Signed up and logged in."
     your_cart_is_currently_empty: 'Your cart is currently empty.'
+    your_cart_is_empty: 'Your cart is empty.'
   successes:
     added_to_cart: "%{o}: '%{name}' was added to your cart."
     created: "%{o} was successfully created."

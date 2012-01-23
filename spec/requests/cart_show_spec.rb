@@ -1,9 +1,10 @@
 require 'spec_helper'
 
-describe "Carts" do
+describe "Carts", :focus=>true do
   describe "show" do
     before(:each) do
-      @cart = Factory(:cart)
+      visit root_path
+      @cart = Cart.last 
     end
 
     context "attempt to display a cart that does not exists" do
@@ -55,6 +56,19 @@ describe "Carts" do
           visit cart_path(@cart)
           div('total').should have_content('Total: 500000 Riel')
         end
+      end
+    end
+
+    context "checkout button" do
+      it "exists with no items in the cart" do
+        visit cart_path(@cart)
+        page.should have_button('Checkout')
+      end
+      it "exists with items in the cart" do
+        book = Factory(:book)
+        @cart.line_items.create!(:book_id=>book.id)
+        visit cart_path(@cart)
+        page.should have_button('Checkout')
       end
     end
 
@@ -139,6 +153,47 @@ describe "Carts" do
       it "shows a flash message" do
         click_button 'Update Cart'
         page.should have_notice('Cart was successfully updated.')
+      end
+    end
+
+    context "checkout" do
+      it "redirects to the login page if not logged in" do
+        visit cart_path(@cart)
+        click_button 'Checkout'
+        current_path.should eq login_path
+      end
+
+      context "redirects to the new order page" do
+        before(:each) do
+          create_member(:email=>'member@example.com')
+          book = Factory(:book)
+          @cart.line_items.create!(:book_id=>book.id)
+        end
+
+        it "after logging in and items are in the cart" do
+          visit cart_path(@cart)
+          click_button 'Checkout'
+          login('member@example.com')
+        end
+
+        it "if logged in and items are in the cart" do
+          login('member@example.com')
+          visit cart_path(@cart)
+          click_button 'Checkout'
+        end
+        
+        after(:each) do
+          current_path.should eq new_order_path
+        end
+      end
+
+      it "redirects to the root page if logged in and no items in the cart" do
+        create_member(:email=>'member@example.com')
+        login('member@example.com')
+        visit cart_path(@cart)
+        click_button 'Checkout'
+        current_path.should eq root_path 
+        page.should have_notice('Your cart is empty.')
       end
     end
 

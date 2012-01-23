@@ -22,3 +22,4 @@
 <% end %>
 
 <%= button_to empty(:cart), @cart, :confirm => sure?, :method => :delete %>
+<%= button_to t(:checkout), new_order_path, :method => :get %>
