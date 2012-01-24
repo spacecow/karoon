@@ -14,6 +14,16 @@ Factory.define :category do |f|
   f.name 'Factory name'
 end
 
+Factory.define :line_item do |f|
+end
+
+Factory.define :order do |f|
+  f.name 'Factory Name'
+  f.address 'Factory Address'
+  f.email 'Factory Email'
+  f.pay_type 'Factory Pay Type'
+end
+
 Factory.define :search do |f|
   f.keywords 'Factory Keywords'
   f.ip '1.2.3.4'

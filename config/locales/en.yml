@@ -46,12 +46,14 @@ en:
     unauthorized_access: "Unauthorized Access."
   formtastic:
     labels:
-      email: 'Login'
-      first_name: 'First Name'
+      address: 'Address'
+      author: 'Author'
+      category: 'Category'
+      email: 'Email'
       image: 'Image'
-      last_name: 'Last Name'
-      middle_names: 'Middle Names'
-      password_confirmation: "Confirmation"
+      login: 'Login'
+      name: 'Name'
+      pay_type: 'Pay Type'
       regular_price: 'Regular Price'
       summary: 'Summary'
       title: 'Title'

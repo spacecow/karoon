@@ -3,7 +3,6 @@ class LineItemsController < ApplicationController
   load_and_authorize_resource
 
   def create
-    @line_item.user = current_user
     if @line_item.save
       redirect_to @line_item.cart, :notice => t('successes.added_to_cart',:o=>t(:book),:name=>@line_item.book.title)
     end

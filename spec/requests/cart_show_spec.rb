@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Carts", :focus=>true do
+describe "Carts" do
   describe "show" do
     before(:each) do
       visit root_path

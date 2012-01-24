@@ -1,7 +1,7 @@
 class LineItem < ActiveRecord::Base
   belongs_to :book
   belongs_to :cart
-  belongs_to :user
+  belongs_to :order
 
   attr_accessible :book_id, :quantity
 

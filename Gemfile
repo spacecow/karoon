@@ -16,6 +16,8 @@ gem 'cancan'
 gem 'compass', '>= 0.12.alpha.0'
 gem 'carrierwave'
 gem 'rmagick', '2.12.2'
+gem 'annotate'
+gem 'aasm'
 
 group :assets do
   gem 'sass-rails', "  ~> 3.1.0"
