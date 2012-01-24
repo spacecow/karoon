@@ -45,3 +45,5 @@ e3f41a: !ruby/object:Dooby::Task
   todo: add order_transactions :done
 5142a5: !ruby/object:Dooby::Task 
   todo: spec cover on order controller :done
+dbb192: !ruby/object:Dooby::Task 
+  todo: create order page :done

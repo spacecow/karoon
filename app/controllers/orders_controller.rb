@@ -16,8 +16,11 @@ class OrdersController < ApplicationController
 
   def create
     @order = current_user.orders.build(params[:order])
+    @order.transfer_line_items_from_cart(current_cart)
     if @order.save
-      redirect_to root_path
+      Cart.destroy(session[:cart_id])
+      session[:cart_id] = nil
+      flash[:notice] = created_state(:order,@order.aasm_state) 
     else
       render :new
     end

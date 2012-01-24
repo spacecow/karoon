@@ -187,13 +187,18 @@ describe "Carts" do
         end
       end
 
-      it "redirects to the root page if logged in and no items in the cart" do
-        create_member(:email=>'member@example.com')
-        login('member@example.com')
-        visit cart_path(@cart)
-        click_button 'Checkout'
-        current_path.should eq root_path 
-        page.should have_notice('Your cart is empty.')
+      context "redirects to the root page" do
+        it "if logged in and no items in the cart" do
+          create_member(:email=>'member@example.com')
+          login('member@example.com')
+          visit cart_path(@cart)
+          click_button 'Checkout'
+          current_path.should eq root_path 
+          page.should have_notice('Your cart is empty.')
+        end
+        it "if not logged and no items in the cart"
+
+        it "shows a flash message about no items in the cart"
       end
     end
 

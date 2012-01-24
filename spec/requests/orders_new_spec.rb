@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe "Orders", :focus=>true do
+describe "Orders" do
   describe "new" do
     before(:each) do
       @member = create_member(:email=>'member@example.com')
       login('member@example.com')
       cart = Cart.last
       book = Factory(:book)
-      cart.line_items.create!(:book_id=>book.id)
+      @item = cart.line_items.create!(:book_id=>book.id)
     end
     it "must be logged in and have a line item in the cart" do
       visit new_order_path
@@ -52,22 +52,37 @@ describe "Orders", :focus=>true do
         select 'Purchase Order', :from => 'Pay Type' 
       end
 
-      it "redirects to the check page" 
-      #do
-      #  click_button 'Create Order'
-      #end
-
-      it "shows a flash message"
-
-      it "default state is 'draft'" do
-        click_button 'Create Order' 
-        Order.last.aasm_state.should eq 'draft'
-      end
-
       it "saves the order to the database" do 
         lambda do
           click_button 'Create Order'
         end.should change(Order,:count).by(1)
+      end
+
+      it "transfers the line items to the order" do
+        click_button 'Create Order'
+        Order.last.line_items.should_not be_empty
+        Order.last.line_items.should eq [@item]
+      end
+
+      it "the cart gets destroyed" do
+        lambda do
+          click_button 'Create Order'
+        end.should change(Cart,:count).by(-1) 
+      end
+
+      it "redirects to the create page" do
+        click_button 'Create Order'
+        current_path.should eq orders_path
+      end
+
+      it "shows a flash message of creating a draft" do
+        click_button 'Create Order'
+        page.should have_notice("Order draft was successfully created.") 
+      end
+
+      it "default state is 'draft'" do
+        click_button 'Create Order' 
+        Order.last.aasm_state.should eq 'draft'
       end
 
       context "error:" do

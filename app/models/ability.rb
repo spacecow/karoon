@@ -9,7 +9,7 @@ class Ability
     can :create, LineItem
     can [:update,:destroy], Cart
     if user
-      if user.role?(:member) || user.role?(:admin)
+      if user.role?(User::MEMBER) || user.role?(User::VIP) || user.role?(User::MINIADMIN) || user.role?(User::ADMIN)
         can :create, Order
       end
       if user.role? :admin

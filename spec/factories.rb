@@ -15,13 +15,14 @@ Factory.define :category do |f|
 end
 
 Factory.define :line_item do |f|
+  f.association :book
 end
 
 Factory.define :order do |f|
   f.name 'Factory Name'
   f.address 'Factory Address'
   f.email 'Factory Email'
-  f.pay_type 'Factory Pay Type'
+  f.pay_type 'Purchase Order'
 end
 
 Factory.define :search do |f|

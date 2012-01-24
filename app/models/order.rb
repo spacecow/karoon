@@ -1,6 +1,8 @@
 class Order < ActiveRecord::Base
   include AASM
 
+  has_many :line_items
+
   PAYMENT_TYPES = ["Purchase Order"] #Check, Credit Card
 
   belongs_to :user
@@ -17,5 +19,17 @@ class Order < ActiveRecord::Base
     self.address  = order.address
     self.email    = order.email
     self.pay_type = order.pay_type 
+  end
+
+  def price(riel)
+    line_items.to_a.sum{|e| e.price(riel)} 
+  end
+
+  def transfer_line_items_from_cart(cart)
+    cart.line_items.each do |item|
+      item.cart_id = nil
+      #item.order_id = id
+      line_items << item
+    end 
   end
 end

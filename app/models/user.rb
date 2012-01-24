@@ -15,7 +15,12 @@ class User < ActiveRecord::Base
   validates_presence_of :email
   validates_uniqueness_of :email
 
-  ROLES = %w(god admin vip member)
+  ADMIN     = 'admin'
+  GOD       = 'god'
+  MEMBER    = 'member'
+  MINIADMIN = 'miniadmin'
+  VIP       = 'vip'
+  ROLES     = [GOD,ADMIN,MINIADMIN,VIP,MEMBER]
 
   def role?(s); roles.include?(s.to_s) end
   def roles; ROLES.reject{|r| ((roles_mask||0) & 2**ROLES.index(r)).zero? } end
