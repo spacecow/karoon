@@ -3,8 +3,8 @@ class OrdersController < ApplicationController
   load_and_authorize_resource
 
   def new
-    cart = current_cart
-    if cart.line_items.empty?
+    @cart = current_cart
+    if @cart.line_items.empty?
       redirect_to root_path, :notice => notify(:your_cart_is_empty)
       return
     end
@@ -21,8 +21,13 @@ class OrdersController < ApplicationController
       Cart.destroy(session[:cart_id])
       session[:cart_id] = nil
       flash[:notice] = created_state(:order,@order.aasm_state) 
+      redirect_to validate_order_path(@order)
     else
       render :new
     end
+  end
+
+  def confirm
+    redirect_to root_path
   end
 end

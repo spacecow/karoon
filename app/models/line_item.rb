@@ -5,7 +5,7 @@ class LineItem < ActiveRecord::Base
 
   attr_accessible :book_id, :quantity
 
-  validates_presence_of :cart_id, :on => :create
+  validates_presence_of :cart_id, :on => :create, :unless => :order_id?
   #validates_presence_of :cart_id, :unless => :order_id?
   #validates_presence_of :order_id, :unless => :cart_id?
   validates_presence_of :book_id, :quantity

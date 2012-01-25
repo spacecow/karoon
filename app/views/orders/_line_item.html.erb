@@ -1,1 +1,3 @@
-<%= line_item.book.title %> (<%= line_item.book_price(currency_in_riel?) %> <%= currency %>) x <%= line_item.quantity %> = <%= line_item.price(currency_in_riel?) %> <%= currency %>
+<div class="line_item">
+  <%= line_item.book.title %> (<%= line_item.book_price(currency_in_riel?) %> <%= currency %>) x <%= line_item.quantity %> = <%= line_item.price(currency_in_riel?) %> <%= currency %>
+</div>

@@ -5,9 +5,9 @@ describe "Orders" do
     before(:each) do
       @member = create_member(:email=>'member@example.com')
       login('member@example.com')
-      cart = Cart.last
-      book = Factory(:book)
-      @item = cart.line_items.create!(:book_id=>book.id)
+      @cart = Cart.last
+      book = Factory(:book,:title=>'Funny Title',:regular_price=>"1234")
+      @item = @cart.line_items.create!(:book_id=>book.id)
     end
     it "must be logged in and have a line item in the cart" do
       visit new_order_path
@@ -18,6 +18,22 @@ describe "Orders" do
       it "tile is set" do
         visit new_order_path
         page.should have_title('New Order')
+      end
+
+      context "list line items" do
+        it "one" do
+          visit new_order_path
+          div('line_item',0).should have_content('Funny Title (1234 Toman) x 1 = 1234 Toman')
+          div('total').should have_content('Total: 1234 Toman')
+        end
+        it "two" do
+          book2 = Factory(:book,:title=>'Funnier Title',:regular_price=>"2345")
+          @cart.line_items.create!(:book_id=>book2.id,:quantity=>2)
+          visit new_order_path
+          div('line_item',0).should have_content('Funny Title (1234 Toman) x 1 = 1234 Toman')
+          div('line_item',1).should have_content('Funnier Title (2345 Toman) x 2 = 4690 Toman')
+          div('total').should have_content('Total: 5924 Toman')
+        end
       end
 
       context "no previous order exists" do
@@ -67,12 +83,13 @@ describe "Orders" do
       it "the cart gets destroyed" do
         lambda do
           click_button 'Create Order'
-        end.should change(Cart,:count).by(-1) 
+        end.should change(Cart,:count).by(0) 
+        Cart.last.should_not eq @cart
       end
 
       it "redirects to the create page" do
         click_button 'Create Order'
-        current_path.should eq orders_path
+        current_path.should eq validate_order_path(Order.last)
       end
 
       it "shows a flash message of creating a draft" do

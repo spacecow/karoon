@@ -11,6 +11,7 @@ class Ability
     if user
       if user.role?(User::MEMBER) || user.role?(User::VIP) || user.role?(User::MINIADMIN) || user.role?(User::ADMIN)
         can :create, Order
+        can [:validate,:confirm], Order
       end
       if user.role? :admin
         can [:create,:update,:destroy,:create_individual], Book

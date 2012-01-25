@@ -1,22 +1,9 @@
-<%= title confirm(:order) %>
-
-<%= render :partial => 'orders/line_item', :collection => @order.line_items %>
-
-<div id="total">
-  <span class="label">
-    <%= t(:total) %>:
-  </span>
-  <span class="content">
-    <%= @order.price(currency_in_riel?) %> <%= currency %>
-  </span>
-</div>
-
 <div id="name">
   <span class="label">
     <%= t(:name) %>:
   </span>
   <span class="content">
-    <%= @order.name %>
+    <%= order.name %>
   </span>
 </div>
 
@@ -25,7 +12,7 @@
     <%= t(:address) %>:
   </span>
   <span class="content">
-    <%= @order.address %>
+    <%= order.address %>
   </span>
 </div>
 
@@ -34,7 +21,7 @@
     <%= t(:email) %>:
   </span>
   <span class="content">
-    <%= @order.email %>
+    <%= order.email %>
   </span>
 </div>
 
@@ -43,6 +30,6 @@
     <%= t(:pay_type) %>:
   </span>
   <span class="content">
-    <%= @order.pay_type %>
+    <%= order.pay_type %>
   </span>
 </div>

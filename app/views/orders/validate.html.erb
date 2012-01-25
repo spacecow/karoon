@@ -1,0 +1,21 @@
+<%= title confirm(:order) %>
+
+<div id="line_items">
+  <%= render :partial => 'orders/line_item', :collection => @order.line_items %>
+</div>
+
+<div id="total">
+  <span class="label">
+    <%= t(:total) %>:
+  </span>
+  <span class="content">
+    <%= @order.price(currency_in_riel?) %> <%= currency %>
+  </span>
+</div>
+
+<%= render @order %>
+
+<%= form_for @order, :url => confirm_order_path(@order), :method => :put, :html=>{:id => 'confirm_order'} do |f| %>
+  <%= f.submit t(:cancel) %>
+  <%= f.submit t(:confirm) %>
+<% end %>
