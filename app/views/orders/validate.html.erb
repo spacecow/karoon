@@ -8,7 +8,7 @@
       <%= t(:total) %>:
     </span>
     <span class="content">
-      <%= @order.price(currency_in_riel?) %> <%= currency %>
+      <%= @order.total_price(currency_in_riel?) %> <%= currency %>
     </span>
   </div>
   <div class="clear"></div>

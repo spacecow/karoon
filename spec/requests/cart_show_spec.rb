@@ -90,6 +90,21 @@ describe "Carts" do
       it "should have an update cart button" do
         page.should have_button('Update Cart')
       end
+    end
+
+    context "layout" do
+      it "the price of an added book cannot be affected afterhand" do
+        @book = Factory(:book)
+        @cart.line_items.create!(:book_id=>@book.id,:regular_price=>'1000')
+        create_admin(:email=>'admin@example.com')
+        login('admin@example.com')
+        visit edit_book_path(@book)
+        fill_in 'Regular Price', :with => 2000
+        fill_in 'Category', :with => 'science'
+        click_button 'Update Book'
+        visit cart_path(@cart)
+        div('line_item',0).div('price').should have_content('Book Price: 1000')
+      end
 
       context "quantity" do
         before(:each){ @book = Factory(:book) }

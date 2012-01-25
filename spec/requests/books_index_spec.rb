@@ -146,8 +146,6 @@ describe "Books" do
         visit books_path
       end
 
-      it "the price of an added book cannot be affected afterhand"
-
       it "flash message quantity if it is larger than 1" do
         div('book',0).select '2', :from => 'Quantity'
         div('book',0).click_button 'Add to Cart'

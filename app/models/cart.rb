@@ -12,7 +12,7 @@ class Cart < ActiveRecord::Base
     current_item
   end
 
-  def price(riel)
-    line_items.to_a.sum{|e| e.price(riel)} 
+  def total_price(riel)
+    line_items.to_a.sum{|e| e.total_price(riel)} 
   end
 end

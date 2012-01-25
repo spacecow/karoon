@@ -10,6 +10,18 @@ class LineItem < ActiveRecord::Base
   #validates_presence_of :order_id, :unless => :cart_id?
   validates_presence_of :book_id, :quantity
 
-  def book_price(riel) book.price(riel) end
-  def price(riel); book_price(riel)*quantity end
+  before_save :set_item_price
+
+  def item_price(riel)
+    riel ? price.to_i*10 : price.to_i
+  end
+  def total_price(riel)
+    item_price(riel)*quantity 
+  end
+
+  private
+
+    def set_item_price
+      self.price = book.regular_price 
+    end
 end

@@ -3,7 +3,8 @@ require 'spec_helper'
 describe Cart do
   it "when cart is destroyed, its line items are destroyed as well" do
     cart = Cart.create 
-    line_item = cart.line_items.build(:book_id=>1)
+    book = Factory(:book)
+    line_item = cart.line_items.build(:book_id=>book.id)
     line_item.save!
     lambda do
       cart.destroy

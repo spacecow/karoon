@@ -26,8 +26,8 @@ class Order < ActiveRecord::Base
     self.pay_type = order.pay_type 
   end
 
-  def price(riel)
-    line_items.to_a.sum{|e| e.price(riel)} 
+  def total_price(riel)
+    line_items.to_a.sum{|e| e.total_price(riel)} 
   end
 
   def transfer_line_items_from_cart(cart)

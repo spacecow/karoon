@@ -25,7 +25,7 @@
         <%= t(:book_price) %>:
       </span>
       <span class="content">
-        <%= line_item.book_price(currency_in_riel?) %> <%= currency %>
+        <%= line_item.item_price(currency_in_riel?) %> <%= currency %>
       </span>
     </div>
     <div id="quantity">
@@ -41,7 +41,7 @@
         <%= t(:total) %>:
       </span>
       <span class="content">
-        <%= line_item.price(currency_in_riel?) %> <%= currency %>
+        <%= line_item.total_price(currency_in_riel?) %> <%= currency %>
       </span>
     </div>
     <div class="clear"></div>
