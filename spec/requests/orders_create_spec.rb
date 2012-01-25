@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Orders", :focus=>true do
+describe "Orders" do
   describe "create" do
     before(:each) do
       Setting.singleton.update_attribute(:currency,Setting::RIEL)

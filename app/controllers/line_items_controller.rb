@@ -4,7 +4,12 @@ class LineItemsController < ApplicationController
 
   def create
     if @line_item.save
-      redirect_to @line_item.cart, :notice => t('successes.added_to_cart',:o=>t(:book),:name=>@line_item.book.title)
+      if params[:line_item][:quantity] == "1"
+        flash[:notice] = t('successes.added_to_cart',:o=>t(:book),:name=>@line_item.book.title)
+      else
+        flash[:notice] = t('successes.added_to_cart_pl',:i=>params[:line_item][:quantity],:o=>t(:books),:name=>@line_item.book.title)
+      end
+      redirect_to @line_item.cart
     end
   end
 

@@ -148,6 +148,13 @@ describe "Books" do
 
       it "the price of an added book cannot be affected afterhand"
 
+      it "flash message quantity if it is larger than 1" do
+        div('book',0).select '2', :from => 'Quantity'
+        div('book',0).click_button 'Add to Cart'
+debug
+        page.should have_notice("2 Books: 'This is the Way' were added to your cart.")
+      end
+
       context "add the same book to existing cart" do
         before(:each) do
           div('book',0).select '2', :from => 'Quantity'
@@ -172,7 +179,6 @@ describe "Books" do
           LineItem.last.quantity.should be(3)
         end
 
-        it "flash message should be different if quantity is larger than 1"
       end
 
       context "add book to empty cart" do
@@ -193,7 +199,6 @@ describe "Books" do
           line_item = LineItem.last
           line_item.cart.should eq Cart.last
           line_item.book.should eq @book
-          line_item.user.should eq @member
         end
 
         it "sets the default quantity to 1" do

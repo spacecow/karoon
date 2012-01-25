@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe OrdersController, :focus=>true do
+describe OrdersController do
   controller_actions = controller_actions("orders")
 
   describe "a user is not logged in" do

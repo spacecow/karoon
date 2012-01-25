@@ -52,10 +52,15 @@ en:
       author: 'Author'
       category: 'Category'
       email: 'Email'
+      first_name: 'First Name'
       image: 'Image'
+      last_name: 'Last Name'
       login: 'Login'
+      middle_names: 'Middle Names'
       name: 'Name'
       pay_type: 'Pay Type'
+      password: 'Password'
+      password_confirmation: 'Confirmation'
       regular_price: 'Regular Price'
       summary: 'Summary'
       title: 'Title'
@@ -78,6 +83,7 @@ en:
     your_cart_is_empty: 'Your cart is empty.'
   successes:
     added_to_cart: "%{o}: '%{name}' was added to your cart."
+    added_to_cart_pl: "%{i} %{o}: '%{name}' were added to your cart."
     created: "%{o} was successfully created."
     created_adv: "%{o}: '%{name}' was successfully created."
     created_state: "%{o} %{state} was successfully created."

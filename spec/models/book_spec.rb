@@ -7,7 +7,6 @@ describe Book do
     it "is not possible if there are referenced line items" do
       cart = Factory(:cart)
       line_item = cart.line_items.build(:book_id=>@book.id)
-      line_item.user_id = 1 
       line_item.save!
       lambda do
         @book.destroy
