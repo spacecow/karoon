@@ -6,8 +6,8 @@ describe "Orders" do
       @member = create_member(:email=>'member@example.com')
       login('member@example.com')
       @cart = Cart.last
-      book = Factory(:book,:title=>'Funny Title',:regular_price=>"1234")
-      @item = @cart.line_items.create!(:book_id=>book.id)
+      @book = Factory(:book,:title=>'Funny Title',:regular_price=>"1234")
+      @item = @cart.line_items.create!(:book_id=>@book.id)
     end
     it "must be logged in and have a line item in the cart" do
       visit new_order_path
@@ -22,17 +22,21 @@ describe "Orders" do
 
       context "list line items" do
         it "one" do
+          @book.update_attribute(:image,File.open(File.join(Rails.root, 'app', 'assets', 'images', 'cover.jpg')))
           visit new_order_path
-          div('line_item',0).should have_content('Funny Title (1234 Toman) x 1 = 1234 Toman')
-          div('total').should have_content('Total: 1234 Toman')
+          div(:line_item,0).div(:image).should have_image('Mini_cover')
+          div(:line_item,0).div(:info).should have_content('Funny Title')
+          div(:line_item,0).div(:price).should have_content('1234 Toman x 1 = 1234 Toman')
+          div(:line_items).div(:total).should have_content('Total: 1234 Toman')
         end
         it "two" do
           book2 = Factory(:book,:title=>'Funnier Title',:regular_price=>"2345")
           @cart.line_items.create!(:book_id=>book2.id,:quantity=>2)
           visit new_order_path
-          div('line_item',0).should have_content('Funny Title (1234 Toman) x 1 = 1234 Toman')
-          div('line_item',1).should have_content('Funnier Title (2345 Toman) x 2 = 4690 Toman')
-          div('total').should have_content('Total: 5924 Toman')
+          div(:line_item,1).div(:image).should have_image('Books-pile-mini')
+          div(:line_item,1).div(:info).should have_content('Funnier Title')
+          div(:line_item,1).div(:price).should have_content('2345 Toman x 2 = 4690 Toman')
+          div(:line_items).div(:total).should have_content('Total: 5924 Toman')
         end
       end
 

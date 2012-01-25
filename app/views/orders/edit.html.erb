@@ -1,14 +1,14 @@
-<%= title new(:order) %>
+<%= title edit(:order) %>
 
 <div id="line_items">
-  <%= render :partial => 'orders/line_item', :collection => @cart.line_items %>
+  <%= render :partial => 'orders/line_item', :collection => @order.line_items %>
 
   <div id="total">
     <span class="label">
       <%= t(:total) %>:
     </span>
     <span class="content">
-      <%= @cart.price(currency_in_riel?) %> <%= currency %>
+      <%= @order.price(currency_in_riel?) %> <%= currency %>
     </span>
   </div>
   <div class="clear"></div>

@@ -29,12 +29,22 @@ describe OrdersController do
         user = create_member
         session[:userid] = user.id
         @model = Factory(:order,:user_id=>user.id)
+        @other = Factory(:order,:user_id=>create_member(:email=>'other@email.com').id)
       end
       controller_actions.each do |action,req|
         if %w(new create).include?(action)
           it "should reach the #{action} page" do
             send(req, action, :id => @model.id)
             response.redirect_url.should_not eq welcome_url
+          end
+        elsif %w(validate confirm edit update).include?(action)
+          it "should reach the own #{action} page" do
+            send(req, action, :id => @model.id)
+            response.redirect_url.should_not eq welcome_url
+          end
+          it "should not reach other's #{action} page" do
+            send(req, action, :id => @other.id)
+            response.redirect_url.should eq welcome_url
           end
         else
           it "should not reach the #{action} page" do
@@ -50,12 +60,22 @@ describe OrdersController do
         user = create_vip
         session[:userid] = user.id
         @model = Factory(:order,:user_id=>user.id)
+        @other = Factory(:order,:user_id=>create_member(:email=>'other@email.com').id)
       end
       controller_actions.each do |action,req|
         if %w(new create).include?(action)
           it "should reach the #{action} page" do
             send(req, action, :id => @model.id)
             response.redirect_url.should_not eq welcome_url
+          end
+        elsif %w(validate confirm edit update).include?(action)
+          it "should reach the own #{action} page" do
+            send(req, action, :id => @model.id)
+            response.redirect_url.should_not eq welcome_url
+          end
+          it "should not reach other's #{action} page" do
+            send(req, action, :id => @other.id)
+            response.redirect_url.should eq welcome_url
           end
         else
           it "should not reach the #{action} page" do
@@ -71,12 +91,22 @@ describe OrdersController do
         user = create_miniadmin
         session[:userid] = user.id
         @model = Factory(:order,:user_id=>user.id)
+        @other = Factory(:order,:user_id=>create_member(:email=>'other@email.com').id)
       end
       controller_actions.each do |action,req|
         if %w(new create).include?(action)
           it "should reach the #{action} page" do
             send(req, action, :id => @model.id, :books => {"0" => {:title => "Title"}})
             response.redirect_url.should_not eq welcome_url
+          end
+        elsif %w(validate confirm edit update).include?(action)
+          it "should reach the own #{action} page" do
+            send(req, action, :id => @model.id)
+            response.redirect_url.should_not eq welcome_url
+          end
+          it "should not reach other's #{action} page" do
+            send(req, action, :id => @other.id)
+            response.redirect_url.should eq welcome_url
           end
         else
           it "should not reach the #{action} page" do
@@ -92,11 +122,21 @@ describe OrdersController do
         user = create_admin
         session[:userid] = user.id
         @model = Factory(:order,:user_id=>user.id)
+        @other = Factory(:order,:user_id=>create_member(:email=>'other@email.com').id)
       end
       controller_actions.each do |action,req|
         if %w(new create).include?(action)
           it "should reach the #{action} page" do
             send(req, action, :id => @model.id, :books => {"0" => {:title => "Title"}})
+            response.redirect_url.should_not eq welcome_url
+          end
+        elsif %w(validate confirm edit update).include?(action)
+          it "should reach the own #{action} page" do
+            send(req, action, :id => @model.id)
+            response.redirect_url.should_not eq welcome_url
+          end
+          it "should reach other's #{action} page" do
+            send(req, action, :id => @other.id)
             response.redirect_url.should_not eq welcome_url
           end
         else
@@ -113,11 +153,21 @@ describe OrdersController do
         user = create_god
         session[:userid] = user.id
         @model = Factory(:order,:user_id=>user.id)
+        @other = Factory(:order,:user_id=>create_member(:email=>'other@email.com').id)
       end
       controller_actions.each do |action,req|
         if %w(new create).include?(action)
           it "should reach the #{action} page" do
             send(req, action, :id => @model.id, :books => {"0" => {:title => "Title"}})
+            response.redirect_url.should_not eq welcome_url
+          end
+        elsif %w(validate confirm edit update).include?(action)
+          it "should reach the own #{action} page" do
+            send(req, action, :id => @model.id)
+            response.redirect_url.should_not eq welcome_url
+          end
+          it "should reach other's #{action} page" do
+            send(req, action, :id => @other.id)
             response.redirect_url.should_not eq welcome_url
           end
         else

@@ -12,6 +12,7 @@ class CartsController < ApplicationController
   end
 
   def update
+    redirect_to new_order_path and return if params[:checkout_button] 
     if @cart.update_attributes(params[:cart])
       redirect_to @cart, :notice => updated(:cart)
     end

@@ -11,7 +11,11 @@ class Ability
     if user
       if user.role?(User::MEMBER) || user.role?(User::VIP) || user.role?(User::MINIADMIN) || user.role?(User::ADMIN)
         can :create, Order
-        can [:validate,:confirm], Order
+        can [:validate,:confirm,:update], Order, :user_id => user.id
+      end
+      if user.role?(User::VIP) || user.role?(User::MINIADMIN) || user.role?(User::ADMIN)
+      end
+      if user.role?(User::MINIADMIN) || user.role?(User::ADMIN)
       end
       if user.role? :admin
         can [:create,:update,:destroy,:create_individual], Book
@@ -20,6 +24,7 @@ class Ability
         can [:update], Setting
         can :index, Search
         can :create, LineItem
+        can [:validate,:confirm,:update], Order
       end
       if user.role? :god
         can :manage, :all

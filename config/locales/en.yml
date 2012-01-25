@@ -5,6 +5,7 @@ en:
   book: 'Book'
   book_form: 'Book Form'
   book_match: 'Book Match'
+  book_price: 'Book Price'
   books: 'Books'
   cancel: 'Cancel'
   cart: 'Cart'

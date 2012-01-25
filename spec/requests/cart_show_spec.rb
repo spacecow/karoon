@@ -29,12 +29,14 @@ describe "Carts" do
         it "for Toman" do
           Setting.singleton.update_attribute(:currency,Setting::TOMAN)
           visit cart_path(@cart)
-          div('line_item',0).div('price').should have_content('20000 Toman')
+          div(:line_item,0).div(:price).should have_content('Book Price: 10000 Toman')
+          div(:line_item,0).div(:book_total).should have_content('Total: 20000 Toman')
         end
         it "for Riel" do
           Setting.singleton.update_attribute(:currency,Setting::RIEL)
           visit cart_path(@cart)
-          div('line_item',0).div('price').should have_content('200000 Riel')
+          div(:line_item,0).div(:price).should have_content('Book Price: 100000 Riel')
+          div(:line_item,0).div(:book_total).should have_content('Total: 200000 Riel')
         end
       end
 

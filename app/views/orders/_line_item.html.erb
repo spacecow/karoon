@@ -1,3 +1,16 @@
 <div class="line_item">
-  <%= line_item.book.title %> (<%= line_item.book_price(currency_in_riel?) %> <%= currency %>) x <%= line_item.quantity %> = <%= line_item.price(currency_in_riel?) %> <%= currency %>
+  <div id="image">
+    <% if line_item.book.image_url.nil? %>
+      <%= image_tag 'books-pile-mini.png' %>
+    <% else %>
+      <%= image_tag line_item.book.image_url(:mini) %>
+    <% end %>
+  </div>
+  <div id="info">
+    <%= line_item.book.title %>
+  </div>
+  <div id="price">
+    <%= line_item.book_price(currency_in_riel?) %> <%= currency %> x <%= line_item.quantity %> = <%= line_item.price(currency_in_riel?) %> <%= currency %>
+  </div>
+  <div class="clear"></div>
 </div>

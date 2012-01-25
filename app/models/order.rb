@@ -13,6 +13,11 @@ class Order < ActiveRecord::Base
 
   aasm_initial_state :draft
   aasm_state :draft
+  aasm_state :confirmed
+
+  aasm_event :order_confirmed do
+    transitions :from => :draft, :to => :confirmed
+  end
 
   def copy(order)
     self.name     = order.name

@@ -47,3 +47,5 @@ e3f41a: !ruby/object:Dooby::Task
   todo: spec cover on order controller :done
 dbb192: !ruby/object:Dooby::Task 
   todo: create order page :done
+c2b50d: !ruby/object:Dooby::Task 
+  todo: state transition from draft to confirmed :done

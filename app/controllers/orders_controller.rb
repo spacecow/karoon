@@ -28,6 +28,22 @@ class OrdersController < ApplicationController
   end
 
   def confirm
-    redirect_to root_path
+    if params[:edit_button]
+      redirect_to edit_order_path(@order)
+    else
+      @order.order_confirmed! unless params[:cancel_button]
+      redirect_to root_path
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @order.update_attributes(params[:order])
+      redirect_to root_path
+    else
+      render :edit
+    end
   end
 end

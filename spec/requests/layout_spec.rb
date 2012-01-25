@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe "Sessions" do
   describe "root" do
+    it "differenct flashes for unauthorized access"
+
     it "general layout" do
       visit root_path
       site_nav.should have_link('Books')

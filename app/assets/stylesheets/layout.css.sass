@@ -43,15 +43,18 @@ $notice_light: #4CC417
   +linear-gradient(color-stops($light, $dark))
 
 form
+  input.submit
+    width: auto
+    margin-top: 10px
+  div
+    input.submit
+      margin-top: 10px
   li
     list-style-type: none
     input
       width: 400px
       &.short
         width: 200px
-      &.submit
-        width: auto
-        margin-top: 10px
     textarea
       width: 400px
       height: 100px
