@@ -3,6 +3,7 @@ require 'spec_helper'
 describe "Carts" do
   describe "show" do
     it "if the cart is empty, it should say that"
+    it "what happends if a book quantity is more than ten"
 
     before(:each) do
       visit root_path
@@ -176,48 +177,88 @@ describe "Carts" do
     end
 
     context "checkout" do
-      it "redirects to the login page if not logged in" do
-        visit cart_path(@cart)
-        click_button 'Checkout'
-        current_path.should eq login_path
+      context "no items in the cart" do 
+        context "logged in" do
+          before(:each) do
+            create_member(:email=>'member@example.com')
+            login('member@example.com')
+            visit cart_path(@cart)
+            click_button 'Checkout'
+          end
+
+          it "redirects to the root path" do
+            current_path.should eq root_path 
+          end
+
+          it "shows notice saying the cart is emtpy" do
+            page.should have_notice('Your cart is empty.')
+          end
+        end
+
+        context "not logged in" do
+          before(:each) do
+            visit cart_path(@cart)
+            click_button 'Checkout'
+          end
+
+          it "redirects to the login path" do
+            current_path.should eq login_path 
+          end
+
+          it "shows notice saying the cart is emtpy" do
+            page.should have_alert('You must be logged in to place an order.')
+          end
+        end
       end
 
-      context "redirects to the new order page" do
+      context "items in the cart" do
         before(:each) do
+          b = Factory(:book)
+          @cart.line_items.create!(:book_id=>b.id)
           create_member(:email=>'member@example.com')
-          book = Factory(:book)
-          @cart.line_items.create!(:book_id=>book.id)
         end
 
-        it "after logging in and items are in the cart" do
-          visit cart_path(@cart)
-          click_button 'Checkout'
-          login('member@example.com')
-        end
+        context "not logged in" do
+          before(:each) do
+            visit cart_path(@cart)
+            click_button 'Checkout'
+          end
 
-        it "if logged in and items are in the cart" do
-          login('member@example.com')
-          visit cart_path(@cart)
-          click_button 'Checkout'
-        end
-        
-        after(:each) do
-          current_path.should eq new_order_path
-        end
-      end
+          it "redirects to the login page" do
+            current_path.should eq login_path
+          end
+          it "shows notice telling to log in in order to place an order" do
+            page.should have_alert('You must be logged in to place an order.')
+          end
+          context "redirects to the new order path after" do
+            before(:each) do
+              visit cart_path(@cart)
+              click_button 'Checkout'
+            end
 
-      context "redirects to the root page" do
-        it "if logged in and no items in the cart" do
-          create_member(:email=>'member@example.com')
-          login('member@example.com')
-          visit cart_path(@cart)
-          click_button 'Checkout'
-          current_path.should eq root_path 
-          page.should have_notice('Your cart is empty.')
-        end
-        it "if not logged and no items in the cart"
+            it "logging in" do
+              login('member@example.com')
+            end
+            it "signing up" do
+              signup
+            end
 
-        it "shows a flash message about no items in the cart"
+            after(:each) do
+              current_path.should eq new_order_path
+            end
+          end
+        end
+        context "logged in" do
+          before(:each) do
+            login('member@example.com')
+          end
+
+          it "redirects to the new_order_path" do
+            visit cart_path(@cart)
+            click_button 'Checkout'
+            current_path.should eq new_order_path
+          end
+        end
       end
     end
 

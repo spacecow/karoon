@@ -55,3 +55,5 @@ bdf056: !ruby/object:Dooby::Task
   todo: add rss feed to confirmed orders
 99e05b: !ruby/object:Dooby::Task 
   todo: add order transitions
+bcb764: !ruby/object:Dooby::Task 
+  todo: add add to cart on the book show page :done

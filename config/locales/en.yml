@@ -95,3 +95,6 @@ en:
     deleted_adv: "%{o}: '%{name}' was successfully deleted."
     updated: "%{o} was successfully updated."
     updated_adv: "%{o}: '%{name}' was successfully updated."
+  unauthorized:
+    new:
+      order: 'You must be logged in to place an order.'

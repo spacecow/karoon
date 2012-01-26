@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
   before_filter :load_new_search
 
   rescue_from CanCan::AccessDenied do |exception|
-    flash[:alert] = alertify(:unauthorized_access)
+    exception.default_message = alertify(:unauthorized_access)
+    flash[:alert] = exception.message
     if current_user
       redirect_to welcome_url
     else
