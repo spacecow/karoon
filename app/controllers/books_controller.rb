@@ -86,6 +86,12 @@ class BooksController < ApplicationController
     redirect_to books_path, :notice => deleted_adv(:book,title)
   end
 
+  def who_bought
+    respond_to do |f|
+      f.atom
+    end
+  end
+
   private
 
     def load_books_with_associations

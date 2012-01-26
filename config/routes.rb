@@ -11,6 +11,9 @@ Karoon::Application.routes.draw do
     collection do
       post 'create_individual' 
     end
+    member do
+      get 'who_bought'
+    end
   end
   root :to => 'books#index'
 

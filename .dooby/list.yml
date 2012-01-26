@@ -51,3 +51,7 @@ c2b50d: !ruby/object:Dooby::Task
   todo: state transition from draft to confirmed :done
 cc3c7d: !ruby/object:Dooby::Task 
   todo: signup on login page :done
+bdf056: !ruby/object:Dooby::Task 
+  todo: add rss feed to confirmed orders
+99e05b: !ruby/object:Dooby::Task 
+  todo: add order transitions
