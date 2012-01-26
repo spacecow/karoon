@@ -1,0 +1,62 @@
+/* line 3, ../../app/assets/stylesheets/orders.css.sass */
+div#line_items {
+  border: 1px solid black;
+  background: #eeeeee;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+}
+/* line 7, ../../app/assets/stylesheets/orders.css.sass */
+div#line_items div.line_item {
+  padding: 5px 300px 5px 100px;
+}
+/* line 9, ../../app/assets/stylesheets/orders.css.sass */
+div#line_items div.line_item div#image {
+  float: left;
+  width: 90px;
+  margin-left: -100px;
+}
+/* line 13, ../../app/assets/stylesheets/orders.css.sass */
+div#line_items div.line_item div#image img {
+  display: block;
+  margin: auto;
+}
+/* line 16, ../../app/assets/stylesheets/orders.css.sass */
+div#line_items div.line_item div#info {
+  float: left;
+  width: 100%;
+}
+/* line 19, ../../app/assets/stylesheets/orders.css.sass */
+div#line_items div.line_item div#price {
+  float: left;
+  width: 290px;
+  margin-right: -300px;
+}
+/* line 23, ../../app/assets/stylesheets/orders.css.sass */
+div#line_items div#total {
+  float: right;
+  width: 250px;
+  padding: 5px 0 5px 0;
+  border-top: 2px dashed black;
+  margin-right: 50px;
+}
+
+/* line 30, ../../app/assets/stylesheets/orders.css.sass */
+form#new_order {
+  margin-top: 20px;
+}
+
+/* line 33, ../../app/assets/stylesheets/orders.css.sass */
+div#order {
+  padding: 5px 20px;
+  border: 1px solid black;
+  background: #eeeeee;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  margin: 10px 0;
+}

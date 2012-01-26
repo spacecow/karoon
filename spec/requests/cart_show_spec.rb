@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe "Carts" do
   describe "show" do
+    it "if the cart is empty, it should say that"
+
     before(:each) do
       visit root_path
       @cart = Cart.last 

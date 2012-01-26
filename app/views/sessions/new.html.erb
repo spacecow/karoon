@@ -13,3 +13,7 @@
   <%= submit_tag t(:login), :class => :submit %>
 </li>
 <% end %>
+<div id="signup">
+  <%= mess(:dont_have_an_account?) %>
+  <%= button_to t(:signup), signup_path, :method => :get %>
+</div>

@@ -49,3 +49,5 @@ dbb192: !ruby/object:Dooby::Task
   todo: create order page :done
 c2b50d: !ruby/object:Dooby::Task 
   todo: state transition from draft to confirmed :done
+cc3c7d: !ruby/object:Dooby::Task 
+  todo: signup on login page :done

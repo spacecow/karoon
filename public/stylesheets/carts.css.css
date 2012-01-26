@@ -1,0 +1,49 @@
+/* line 2, ../../app/assets/stylesheets/carts.css.sass */
+form.edit_cart div#total {
+  width: 175px;
+  float: right;
+  border-top: 2px dashed black;
+  padding-top: 5px;
+  margin-right: 25px;
+}
+/* line 8, ../../app/assets/stylesheets/carts.css.sass */
+form.edit_cart input.submit {
+  float: left;
+}
+/* line 11, ../../app/assets/stylesheets/carts.css.sass */
+form.edit_cart div.line_item {
+  padding-left: 100px;
+  padding-right: 200px;
+}
+/* line 14, ../../app/assets/stylesheets/carts.css.sass */
+form.edit_cart div.line_item div#image {
+  float: left;
+  width: 100px;
+  margin-left: -100px;
+}
+/* line 18, ../../app/assets/stylesheets/carts.css.sass */
+form.edit_cart div.line_item div#image img {
+  height: 80px;
+  display: block;
+  margin: auto;
+}
+/* line 22, ../../app/assets/stylesheets/carts.css.sass */
+form.edit_cart div.line_item div#content {
+  width: 100%;
+  float: left;
+}
+/* line 26, ../../app/assets/stylesheets/carts.css.sass */
+form.edit_cart div.line_item div#content div#title span.title {
+  font-size: 18px;
+  font-weight: bold;
+}
+/* line 30, ../../app/assets/stylesheets/carts.css.sass */
+form.edit_cart div.line_item div#content div#categories span.content {
+  font-style: italic;
+}
+/* line 32, ../../app/assets/stylesheets/carts.css.sass */
+form.edit_cart div.line_item div#expenses {
+  float: left;
+  width: 190px;
+  margin-right: -200px;
+}

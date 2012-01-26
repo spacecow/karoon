@@ -1,8 +1,21 @@
 @import "compass/css3/border-radius"
 @import "compass/css3/gradient"
+@import "fancy-buttons"
 
 $flash_container_height: 35px
 $blue: #4B7399
+
+input.submit
+  width: auto
+  margin: 10px 5px 0 0
+  +fancy-button
+
+div#signup
+  margin-top: 10px
+  font-size: 16px
+  input
+    margin-top: 10px
+    +fancy-button($blue, 26px, 1em, 5px)
 
 body
   font: normal 14px "Helvetica Neue", Arial, Helvetica, sans-serif
@@ -43,12 +56,6 @@ $notice_light: #4CC417
   +linear-gradient(color-stops($light, $dark))
 
 form
-  input.submit
-    width: auto
-    margin-top: 10px
-  div
-    input.submit
-      margin-top: 10px
   li
     list-style-type: none
     input

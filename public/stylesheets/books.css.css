@@ -1,0 +1,67 @@
+/* line 1, ../../app/assets/stylesheets/books.css.sass */
+div#book {
+  padding-left: 300px;
+}
+/* line 3, ../../app/assets/stylesheets/books.css.sass */
+div#book div#image {
+  width: 300px;
+  margin-left: -300px;
+  float: left;
+}
+/* line 7, ../../app/assets/stylesheets/books.css.sass */
+div#book div#image img {
+  display: block;
+  height: 250px;
+  margin: auto;
+}
+/* line 13, ../../app/assets/stylesheets/books.css.sass */
+div#book div#content div#category span.content {
+  font-style: italic;
+}
+/* line 15, ../../app/assets/stylesheets/books.css.sass */
+div#book div#content div#summary {
+  font-style: italic;
+}
+
+/* line 19, ../../app/assets/stylesheets/books.css.sass */
+form#book div.book {
+  border-bottom: 1px solid #aaaaaa;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+/* line 25, ../../app/assets/stylesheets/books.css.sass */
+div#books div.book {
+  border-bottom: 1px solid #aaaaaa;
+  margin-bottom: 20px;
+  padding: 0 0 20px 170px;
+}
+/* line 29, ../../app/assets/stylesheets/books.css.sass */
+div#books div.book div#image {
+  float: left;
+  width: 170px;
+  margin-left: -170px;
+}
+/* line 33, ../../app/assets/stylesheets/books.css.sass */
+div#books div.book div#image img {
+  height: 150px;
+  display: block;
+  margin: auto;
+}
+/* line 39, ../../app/assets/stylesheets/books.css.sass */
+div#books div.book div#content div#title span.title {
+  font-size: 18px;
+  font-weight: bold;
+}
+/* line 43, ../../app/assets/stylesheets/books.css.sass */
+div#books div.book div#content div#categories span.content {
+  font-style: italic;
+}
+/* line 45, ../../app/assets/stylesheets/books.css.sass */
+div#books div.book div#content div#actions {
+  font-size: 12px;
+}
+/* line 47, ../../app/assets/stylesheets/books.css.sass */
+div#books div.book div#content div#quantity {
+  float: left;
+}

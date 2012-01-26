@@ -1,0 +1,15 @@
+/* line 2, ../../app/assets/stylesheets/categories.css.sass */
+div#categories div.nested_category {
+  margin-left: 20px;
+}
+/* line 5, ../../app/assets/stylesheets/categories.css.sass */
+div#categories div.category div#name {
+  float: left;
+  margin-right: 10px;
+}
+/* line 8, ../../app/assets/stylesheets/categories.css.sass */
+div#categories div.category div#actions {
+  float: left;
+  font-size: 10px;
+  margin-top: 3px;
+}

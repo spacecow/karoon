@@ -77,6 +77,7 @@ en:
     new: 'New %{o}'
     update: 'Update %{o}'
   messages:
+    dont_have_an_account?: "Don't have an account?"
     sure?: 'Are you sure?'
   notices:
     logged_in: "Logged in."

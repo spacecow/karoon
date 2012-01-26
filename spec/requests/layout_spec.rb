@@ -200,6 +200,7 @@ describe "Sessions" do
         user_nav.click_link('My Cart')
         current_path.should eq cart_path(Cart.last)
       end
+      it "singup should not be visible for logged in users"
     end
   end
 end
