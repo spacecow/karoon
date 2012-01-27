@@ -2,12 +2,15 @@ require 'spec_helper'
 
 describe "Orders" do
   describe "validate" do
+    it "cancel an order deletes it?"
+    it "edit an order takes you back to validate"
+
     before(:each) do
       Setting.singleton.update_attribute(:currency,Setting::RIEL)
       member = create_member(:email=>'member@example.com')
       login('member@example.com')
       book = Factory(:book,:title=>'Funny Title',:regular_price=>'1234')
-      @order = Factory(:order,:name => "New Name",:address => "New Address",:email => "new@email.com",:pay_type => 'Purchase Order',:user_id=>member.id)
+      @order = Factory(:order,:name => "New Name",:address => "New Address",:email => "new@email.com",:pay_type => 'Pay on Delivery',:postal_service => 'Scud Missile',:user_id=>member.id)
       @order.line_items.create!(:book_id=>book.id,:quantity=>2)
     end
 
@@ -47,7 +50,8 @@ describe "Orders" do
         div('order').div('name').should have_content('Name: New Name')
         div('order').div('address').should have_content('Address: New Address')
         div('order').div('email').should have_content('Email: new@email.com')
-        div('order').div('pay_type').should have_content('Pay Type: Purchase Order')
+        div('order').div('pay_type').should have_content('Pay Type: Pay on Delivery')
+        div('order').div('postal_service').should have_content('Postal Service: Scud Missile')
       end
     end
 

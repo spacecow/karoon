@@ -9,7 +9,7 @@ describe BooksController do
 
   describe "a user is not logged in" do
     controller_actions.each do |action,req|
-      if %w(show index).include?(action)
+      if %w(show index who_bought).include?(action)
         it "should reach the #{action} page" do
           send("#{req}", "#{action}", :id => @model.id)
           response.redirect_url.should_not eq welcome_url
@@ -29,7 +29,7 @@ describe BooksController do
         session[:userid] = create_member.id
       end
       controller_actions.each do |action,req|
-        if %w(show index).include?(action)
+        if %w(show index who_bought).include?(action)
           it "should reach the #{action} page" do
             send(req, action, :id => @model.id)
             response.redirect_url.should_not eq welcome_url
@@ -48,7 +48,26 @@ describe BooksController do
         session[:userid] = create_vip.id
       end
       controller_actions.each do |action,req|
-        if %w(show index).include?(action)
+        if %w(show index who_bought).include?(action)
+          it "should reach the #{action} page" do
+            send(req, action, :id => @model.id)
+            response.redirect_url.should_not eq welcome_url
+          end
+        else
+          it "should not reach the #{action} page" do
+            send(req, action, :id => @model.id)
+            response.redirect_url.should eq welcome_url 
+          end
+        end
+      end
+    end
+
+    context "miniadmin" do
+      before(:each) do
+        session[:userid] = create_miniadmin.id
+      end
+      controller_actions.each do |action,req|
+        if %w(show index who_bought).include?(action)
           it "should reach the #{action} page" do
             send(req, action, :id => @model.id)
             response.redirect_url.should_not eq welcome_url
@@ -67,7 +86,7 @@ describe BooksController do
         session[:userid] = create_admin.id
       end
       controller_actions.each do |action,req|
-        if %w(show index new create edit update destroy create_individual).include?(action)
+        if %w(show index new create edit update destroy create_individual who_bought).include?(action)
           it "should reach the #{action} page" do
             send(req, action, :id => @model.id, :books => {"0" => {:title => "Title"}})
             response.redirect_url.should_not eq welcome_url
@@ -86,7 +105,7 @@ describe BooksController do
         session[:userid] = create_god.id
       end
       controller_actions.each do |action,req|
-        if %w(show index new create edit update destroy create_individual).include?(action)
+        if %w(show index new create edit update destroy create_individual who_bought).include?(action)
           it "should reach the #{action} page" do
             send(req, action, :id => @model.id, :books => {"0" => {:title => "Title"}})
             response.redirect_url.should_not eq welcome_url

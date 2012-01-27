@@ -29,7 +29,7 @@ describe "Settings" do
         it "nil" do
           Setting.singleton.update_attribute(:currency,nil)
           visit edit_setting_path(Setting.singleton)
-          selected_value('Currency').should be_nil 
+          selected_value('Currency').should be_empty
         end
       end
     end 

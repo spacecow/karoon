@@ -23,6 +23,7 @@ Factory.define :order do |f|
   f.address 'Factory Address'
   f.email 'Factory Email'
   f.pay_type Order::PAY_ON_DELIVERY
+  f.postal_service Order::FLYING_CARPET
 end
 
 Factory.define :search do |f|

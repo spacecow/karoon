@@ -14,8 +14,9 @@ class Order < ActiveRecord::Base
   belongs_to :user
   validates_presence_of :name, :address, :email, :user_id
   validates :pay_type, :inclusion => PAYMENT_TYPES
+  validates :postal_service, :inclusion => POSTAL_SERVICES 
 
-  attr_accessible :name, :address, :email, :pay_type
+  attr_accessible :name, :address, :email, :pay_type, :postal_service
 
   aasm_initial_state :draft
   aasm_state :draft
@@ -26,10 +27,11 @@ class Order < ActiveRecord::Base
   end
 
   def copy(order)
-    self.name     = order.name
-    self.address  = order.address
-    self.email    = order.email
-    self.pay_type = order.pay_type 
+    self.name           = order.name
+    self.address        = order.address
+    self.email          = order.email
+    self.pay_type       = order.pay_type
+    self.postal_service = order.postal_service
   end
 
   def total_price(riel)

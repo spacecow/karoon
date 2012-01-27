@@ -43,6 +43,7 @@ en:
         blank: "can't be blank"
         confirmation: "doesn't match confirmation"
         greater_than: "must be greater than %{count}"
+        inclusion: "is not included in the list"
         numericality: "is not a number"
   alerts:
     invalid_cart: "Invalid cart."
@@ -64,6 +65,7 @@ en:
       pay_type: 'Pay Type'
       password: 'Password'
       password_confirmation: 'Confirmation'
+      postal_service: 'Postal Service'
       regular_price: 'Regular Price'
       summary: 'Summary'
       title: 'Title'

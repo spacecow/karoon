@@ -59,3 +59,5 @@ bcb764: !ruby/object:Dooby::Task
   todo: add add to cart on the book show page :done
 42ba2d: !ruby/object:Dooby::Task 
   todo: change purchase order to pay on delivery :done
+7e8352: !ruby/object:Dooby::Task 
+  todo: add postal service to order :done

@@ -46,19 +46,22 @@ describe "Orders" do
           find_field('Name').value.should be_nil
           find_field('Address').value.should be_empty
           find_field('Email').value.should be_nil
-          options('Pay Type').should eq 'Purchase Order'
-          selected_value('Pay Type').should be_nil
+          options('Pay Type').should eq 'Pay on Delivery'
+          selected_value('Pay Type').should eq 'Pay on Delivery' 
+          options('Postal Service').should eq 'BLANK, Camel Caravan, Flying Carpet, Scud Missile'
+          selected_value('Postal Service').should be_empty
         end
       end
 
       context "a previous order exists" do
         it "new order is filled in" do
-          Factory(:order,:user_id=>@member.id,:name=>'Last Name',:address=>'Last Address',:email=>'Last Email',:pay_type=>'Purchase Order')
+          Factory(:order,:user_id=>@member.id,:name=>'Last Name',:address=>'Last Address',:email=>'Last Email',:pay_type=>'Pay on Delivery',:postal_service=>'Scud Missile')
           visit new_order_path
           find_field('Name').value.should eq 'Last Name'
           find_field('Address').value.should eq 'Last Address'
           find_field('Email').value.should eq 'Last Email'
-          selected_value('Pay Type').should eq 'Purchase Order'
+          selected_value('Pay Type').should eq 'Pay on Delivery'
+          selected_value('Postal Service').should eq 'Scud Missile'
         end
       end
     end
@@ -69,7 +72,8 @@ describe "Orders" do
         fill_in 'Name', :with => "New Name"
         fill_in 'Address', :with => "New Address"
         fill_in 'Email', :with => "new@email.com"
-        select 'Purchase Order', :from => 'Pay Type' 
+        select 'Pay on Delivery', :from => 'Pay Type' 
+        select 'Flying Carpet', :from => 'Postal Service' 
       end
 
       it "saves the order to the database" do 
@@ -123,6 +127,12 @@ describe "Orders" do
           fill_in 'Email', :with => ""
           click_button 'Create Order'
           li(:email).should have_blank_error 
+        end
+
+        it "postal service must be present" do
+          select '', :from => 'Postal Service'
+          click_button 'Create Order'
+          li(:postal_service).should have_inclusion_error 
         end
       end
     end

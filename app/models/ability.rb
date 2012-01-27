@@ -2,7 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    can [:show,:index], Book
+    can [:show,:index,:who_bought], Book
     can [:show,:index], Author
     can [:show,:index], Category
     can [:show,:create], Search

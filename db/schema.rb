@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120125100620) do
+ActiveRecord::Schema.define(:version => 20120127072116) do
 
   create_table "authors", :force => true do |t|
     t.string   "name"
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(:version => 20120125100620) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.string   "aasm_state"
+    t.string   "postal_service"
   end
 
   create_table "searches", :force => true do |t|

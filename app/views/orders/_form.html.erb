@@ -3,5 +3,6 @@
   <%= f.input :address %>
   <%= f.input :email %>
   <%= f.input :pay_type, :as => :select, :collection => Order::PAYMENT_TYPES, :include_blank => false %>
+  <%= f.input :postal_service, :as => :select, :collection => Order::POSTAL_SERVICES %>
   <%= f.submit :class => :submit %>
 <% end %>

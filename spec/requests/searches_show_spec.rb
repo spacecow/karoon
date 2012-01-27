@@ -13,13 +13,13 @@ describe "Searches" do
         end
         it "the search stays in the search field but no category is chosen" do
           search_bar.find_field('Search').value.should eq 'Hood'
-          selected_value('search_category_id').should be_nil 
+          selected_value('search_category_id').should be_empty 
         end
       end
       context "category chosen" do
         before(:each) do
-          novel = create_category('novel')
-          search = create_search('Hood',novel.id)
+          @novel = create_category('novel')
+          search = create_search('Hood',@novel.id)
           visit search_path(search)
         end
         it "the category is set as title" do
@@ -27,7 +27,7 @@ describe "Searches" do
         end
         it "the search stays in the search field and a category is chosen" do
           search_bar.find_field('Search').value.should eq 'Hood'
-          selected_value('search_category_id').should eq 'novel' 
+          selected_value('search_category_id').should eq @novel.id.to_s
         end
       end
 
