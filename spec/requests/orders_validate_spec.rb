@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Orders" do
+describe "Orders", :focus=>true do
   describe "validate" do
     it "cancel an order deletes it?"
     it "edit an order takes you back to validate"
@@ -22,6 +22,10 @@ describe "Orders" do
       it "should have a cancel button" do
         visit validate_order_path(@order)
         form(:confirm_order).should have_button('Cancel')
+      end
+      it "should have an edit button" do
+        visit validate_order_path(@order)
+        form(:confirm_order).should have_button('Edit')
       end
       it "should have a confirm button" do
         visit validate_order_path(@order)

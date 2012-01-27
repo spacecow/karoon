@@ -11,7 +11,7 @@ class Ability
     if user
       if user.role?(User::MEMBER) || user.role?(User::VIP) || user.role?(User::MINIADMIN) || user.role?(User::ADMIN)
         can :create, Order
-        can [:validate,:confirm,:update], Order, :user_id => user.id
+        can [:validate,:confirm,:update], Order, :user_id => user.id, :aasm_state => "draft"
       end
       if user.role?(User::VIP) || user.role?(User::MINIADMIN) || user.role?(User::ADMIN)
       end

@@ -24,6 +24,7 @@ class Order < ActiveRecord::Base
 
   aasm_event :order_confirmed do
     transitions :from => :draft, :to => :confirmed
+    transitions :from => :confirmed, :to => :confirmed
   end
 
   def copy(order)
