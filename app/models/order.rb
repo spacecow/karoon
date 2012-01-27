@@ -3,7 +3,13 @@ class Order < ActiveRecord::Base
 
   has_many :line_items
 
-  PAYMENT_TYPES = ["Purchase Order"] #Check, Credit Card
+  CAMEL_CARAVAN = "Camel Caravan"
+  FLYING_CARPET = "Flying Carpet"
+  PAY_ON_DELIVERY = "Pay on Delivery"
+  SCUD_MISSILE = "Scud Missile"
+
+  PAYMENT_TYPES = [PAY_ON_DELIVERY] #online, bank transfer
+  POSTAL_SERVICES = [CAMEL_CARAVAN,FLYING_CARPET,SCUD_MISSILE]
 
   belongs_to :user
   validates_presence_of :name, :address, :email, :user_id

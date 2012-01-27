@@ -149,7 +149,6 @@ describe "Books" do
       it "flash message quantity if it is larger than 1" do
         div('book',0).select '2', :from => 'Quantity'
         div('book',0).click_button 'Add to Cart'
-debug
         page.should have_notice("2 Books: 'This is the Way' were added to your cart.")
       end
 

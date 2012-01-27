@@ -22,7 +22,7 @@ Factory.define :order do |f|
   f.name 'Factory Name'
   f.address 'Factory Address'
   f.email 'Factory Email'
-  f.pay_type 'Purchase Order'
+  f.pay_type Order::PAY_ON_DELIVERY
 end
 
 Factory.define :search do |f|
