@@ -10,6 +10,7 @@
       <div id="right_content">
         <%= f.select :category_id, Category.order(:names_depth_cache).map{|e| [e.names_depth_cache,e.id]}, :prompt => t(:books) %>
         <%= f.submit t(:go) %>
+        <%= link_to cart_image, current_cart %>
       </div>
       <div class="clear"></div>
     </div>

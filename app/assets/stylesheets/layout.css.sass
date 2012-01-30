@@ -113,29 +113,41 @@ div#flash_container
   div#user_nav
     float: right
     text-align: right
+    div#my_cart
+      background-image: url('my_cart.png')
+      height: 60px
+      width: 180px
+      float: right
 
 div#search_bar
   margin-top: 57px
-  height: 30px
+  height: 35px
   +custom_gradient(#fff,$blue)
   form
-    margin-top: 5px
     div#form
       padding-left: 55px
-      padding-right: 400px
+      padding-right: 500px
       div#label
         float: left
         margin-left: -55px
-        margin-top: 4px
+        margin-top: 10px
         width: 55px
       div#left_content
         input
+          margin-top: 7px
           float: left
           width: 100%
       div#right_content
         float: left 
-        width: 390px
-        margin-right: -400px
+        width: 490px
+        margin-right: -500px
+        select
+          margin-top: 7px
+        img
+          margin-top: 3px
+          float: right
+          border: 1px solid black
+          +border-radius(5px)
 
 div#mid_container
   padding-left: 200px

@@ -1,4 +1,16 @@
 module ApplicationHelper
+  def cart_image
+    count = current_cart.total_count
+    if count > 0
+      if count < 10
+        image_tag "my_cart_#{count}.png"
+      else
+        image_tag 'my_cart_9p.png'
+      end 
+    else
+      image_tag 'my_cart_e.png'
+    end
+  end
   def class_selection(s)
     if s.instance_of? Symbol
       t(s) == @selection ? "selected" : ''

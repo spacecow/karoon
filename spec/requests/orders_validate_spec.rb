@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Orders", :focus=>true do
+describe "Orders" do
   describe "validate" do
     it "cancel an order deletes it?"
     it "edit an order takes you back to validate"

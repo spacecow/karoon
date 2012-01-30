@@ -10,7 +10,7 @@ describe "Sessions" do
       site_nav.should have_link('Books')
       site_nav.should have_link('Authors')
       site_nav.should have_link('Categories')
-      user_nav.should have_link('My Cart')
+      search_bar.should have_image('My_cart_e')
       user_nav.should_not have_link('Settings')
       user_nav.should_not have_link('Searches')
     end
@@ -198,7 +198,7 @@ describe "Sessions" do
         current_path.should eq categories_path
       end
       it "my cart" do
-        user_nav.click_link('My Cart')
+        search_bar.click_link('My_cart_e')
         current_path.should eq cart_path(Cart.last)
       end
       it "singup should not be visible for logged in users"
