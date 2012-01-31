@@ -90,11 +90,13 @@ en:
   successes:
     added_to_cart: "%{o}: '%{name}' was added to your cart."
     added_to_cart_pl: "%{i} %{o}: '%{name}' were added to your cart."
+    canceled: "%{o} was canceled."
     created: "%{o} was successfully created."
     created_adv: "%{o}: '%{name}' was successfully created."
     created_state: "%{o} %{state} was successfully created."
     created_nos: "%{i} %{o} %{v} successfully created."
     deleted_adv: "%{o}: '%{name}' was successfully deleted."
+    placed: "%{o} has been placed."
     updated: "%{o} was successfully updated."
     updated_adv: "%{o}: '%{name}' was successfully updated."
   unauthorized:

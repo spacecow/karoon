@@ -2,6 +2,9 @@ class OrdersController < ApplicationController
   skip_load_resource :only => :create
   load_and_authorize_resource
 
+  def show
+  end
+
   def new
     @cart = current_cart
     if @cart.line_items.empty?
@@ -31,7 +34,12 @@ class OrdersController < ApplicationController
     if params[:edit_button]
       redirect_to edit_order_path(@order)
     else
-      @order.order_confirmed! unless params[:cancel_button]
+      if params[:cancel_button]
+        flash[:notice] = canceled(:order)
+      else
+        flash[:notice] = placed(:order)
+        @order.order_confirmed! 
+      end
       redirect_to root_path
     end
   end
@@ -41,7 +49,12 @@ class OrdersController < ApplicationController
 
   def update
     if @order.update_attributes(params[:order])
-      redirect_to root_path
+      flash[:notice] = updated(:order)
+      if @order.aasm_state == 'draft'
+        redirect_to validate_order_path(@order) 
+      else
+        redirect_to @order 
+      end
     else
       render :edit
     end

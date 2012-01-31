@@ -11,6 +11,7 @@ class Ability
     if user
       if user.role?(User::MEMBER) || user.role?(User::VIP) || user.role?(User::MINIADMIN) || user.role?(User::ADMIN)
         can :create, Order
+        can :show, Order, :user_id => user.id
         can [:validate,:confirm,:update], Order, :user_id => user.id, :aasm_state => "draft"
       end
       if user.role?(User::VIP) || user.role?(User::MINIADMIN) || user.role?(User::ADMIN)
@@ -24,7 +25,7 @@ class Ability
         can [:update], Setting
         can :index, Search
         can :create, LineItem
-        can [:validate,:confirm,:update], Order
+        can [:show,:validate,:confirm,:update], Order
       end
       if user.role? :god
         can :manage, :all

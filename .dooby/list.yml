@@ -61,3 +61,5 @@ bcb764: !ruby/object:Dooby::Task
   todo: change purchase order to pay on delivery :done
 7e8352: !ruby/object:Dooby::Task 
   todo: add postal service to order :done
+403f85: !ruby/object:Dooby::Task 
+  todo: redirect after order edit :done

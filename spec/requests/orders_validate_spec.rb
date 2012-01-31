@@ -2,9 +2,6 @@ require 'spec_helper'
 
 describe "Orders" do
   describe "validate" do
-    it "cancel an order deletes it?"
-    it "edit an order takes you back to validate"
-
     before(:each) do
       Setting.singleton.update_attribute(:currency,Setting::RIEL)
       member = create_member(:email=>'member@example.com')
@@ -72,7 +69,12 @@ describe "Orders" do
       it "redirect to the root page" do
         current_path.should eq root_path
       end
+
+      it "shows a flash message" do
+        page.should have_notice('Order was canceled.')
+      end
     end
+
     context "edit order information" do
       before(:each) do
         visit validate_order_path(@order)
@@ -88,8 +90,6 @@ describe "Orders" do
       end
     end
 
-    it "can only edit orders that have not been shipped yet"
-
     context "confirm order" do
       before(:each) do
         visit validate_order_path(@order)
@@ -102,6 +102,10 @@ describe "Orders" do
 
       it "redirect to the root page" do
         current_path.should eq root_path
+      end
+
+      it "shows a flash message" do
+        page.should have_notice('Order has been placed.')
       end
     end
   end

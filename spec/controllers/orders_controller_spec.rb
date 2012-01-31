@@ -37,15 +37,23 @@ describe OrdersController do
             send(req, action, :id => @model.id)
             response.redirect_url.should_not eq welcome_url
           end
-        elsif %w(validate confirm edit update).include?(action)
+        elsif %w(show validate confirm edit update).include?(action)
           it "should reach the own #{action} page if 'draft'" do
             send(req, action, :id => @model.id)
             response.redirect_url.should_not eq welcome_url
           end
-          it "should not reach the own #{action} page if 'confirmed'" do
-            @model.order_confirmed!
-            send(req, action, :id => @model.id)
-            response.redirect_url.should eq welcome_url
+          if %w(show).include?(action)
+            it "should reach the own #{action} page if 'confirmed'" do
+              @model.order_confirmed!
+              send(req, action, :id => @model.id)
+              response.redirect_url.should_not eq welcome_url
+            end
+          else
+            it "should not reach the own #{action} page if 'confirmed'" do
+              @model.order_confirmed!
+              send(req, action, :id => @model.id)
+              response.redirect_url.should eq welcome_url
+            end
           end
           it "should not reach other's #{action} page" do
             send(req, action, :id => @other.id)
@@ -73,15 +81,23 @@ describe OrdersController do
             send(req, action, :id => @model.id)
             response.redirect_url.should_not eq welcome_url
           end
-        elsif %w(validate confirm edit update).include?(action)
+        elsif %w(show validate confirm edit update).include?(action)
           it "should reach the own #{action} page if 'draft'" do
             send(req, action, :id => @model.id)
             response.redirect_url.should_not eq welcome_url
           end
-          it "should not reach the own #{action} page if 'confirmed'" do
-            @model.order_confirmed!
-            send(req, action, :id => @model.id)
-            response.redirect_url.should eq welcome_url
+          if %w(show).include?(action)
+            it "should reach the own #{action} page if 'confirmed'" do
+              @model.order_confirmed!
+              send(req, action, :id => @model.id)
+              response.redirect_url.should_not eq welcome_url
+            end
+          else
+            it "should not reach the own #{action} page if 'confirmed'" do
+              @model.order_confirmed!
+              send(req, action, :id => @model.id)
+              response.redirect_url.should eq welcome_url
+            end
           end
           it "should not reach other's #{action} page" do
             send(req, action, :id => @other.id)
@@ -109,15 +125,23 @@ describe OrdersController do
             send(req, action, :id => @model.id, :books => {"0" => {:title => "Title"}})
             response.redirect_url.should_not eq welcome_url
           end
-        elsif %w(validate confirm edit update).include?(action)
+        elsif %w(show validate confirm edit update).include?(action)
           it "should reach the own #{action} page if 'draft'" do
             send(req, action, :id => @model.id)
             response.redirect_url.should_not eq welcome_url
           end
-          it "should not reach the own #{action} page if 'confirmed'" do
-            @model.order_confirmed!
-            send(req, action, :id => @model.id)
-            response.redirect_url.should eq welcome_url
+          if %w(show).include?(action)
+            it "should reach the own #{action} page if 'confirmed'" do
+              @model.order_confirmed!
+              send(req, action, :id => @model.id)
+              response.redirect_url.should_not eq welcome_url
+            end
+          else
+            it "should not reach the own #{action} page if 'confirmed'" do
+              @model.order_confirmed!
+              send(req, action, :id => @model.id)
+              response.redirect_url.should eq welcome_url
+            end
           end
           it "should not reach other's #{action} page" do
             send(req, action, :id => @other.id)
@@ -145,7 +169,7 @@ describe OrdersController do
             send(req, action, :id => @model.id, :books => {"0" => {:title => "Title"}})
             response.redirect_url.should_not eq welcome_url
           end
-        elsif %w(validate confirm edit update).include?(action)
+        elsif %w(show validate confirm edit update).include?(action)
           it "should reach the own #{action} page if 'draft'" do
             send(req, action, :id => @model.id)
             response.redirect_url.should_not eq welcome_url
@@ -181,7 +205,7 @@ describe OrdersController do
             send(req, action, :id => @model.id, :books => {"0" => {:title => "Title"}})
             response.redirect_url.should_not eq welcome_url
           end
-        elsif %w(validate confirm edit update).include?(action)
+        elsif %w(show validate confirm edit update).include?(action)
           it "should reach the own #{action} page if 'draft'" do
             send(req, action, :id => @model.id)
             response.redirect_url.should_not eq welcome_url
