@@ -18,6 +18,9 @@
         <%= link_to_categories line_item.book.categories %>
       </span>
     </div>
+    <div id="actions">
+      <%= link_to t(:delete), line_item, :confirm => sure?, :method => :delete %>
+    </div>
   </div>
   <div id="expenses">
     <div id="price">

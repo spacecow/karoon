@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe "Orders" do
   describe "validate" do
+    it "send email to user after confirmation"
+
     before(:each) do
       Setting.singleton.update_attribute(:currency,Setting::RIEL)
       member = create_member(:email=>'member@example.com')
@@ -71,7 +73,7 @@ describe "Orders" do
       end
 
       it "shows a flash message" do
-        page.should have_notice('Order was canceled.')
+        page.should have_notice('Your order was canceled.')
       end
     end
 
@@ -100,12 +102,12 @@ describe "Orders" do
         Order.last.aasm_state.should eq 'confirmed'
       end
 
-      it "redirect to the root page" do
-        current_path.should eq root_path
+      it "redirect to the order show page" do
+        current_path.should eq order_path(@order) 
       end
 
       it "shows a flash message" do
-        page.should have_notice('Order has been placed.')
+        page.should have_notice('Your order has been confirmed. An email has been sent to you with information about the purchase.')
       end
     end
   end

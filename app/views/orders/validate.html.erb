@@ -1,18 +1,6 @@
 <%= title confirm(:order) %>
 
-<div id="line_items">
-  <%= render :partial => 'orders/line_item', :collection => @order.line_items %>
-
-  <div id="total">
-    <span class="label">
-      <%= t(:total) %>:
-    </span>
-    <span class="content">
-      <%= @order.total_price(currency_in_riel?) %> <%= currency %>
-    </span>
-  </div>
-  <div class="clear"></div>
-</div>
+<%= render 'orders/line_items', :line_items => @order.line_items, :model => @order %>
 
 <%= render @order %>
 

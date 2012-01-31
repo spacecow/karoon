@@ -63,3 +63,5 @@ bcb764: !ruby/object:Dooby::Task
   todo: add postal service to order :done
 403f85: !ruby/object:Dooby::Task 
   todo: redirect after order edit :done
+c4c1b4: !ruby/object:Dooby::Task 
+  todo: delete items from the cart :done

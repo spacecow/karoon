@@ -1,25 +1,27 @@
 <%= title 'Your Cart' %>
 
-<%= form_for @cart do |f| %>
-  <% @cart.line_items.each do |line_item| %>
-    <%= f.fields_for :line_items, line_item do |ref| %>
-      <%= render 'line_item', :line_item => line_item, :f => ref %>
-      <% end %>
+<div id="cart">
+  <%= form_for @cart do |f| %>
+    <% @cart.line_items.each do |line_item| %>
+      <%= f.fields_for :line_items, line_item do |ref| %>
+        <%= render 'line_item', :line_item => line_item, :f => ref %>
+        <% end %>
+    <% end %>
+
+    <div id="total">
+      <span class="label">
+        <%= t(:total) %>:
+      </span>
+      <span class="content">
+        <%= @cart.total_price(currency_in_riel?) %> <%= currency %>
+      </span>
+    </div>
+    <div class="clear"></div>
+
+    <%= f.submit :class => :submit %>
+    <%= f.submit t(:checkout), :name => :checkout_button, :class => :submit if @cart.line_items.present? %>
   <% end %>
 
-  <div id="total">
-    <span class="label">
-      <%= t(:total) %>:
-    </span>
-    <span class="content">
-      <%= @cart.total_price(currency_in_riel?) %> <%= currency %>
-    </span>
-  </div>
-  <div class="clear"></div>
-
-  <%= f.submit :class => :submit %>
-  <%= f.submit t(:checkout), :name => :checkout_button, :class => :submit %>
-<% end %>
-
-<%= button_to empty(:cart), @cart, :confirm => sure?, :method => :delete, :class => :submit %>
-<%# button_to t(:checkout), new_order_path, :method => :get, :class => :submit %>
+  <%= button_to empty(:cart), @cart, :confirm => sure?, :method => :delete, :class => :submit %>
+  <%# button_to t(:checkout), new_order_path, :method => :get, :class => :submit %>
+</div>

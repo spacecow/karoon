@@ -36,11 +36,11 @@ class ApplicationController < ActionController::Base
   private
 
     def current_cart
-      @cart ||= Cart.find(session[:cart_id])
+      Cart.find(session[:cartid])
     rescue ActiveRecord::RecordNotFound
-      @cart = Cart.create
-      session[:cart_id] = @cart.id
-      @cart
+      cart = Cart.create
+      session[:cartid] = cart.id
+      cart
     end
 
     def load_new_search

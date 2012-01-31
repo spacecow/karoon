@@ -13,6 +13,17 @@ class LineItemsController < ApplicationController
     end
   end
 
+  def destroy
+    cart = @line_item.cart
+    if @line_item.quantity == 1
+      flash[:notice] = t('successes.removed_from_cart',:o=>t(:book),:name=>@line_item.book.title)
+    else
+      flash[:notice] = t('successes.removed_from_cart_pl',:i=>@line_item.quantity,:o=>t(:books),:name=>@line_item.book.title)
+    end
+    @line_item.destroy
+    redirect_to cart
+  end
+
   private
 
     def load_line_item_through_cart

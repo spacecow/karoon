@@ -26,7 +26,10 @@ en:
   login: 'Login'
   my_cart: 'My Cart'
   order: 'Order'
+  order_confirmed: 'Order confirmed'
+  order_draft: 'Order draft'
   price: 'Price'
+  purchase: 'Purchase'
   quantity: 'Quantity'
   search: 'Search'
   searches: 'Searches'
@@ -36,6 +39,8 @@ en:
   userid: 'Userid'
   was: 'was'
   were: 'were'
+  your_cart: 'Your cart'
+  your_order: 'Your order'
   
   activerecord:
     errors:
@@ -79,6 +84,7 @@ en:
     new: 'New %{o}'
     update: 'Update %{o}'
   messages:
+    email_has_been_sent_about: "An email has been sent to you with information about the %{o}."
     dont_have_an_account?: "Don't have an account?"
     sure?: 'Are you sure?'
   notices:
@@ -91,12 +97,15 @@ en:
     added_to_cart: "%{o}: '%{name}' was added to your cart."
     added_to_cart_pl: "%{i} %{o}: '%{name}' were added to your cart."
     canceled: "%{o} was canceled."
+    confirmed: "%{o} has been confirmed."
     created: "%{o} was successfully created."
     created_adv: "%{o}: '%{name}' was successfully created."
     created_state: "%{o} %{state} was successfully created."
     created_nos: "%{i} %{o} %{v} successfully created."
     deleted_adv: "%{o}: '%{name}' was successfully deleted."
-    placed: "%{o} has been placed."
+    emptied: "%{o} was emptied."
+    removed_from_cart: "%{o}: '%{name}' was removed from your cart."
+    removed_from_cart_pl: "%{i} %{o}: '%{name}' were removed from your cart."
     updated: "%{o} was successfully updated."
     updated_adv: "%{o}: '%{name}' was successfully updated."
   unauthorized:

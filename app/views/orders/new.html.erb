@@ -1,17 +1,5 @@
 <%= title new(:order) %>
 
-<div id="line_items">
-  <%= render :partial => 'orders/line_item', :collection => @cart.line_items %>
-
-  <div id="total">
-    <span class="label">
-      <%= t(:total) %>:
-    </span>
-    <span class="content">
-      <%= @cart.total_price(currency_in_riel?) %> <%= currency %>
-    </span>
-  </div>
-  <div class="clear"></div>
-</div>
+<%= render 'orders/line_items', :line_items => @cart.line_items, :model => @cart %>
 
 <%= render 'form' %>

@@ -7,7 +7,7 @@ class Ability
     can [:show,:index], Category
     can [:show,:create], Search
     can :create, LineItem
-    can [:update,:destroy], Cart
+    can :destroy, LineItem
     if user
       if user.role?(User::MEMBER) || user.role?(User::VIP) || user.role?(User::MINIADMIN) || user.role?(User::ADMIN)
         can :create, Order
@@ -26,6 +26,7 @@ class Ability
         can :index, Search
         can :create, LineItem
         can [:show,:validate,:confirm,:update], Order
+        can [:show,:update,:destroy], Cart
       end
       if user.role? :god
         can :manage, :all

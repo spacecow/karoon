@@ -24,7 +24,7 @@ Karoon::Application.routes.draw do
   resources :searches, :only => [:show,:index,:create]
 
   resources :carts, :only => [:show,:update,:destroy]
-  resources :line_items, :only => [:create]
+  resources :line_items, :only => [:create,:destroy]
   resources :orders, :only => [:new,:create,:edit,:update,:show] do
     member do
       get 'validate'

@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
   has_many :orders
-  has_many :line_items
   has_many :searches
   has_many :books
   has_many :blank_books, :class_name => 'Book', :conditions => {:user_id => nil}
@@ -22,6 +21,7 @@ class User < ActiveRecord::Base
   VIP       = 'vip'
   ROLES     = [GOD,ADMIN,MINIADMIN,VIP,MEMBER]
 
+  def cart; current_cart end
   def role?(s); roles.include?(s.to_s) end
   def roles; ROLES.reject{|r| ((roles_mask||0) & 2**ROLES.index(r)).zero? } end
 

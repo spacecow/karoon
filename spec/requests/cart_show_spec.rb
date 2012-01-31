@@ -2,9 +2,6 @@ require 'spec_helper'
 
 describe "Carts" do
   describe "show" do
-    it "if the cart is empty, it should say that"
-    it "what happends if a book quantity is more than ten"
-
     before(:each) do
       visit root_path
       @cart = Cart.last 
@@ -18,7 +15,7 @@ describe "Carts" do
       
       it "redirects to the book index" do
         visit cart_path(1)
-        page.current_path.should eq books_path
+        page.current_path.should eq welcome_path
       end
     end
 
@@ -65,9 +62,9 @@ describe "Carts" do
     end
 
     context "checkout button" do
-      it "exists with no items in the cart" do
+      it "does not exist with no items in the cart" do
         visit cart_path(@cart)
-        page.should have_button('Checkout')
+        page.should_not have_button('Checkout')
       end
       it "exists with items in the cart" do
         book = Factory(:book)
@@ -93,6 +90,11 @@ describe "Carts" do
       it "should have an update cart button" do
         page.should have_button('Update Cart')
       end
+
+      it "if the cart is empty, it should say that" do
+      end
+
+      it "what happends if a book quantity is more than ten"
     end
 
     context "layout" do
@@ -138,8 +140,12 @@ describe "Carts" do
           page.should_not have_button('Add to Cart')
         end
 
-        it "should have no actions" do
-          page.should_not have_div('actions')
+        it "should have actions" do
+          page.should have_div('actions')
+        end
+
+        it "should have a delete action" do
+          div('actions').should have_link('Delete')
         end
       end
     end
@@ -177,39 +183,39 @@ describe "Carts" do
     end
 
     context "checkout" do
-      context "no items in the cart" do 
-        context "logged in" do
-          before(:each) do
-            create_member(:email=>'member@example.com')
-            login('member@example.com')
-            visit cart_path(@cart)
-            click_button 'Checkout'
-          end
+      #context "no items in the cart" do 
+      #  context "logged in" do
+      #    before(:each) do
+      #      create_member(:email=>'member@example.com')
+      #      login('member@example.com')
+      #      visit cart_path(@cart)
+      #      click_button 'Checkout'
+      #    end
 
-          it "redirects to the root path" do
-            current_path.should eq root_path 
-          end
+      #    it "redirects to the root path" do
+      #      current_path.should eq root_path 
+      #    end
 
-          it "shows notice saying the cart is emtpy" do
-            page.should have_notice('Your cart is empty.')
-          end
-        end
+      #    it "shows notice saying the cart is emtpy" do
+      #      page.should have_notice('Your cart is empty.')
+      #    end
+      #  end
 
-        context "not logged in" do
-          before(:each) do
-            visit cart_path(@cart)
-            click_button 'Checkout'
-          end
+      #  context "not logged in" do
+      #    before(:each) do
+      #      visit cart_path(@cart)
+      #      click_button 'Checkout'
+      #    end
 
-          it "redirects to the login path" do
-            current_path.should eq login_path 
-          end
+      #    it "redirects to the login path" do
+      #      current_path.should eq login_path 
+      #    end
 
-          it "shows notice saying the cart is emtpy" do
-            page.should have_alert('You must be logged in to place an order.')
-          end
-        end
-      end
+      #    it "shows notice saying the cart is emtpy" do
+      #      page.should have_alert('You must be logged in to place an order.')
+      #    end
+      #  end
+      #end
 
       context "items in the cart" do
         before(:each) do
@@ -281,13 +287,55 @@ describe "Carts" do
       end
       it "redirects to the root page" do
         click_button 'Empty Cart'
-        current_path.should eq root_path
+        current_path.should eq cart_path(Cart.last) 
       end
       it "shows a flash message" do
         click_button 'Empty Cart'
-        page.should have_notice('Your cart is currently empty.')
+        page.should have_notice('Your cart was emptied.')
       end
       it "cart can only be emptied by the user who created it"
+    end
+
+    context "delete item from cart" do
+      before(:each) do
+        @book = Factory(:book,:title=>'Moby Dick')
+        @line_item = @cart.line_items.create!(:book_id=>@book.id)
+      end
+
+      it "removes a line item from the database" do
+        visit cart_path(@cart)
+        lambda do
+          div('line_item',0).click_link('Delete')      
+        end.should change(LineItem,:count).by(-1)
+      end
+
+      it "removes the line item from the cart" do
+        visit cart_path(@cart)
+        div('line_item',0).click_link('Delete')      
+        Cart.last.line_items.count.should be(0)
+      end
+
+      it "redirects back to the cart page" do
+        visit cart_path(@cart)
+        div('line_item',0).click_link('Delete')      
+        current_path.should eq cart_path(@cart)
+      end
+
+      context "shows a flash message for quantity:" do
+        it "singular" do
+          visit cart_path(@cart)
+          div('line_item',0).click_link('Delete')      
+          page.should have_notice("Book: 'Moby Dick' was removed from your cart.") 
+        end
+        it "plural" do
+          @line_item.update_attribute(:quantity,2)
+          visit cart_path(@cart)
+          div('line_item',0).click_link('Delete')      
+          page.should have_notice("2 Books: 'Moby Dick' were removed from your cart.") 
+        end
+      end
+
+      it "chekcout should have an alert message"
     end
   end
 end

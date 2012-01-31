@@ -21,11 +21,12 @@ class OrdersController < ApplicationController
     @order = current_user.orders.build(params[:order])
     @order.transfer_line_items_from_cart(current_cart)
     if @order.save
-      Cart.destroy(session[:cart_id])
-      session[:cart_id] = nil
-      flash[:notice] = created_state(:order,@order.aasm_state) 
+      Cart.destroy(session[:cartid])
+      session[:cartid] = nil
+      flash[:notice] = created(:order_draft) 
       redirect_to validate_order_path(@order)
     else
+      @cart = current_cart
       render :new
     end
   end
@@ -35,12 +36,13 @@ class OrdersController < ApplicationController
       redirect_to edit_order_path(@order)
     else
       if params[:cancel_button]
-        flash[:notice] = canceled(:order)
+        flash[:notice] = canceled(:your_order)
+        redirect_to root_path
       else
-        flash[:notice] = placed(:order)
+        flash[:notice] = confirmed(:your_order) + " " + t('messages.email_has_been_sent_about',:o=>t(:purchase).downcase) 
         @order.order_confirmed! 
+        redirect_to @order 
       end
-      redirect_to root_path
     end
   end
 
