@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120201083526) do
+ActiveRecord::Schema.define(:version => 20120201091628) do
 
   create_table "authors", :force => true do |t|
     t.string   "name"
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(:version => 20120201083526) do
   end
 
   create_table "locales", :force => true do |t|
-    t.string   "title"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -33,4 +33,5 @@ Karoon::Application.routes.draw do
   end
 
   resources :translations, :only => [:index,:create]
+  resources :locales, :only => :index
 end

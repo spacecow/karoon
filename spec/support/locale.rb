@@ -1,1 +1,1 @@
-def create_locale(s) Factory(:locale,:title=>s) end
+def create_locale(s) Factory(:locale,:name=>s) end

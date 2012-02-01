@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Translations", :focus=>true do
+describe "Translations" do
   describe "index" do
     before(:each) do
       create_admin(:email=>'admin@example.com')
@@ -54,7 +54,7 @@ describe "Translations", :focus=>true do
       end
       it "sets the locale" do
         click_button 'Create Translation'
-        Translation.last.locale.title.should eq 'en' 
+        Translation.last.locale.name.should eq 'en' 
       end
       context "create locale on the fly" do
         before(:each) do
@@ -68,7 +68,7 @@ describe "Translations", :focus=>true do
         end
         it "sets the locale" do
           click_button 'Create Translation'
-          Translation.last.locale.title.should eq 'en.book'
+          Translation.last.locale.name.should eq 'en.book'
         end
       end
 

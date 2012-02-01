@@ -1,5 +1,5 @@
 class Locale < ActiveRecord::Base
   has_many :translations
   
-  validates :title, presence: true
+  validates :name, presence: true
 end

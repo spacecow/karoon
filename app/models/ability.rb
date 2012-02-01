@@ -28,6 +28,7 @@ class Ability
         can [:show,:validate,:confirm,:update], Order
         can [:show,:update,:destroy], Cart
         can [:index,:create], Translation
+        can :index, Locale
       end
       if user.role? :god
         can :manage, :all

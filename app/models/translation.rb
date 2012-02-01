@@ -13,7 +13,7 @@ class Translation < ActiveRecord::Base
       self.locale_id = id
     elsif id.empty?
     else
-      self.locale_id = Locale.create!(:title=>id).id
+      self.locale_id = Locale.create!(:name=>id).id
     end
   end
 end

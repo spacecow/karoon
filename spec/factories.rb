@@ -19,7 +19,7 @@ Factory.define :line_item do |f|
 end
 
 Factory.define :locale do |f|
-  f.title 'Factory Title'
+  f.name 'Factory Name'
 end
 
 Factory.define :order do |f|
