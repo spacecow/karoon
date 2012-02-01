@@ -31,6 +31,10 @@ Factory.define :search do |f|
   f.ip '1.2.3.4'
 end
 
+Factory.define :translation do |f|
+  f.value 'Factory Value'
+end
+
 Factory.define :user do |f|
   f.email 'test@example.com'
   f.password 'secret'
