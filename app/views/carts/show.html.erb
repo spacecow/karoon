@@ -1,6 +1,9 @@
 <%= title 'Your Cart' %>
 
 <div id="cart">
+  <% if @cart.line_items.empty? %>
+    <%= mess(:your_cart_is_currently_empty) %>
+  <% end %>
   <%= form_for @cart do |f| %>
     <% @cart.line_items.each do |line_item| %>
       <%= f.fields_for :line_items, line_item do |ref| %>
@@ -8,14 +11,16 @@
         <% end %>
     <% end %>
 
-    <div id="total">
-      <span class="label">
-        <%= t(:total) %>:
-      </span>
-      <span class="content">
-        <%= @cart.total_price(currency_in_riel?) %> <%= currency %>
-      </span>
-    </div>
+    <% if @cart.line_items.present? %>
+      <div id="total">
+        <span class="label">
+          <%= t(:total) %>:
+        </span>
+        <span class="content">
+          <%= @cart.total_price(currency_in_riel?) %> <%= currency %>
+        </span>
+      </div>
+    <% end %>
     <div class="clear"></div>
 
     <%= f.submit :class => :submit %>

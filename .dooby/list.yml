@@ -65,3 +65,5 @@ bcb764: !ruby/object:Dooby::Task
   todo: redirect after order edit :done
 c4c1b4: !ruby/object:Dooby::Task 
   todo: delete items from the cart :done
+e9c332: !ruby/object:Dooby::Task 
+  todo: if the cart is empty, it should say that :done

@@ -87,11 +87,11 @@ en:
     email_has_been_sent_about: "An email has been sent to you with information about the %{o}."
     dont_have_an_account?: "Don't have an account?"
     sure?: 'Are you sure?'
+    your_cart_is_currently_empty: 'Your cart is currently empty.'
   notices:
     logged_in: "Logged in."
     logged_out: "Logged out."
     signed_up_and_logged_in: "Signed up and logged in."
-    your_cart_is_currently_empty: 'Your cart is currently empty.'
     your_cart_is_empty: 'Your cart is empty.'
   successes:
     added_to_cart: "%{o}: '%{name}' was added to your cart."

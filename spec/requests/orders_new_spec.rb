@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe "Orders" do
   describe "new" do
+    it "email check"
+
     before(:each) do
       @member = create_member(:email=>'member@example.com')
       login('member@example.com')

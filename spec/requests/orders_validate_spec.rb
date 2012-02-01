@@ -3,6 +3,8 @@ require 'spec_helper'
 describe "Orders" do
   describe "validate" do
     it "send email to user after confirmation"
+    it "cancel has a confirmation popup windown"
+    it "update order should have a cancel button"
 
     before(:each) do
       Setting.singleton.update_attribute(:currency,Setting::RIEL)

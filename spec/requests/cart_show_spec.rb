@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Carts" do
+describe "Carts", :focus=>true do
   describe "show" do
     before(:each) do
       visit root_path
@@ -92,6 +92,11 @@ describe "Carts" do
       end
 
       it "if the cart is empty, it should say that" do
+        div('cart').should have_content('Your cart is currently empty.')
+      end
+
+      it "if a cart is empty, no total should be visible" do
+        div('cart').should_not have_div('total')
       end
 
       it "what happends if a book quantity is more than ten"
