@@ -71,3 +71,5 @@ ae5d7c: !ruby/object:Dooby::Task
   todo: create the translation form :done
 a8f09b: !ruby/object:Dooby::Task 
   todo: create translations + error handling :done
+30ad67: !ruby/object:Dooby::Task 
+  todo: add locale to the translation model :done

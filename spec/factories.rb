@@ -18,6 +18,10 @@ Factory.define :line_item do |f|
   f.association :book
 end
 
+Factory.define :locale do |f|
+  f.title 'Factory Title'
+end
+
 Factory.define :order do |f|
   f.name 'Factory Name'
   f.address 'Factory Address'
@@ -33,6 +37,7 @@ end
 
 Factory.define :translation do |f|
   f.value 'Factory Value'
+  f.locale
 end
 
 Factory.define :user do |f|

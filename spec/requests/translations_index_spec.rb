@@ -22,6 +22,9 @@ describe "Translations", :focus=>true do
       it "has an empty value field" do
         value('Value').should be_nil
       end
+      it "has an empty locale field" do
+        value('Locale').should be_nil
+      end
       it "has a Create Translation button" do
         page.should have_button('Create Translation')
       end
@@ -29,8 +32,10 @@ describe "Translations", :focus=>true do
 
     context "create translation" do
       before(:each) do
+        locale = create_locale('en')
         fill_in 'Key', :with => 'action'
         fill_in 'Value', :with => 'Action'
+        fill_in 'Locale', :with => locale.id 
       end
 
       it "adds a translation to the database" do
@@ -39,13 +44,32 @@ describe "Translations", :focus=>true do
         end.should change(Translation,:count).by(1)
       end
 
-      it "set the key" do
+      it "sets the key" do
         click_button 'Create Translation'
         Translation.last.key.should eq 'action'
       end
-      it "set the value" do
+      it "sets the value" do
         click_button 'Create Translation'
         Translation.last.value.should eq 'Action'
+      end
+      it "sets the locale" do
+        click_button 'Create Translation'
+        Translation.last.locale.title.should eq 'en' 
+      end
+      context "create locale on the fly" do
+        before(:each) do
+          fill_in 'Locale', :with => 'en.book'
+        end
+
+        it "adds a locale to the database" do
+          lambda do
+            click_button 'Create Translation'
+          end.should change(Locale,:count).by(1)
+        end
+        it "sets the locale" do
+          click_button 'Create Translation'
+          Translation.last.locale.title.should eq 'en.book'
+        end
       end
 
       context "errors:" do
@@ -63,6 +87,11 @@ describe "Translations", :focus=>true do
           fill_in 'Value', :with => ''
           click_button 'Create Translation'
           li(:value).should have_blank_error
+        end
+        it "locale cannot be blank" do
+          fill_in 'Locale', :with => ''
+          click_button 'Create Translation'
+          li(:locale).should have_blank_error
         end
       end
     end

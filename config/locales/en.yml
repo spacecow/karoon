@@ -66,6 +66,7 @@ en:
       first_name: 'First Name'
       image: 'Image'
       last_name: 'Last Name'
+      locale: 'Locale'
       login: 'Login'
       middle_names: 'Middle Names'
       name: 'Name'

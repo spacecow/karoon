@@ -9,6 +9,12 @@
 //= require_tree .
 
 $(function() {
+  $("#translation_locale_token").tokenInput("/locales.json", {
+    crossDomain: false,
+    allowCreation: true,
+    prePopulate: $("#translation_locale_token").data("pre"),
+    theme: ""
+  });
   $("#book_author_tokens").tokenInput("/authors.json", {
     crossDomain: false,
     preventDuplicates: true,

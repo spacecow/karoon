@@ -166,8 +166,8 @@ describe "Books" do
             find_field('Regular Price').value.should eq 'letters'  
           end
         end
-      end
 
+      end
       context "create on the fly" do
         it "author" do
           lambda do

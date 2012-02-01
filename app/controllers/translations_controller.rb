@@ -10,6 +10,7 @@ class TranslationsController < ApplicationController
     if @translation.save
       redirect_to translations_path
     else
+      @translation.errors.add(:locale_token,@translation.errors[:locale]) if @translation.errors[:locale]
       render :index
     end
   end
