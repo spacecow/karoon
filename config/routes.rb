@@ -31,4 +31,6 @@ Karoon::Application.routes.draw do
       put 'confirm'
     end
   end
+
+  resources :translations, :only => :index
 end

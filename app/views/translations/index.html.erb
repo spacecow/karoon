@@ -1,0 +1,9 @@
+<%= title t(:translations) %>
+
+<%= subtitle new(:translation) %>
+
+<%= semantic_form_for @translation do |f| %>
+  <%= f.input :key %>
+  <%= f.input :value %>
+  <%= f.submit :class => :submit %>
+<% end %>

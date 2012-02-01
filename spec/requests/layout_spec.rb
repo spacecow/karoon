@@ -10,6 +10,7 @@ describe "Sessions" do
       site_nav.should have_link('Books')
       site_nav.should have_link('Authors')
       site_nav.should have_link('Categories')
+      site_nav.should_not have_link('Translations')
       search_bar.should have_image('My_cart_e')
       user_nav.should_not have_link('Settings')
       user_nav.should_not have_link('Searches')
@@ -113,6 +114,13 @@ describe "Sessions" do
           site_nav.click_link 'Authors'
           site_nav.find(:css,'.selected').text.should eq 'Authors'
         end
+        it "Translations" do
+          create_admin(:email=>'admin@example.com')
+          login('admin@example.com')
+          visit root_path
+          site_nav.click_link 'Translations'
+          site_nav.find(:css,'.selected').text.should eq 'Translations'
+        end
         context "Categories" do
           it "base" do
             site_nav.click_link 'Categories'
@@ -153,6 +161,7 @@ describe "Sessions" do
       create_admin(:email=>'admin@example.com')
       login('admin@example.com')
       visit root_path
+      site_nav.should have_link('Translations')
       user_nav.should have_link('Settings')
       user_nav.should have_link('Searches')
     end
@@ -160,19 +169,22 @@ describe "Sessions" do
     it "admin should be able to change from real to tomen in user profile"
 
     context "admin links to" do
-      it "settings" do
+      before(:each) do
         create_admin(:email=>'admin@example.com')
         login('admin@example.com')
         visit root_path
+      end
+      it "settings" do
         user_nav.click_link 'Settings'
         page.current_path.should eq edit_setting_path(Setting.singleton)
       end
       it "searches" do
-        create_admin(:email=>'admin@example.com')
-        login('admin@example.com')
-        visit root_path
         user_nav.click_link 'Searches'
         page.current_path.should eq searches_path 
+      end
+      it "translations" do
+        site_nav.click_link 'Translations'
+        page.current_path.should eq translations_path
       end
     end
 

@@ -67,3 +67,5 @@ c4c1b4: !ruby/object:Dooby::Task
   todo: delete items from the cart :done
 e9c332: !ruby/object:Dooby::Task 
   todo: if the cart is empty, it should say that :done
+ae5d7c: !ruby/object:Dooby::Task 
+  todo: create the translation form :done

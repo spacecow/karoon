@@ -22,11 +22,12 @@ class Ability
         can [:create,:update,:destroy,:create_individual], Book
         can [:create,:update,:destroy], Author
         can [:create,:update,:destroy], Category
-        can [:update], Setting
+        can :update, Setting
         can :index, Search
         can :create, LineItem
         can [:show,:validate,:confirm,:update], Order
         can [:show,:update,:destroy], Cart
+        can :index, Translation
       end
       if user.role? :god
         can :manage, :all

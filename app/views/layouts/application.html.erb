@@ -28,16 +28,7 @@
     <div class="clear"></div>
     <div id="mid_container">
       <div id="site_nav_container">
-        <div id="site_nav">
-          <ul>
-            <li class='<%= class_selection(:books) %>' ><%= link_to t(:books), books_path %></li>
-            <li>
-                <%= listed_categories @site_nav_categories || {} %>
-            </li>
-            <li class='<%= class_selection(:authors) %>' ><%= link_to t(:authors), authors_path %></li>
-            <li class='<%= class_selection(:categories) %>' ><%= link_to t(:categories), categories_path %></li>
-          </ul>
-        </div>
+        <%= render 'layouts/site_nav' %>
       </div>
 
       <div id="main_container">
