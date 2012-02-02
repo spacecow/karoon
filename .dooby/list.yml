@@ -81,3 +81,5 @@ d62f2b: !ruby/object:Dooby::Task
   todo: list translations :done
 "279698": !ruby/object:Dooby::Task 
   todo: switch between languages :done
+47cb5c: !ruby/object:Dooby::Task 
+  todo: edit translations :done

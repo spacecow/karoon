@@ -22,6 +22,8 @@ module ApplicationHelper
     end
   end
   def english?; I18n.locale == :en end
+  def key_key(key) key.split('.')[0..-2].join('.') end
+  def key_value(key) key.split('.')[-1] end
   def listed_categories(categories)
     return if categories.empty?
     content_tag(:ul,categories.map{|cat,subcat|

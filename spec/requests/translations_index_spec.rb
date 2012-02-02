@@ -71,6 +71,18 @@ describe "Translations" do
           end
         end
       end
+    end #layout
+
+    context "links to", :focus=>true do
+      it "edit translation" do
+        TRANSLATION_STORE.flushdb
+        create_translation('dog','Dog','en')
+        visit translations_path
+        table('translations').click_link 'Dog'
+        value('Key').should eq 'dog' 
+        value('Value').should eq 'Dog' 
+        value('Locale').should eq 'en' 
+      end
     end
 
     context "create translation" do

@@ -9,7 +9,7 @@
     <tr>
       <td><%= anti_language(key) %></td>
     <% @translations.keys.group_by{|e| language(e)}.each do |language,value| %>
-      <td><%= translate_or_skip(anti_language(key),language) %></td>
+      <td><%= link_to translate_or_skip(anti_language(key),language), key: key_value(key), value: t(anti_language(key), locale: language), locale: key_key(key) %></td>
     <% end %>
     </tr>
   <% end %>

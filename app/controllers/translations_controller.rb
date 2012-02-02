@@ -4,7 +4,10 @@ class TranslationsController < ApplicationController
 
   def index
     @selection = t(:translations)
-    @translation = Translation.new
+    @translation = Translation.new(key: params[:key], value: params[:value])
+    p params[:locale]
+    @translation.locale = Locale.find_or_create_by_name(params[:locale]) if params[:locale]
+    p @translation.locale
     @translations = TRANSLATION_STORE
   end
 
