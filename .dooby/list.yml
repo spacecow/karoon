@@ -77,3 +77,5 @@ a8f09b: !ruby/object:Dooby::Task
   todo: add java for choosing locale :done
 d62f2b: !ruby/object:Dooby::Task 
   todo: save translations to redis database :done
+008ebf: !ruby/object:Dooby::Task 
+  todo: list translations :done

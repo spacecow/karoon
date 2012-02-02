@@ -28,11 +28,53 @@ describe "Translations", :focus=>true do
       it "has a Create Translation button" do
         page.should have_button('Create Translation')
       end
+
+      context "translation list" do
+        it "empty -> has no div list" do
+          page.should_not have_a_table('translations') 
+        end
+        context "non-empty" do
+          it "has a div for the list" do
+            create_translation('dog')
+            visit translations_path
+            page.should have_a_table('translations') 
+          end
+        end
+
+        context "english" do
+          before(:each) do
+            create_translation('dog')
+            visit translations_path
+          end
+
+          it "has two headers" do
+            tableheader.should eq ['Key','English']
+          end
+          it "shows key" do
+            tablerow(0).should eq ['dog','Dog']
+          end
+        end
+
+        context "english and persian" do
+          before(:each) do
+            create_translation('dog')
+            create_translation('bbq','BBQ','ir')
+            visit translations_path
+          end
+
+          it "has three headers" do
+            tableheader.should eq ['Key','English','Persian']
+          end
+          it "shows key" do
+            tablerow(0).should eq ['en.dog']
+          end
+        end
+      end
     end
 
     context "create translation" do
       before(:each) do
-        TRANSLATION_STORE.flushall
+        TRANSLATION_STORE.flushdb
         locale = create_locale('en')
         fill_in 'Key', :with => 'action'
         fill_in 'Value', :with => 'Action'
@@ -80,11 +122,6 @@ describe "Translations", :focus=>true do
           fill_in 'Key', :with => ''
           click_button 'Create Translation'
           li(:key).should have_blank_error
-        end
-        it "key cannot be blank" do
-          create_translation('action')
-          click_button 'Create Translation'
-          li(:key).should have_duplication_error
         end
         it "value cannot be blank" do
           fill_in 'Value', :with => ''

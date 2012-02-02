@@ -1,4 +1,7 @@
 module ApplicationHelper
+  def anti_language(key)
+    key.split('.')[1..-1].join('.')
+  end
   def cart_image
     count = current_cart.total_count
     if count > 0
@@ -23,5 +26,10 @@ module ApplicationHelper
     content_tag(:ul,categories.map{|cat,subcat|
       content_tag(:li,link_to(cat.name,cat),:class=>class_selection(cat.name)) + (subcat.present? ? content_tag(:li,listed_categories(subcat)) : '')
     }.join.html_safe,:class=>'nested_category')
+  end
+  def language(key) key.split('.')[0] end
+  def locale(key) key.split('.')[0..-2].join('.') end
+  def translate_or_skip(s,lang)
+    TRANSLATION_STORE["#{lang}.#{s}"].nil? ? '-' : t(s,:locale=>lang)
   end
 end

@@ -4,9 +4,7 @@ class Translation < ActiveRecord::Base
   attr_accessible :key, :value, :locale_token
   attr_reader :locale_token
 
-  validates :key, presence: true, uniqueness: true
-  validates :value, presence: true
-  validates :locale, presence: true
+  validates_presence_of :key,:value,:locale
 
   def locale_token=(id)
     if id =~ /^\d+$/

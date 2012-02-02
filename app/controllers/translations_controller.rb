@@ -1,9 +1,11 @@
 class TranslationsController < ApplicationController
   load_and_authorize_resource
+  skip_load_resource :only => :index
 
   def index
     @selection = t(:translations)
     @translation = Translation.new
+    @translations = TRANSLATION_STORE
   end
 
   def create
@@ -13,6 +15,7 @@ class TranslationsController < ApplicationController
       redirect_to translations_path
     else
       @translation.errors.add(:locale_token,@translation.errors[:locale]) if @translation.errors[:locale]
+      @translations = TRANSLATION_STORE
       render :index
     end
   end

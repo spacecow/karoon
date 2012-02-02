@@ -1,0 +1,16 @@
+<table id="translations">
+  <tr>
+    <th><%= t(:key) %></th>
+    <% @translations.keys.group_by{|e| language(e)}.each do |key,value| %>
+      <th><%= t(key) %></th>
+    <% end %>
+  </tr>
+  <% @translations.keys.each do |key| %>
+    <tr>
+      <td><%= anti_language(key) %></td>
+    <% @translations.keys.group_by{|e| language(e)}.each do |language,value| %>
+      <td><%= translate_or_skip(anti_language(key),language) %></td>
+    <% end %>
+    </tr>
+  <% end %>
+</table>

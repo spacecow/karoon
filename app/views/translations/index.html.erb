@@ -1,5 +1,7 @@
 <%= title t(:translations) %>
 
+<%= render 'translations' if @translations.keys.present? %>
+
 <%= subtitle new(:translation) %>
 
 <%= semantic_form_for @translation do |f| %>
