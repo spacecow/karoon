@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   include BasicApplicationController
   protect_from_forgery
   helper_method :pt,:current_user,:currency_in_riel?,:currency,:current_cart
-  before_filter :load_new_search
+  before_filter :load_new_search, :set_language
 
   rescue_from CanCan::AccessDenied do |exception|
     exception.default_message = alertify(:unauthorized_access)
@@ -45,5 +45,10 @@ class ApplicationController < ActionController::Base
 
     def load_new_search
       @new_search = Search.new
+    end
+
+    def set_language
+      session[:language] = params[:language].to_sym if params[:language]
+      I18n.locale = session[:language] || I18n.default_locale
     end
 end

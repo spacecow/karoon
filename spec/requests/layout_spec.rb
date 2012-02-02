@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Sessions" do
+describe "Sessions", :focus=>true do
   describe "root" do
     it "differenct flashes for unauthorized access"
     it "a book categorized as religion/islam should show up as religion as well"
@@ -14,6 +14,7 @@ describe "Sessions" do
       search_bar.should have_image('My_cart_e')
       user_nav.should_not have_link('Settings')
       user_nav.should_not have_link('Searches')
+      user_nav.should have_link('Persian')
     end
 
     context "category listing" do
@@ -212,6 +213,10 @@ describe "Sessions" do
       it "my cart" do
         search_bar.click_link('My_cart_e')
         current_path.should eq cart_path(Cart.last)
+      end
+      it "persian" do
+        user_nav.click_link 'Persian'
+        user_nav.should have_link('English')
       end
       it "singup should not be visible for logged in users"
     end

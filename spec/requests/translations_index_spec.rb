@@ -43,21 +43,21 @@ describe "Translations", :focus=>true do
 
         context "english" do
           before(:each) do
-            create_translation('dog')
+            create_translation('dog','Dog','en')
             visit translations_path
           end
 
           it "has two headers" do
             tableheader.should eq ['Key','English']
           end
-          it "shows key" do
+          it "shows one row" do
             tablerow(0).should eq ['dog','Dog']
           end
         end
 
         context "english and persian" do
           before(:each) do
-            create_translation('dog')
+            create_translation('dog','Dog','en')
             create_translation('bbq','BBQ','ir')
             visit translations_path
           end
@@ -65,8 +65,9 @@ describe "Translations", :focus=>true do
           it "has three headers" do
             tableheader.should eq ['Key','English','Persian']
           end
-          it "shows key" do
-            tablerow(0).should eq ['en.dog']
+          it "shows two rows" do
+            tablerow(0).should eq ['dog','Dog','-']
+            tablerow(1).should eq ['bbq','-','BBQ']
           end
         end
       end

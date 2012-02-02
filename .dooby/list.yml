@@ -79,3 +79,5 @@ d62f2b: !ruby/object:Dooby::Task
   todo: save translations to redis database :done
 008ebf: !ruby/object:Dooby::Task 
   todo: list translations :done
+"279698": !ruby/object:Dooby::Task 
+  todo: switch between languages :done

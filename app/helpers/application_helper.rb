@@ -21,6 +21,7 @@ module ApplicationHelper
       s == @selection ? "selected" : ''
     end
   end
+  def english?; I18n.locale == :en end
   def listed_categories(categories)
     return if categories.empty?
     content_tag(:ul,categories.map{|cat,subcat|
