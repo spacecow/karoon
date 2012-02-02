@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Translations" do
+describe "Translations", :focus=>true do
   describe "index" do
     before(:each) do
       create_admin(:email=>'admin@example.com')
@@ -32,33 +32,36 @@ describe "Translations" do
 
     context "create translation" do
       before(:each) do
+        TRANSLATION_STORE.flushall
         locale = create_locale('en')
         fill_in 'Key', :with => 'action'
         fill_in 'Value', :with => 'Action'
         fill_in 'Locale', :with => locale.id 
       end
 
-      it "adds a translation to the database" do
+      it "adds no translation to the database" do
         lambda do
           click_button 'Create Translation'
-        end.should change(Translation,:count).by(1)
+        end.should change(Translation,:count).by(0)
       end
+      it "adds no locale to the database" do
+        lambda do
+          click_button 'Create Translation'
+        end.should change(Locale,:count).by(0)
+      end
+
 
       it "sets the key" do
         click_button 'Create Translation'
-        Translation.last.key.should eq 'action'
+        TRANSLATION_STORE.keys.should eq ['en.action']
       end
       it "sets the value" do
         click_button 'Create Translation'
-        Translation.last.value.should eq 'Action'
-      end
-      it "sets the locale" do
-        click_button 'Create Translation'
-        Translation.last.locale.name.should eq 'en' 
+        TRANSLATION_STORE['en.action'].should eq '"Action"'
       end
       context "create locale on the fly" do
         before(:each) do
-          fill_in 'Locale', :with => 'en.book'
+          fill_in 'Locale', :with => 'en.messages'
         end
 
         it "adds a locale to the database" do
@@ -68,7 +71,7 @@ describe "Translations" do
         end
         it "sets the locale" do
           click_button 'Create Translation'
-          Translation.last.locale.name.should eq 'en.book'
+          Locale.last.name.should eq 'en.messages'
         end
       end
 

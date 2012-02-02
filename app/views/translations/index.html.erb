@@ -8,3 +8,23 @@
   <%= f.input :locale_token, :label => ft(:locale) %>
   <%= f.submit :class => :submit %>
 <% end %>
+
+<!--
+<%= form_tag translations_path do %>
+  <li>
+    <%= label_tag :key, ft(:key) %>
+    <%= text_field_tag :key %>
+  </li>
+  <li>
+    <%= label_tag :value, ft(:value) %>
+    <%= text_field_tag :value %>
+  </li>
+  <li>
+    <%= label_tag :locale, ft(:locale) %>
+    <%= text_field_tag :locale %>
+  </li>
+  <li>
+    <%= submit_tag create(:translation), :class => :submit %>
+  </li>
+<% end %>
+-->

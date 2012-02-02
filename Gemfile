@@ -20,6 +20,7 @@ gem 'annotate'
 gem 'aasm'
 gem 'fancy-buttons'
 gem 'redis'
+gem 'yajl-ruby'
 
 group :assets do
   gem 'sass-rails', "  ~> 3.1.0"

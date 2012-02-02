@@ -1,8 +1,15 @@
-$redis = Redis.new(:host => 'localhost', :port => 6379)
+DATABASES = {
+  "development" => 0,
+  "test" => 1,
+  "production" => 2
+}
+
+TRANSLATION_STORE = Redis.new(:db => DATABASES[Rails.env.to_s])
+#$redis = Redis.new(:host => 'localhost', :port => 6379)
 
 if Rails.env.test?
-  I18n.backend = I18n::Backend::Chain.new(I18n::Backend::KeyValue.new($redis), I18n.backend)
+  I18n.backend = I18n::Backend::Chain.new(I18n::Backend::KeyValue.new(TRANSLATION_STORE), I18n.backend)
 else
-  I18n.backend = I18n::Backend::KeyValue.new($redis)
+  #I18n.backend = I18n::Backend::Chain.new(I18n::Backend::KeyValue.new(TRANSLATION_STORE), I18n.backend)
+  I18n.backend = I18n::Backend::KeyValue.new(TRANSLATION_STORE)
 end
-

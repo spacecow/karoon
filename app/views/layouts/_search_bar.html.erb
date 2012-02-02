@@ -16,11 +16,3 @@
     </div>
   <% end %>
 </div>
-<!--
-  <%= semantic_form_for @new_search, :html=>{:class=>'inline'} do |f| %>
-    <%= f.input :keywords, :label => ft(:search) %>
-    <%= f.input :category, :label => false, :collection => Category.order(:names_depth_cache).map{|e| [e.names_depth_cache,e.id]}, :prompt => t(:books) %>
-    <%= f.submit t(:go) %>
-  <% end %>
-</div>
--->

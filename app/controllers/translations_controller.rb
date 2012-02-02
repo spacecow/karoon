@@ -7,7 +7,9 @@ class TranslationsController < ApplicationController
   end
 
   def create
-    if @translation.save
+    if @translation.valid?
+     I18n.backend.store_translations(@translation.locale.name, {@translation.key => @translation.value}, :escape => false)
+      # save to redis
       redirect_to translations_path
     else
       @translation.errors.add(:locale_token,@translation.errors[:locale]) if @translation.errors[:locale]
