@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Sessions", :focus=>true do
+describe "Sessions" do
   describe "root" do
     it "differenct flashes for unauthorized access"
     it "a book categorized as religion/islam should show up as religion as well"

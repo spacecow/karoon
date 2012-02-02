@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Translations", :focus=>true do
+describe "Translations" do
   describe "index" do
     before(:each) do
       create_admin(:email=>'admin@example.com')
