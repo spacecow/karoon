@@ -15,6 +15,17 @@ describe "Orders" do
         page.should have_title('Edit Order')
       end
 
+      it "has a update button" do
+        visit edit_order_path(@order)
+        page.should have_button('Update Order')
+      end
+
+      it "has a cancel button" do
+        visit edit_order_path(@order)
+        page.should have_button('Cancel Update')
+      end
+
+
       context "update order" do
         before(:each) do
           visit edit_order_path(@order)

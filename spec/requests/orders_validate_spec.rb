@@ -75,7 +75,7 @@ describe "Orders" do
       end
 
       it "shows a flash message" do
-        page.should have_notice('Your order was canceled.')
+        page.should have_notice("Your order was canceled. It is saved as 'draft' in 'My Orders'.")
       end
     end
 

@@ -5,7 +5,7 @@
   <% else %>
     <%= link_to t(:login), login_path %>
   <% end %>
-  <%= link_to t(:signup), signup_path %>
+  <%= link_to t(:signup), signup_path unless current_user %>
   <%= link_to t(:settings), edit_setting_path(Setting.singleton) if can?(:edit, Setting.singleton) %>
   <%= link_to t(:searches), searches_path if can? :index, Search %><br>
   <% if english? %>

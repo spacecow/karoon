@@ -21,10 +21,10 @@ class TranslationsController < ApplicationController
   end
 
   def update_multiple
-    params[:english].each do |key,value|
+    (params[:english]||{}).each do |key,value|
       I18n.backend.store_translations(value[:locale], {value[:key] => value[:value]}, :escape => false) unless value[:value].blank?
     end
-    params[:persian].each do |key,value|
+    (params[:persian]||{}).each do |key,value|
       I18n.backend.store_translations(value[:locale], {value[:key] => value[:value]}, :escape => false) unless value[:value].blank?
     end
     redirect_to translations_path

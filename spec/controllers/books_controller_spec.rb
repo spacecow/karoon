@@ -12,7 +12,7 @@ describe BooksController do
       if %w(show index who_bought).include?(action)
         it "should reach the #{action} page" do
           send("#{req}", "#{action}", :id => @model.id)
-          response.redirect_url.should_not eq welcome_url
+          response.redirect_url.should_not eq login_url
         end
       else
         it "should not reach the #{action} page" do

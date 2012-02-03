@@ -9,7 +9,8 @@ TRANSLATION_STORE = Redis.new(:db => DATABASES[Rails.env.to_s])
 
 if Rails.env.test?
   I18n.backend = I18n::Backend::Chain.new(I18n::Backend::KeyValue.new(TRANSLATION_STORE), I18n.backend)
+elsif Rails.env.development?
+  I18n.backend = I18n::Backend::Chain.new(I18n::Backend::KeyValue.new(TRANSLATION_STORE), I18n.backend)
 else
-  #I18n.backend = I18n::Backend::Chain.new(I18n::Backend::KeyValue.new(TRANSLATION_STORE), I18n.backend)
   I18n.backend = I18n::Backend::KeyValue.new(TRANSLATION_STORE)
 end

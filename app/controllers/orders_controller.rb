@@ -36,10 +36,10 @@ class OrdersController < ApplicationController
       redirect_to edit_order_path(@order)
     else
       if params[:cancel_button]
-        flash[:notice] = canceled(:your_order)
+        flash[:notice] = canceled(:your_order) + " " + mess(:saved_as_draft_in_my_orders)
         redirect_to root_path
       else
-        flash[:notice] = confirmed(:your_order) + " " + t('messages.email_has_been_sent_about',:o=>t(:purchase).downcase) 
+        flash[:notice] = confirmed(:your_order) + " " + mess(:email_has_been_sent_about,:o=>t(:purchase).downcase) 
         @order.order_confirmed! 
         redirect_to @order 
       end

@@ -61,7 +61,7 @@ describe CartsController do
         else
           it "should not reach the #{action} page" do
             send("#{req}", "#{action}", :id => @model.id)
-            response.redirect_url.should eq login_url 
+            response.redirect_url.should eq welcome_url 
           end
         end
       end
@@ -92,7 +92,7 @@ describe CartsController do
         else
           it "should not reach the #{action} page" do
             send("#{req}", "#{action}", :id => @model.id)
-            response.redirect_url.should eq login_url 
+            response.redirect_url.should eq welcome_url 
           end
         end
       end
@@ -123,7 +123,7 @@ describe CartsController do
         else
           it "should not reach the #{action} page" do
             send("#{req}", "#{action}", :id => @model.id)
-            response.redirect_url.should eq login_url 
+            response.redirect_url.should eq welcom_url 
           end
         end
       end
@@ -154,7 +154,7 @@ describe CartsController do
         else
           it "should not reach the #{action} page" do
             send("#{req}", "#{action}", :id => @model.id)
-            response.redirect_url.should eq login_url 
+            response.redirect_url.should eq weclome_url 
           end
         end
       end
@@ -185,7 +185,7 @@ describe CartsController do
         else
           it "should not reach the #{action} page" do
             send("#{req}", "#{action}", :id => @model.id)
-            response.redirect_url.should eq login_url 
+            response.redirect_url.should eq welcome_url 
           end
         end
       end

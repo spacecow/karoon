@@ -298,7 +298,6 @@ describe "Carts" do
         click_button 'Empty Cart'
         page.should have_notice('Your cart was emptied.')
       end
-      it "cart can only be emptied by the user who created it"
     end
 
     context "delete item from cart" do
@@ -339,8 +338,6 @@ describe "Carts" do
           page.should have_notice("2 Books: 'Moby Dick' were removed from your cart.") 
         end
       end
-
-      it "chekcout should have an alert message"
     end
   end
 end

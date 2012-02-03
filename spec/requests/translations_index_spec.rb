@@ -5,6 +5,7 @@ describe "Translations" do
     before(:each) do
       create_admin(:email=>'admin@example.com')
       login('admin@example.com')
+      TRANSLATION_STORE.flushdb
       visit translations_path
     end
 
@@ -46,7 +47,6 @@ describe "Translations" do
 
         context "english" do
           before(:each) do
-            TRANSLATION_STORE.flushdb
             create_translation('dog','Dog','en')
             visit translations_path
           end
@@ -61,7 +61,6 @@ describe "Translations" do
 
         context "english and persian" do
           before(:each) do
-            TRANSLATION_STORE.flushdb
             create_translation('dog','Dog','en')
             create_translation('bbq','BBQ','ir')
             visit translations_path
@@ -83,7 +82,6 @@ describe "Translations" do
     #context "links to" do
     #  context "edit translation" do
     #    before(:each) do
-    #      TRANSLATION_STORE.flushdb
     #      create_translation('dog','Dog','en')
     #      create_translation('bbq','BBQ','ir')
     #      visit translations_path
@@ -131,7 +129,6 @@ describe "Translations" do
 
     context "create translation" do
       before(:each) do
-        TRANSLATION_STORE.flushdb
         locale = create_locale('en')
         fill_in 'Key', :with => 'action'
         fill_in 'Value', :with => 'Action'
