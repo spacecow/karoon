@@ -89,3 +89,5 @@ b9da25: !ruby/object:Dooby::Task
   todo: hint with the english translation :done
 42c2f0: !ruby/object:Dooby::Task 
   todo: list translations alphabetically :done
+98e672: !ruby/object:Dooby::Task 
+  todo: make the translations one big form :done

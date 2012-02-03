@@ -46,6 +46,7 @@ describe "Translations" do
 
         context "english" do
           before(:each) do
+            TRANSLATION_STORE.flushdb
             create_translation('dog','Dog','en')
             visit translations_path
           end
@@ -54,12 +55,13 @@ describe "Translations" do
             tableheader.should eq ['Key','English']
           end
           it "shows one row" do
-            tablerow(0).should eq ['dog','Dog']
+            value('english_0_value').should eq 'Dog'
           end
         end
 
         context "english and persian" do
           before(:each) do
+            TRANSLATION_STORE.flushdb
             create_translation('dog','Dog','en')
             create_translation('bbq','BBQ','ir')
             visit translations_path
@@ -69,59 +71,63 @@ describe "Translations" do
             tableheader.should eq ['Key','English','Persian']
           end
           it "shows two rows" do
-            tablerow(0).should eq ['bbq','-','BBQ']
-            tablerow(1).should eq ['dog','Dog','-']
+            value('english_0_value').should be_nil 
+            value('persian_0_value').should eq 'BBQ'
+            value('english_1_value').should eq 'Dog'
+            value('persian_1_value').should be_nil 
           end
         end
       end
     end #layout
 
-    context "links to" do
-      context "edit translation" do
-        before(:each) do
-          TRANSLATION_STORE.flushdb
-          create_translation('dog','Dog','en')
-          create_translation('bbq','BBQ','ir')
-          visit translations_path
-        end
+    #context "links to" do
+    #  context "edit translation" do
+    #    before(:each) do
+    #      TRANSLATION_STORE.flushdb
+    #      create_translation('dog','Dog','en')
+    #      create_translation('bbq','BBQ','ir')
+    #      visit translations_path
+    #    end
 
-        it "fill in a done translation" do
-          cell(2,1).click_link 'Dog'
-          value('Key').should eq 'dog' 
-          value('Value').should eq 'Dog' 
-          value('Locale').should eq 'en' 
-        end
-        it "no hint if value is filled in" do
-          cell(2,1).click_link 'Dog'
-          li(:value).should_not have_hint
-        end
-        context "fill in not yet done" do
-          it "persian translation" do
-            cell(2,2).click_link '-'
-            value('Key').should eq 'dog' 
-            value('Value').should be_nil 
-            value('Locale').should eq 'ir' 
-          end
-          it "english translation" do
-            cell(1,1).click_link '-'
-            value('Key').should eq 'bbq' 
-            value('Value').should be_nil 
-            value('Locale').should eq 'en' 
-          end
-        end
+    #    it "fill in a done translation" do
+    #      cell(2,1).click_link 'Dog'
+    #      value('Key').should eq 'dog' 
+    #      value('Value').should eq 'Dog' 
+    #      value('Locale').should eq 'en' 
+    #    end
+    #    it "no hint if value is filled in" do
+    #      cell(2,1).click_link 'Dog'
+    #      li(:value).should_not have_hint
+    #    end
+    #    context "fill in not yet done" do
+    #      it "persian translation" do
+    #        cell(2,2).click_link '-'
+    #        value('Key').should eq 'dog' 
+    #        value('Value').should be_nil 
+    #        value('Locale').should eq 'ir' 
+    #      end
+    #      it "english translation" do
+    #        cell(1,1).click_link '-'
+    #        value('Key').should eq 'bbq' 
+    #        value('Value').should be_nil 
+    #        value('Locale').should eq 'en' 
+    #      end
+    #    end
 
-        context "hint with the english translation for" do
-          it "persian translation" do
-            cell(2,2).click_link '-'
-            li(:value).should have_hint('English: Dog')
-          end
-          it "english translation" do
-            cell(1,1).click_link '-'
-            li(:value).should_not have_hint
-          end
-        end
-      end
-    end
+    #    context "hint with the english translation for" do
+    #      it "persian translation" do
+    #        cell(2,2).click_link '-'
+    #        li(:value).should have_hint('English: Dog')
+    #      end
+    #      it "english translation" do
+    #        cell(1,1).click_link '-'
+    #        li(:value).should_not have_hint
+    #      end
+    #    end
+    #  end
+    #end
+
+    it "update translation button"
 
     context "create translation" do
       before(:each) do

@@ -15,5 +15,5 @@
   <%= f.input :image %>
   <%= f.input :author_tokens, :label => ft(:author), :input_html => {"data-pre" => @book.authors.map(&:attributes).to_json} %>
   <%= f.input :category_tokens, :label => ft(:category), :input_html => {"data-pre" => @book.categories.map(&:attributes).to_json} %>
-  <%= f.submit :class => :submit %>
+  <%= f.submit @book.new_record? ? create(:book) : update(:book), :class => :submit %>
 <% end %>

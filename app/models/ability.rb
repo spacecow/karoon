@@ -27,7 +27,7 @@ class Ability
         can :create, LineItem
         can [:show,:validate,:confirm,:update], Order
         can [:show,:update,:destroy], Cart
-        can [:index,:create], Translation
+        can [:index,:create,:update_multiple], Translation
         can :index, Locale
       end
       if user.role? :god

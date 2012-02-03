@@ -1,3 +1,5 @@
+<%= form_tag update_multiple_translations_path, :method => :put do |f| %>
+
 <table id="translations">
   <tr>
     <th><%= t(:key) %></th>
@@ -5,14 +7,25 @@
       <th><%= t(lang) %></th>
     <% end %>
   </tr>
-  <% sorted_unique_suffixes(@translations).each do |suffix| %>
+  <% sorted_unique_suffixes(@translations).each_with_index do |suffix,i| %>
     <tr>
       <td><%= suffix %></td>
       <% languages(@translations).each do |lang| %>
       <td>
-        <%= link_to translate_or_skip(suffix,lang,'-'), key: key_value(suffix), value: translate_or_skip(suffix,lang), locale: switch_language_on_locale(suffix,lang) %>
+        <% if lang == 'en' %>
+          <%= text_field_tag "english[#{i}][value]", translate_or_skip(suffix,lang) %>
+          <%= hidden_field_tag "english[#{i}][key]", key_value(suffix) %>
+          <%= hidden_field_tag "english[#{i}][locale]", locale("#{lang}.#{suffix}") %>
+        <% else %>
+          <%= text_field_tag "persian[#{i}][value]", translate_or_skip(suffix,lang) %>
+          <%= hidden_field_tag "persian[#{i}][key]", key_value(suffix) %>
+          <%= hidden_field_tag "persian[#{i}][locale]", locale("#{lang}.#{suffix}") %>
+        <% end %>
       </td>
       <% end %>
     </tr>
   <% end %>
 </table>
+
+<%= submit_tag update(:translations), :class => :submit %>
+<% end %>

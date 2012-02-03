@@ -32,6 +32,10 @@ Karoon::Application.routes.draw do
     end
   end
 
-  resources :translations, :only => [:index,:create]
+  resources :translations, :only => [:index,:create] do
+    collection do
+      put 'update_multiple'
+    end
+  end
   resources :locales, :only => :index
 end
