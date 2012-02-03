@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Translations" do
+describe "Translations", :focus=>true do
   describe "index" do
     before(:each) do
       create_admin(:email=>'admin@example.com')
@@ -73,16 +73,41 @@ describe "Translations" do
       end
     end #layout
 
-    context "links to", :focus=>true do
-      it "edit translation" do
-        TRANSLATION_STORE.flushdb
-        create_translation('dog','Dog','en')
-        visit translations_path
-        table('translations').click_link 'Dog'
-        value('Key').should eq 'dog' 
-        value('Value').should eq 'Dog' 
-        value('Locale').should eq 'en' 
+    context "links to" do
+      context "edit translation" do
+        before(:each) do
+          TRANSLATION_STORE.flushdb
+          create_translation('dog','Dog','en')
+          visit translations_path
+        end
+
+        it "fill in a done translation" do
+          cell(1,1).click_link 'Dog'
+          value('Key').should eq 'dog' 
+          value('Value').should eq 'Dog' 
+          value('Locale').should eq 'en' 
+        end
+        context "fill in not yet done" do
+          before(:each) do
+            create_translation('bbq','BBQ','ir')
+            visit translations_path
+          end
+          it "persian translation" do
+            cell(1,2).click_link '-'
+            value('Key').should eq 'dog' 
+            value('Value').should be_nil 
+            value('Locale').should eq 'ir' 
+          end
+          it "english translation" do
+            cell(2,1).click_link '-'
+            value('Key').should eq 'bbq' 
+            value('Value').should be_nil 
+            value('Locale').should eq 'en' 
+          end
+        end
       end
+      it "hint with the english translation"
+      it "list translations alphabetically"
     end
 
     context "create translation" do

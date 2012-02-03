@@ -9,6 +9,9 @@ class Translation < ActiveRecord::Base
   def locale_attributes_to_json
     locale.nil? ? '' : [locale.attributes].to_json
   end
+  def locale_token
+    self.locale_token = locale.name if locale 
+  end
   def locale_token=(id)
     if id =~ /^\d+$/
       self.locale_id = id

@@ -22,7 +22,7 @@ module ApplicationHelper
     end
   end
   def english?; I18n.locale == :en end
-  def key_key(key) key.split('.')[0..-2].join('.') end
+  def switch_language_on_locale(key,lang) key.split('.')[0..-2].join('.').gsub(/^\w\w/,"#{lang}") end
   def key_value(key) key.split('.')[-1] end
   def listed_categories(categories)
     return if categories.empty?
@@ -32,7 +32,7 @@ module ApplicationHelper
   end
   def language(key) key.split('.')[0] end
   def locale(key) key.split('.')[0..-2].join('.') end
-  def translate_or_skip(s,lang)
-    TRANSLATION_STORE["#{lang}.#{s}"].nil? ? '-' : t(s,:locale=>lang)
+  def translate_or_skip(s,lang,skip)
+    TRANSLATION_STORE["#{lang}.#{s}"].nil? ? skip : t(s,:locale=>lang)
   end
 end
