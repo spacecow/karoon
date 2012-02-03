@@ -14,6 +14,11 @@ module ApplicationHelper
       image_tag 'my_cart_e.png'
     end
   end
+  def concatenate_or_skip(s1,s2,skip=nil)
+    return skip if s1.nil?
+    return skip if s2.nil?
+    s1 + s2
+  end
   def class_selection(s)
     if s.instance_of? Symbol
       t(s) == @selection ? "selected" : ''
@@ -22,7 +27,12 @@ module ApplicationHelper
     end
   end
   def english?; I18n.locale == :en end
-  def switch_language_on_locale(key,lang) key.split('.')[0..-2].join('.').gsub(/^\w\w/,"#{lang}") end
+  def switch_language(s,lang) 
+    s.gsub(/^\w\w/,"#{lang}") unless s.nil? 
+  end
+  def switch_language_on_locale(key,lang) 
+    switch_language(locale(key),lang)
+  end
   def key_value(key) key.split('.')[-1] end
   def listed_categories(categories)
     return if categories.empty?
@@ -32,7 +42,7 @@ module ApplicationHelper
   end
   def language(key) key.split('.')[0] end
   def locale(key) key.split('.')[0..-2].join('.') end
-  def translate_or_skip(s,lang,skip)
+  def translate_or_skip(s,lang,skip=nil)
     TRANSLATION_STORE["#{lang}.#{s}"].nil? ? skip : t(s,:locale=>lang)
   end
 end

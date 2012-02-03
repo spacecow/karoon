@@ -6,6 +6,12 @@ class Translation < ActiveRecord::Base
 
   validates_presence_of :key,:value,:locale
 
+  def anti_language
+    full_key.split('.')[1..-1].join('.') if locale
+  end
+  def full_key
+    "#{locale.name}.#{key}" if locale
+  end
   def locale_attributes_to_json
     locale.nil? ? '' : [locale.attributes].to_json
   end

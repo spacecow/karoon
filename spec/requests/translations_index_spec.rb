@@ -22,6 +22,9 @@ describe "Translations", :focus=>true do
       it "has an empty value field" do
         value('Value').should be_nil
       end
+      it "has no value hint" do
+        li(:value).should_not have_hint
+      end
       it "has an empty locale field" do
         value('Locale').should be_nil
       end
@@ -78,6 +81,7 @@ describe "Translations", :focus=>true do
         before(:each) do
           TRANSLATION_STORE.flushdb
           create_translation('dog','Dog','en')
+          create_translation('bbq','BBQ','ir')
           visit translations_path
         end
 
@@ -87,11 +91,11 @@ describe "Translations", :focus=>true do
           value('Value').should eq 'Dog' 
           value('Locale').should eq 'en' 
         end
+        it "no hint if value is filled in" do
+          cell(1,1).click_link 'Dog'
+          li(:value).should_not have_hint
+        end
         context "fill in not yet done" do
-          before(:each) do
-            create_translation('bbq','BBQ','ir')
-            visit translations_path
-          end
           it "persian translation" do
             cell(1,2).click_link '-'
             value('Key').should eq 'dog' 
@@ -105,8 +109,18 @@ describe "Translations", :focus=>true do
             value('Locale').should eq 'en' 
           end
         end
+
+        context "hint with the english translation for" do
+          it "persian translation" do
+            cell(1,2).click_link '-'
+            li(:value).should have_hint('English: Dog')
+          end
+          it "english translation" do
+            cell(2,1).click_link '-'
+            li(:value).should_not have_hint
+          end
+        end
       end
-      it "hint with the english translation"
       it "list translations alphabetically"
     end
 

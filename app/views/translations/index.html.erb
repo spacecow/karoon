@@ -6,27 +6,11 @@
 
 <%= semantic_form_for @translation do |f| %>
   <%= f.input :key %>
-  <%= f.input :value %>
+  <% if @translation.value %>
+    <%= f.input :value %>
+  <% else %>
+    <%= f.input :value, :hint => concatenate_or_skip("English: ", translate_or_skip(@translation.anti_language,'en',nil)) %>
+  <% end %>
   <%= f.input :locale_token, :label => ft(:locale), :input_html => {"data-pre" => @translation.locale_attributes_to_json} %>
   <%= f.submit :class => :submit %>
 <% end %>
-
-<!--
-<%= form_tag translations_path do %>
-  <li>
-    <%= label_tag :key, ft(:key) %>
-    <%= text_field_tag :key %>
-  </li>
-  <li>
-    <%= label_tag :value, ft(:value) %>
-    <%= text_field_tag :value %>
-  </li>
-  <li>
-    <%= label_tag :locale, ft(:locale) %>
-    <%= text_field_tag :locale %>
-  </li>
-  <li>
-    <%= submit_tag create(:translation), :class => :submit %>
-  </li>
-<% end %>
--->

@@ -5,11 +5,11 @@
       <th><%= t(key) %></th>
     <% end %>
   </tr>
-  <% @translations.keys.each do |key| %>
+  <% @translations.keys.sort_by{|e| locale(e)}.each do |key| %>
     <tr>
       <td><%= anti_language(key) %></td>
     <% @translations.keys.group_by{|e| language(e)}.each do |language,value| %>
-      <td><%= link_to translate_or_skip(anti_language(key),language,'-'), key: key_value(key), value: translate_or_skip(anti_language(key),language,nil), locale: switch_locale_on_prefix(key,language) %></td>
+      <td><%= link_to translate_or_skip(anti_language(key),language,'-'), key: key_value(key), value: translate_or_skip(anti_language(key),language), locale: switch_language_on_locale(key,language) %></td>
     <% end %>
     </tr>
   <% end %>

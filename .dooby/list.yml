@@ -85,3 +85,5 @@ d62f2b: !ruby/object:Dooby::Task
   todo: edit translations :done
 f028b4: !ruby/object:Dooby::Task 
   todo: automatically fill in field that can be filled in for a new translation :done
+b9da25: !ruby/object:Dooby::Task 
+  todo: hint with the english translation :done
