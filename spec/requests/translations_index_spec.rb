@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Translations", :focus=>true do
+describe "Translations" do
   describe "index" do
     before(:each) do
       create_admin(:email=>'admin@example.com')
@@ -33,11 +33,11 @@ describe "Translations", :focus=>true do
       end
 
       context "translation list" do
-        it "empty -> has no div list" do
+        it "empty -> has no table" do
           page.should_not have_a_table('translations') 
         end
         context "non-empty" do
-          it "has a div for the list" do
+          it "has a table for the list" do
             create_translation('dog')
             visit translations_path
             page.should have_a_table('translations') 
@@ -69,8 +69,8 @@ describe "Translations", :focus=>true do
             tableheader.should eq ['Key','English','Persian']
           end
           it "shows two rows" do
-            tablerow(0).should eq ['dog','Dog','-']
-            tablerow(1).should eq ['bbq','-','BBQ']
+            tablerow(0).should eq ['bbq','-','BBQ']
+            tablerow(1).should eq ['dog','Dog','-']
           end
         end
       end
@@ -86,24 +86,24 @@ describe "Translations", :focus=>true do
         end
 
         it "fill in a done translation" do
-          cell(1,1).click_link 'Dog'
+          cell(2,1).click_link 'Dog'
           value('Key').should eq 'dog' 
           value('Value').should eq 'Dog' 
           value('Locale').should eq 'en' 
         end
         it "no hint if value is filled in" do
-          cell(1,1).click_link 'Dog'
+          cell(2,1).click_link 'Dog'
           li(:value).should_not have_hint
         end
         context "fill in not yet done" do
           it "persian translation" do
-            cell(1,2).click_link '-'
+            cell(2,2).click_link '-'
             value('Key').should eq 'dog' 
             value('Value').should be_nil 
             value('Locale').should eq 'ir' 
           end
           it "english translation" do
-            cell(2,1).click_link '-'
+            cell(1,1).click_link '-'
             value('Key').should eq 'bbq' 
             value('Value').should be_nil 
             value('Locale').should eq 'en' 
@@ -112,16 +112,15 @@ describe "Translations", :focus=>true do
 
         context "hint with the english translation for" do
           it "persian translation" do
-            cell(1,2).click_link '-'
+            cell(2,2).click_link '-'
             li(:value).should have_hint('English: Dog')
           end
           it "english translation" do
-            cell(2,1).click_link '-'
+            cell(1,1).click_link '-'
             li(:value).should_not have_hint
           end
         end
       end
-      it "list translations alphabetically"
     end
 
     context "create translation" do

@@ -1,16 +1,18 @@
 <table id="translations">
   <tr>
     <th><%= t(:key) %></th>
-    <% @translations.keys.group_by{|e| language(e)}.each do |key,value| %>
-      <th><%= t(key) %></th>
+    <% languages(@translations).each do |lang| %>
+      <th><%= t(lang) %></th>
     <% end %>
   </tr>
-  <% @translations.keys.sort_by{|e| locale(e)}.each do |key| %>
+  <% sorted_unique_suffixes(@translations).each do |suffix| %>
     <tr>
-      <td><%= anti_language(key) %></td>
-    <% @translations.keys.group_by{|e| language(e)}.each do |language,value| %>
-      <td><%= link_to translate_or_skip(anti_language(key),language,'-'), key: key_value(key), value: translate_or_skip(anti_language(key),language), locale: switch_language_on_locale(key,language) %></td>
-    <% end %>
+      <td><%= suffix %></td>
+      <% languages(@translations).each do |lang| %>
+      <td>
+        <%= link_to translate_or_skip(suffix,lang,'-'), key: key_value(suffix), value: translate_or_skip(suffix,lang), locale: switch_language_on_locale(suffix,lang) %>
+      </td>
+      <% end %>
     </tr>
   <% end %>
 </table>

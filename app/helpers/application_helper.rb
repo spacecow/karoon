@@ -1,4 +1,8 @@
+require 'translation_helper'
+
 module ApplicationHelper
+  include TranslationHelper
+
   def anti_language(key)
     key.split('.')[1..-1].join('.')
   end
@@ -27,22 +31,10 @@ module ApplicationHelper
     end
   end
   def english?; I18n.locale == :en end
-  def switch_language(s,lang) 
-    s.gsub(/^\w\w/,"#{lang}") unless s.nil? 
-  end
-  def switch_language_on_locale(key,lang) 
-    switch_language(locale(key),lang)
-  end
-  def key_value(key) key.split('.')[-1] end
   def listed_categories(categories)
     return if categories.empty?
     content_tag(:ul,categories.map{|cat,subcat|
       content_tag(:li,link_to(cat.name,cat),:class=>class_selection(cat.name)) + (subcat.present? ? content_tag(:li,listed_categories(subcat)) : '')
     }.join.html_safe,:class=>'nested_category')
-  end
-  def language(key) key.split('.')[0] end
-  def locale(key) key.split('.')[0..-2].join('.') end
-  def translate_or_skip(s,lang,skip=nil)
-    TRANSLATION_STORE["#{lang}.#{s}"].nil? ? skip : t(s,:locale=>lang)
   end
 end
