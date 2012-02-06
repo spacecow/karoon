@@ -2,7 +2,7 @@
   <%= form_for @new_search do |f| %>
     <div id="form">
       <div id="label">
-        <%= f.label :keywords, t(:search,count:1) %>
+        <%= f.label :keywords, pl(:search,1) %>
       </div>
       <div id="left_content">
         <%= f.text_field :keywords %>

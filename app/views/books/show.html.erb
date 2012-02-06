@@ -11,7 +11,7 @@
   <div id="content">
     <div id="author">
       <span class="label">
-        <%= t(:author,count:@book.authors_count) %>:
+        <%= pl(:author, @book.authors_count) %>:
       </span>
       <span class="content">
         <% if @book.authors.present? %>
@@ -23,7 +23,7 @@
     </div>
     <div id="category">
       <span class="label">
-        <%= t(:category,count:@book.categories_count) %>:
+        <%= pl(:category, @book.categories_count) %>:
       </span>
       <span class="content">
         <% if @book.categories.present? %>

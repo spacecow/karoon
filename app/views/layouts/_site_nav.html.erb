@@ -1,11 +1,11 @@
 <div id="site_nav">
   <ul>
-    <li class='<%= class_selection(:books) %>' ><%= link_to t(:book,count:2), books_path %></li>
+    <li class='<%= class_selection(:books) %>' ><%= link_to pl(:book), books_path %></li>
     <li>
         <%= listed_categories @site_nav_categories || {} %>
     </li>
-    <li class='<%= class_selection(:authors) %>' ><%= link_to t(:author,count:2), authors_path %></li>
-    <li class='<%= class_selection(:categories) %>' ><%= link_to t(:category,count:2), categories_path %></li>
-    <li class='<%= class_selection(:translations) %>' ><%= link_to t(:translation,count:2), translations_path if can? :index, Translation %></li>
+    <li class='<%= class_selection(:authors) %>' ><%= link_to pl(:author), authors_path %></li>
+    <li class='<%= class_selection(:categories) %>' ><%= link_to pl(:category), categories_path %></li>
+    <li class='<%= class_selection(:translations) %>' ><%= link_to pl(:translation), translations_path if can? :index, Translation %></li>
   </ul>
 </div>
