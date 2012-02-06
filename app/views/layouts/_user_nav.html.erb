@@ -1,6 +1,6 @@
 <div id="user_nav">
   <% if current_user %>
-    Logged in as <%= current_user.email %><br>
+    <%= t('messages.logged_in_as',:name=>current_user.email) %><br>
     <%= link_to t(:logout), logout_path %>
   <% else %>
     <%= link_to t(:login), login_path %>

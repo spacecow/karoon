@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe "Books" do
   describe "new" do
-
     context "Toman on error form" do
       before(:each) do
         Setting.singleton.update_attribute(:currency,Setting::TOMAN)

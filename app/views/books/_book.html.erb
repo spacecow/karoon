@@ -12,7 +12,7 @@
     </div>
     <div id="categories">
       <span class="label">
-        <%= book.categories.count > 1 ? t(:categories) : t(:category) %>:
+        <%= t(:category, count:book.categories_count) %>:
       </span>
       <span class="content">
         <%= link_to_categories book.categories %>

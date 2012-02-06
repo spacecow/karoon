@@ -3,7 +3,7 @@ class TranslationsController < ApplicationController
   skip_load_resource :only => :index
 
   def index
-    @selection = t(:translations)
+    @selection = :translations
     @translation = Translation.new(key: params[:key], value: params[:value])
     @translation.locale = Locale.find_or_create_by_name(params[:locale]) if params[:locale]
     @translations = TRANSLATION_STORE

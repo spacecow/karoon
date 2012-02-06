@@ -11,7 +11,7 @@ Factory.define :cart do |f|
 end
 
 Factory.define :category do |f|
-  f.name 'Factory name'
+  f.name 'factory'
 end
 
 Factory.define :line_item do |f|

@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe "Orders" do
   describe "edit" do
-    it "should have a cancel button"
     context "member" do
       before(:each) do
         member = create_member(:email=>'member@example.com')
@@ -20,11 +19,30 @@ describe "Orders" do
         page.should have_button('Update Order')
       end
 
-      it "has a cancel button" do
+      it "has a cancel update button" do
         visit edit_order_path(@order)
         page.should have_button('Cancel Update')
       end
 
+      context "cancel update" do
+        before(:each) do
+          visit edit_order_path(@order)
+        end
+
+        it "does not update the attributes of the order" do
+          fill_in 'Name', :with => "Edited Name"
+          click_button 'Cancel Update'
+          Order.last.name.should_not eq 'Edited Name'
+        end
+        it "redirects to the validate page" do
+          click_button 'Cancel Update'
+          current_path.should eq validate_order_path(@order)
+        end
+        it "shows no flash message" do  
+          click_button 'Cancel Update'
+          page.should_not have_notice
+        end
+      end
 
       context "update order" do
         before(:each) do

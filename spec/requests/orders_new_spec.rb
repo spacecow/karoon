@@ -22,6 +22,16 @@ describe "Orders" do
         page.should have_title('New Order')
       end
 
+      it "has a create button" do
+        visit new_order_path
+        page.should have_button('Create Order')
+      end
+      it "has a cancel button" do
+        visit new_order_path
+        page.should have_button('Cancel Order')
+      end
+
+
       context "list line items" do
         it "one" do
           @book.update_attribute(:image,File.open(File.join(Rails.root, 'app', 'assets', 'images', 'cover.jpg')))
@@ -84,6 +94,12 @@ describe "Orders" do
         end.should change(Order,:count).by(1)
       end
 
+      it "cancels the order" do
+        lambda do
+          click_button 'Cancel Order'
+        end.should change(Order,:count).by(0)
+      end
+
       it "transfers the line items to the order" do
         click_button 'Create Order'
         Order.last.line_items.should_not be_empty
@@ -136,6 +152,20 @@ describe "Orders" do
           click_button 'Create Order'
           li(:postal_service).should have_inclusion_error 
         end
+      end #error
+    end #create order
+
+    context "cancel order" do
+      before(:each) do
+        visit new_order_path
+        click_button 'Cancel Order'
+      end
+      
+      it "redirects to the cart show page" do
+        current_path.should eq cart_path(Cart.last)
+      end
+      it "shows no flash message" do
+        page.should_not have_notice
       end
     end
   end

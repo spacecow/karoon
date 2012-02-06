@@ -20,7 +20,7 @@ class Book < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
-  def all_fields_emtpy?
+  def all_fields_empty?
     title.blank? && summary.blank? && regular_price.blank? && image.blank? && authors.empty? && categories.empty?
   end
 
@@ -38,7 +38,9 @@ class Book < ActiveRecord::Base
     end
     self.author_ids = tokens
   end
+  def authors_count; authors.count end
 
+  def categories_count; categories.count end
   def category
     categories.first == categories.last ? categories.first : nil 
   end

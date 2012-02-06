@@ -3,8 +3,6 @@ require 'spec_helper'
 describe "Orders" do
   describe "validate" do
     it "send email to user after confirmation"
-    it "cancel has a confirmation popup windown"
-    it "update order should have a cancel button"
 
     before(:each) do
       Setting.singleton.update_attribute(:currency,Setting::RIEL)
@@ -22,15 +20,15 @@ describe "Orders" do
       end
       it "should have a cancel button" do
         visit validate_order_path(@order)
-        form(:confirm_order).should have_button('Cancel')
+        form(:confirm_order).should have_button('Cancel Order')
       end
       it "should have an edit button" do
         visit validate_order_path(@order)
-        form(:confirm_order).should have_button('Edit')
+        form(:confirm_order).should have_button('Edit Order')
       end
       it "should have a confirm button" do
         visit validate_order_path(@order)
-        form(:confirm_order).should have_button('Confirm')
+        form(:confirm_order).should have_button('Confirm Order')
       end
 
       context "list books" do
@@ -109,7 +107,7 @@ describe "Orders" do
       end
 
       it "shows a flash message" do
-        page.should have_notice('Your order has been confirmed. An email has been sent to you with information about the purchase.')
+        page.should have_notice('Your order has been confirmed. An email has been sent to you with information about your purchase.')
       end
     end
   end

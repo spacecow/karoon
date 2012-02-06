@@ -4,22 +4,14 @@ class LineItemsController < ApplicationController
 
   def create
     if @line_item.save
-      if params[:line_item][:quantity] == "1"
-        flash[:notice] = t('successes.added_to_cart',:o=>t(:book),:name=>@line_item.book.title)
-      else
-        flash[:notice] = t('successes.added_to_cart_pl',:i=>params[:line_item][:quantity],:o=>t(:books),:name=>@line_item.book.title)
-      end
+      flash[:notice] = added_to_cart(:book, @line_item.book_title, params[:line_item][:quantity].to_i)
       redirect_to @line_item.cart
     end
   end
 
   def destroy
     cart = @line_item.cart
-    if @line_item.quantity == 1
-      flash[:notice] = t('successes.removed_from_cart',:o=>t(:book),:name=>@line_item.book.title)
-    else
-      flash[:notice] = t('successes.removed_from_cart_pl',:i=>@line_item.quantity,:o=>t(:books),:name=>@line_item.book.title)
-    end
+    flash[:notice] = removed_from_cart(:book, @line_item.book_title, @line_item.quantity)
     @line_item.destroy
     redirect_to cart
   end

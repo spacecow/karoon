@@ -7,7 +7,7 @@ describe "Carts" do
       @cart = Cart.last 
     end
 
-    context "attempt to display a cart that does not exists" do
+    context "attempt to display a cart that does not exist" do
       it "generates an alert message" do
         visit cart_path(1)
         page.should have_alert("Invalid cart.")

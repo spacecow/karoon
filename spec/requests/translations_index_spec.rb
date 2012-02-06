@@ -125,8 +125,6 @@ describe "Translations" do
     #  end
     #end
 
-    it "update translation button"
-
     context "create translation" do
       before(:each) do
         locale = create_locale('en')

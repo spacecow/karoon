@@ -5,7 +5,7 @@
 <%= render @order %>
 
 <%= form_for @order, :url => confirm_order_path(@order), :method => :put, :html=>{:id => 'confirm_order'} do |f| %>
-  <%= f.submit t(:cancel), :name => :cancel_button, :class => :submit %>
-  <%= f.submit t(:edit), :name => :edit_button, :class => :submit %>
-  <%= f.submit t(:confirm), :class => :submit %>
+  <%= f.submit cancel(:order), :name => :cancel_button, :class => :submit, :confirm => sure? %>
+  <%= f.submit edit(:order), :name => :edit_button, :class => :submit %>
+  <%= f.submit confirm(:order), :class => :submit %>
 <% end %>

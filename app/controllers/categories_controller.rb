@@ -24,7 +24,7 @@ class CategoriesController < ApplicationController
 
   def index
     @categories = Category.arrange(:order => :names_depth_cache)
-    @selection = t(:categories)
+    @selection = :categories
     respond_to do |f|
       f.html
       f.json {render :json => load_selected_categories.map{|e| e.name=e.names_depth_cache; e}.map(&:attributes)}

@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe "Sessions" do
   describe "root" do
-    it "differenct flashes for unauthorized access"
     it "a book categorized as religion/islam should show up as religion as well"
 
     it "general layout" do
@@ -22,7 +21,7 @@ describe "Sessions" do
         @religion = create_category('religion')
         create_category('islam',@religion.id)
         @space = create_category('space')
-        create_category('rocket',@space.id)
+        create_category('rocket_launcher',@space.id)
         @planet = create_category('planet',@space.id)
         create_category('Mars',@planet.id)
       end
@@ -32,7 +31,7 @@ describe "Sessions" do
         site_nav.li(1).li.should have_link('religion')
         site_nav.should_not have_link('islam') 
         site_nav.li(1).li(1).should have_link('space')
-        site_nav.should_not have_link('rocket') 
+        site_nav.should_not have_link('rocket launcher') 
         site_nav.should_not have_link('planet') 
         site_nav.should_not have_link('Mars') 
       end
@@ -45,7 +44,7 @@ describe "Sessions" do
           site_nav.li(1).li.should have_link('religion') 
           site_nav.should_not have_link('space') 
           site_nav.li(1).li(1).li.should have_link('islam') 
-          site_nav.should_not have_link('rocket') 
+          site_nav.should_not have_link('rocket launcher') 
           site_nav.should_not have_link('planet') 
           site_nav.should_not have_link('Mars') 
         end
@@ -55,7 +54,7 @@ describe "Sessions" do
           site_nav.should_not have_link('religion') 
           site_nav.should_not have_link('islam') 
           site_nav.li(1).li(1).li.should have_link('planet') 
-          site_nav.li(1).li(1).li(1).should have_link('rocket') 
+          site_nav.li(1).li(1).li(1).should have_link('rocket launcher') 
           site_nav.should_not have_link('Mars') 
         end
         context "space - planet" do
@@ -74,7 +73,7 @@ describe "Sessions" do
             site_nav.should_not have_link('religion') 
             site_nav.should_not have_link('islam') 
             site_nav.li(1).li(1).li.should have_link('planet') 
-            site_nav.should_not have_link('rocket') 
+            site_nav.should_not have_link('rocket launcher') 
             site_nav.li(1).li(1).li(1).li.should have_link('Mars') 
           end
         end
@@ -143,10 +142,10 @@ describe "Sessions" do
               site_nav.click_link 'space'
               site_nav.find(:css,'.selected').text.should eq 'space'
             end
-            it "rocket" do
+            it "rocket launcher" do
               site_nav.click_link 'space'
-              site_nav.click_link 'rocket'
-              site_nav.find(:css,'.selected').text.should eq 'rocket'
+              site_nav.click_link 'rocket launcher'
+              site_nav.find(:css,'.selected').text.should eq 'rocket launcher'
             end
             it "planet" do
               site_nav.click_link 'space'
@@ -218,7 +217,6 @@ describe "Sessions" do
         user_nav.click_link 'Persian'
         user_nav.should have_link('English')
       end
-      it "singup should not be visible for logged in users"
     end
   end
 end

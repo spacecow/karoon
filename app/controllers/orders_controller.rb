@@ -18,9 +18,10 @@ class OrdersController < ApplicationController
   end
 
   def create
+    redirect_to current_cart and return if params[:cancel_button]
     @order = current_user.orders.build(params[:order])
-    @order.transfer_line_items_from_cart(current_cart)
     if @order.save
+      @order.transfer_line_items_from_cart(current_cart)
       Cart.destroy(session[:cartid])
       session[:cartid] = nil
       flash[:notice] = created(:order_draft) 
@@ -36,10 +37,10 @@ class OrdersController < ApplicationController
       redirect_to edit_order_path(@order)
     else
       if params[:cancel_button]
-        flash[:notice] = canceled(:your_order) + " " + mess(:saved_as_draft_in_my_orders)
+        flash[:notice] = canceled(:your_order) + " " + notify(:saved_as_draft_in_my_orders)
         redirect_to root_path
       else
-        flash[:notice] = confirmed(:your_order) + " " + mess(:email_has_been_sent_about,:o=>t(:purchase).downcase) 
+        flash[:notice] = confirmed(:your_order) + " " + notify(:email_has_been_sent_about_your_purchase) 
         @order.order_confirmed! 
         redirect_to @order 
       end
@@ -50,6 +51,7 @@ class OrdersController < ApplicationController
   end
 
   def update
+    redirect_to validate_order_path(@order) and return if params[:cancel_button]
     if @order.update_attributes(params[:order])
       flash[:notice] = updated(:order)
       if @order.aasm_state == 'draft'

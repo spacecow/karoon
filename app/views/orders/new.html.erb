@@ -2,4 +2,4 @@
 
 <%= render 'orders/line_items', :line_items => @cart.line_items, :model => @cart %>
 
-<%= render 'form' %>
+<%= render 'form', :cancel => cancel(:order) %>

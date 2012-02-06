@@ -22,7 +22,8 @@ describe "Books" do
         div('books').should_not have_link('Del')
         div('book',0).should have_button('Add to Cart')
         div('book',0).options('Quantity').should eq "1, 2, 3, 4, 5, 6, 7, 8, 9, 10"
-        page.should_not have_link('New Book')
+        top_links.should_not have_link('New Book')
+        bottom_links.should_not have_link('New Book')
       end
 
       context "image" do
@@ -91,9 +92,12 @@ describe "Books" do
         visit books_path
         div('books').should have_link('Edit')
         div('books').should have_link('Del')
-        page.should have_link('New Book')
+        top_links.should have_link('New Book')
+        bottom_links.should have_link('New Book')
       end
     end
+
+    it "pagination on book index page"
 
     context "general links to" do
       context "This is the Way" do

@@ -1,17 +1,20 @@
 en:
-  author: 'Author'
+  author: 
+    one: 'Author'
+    other: 'Authors'
   author_match: 'Author Match'
-  authors: 'Authors'
-  book: 'Book'
+  book: 
+    one: 'Book'
+    other: 'Books'
   book_form: 'Book Form'
   book_match: 'Book Match'
   book_price: 'Book Price'
-  books: 'Books'
   cancel: 'Cancel'
   cart: 'Cart'
-  category: 'Category'
+  category: 
+    one: 'Category'
+    other: 'Categories'
   category_match: 'Category Match'
-  categories: 'Categories'
   checkout: 'Checkout'
   confirm: 'Confirm'
   del: 'Del'
@@ -20,29 +23,34 @@ en:
   edit: 'Edit'
   en: 'English'
   go: 'Go'
-  hit: 'Hit'
-  hits: 'Hits'
+  hit: 
+    one: 'Hit'
+    other: 'Hits'
   in_toman: 'in Toman'
   ip: 'IP'
   ir: 'Persian'
   login: 'Login'
   my_cart: 'My Cart'
-  order: 'Order'
+  order: 
+    one: 'Order'
+    other: 'Orders'
   order_confirmed: 'Order confirmed'
   order_draft: 'Order draft'
   price: 'Price'
   purchase: 'Purchase'
   quantity: 'Quantity'
-  search: 'Search'
-  searches: 'Searches'
+  search: 
+    one: 'Search'
+    other: 'Searches'
   settings: 'Settings'
   signup: 'Signup'
   total: 'Total'
-  translation: 'Translation'
-  translations: 'Translations'
+  translation: 
+    one: 'Translation'
+    other: 'Translations'
+  user: 'User'
   userid: 'Userid'
-  was: 'was'
-  were: 'were'
+  update: 'Update'
   your_cart: 'Your cart'
   your_order: 'Your order'
   
@@ -53,12 +61,25 @@ en:
         confirmation: "doesn't match confirmation"
         greater_than: "must be greater than %{count}"
         inclusion: "is not included in the list"
+        invalid: "is invalid"
         numericality: "is not a number"
+
   alerts:
     invalid_cart: "Invalid cart."
     invalid_login_or_password: "Invalid login or password."
     not_created: 'No %{o} was created.'
     unauthorized_access: "Unauthorized Access."
+
+  categories:
+    christianity: "angels come down from heaven"
+    islam: "islam"
+    planet: "planet"
+    priesthood: "priesthood"
+    religion: "religion"
+    rocket_launcher: "rocket launcher"
+    science: "science"
+    space: "space"
+
   formtastic:
     labels:
       address: 'Address'
@@ -82,6 +103,7 @@ en:
   labels:
     add: 'Add %{o}'
     add_to: 'Add to %{o}'
+    cancel: 'Cancel %{o}'
     confirm: 'Confirm %{o}'
     create: 'Create %{o}'
     edit: 'Edit %{o}'
@@ -89,30 +111,41 @@ en:
     new: 'New %{o}'
     update: 'Update %{o}'
   messages:
-    email_has_been_sent_about: "An email has been sent to you with information about the %{o}."
     dont_have_an_account?: "Don't have an account?"
+    logged_in_as: "Logged in as %{name}"
     sure?: 'Are you sure?'
     your_cart_is_currently_empty: 'Your cart is currently empty.'
   notices:
+    email_has_been_sent_about_your_purchase: "An email has been sent to you with information about your purchase."
     logged_in: "Logged in."
     logged_out: "Logged out."
+    saved_as_draft_in_my_orders: "It is saved as 'draft' in 'My Orders'."
     signed_up_and_logged_in: "Signed up and logged in."
     your_cart_is_empty: 'Your cart is empty.'
   successes:
-    added_to_cart: "%{o}: '%{name}' was added to your cart."
-    added_to_cart_pl: "%{i} %{o}: '%{name}' were added to your cart."
+    added_to_cart: 
+      one: "%{o}: '%{name}' was added to your cart."
+      other: "%{count} %{o}: '%{name}' were added to your cart."
     canceled: "%{o} was canceled."
     confirmed: "%{o} has been confirmed."
     created: "%{o} was successfully created."
-    created_adv: "%{o}: '%{name}' was successfully created."
     created_state: "%{o} %{state} was successfully created."
-    created_nos: "%{i} %{o} %{v} successfully created."
-    deleted_adv: "%{o}: '%{name}' was successfully deleted."
     emptied: "%{o} was emptied."
-    removed_from_cart: "%{o}: '%{name}' was removed from your cart."
-    removed_from_cart_pl: "%{i} %{o}: '%{name}' were removed from your cart."
+    removed_from_cart: 
+      one: "%{o}: '%{name}' was removed from your cart."
+      other: "%{count} %{o}: '%{name}' were removed from your cart."
     updated: "%{o} was successfully updated."
-    updated_adv: "%{o}: '%{name}' was successfully updated."
+
+  successes_adv:
+    created: "%{o}: '%{name}' was successfully created."
+    deleted: "%{o}: '%{name}' was successfully deleted."
+    updated: "%{o}: '%{name}' was successfully updated."
+
+  successes_no:
+    created: 
+      one: "%{count} %{o} was successfully created."
+      other: "%{count} %{o} were successfully created."
+
   unauthorized:
     new:
       order: 'You must be logged in to place an order.'

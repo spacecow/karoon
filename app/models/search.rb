@@ -22,6 +22,8 @@ class Search < ActiveRecord::Base
     @books = @books.where("title LIKE ?","%#{keywords}%")
   end
 
+  def books_count; books.count end
+
   private
 
     def add_and_save_match(assoc,id,text)

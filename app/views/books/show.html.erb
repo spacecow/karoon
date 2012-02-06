@@ -11,11 +11,7 @@
   <div id="content">
     <div id="author">
       <span class="label">
-        <% if @book.authors.count <= 1 %>
-          <%= t(:author) %>:
-        <% else %>
-          <%= t(:authors) %>:
-        <% end %>
+        <%= t(:author,count:@book.authors_count) %>:
       </span>
       <span class="content">
         <% if @book.authors.present? %>
@@ -27,11 +23,7 @@
     </div>
     <div id="category">
       <span class="label">
-        <% if @book.categories.count <= 1 %>
-          <%= t(:category) %>:
-        <% else %>
-          <%= t(:categories) %>:
-        <% end %>
+        <%= t(:category,count:@book.categories_count) %>:
       </span>
       <span class="content">
         <% if @book.categories.present? %>

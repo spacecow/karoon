@@ -12,6 +12,7 @@ class LineItem < ActiveRecord::Base
 
   before_save :set_item_price
 
+  def book_title; book.title end
   def item_price(riel)
     riel ? price.to_i*10 : price.to_i
   end

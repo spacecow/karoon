@@ -85,7 +85,7 @@ describe "Books" do
 
         it "none, if there are none" do
           visit book_path(@book)
-          div('book').should have_content('Category: -')
+          div('book').should have_content('Categories: -')
         end
 
         context "for" do
@@ -113,7 +113,7 @@ describe "Books" do
       context "author layout" do
         it "none, if there are none" do
           visit book_path(@book)
-          div('book').should have_content('Author: -')
+          div('book').should have_content('Authors: -')
         end
         context "for" do
           before(:each) do

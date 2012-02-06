@@ -11,7 +11,7 @@ class BooksController < ApplicationController
 
   def index
     @site_nav_categories = Category.where(:ancestry => nil)
-    @selection = t(:books)
+    @selection = :books
   end
 
   def new
@@ -37,25 +37,29 @@ class BooksController < ApplicationController
     end
     @books = Book.create(params[:books].values).reject{|e| e.errors.empty?} 
     i = params[:books].count - @books.count
-    @books.reject!(&:all_fields_emtpy?)
-    if @books.empty? 
-      if i == 0
+    @books.reject!(&:all_fields_empty?)
+    if @books.empty? #no temporary filled fields 
+      if i == 0 #no fields filled in
         @books << Book.new
         @books.map(&:save)
         load_hidden_book(9)
-        flash[:alert] = not_created(:book)
+        flash.now[:alert] = not_created(:book)
         render :new
-      else
-        redirect_to new_book_path, :notice => created(:book,i,:books)
+      else #i fully filled fields
+        redirect_to new_book_path, :notice => created(:book,i)
       end
-    else
+    else #temporary filled fields
       if currency_in_riel?
         @books.map! do |book|
           book.convert_to_riel; book
         end 
       end
+      if i == 0 #no fully filled fields
+        flash.now[:alert] = not_created(:book)
+      else
+        flash.now[:notice] = created(:book,i)
+      end
       load_hidden_book(10-@books.count)
-      flash[:notice] = created(:book,i,:books)
       render :new
     end
   end
