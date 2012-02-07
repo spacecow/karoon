@@ -1,4 +1,6 @@
-def create_book(s); Factory(:book,:title=>s) end
+def create_book(s='Rspec Title')
+  Factory(:book,:title=>s) 
+end
 def fill_in_book(i=0,title="A",price="1000",cat="B")
   if title.instance_of? Hash
     title.each do |k,v|

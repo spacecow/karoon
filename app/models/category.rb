@@ -14,12 +14,14 @@ class Category < ActiveRecord::Base
   def cache_ancestry
     #jp ancestors = ancestors.map(&:name)
     #ancestors.pop unless new_record?
-    self.names_depth_cache = ancestors.map(&:name).push(name).join('/')
+    self.names_depth_cache_en = ancestors.map{|e| category(e.name,:en)}.push(category(name,:en)).join('/')
+    self.names_depth_cache_ir = ancestors.map{|e| category(e.name,:ir)}.push(category(name,:ir)).join('\\')
   end
 
-  def translated_name; category(name) end
-  def translated_names_depth_cache
-    names_depth_cache.split('/').map{|e| category(e)}.join('/')
+  def translated_name(lang); category(name,lang) end
+  def names_depth_cache(lang)
+    #names_depth_cache_en.split('/').map{|e| category(e)}.join('/')
+    lang==:en ? names_depth_cache_en : names_depth_cache_ir
   end
   
   private
@@ -27,5 +29,5 @@ class Category < ActiveRecord::Base
     def ancestry_exclude_self
       errors.add(:parent_id, "cannot be a descendant of itself.") if ancestor_ids.include? self.id
     end 
-    def category(s) I18n.t(s,:scope=>:categories) end
+    def category(s,l) I18n.t(s,:scope=>:categories,:locale=>l) end
 end

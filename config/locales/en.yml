@@ -72,11 +72,18 @@ en:
 
   categories:
     christianity: "angels come down from heaven"
+    fuel: "fuel"
     islam: "islam"
+    jewellery: "jewellery"
+    mantra: "mantra"
     planet: "planet"
     priesthood: "priesthood"
+    programming: "programming"
     religion: "religion"
+    rails: "rails"
+    rocket: "rocket"
     rocket_launcher: "rocket launcher"
+    ruby: "ruby"
     science: "science"
     space: "space"
 

@@ -75,34 +75,6 @@ describe "Carts" do
     end
 
     context "layout" do
-      before(:each) do
-        visit cart_path(@cart)
-      end
-
-      it "title is set to 'Your Cart'" do
-        page.should have_title('Your Cart')
-      end
-
-      it "should have an empty cart button" do
-        page.should have_button('Empty Cart')
-      end
-
-      it "should have an update cart button" do
-        page.should have_button('Update Cart')
-      end
-
-      it "if the cart is empty, it should say that" do
-        div('cart').should have_content('Your cart is currently empty.')
-      end
-
-      it "if a cart is empty, no total should be visible" do
-        div('cart').should_not have_div('total')
-      end
-
-      it "what happends if a book quantity is more than ten"
-    end
-
-    context "layout" do
       it "the price of an added book cannot be affected afterhand" do
         @book = Factory(:book)
         @cart.line_items.create!(:book_id=>@book.id,:regular_price=>'1000')

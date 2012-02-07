@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120201091628) do
+ActiveRecord::Schema.define(:version => 20120206081728) do
 
   create_table "authors", :force => true do |t|
     t.string   "name"
@@ -46,7 +46,8 @@ ActiveRecord::Schema.define(:version => 20120201091628) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "ancestry"
-    t.string   "names_depth_cache"
+    t.string   "names_depth_cache_en"
+    t.string   "names_depth_cache_ir"
   end
 
   add_index "categories", ["ancestry"], :name => "index_categories_on_ancestry"

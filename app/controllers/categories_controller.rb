@@ -10,20 +10,20 @@ class CategoriesController < ApplicationController
       search.add_and_save_category_match(@category.id,@category.name)
     end
     if @category.parent
-      @site_nav_categories = @category.ancestors.arrange(:order => :names_depth_cache)
+      @site_nav_categories = @category.ancestors.arrange(:order => :names_depth_cache_en)
       hash = ActiveSupport::OrderedHash.new
-      hash[@category] = @category.children.arrange(:order => :names_depth_cache)
+      hash[@category] = @category.children.arrange(:order => :names_depth_cache_en)
       attach_children(@site_nav_categories,hash)
     else
       @site_nav_categories = ActiveSupport::OrderedHash.new
-      @site_nav_categories[@category] = @category.children.arrange(:order => :names_depth_cache)
+      @site_nav_categories[@category] = @category.children.arrange(:order => :names_depth_cache_en)
     end
       
     @selection = @category.name
   end
 
   def index
-    @categories = Category.arrange(:order => :names_depth_cache)
+    @categories = Category.arrange(:order => :names_depth_cache_en)
     @selection = :categories
     respond_to do |f|
       f.html
@@ -74,10 +74,10 @@ class CategoriesController < ApplicationController
       end
     end
     def load_all_categories
-      @categories = Category.all.map{|e| [e.names_depth_cache,e.id]}
+      @categories = Category.all.map{|e| [e.names_depth_cache_en,e.id]}
     end
     def load_min_categories
-      @categories = Category.all.reject{|e| @category.subtree_ids.include? e.id}.map{|e| [e.names_depth_cache,e.id]}
+      @categories = Category.all.reject{|e| @category.subtree_ids.include? e.id}.map{|e| [e.names_depth_cache_en,e.id]}
     end
     def load_selected_categories
       @categories = Category.where('names_depth_cache like ?',"%#{params[:q]}%").order(:names_depth_cache) 

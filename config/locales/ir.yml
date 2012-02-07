@@ -1,3 +1,18 @@
 ir:
+  book:
+    other: 'کتابها'
+
+  category:
+    one: 'موضوعها'
+    other: 'موضوعها'
+
   categories:
     christianity: "dances with devils"
+    formtastic: 'شکل'
+    jewellery: 'جواهر'
+    programming: 'برنامه‌نویسی'
+    rails: 'ریلز'
+    religion: 'دين'
+    rocket_launcher: 'راکت'
+    ruby: 'روبی' 
+    science: 'علم'

@@ -30,13 +30,13 @@ describe "Categories" do
           click_button 'Update Category'
         end.should change(Category,:count).by(0)
         Category.find(@science.id).name.should eq 'space'
-        Category.find(@science.id).names_depth_cache.should eq 'religion/mantra/space'
+        Category.find(@science.id).names_depth_cache_en.should eq 'religion/mantra/space'
         Category.find(@science.id).parent.should eq @mantra
       end
 
       it "descendants names_depth_cache is updated" do
         click_button 'Update Category'
-        Category.find(@rocket.id).names_depth_cache.should eq 'religion/mantra/space/rocket'
+        Category.find(@rocket.id).names_depth_cache_en.should eq 'religion/mantra/space/rocket'
       end
 
       it "name cannot be blank" do

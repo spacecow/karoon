@@ -27,7 +27,7 @@
       </span>
       <span class="content">
         <% if @book.categories.present? %>
-          <%= raw @book.categories.order(:names_depth_cache).map{|e| link_to e.names_depth_cache,e}.join(', ') %>
+          <%= raw @book.categories.order(:names_depth_cache_en).map{|e| link_to e.names_depth_cache(english?),e}.join(', ') %>
         <% else %>
           -
         <% end %>

@@ -17,19 +17,6 @@ describe "Orders" do
     end
 
     context "layout" do
-      it "tile is set" do
-        visit new_order_path
-        page.should have_title('New Order')
-      end
-
-      it "has a create button" do
-        visit new_order_path
-        page.should have_button('Create Order')
-      end
-      it "has a cancel button" do
-        visit new_order_path
-        page.should have_button('Cancel Order')
-      end
 
 
       context "list line items" do

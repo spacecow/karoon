@@ -8,7 +8,7 @@
         <%= f.text_field :keywords %>
       </div>
       <div id="right_content">
-        <%= f.select :category_id, Category.order(:names_depth_cache).map{|e| [e.translated_names_depth_cache,e.id]}, :prompt => t(:books) %>
+        <%= f.select :category_id, Category.order(:names_depth_cache_en).map{|e| [e.names_depth_cache(get_language),e.id]}, :prompt => pl(:book) %>
         <%= f.submit t(:go) %>
         <%= link_to cart_image, current_cart %>
       </div>

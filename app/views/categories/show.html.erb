@@ -1,4 +1,4 @@
-<%= title @category.translated_name %>
+<%= title @category.translated_name(get_language) %>
 
 <div id="books">
   <%= render @category.books %>

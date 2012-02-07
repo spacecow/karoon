@@ -68,8 +68,8 @@ describe "Categories" do
         rocket = create_category('rocket',@space.id)        
         fuel = create_category('fuel',rocket.id)
         div('category',1).click_link 'Del'
-        Category.find(rocket.id).names_depth_cache.should eq 'rocket'
-        Category.find(fuel.id).names_depth_cache.should eq 'rocket/fuel'
+        Category.find(rocket.id).names_depth_cache_en.should eq 'rocket'
+        Category.find(fuel.id).names_depth_cache_en.should eq 'rocket/fuel'
       end
     end
   end

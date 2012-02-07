@@ -30,11 +30,12 @@ module ApplicationHelper
       s == @selection ? "selected" : ''
     #end
   end
-  def english?; I18n.locale == :en end
+  def english?; get_language == :en end
+  def get_language; I18n.locale end
   def listed_categories(categories)
     return if categories.empty?
     content_tag(:ul,categories.map{|cat,subcat|
-      content_tag(:li,link_to(cat.translated_name,cat),:class=>class_selection(cat.name)) + (subcat.present? ? content_tag(:li,listed_categories(subcat)) : '')
+      content_tag(:li,link_to(cat.translated_name(get_language),cat),:class=>class_selection(cat.name)) + (subcat.present? ? content_tag(:li,listed_categories(subcat)) : '')
     }.join.html_safe,:class=>'nested_category')
   end
 end

@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 require 'spec_helper'
 
 describe Category do
@@ -25,47 +25,103 @@ describe Category do
     end
 
     context "every time a category gets saved, its path is saved in #names_depth_cache for" do
-      it "one category" do
-        Category.last.names_depth_cache.should eq 'programming'
+      it "one category in english" do
+        Category.last.names_depth_cache_en.should eq 'programming'
       end
-      it "two categories" do
-        ruby = create_category('ruby',@programming.id)
-        Category.last.names_depth_cache.should eq 'programming/ruby'  
+      it "one category in persian" do
+        Category.last.names_depth_cache_ir.should eq 'برنامه‌نویسی' 
+      end
+
+      context "two categories in" do
+        before(:each) do
+          ruby = create_category('ruby',@programming.id)
+        end
+
+        it "english" do
+          Category.last.names_depth_cache_en.should eq 'programming/ruby'  
+        end
+        it "english" do
+          Category.last.names_depth_cache_ir.should eq 'برنامه‌نویسی\روبی'  
+        end
       end
     end
 
     context "if the name of a root category changes, the #names_depth_cache for" do
-      it "the root should be changed" do
-        @programming.update_attribute(:name,'jewelry')
-        Category.first.names_depth_cache.should eq 'jewelry'
+      context "the root should be changed for" do
+        before(:each) do
+          @programming.update_attribute(:name,'jewellery')
+        end
+
+        it "english" do
+          Category.first.names_depth_cache_en.should eq 'jewellery'
+        end
+        it "persian" do
+          Category.first.names_depth_cache_ir.should eq 'جواهر'
+        end
       end
-      it "its children should be updated" do
-        create_category('ruby',@programming.id)
-        @programming.update_attribute(:name,'jewelry')
-        Category.first.children.map(&:save)
-        Category.last.names_depth_cache.should eq 'jewelry/ruby'
+
+      context "its children should be updated for" do
+        before(:each) do
+          create_category('ruby',@programming.id)
+          @programming.update_attribute(:name,'jewellery')
+          Category.first.children.map(&:save)
+        end
+
+        it "english" do
+          Category.last.names_depth_cache_en.should eq 'jewellery/ruby'
+        end
+        it "persian" do
+          Category.last.names_depth_cache_ir.should eq 'جواهر\روبی'
+        end
       end
-      it "its grand-children should be updated" do
-        ruby = create_category('ruby',@programming.id)
-        create_category('rails',ruby.id)
-        @programming.update_attribute(:name,'jewelry')
-        Category.first.descendants.map(&:save)
-        Category.last.names_depth_cache.should eq 'jewelry/ruby/rails'
+
+      context "its grand-children should be updated for" do
+        before(:each) do
+          ruby = create_category('ruby',@programming.id)
+          create_category('rails',ruby.id)
+          @programming.update_attribute(:name,'jewellery')
+          Category.first.descendants.map(&:save)
+        end
+
+        it "english" do
+          Category.last.names_depth_cache_en.should eq 'jewellery/ruby/rails'
+        end
+
+        it "persian" do
+          Category.last.names_depth_cache_ir.should eq 'جواهر\روبی\ریلز'
+        end
       end
     end
 
     context "when changing a parent, #names_depth_cache should be updated for" do
-      it "the category in question" do
-        religion = create_category('religion')
-        @programming.update_attributes(:parent_id=>religion.id)
-        Category.first.names_depth_cache.should eq 'religion/programming'
+      context "the category in question in" do
+        before(:each) do
+          religion = create_category('religion')
+          @programming.update_attributes(:parent_id=>religion.id)
+        end
+
+        it "english" do
+          Category.first.names_depth_cache_en.should eq 'religion/programming'
+        end
+        it "persian" do
+          Category.first.names_depth_cache_ir.should eq 'دين\برنامه‌نویسی'
+        end
       end
-      it "its children" do
-        religion = create_category('religion')
-        create_category('ruby',@programming.id)
-        @programming.update_attributes(:parent_id=>religion.id)
-        @programming.descendants.map(&:save)
-        Category.last.names_depth_cache.should eq 'religion/programming/ruby'
+
+      context "its children for" do
+        before(:each) do
+          religion = create_category('religion')
+          create_category('ruby',@programming.id)
+          @programming.update_attributes(:parent_id=>religion.id)
+          @programming.descendants.map(&:save)
+        end
+
+        it "english" do
+          Category.last.names_depth_cache_en.should eq 'religion/programming/ruby'
+        end
+        it "persian" do
+          Category.last.names_depth_cache_ir.should eq 'دين\برنامه‌نویسی\روبی'
+        end
       end
     end
   end

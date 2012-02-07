@@ -10,14 +10,7 @@
     <div id="title">
       <span class="title"><%= search_link_to line_item.book.title, :book_path, line_item.book %></span> by <%= link_to_authors line_item.book.authors %>
     </div>
-    <div id="categories">
-      <span class="label">
-        <%= line_item.book.categories.count > 1 ? t(:categories) : t(:category) %>:
-      </span>
-      <span class="content">
-        <%= link_to_categories line_item.book.categories %>
-      </span>
-    </div>
+    <%= render 'books/categories', :book => line_item.book %>
     <div id="actions">
       <%= link_to t(:delete), line_item, :confirm => sure?, :method => :delete %>
     </div>

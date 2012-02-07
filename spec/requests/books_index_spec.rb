@@ -14,7 +14,6 @@ describe "Books" do
     context "layout" do
       it "general" do
         visit books_path
-        page.should have_title('Books')
         div('book',0).should have_content("This is the Way by Stephen King")
         div('book',0).should have_link("This is the Way")
         div('book',0).should have_link("Stephen King")
@@ -22,8 +21,6 @@ describe "Books" do
         div('books').should_not have_link('Del')
         div('book',0).should have_button('Add to Cart')
         div('book',0).options('Quantity').should eq "1, 2, 3, 4, 5, 6, 7, 8, 9, 10"
-        top_links.should_not have_link('New Book')
-        bottom_links.should_not have_link('New Book')
       end
 
       context "image" do
