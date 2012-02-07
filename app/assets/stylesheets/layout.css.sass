@@ -37,23 +37,13 @@ ul
   li
     list-style-type: none
 
-div#top_links
-  margin-bottom: 10px
-
-div#bottom_links
-  margin-top: 10px
-
 span.label
   font-weight: bold
 
 input.submit
   width: auto
-  margin: 10px 5px 0 0
+  margin-top: 10px
   +fancy-button
-
-div#top_container
-  div#image_container
-    width: 200px
 
 div#signup
   margin-top: 10px
@@ -62,29 +52,15 @@ div#signup
     margin-top: 10px
     +fancy-button($blue, 26px, 1em, 5px)
 
-ul.nested_category
-  margin-right: 10px
+div#top_container
+  div#image_container
+    width: 200px
 
-form
-  li
-    list-style-type: none
-    input
-      width: 400px
-      &.short
-        width: 200px
-    textarea
-      width: 400px
-      height: 100px
-    label
-      display: block
-    p.inline-hints
-      margin: 0
-      color: gray
-      font-style: italic
-    p.inline-errors
-      font-style: italic
-      color: red
-      margin: 0
+div#top_links
+  margin-bottom: 10px
+
+div#bottom_links
+  margin-top: 10px
 
 div#flash_container
   padding: 2px
@@ -139,3 +115,23 @@ div#mid_container
           ul
             li
               font-size: 16px
+form
+  li
+    list-style-type: none
+    input
+      width: 400px
+      &.short
+        width: 200px
+    textarea
+      width: 400px
+      height: 100px
+    label
+      display: block
+    p.inline-hints
+      margin: 0
+      color: gray
+      font-style: italic
+    p.inline-errors
+      font-style: italic
+      color: red
+      margin: 0
