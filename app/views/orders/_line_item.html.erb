@@ -8,6 +8,7 @@
   </div>
   <div id="info">
     <%= line_item.book.title %>
+    <%= render 'books/categories', book:line_item.book, :as=>:static %>
   </div>
   <div id="price">
     <%= line_item.item_price(currency_in_riel?) %> <%= currency %> x <%= line_item.quantity %> = <%= line_item.total_price(currency_in_riel?) %> <%= currency %>

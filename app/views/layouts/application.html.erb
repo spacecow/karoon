@@ -2,10 +2,15 @@
 <html>
 <head>
   <title>Karoon</title>
-  <%= stylesheet_link_tag    "application" %>
+  <%= stylesheet_link_tag "application" %>
   <%= stylesheet_link_tag 'ie6.css', :media => 'screen, projection' %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <% if english? %>
+    <%= stylesheet_link_tag 'layout_en', 'books_en', 'carts_en', 'orders_en', 'categories_en' %>
+  <% else %>
+    <%= stylesheet_link_tag 'layout_ir', 'books_ir', 'carts_ir', 'orders_ir', 'categories_ir' %>
+  <% end %>
 </head>
 <body>
 

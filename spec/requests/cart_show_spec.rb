@@ -121,8 +121,8 @@ describe "Carts" do
           page.should have_div('actions')
         end
 
-        it "should have a delete action" do
-          div('actions').should have_link('Delete')
+        it "should have a remove action" do
+          div('actions').should have_link('Remove')
         end
       end
     end
@@ -281,32 +281,32 @@ describe "Carts" do
       it "removes a line item from the database" do
         visit cart_path(@cart)
         lambda do
-          div('line_item',0).click_link('Delete')      
+          div('line_item',0).click_link('Remove')      
         end.should change(LineItem,:count).by(-1)
       end
 
       it "removes the line item from the cart" do
         visit cart_path(@cart)
-        div('line_item',0).click_link('Delete')      
+        div('line_item',0).click_link('Remove')      
         Cart.last.line_items.count.should be(0)
       end
 
       it "redirects back to the cart page" do
         visit cart_path(@cart)
-        div('line_item',0).click_link('Delete')      
+        div('line_item',0).click_link('Remove')      
         current_path.should eq cart_path(@cart)
       end
 
       context "shows a flash message for quantity:" do
         it "singular" do
           visit cart_path(@cart)
-          div('line_item',0).click_link('Delete')      
+          div('line_item',0).click_link('Remove')      
           page.should have_notice("Book: 'Moby Dick' was removed from your cart.") 
         end
         it "plural" do
           @line_item.update_attribute(:quantity,2)
           visit cart_path(@cart)
-          div('line_item',0).click_link('Delete')      
+          div('line_item',0).click_link('Remove')      
           page.should have_notice("2 Books: 'Moby Dick' were removed from your cart.") 
         end
       end

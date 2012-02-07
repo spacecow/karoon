@@ -1,9 +1,6 @@
 div#book
-  padding-left: 300px
   div#image
     width: 300px
-    margin-left: -300px
-    float: left
     img
       display: block
       height: 250px
@@ -14,25 +11,25 @@ div#book
         font-style: italic
     div#summary
       font-style: italic
-    form
-      div#quantity
-        float: left
 
 form#book
   div.book
     border-bottom: 1px solid #aaa
     margin-bottom: 20px
     padding-bottom: 20px
+  li#book_regular_price_input
+    p.inline-hints
+      margin-top: 4px
+    p.inline-errors
+      width: 100% 
 
 div#books
   div.book
     border-bottom: 1px solid #aaa
     margin-bottom: 20px
-    padding: 0 0 20px 170px
+    padding-bottom: 20px
     div#image
-      float: left
       width: 170px
-      margin-left: -170px
       img
         height: 150px 
         display: block
@@ -47,5 +44,3 @@ div#books
           font-style: italic
       div#actions
         font-size: 12px
-      div#quantity
-        float: left

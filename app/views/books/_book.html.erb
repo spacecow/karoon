@@ -10,14 +10,7 @@
     <div id="title">
       <span class="title"><%= search_link_to book.title, :book_path, book %></span> by <%= link_to_authors book.authors %>
     </div>
-    <div id="categories">
-      <span class="label">
-        <%= pl(:category, book.categories_count) %>:
-      </span>
-      <span class="content">
-        <%= link_to_categories book.categories %>
-      </span>
-    </div>
+    <%= render 'books/categories', book:book %>
     <div id="price">
       <span class="label">
         <%= t(:price) %>:

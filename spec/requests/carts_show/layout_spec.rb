@@ -54,10 +54,12 @@ describe "Carts" do
 
         it "english" do
           div(:line_item,0).div(:categories).should have_content('Category: programming')
+          div(:line_item,0).div(:categories).should have_link('programming')
         end
         it "persian" do
           user_nav.click_link 'Persian'
           div(:line_item,0).div(:categories).should have_content('موضوعها: برنامه‌نویسی')
+          div(:line_item,0).div(:categories).should have_link('برنامه‌نویسی')
         end
       end
     end

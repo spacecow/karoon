@@ -21,18 +21,7 @@
         <% end %>
       </span>
     </div>
-    <div id="category">
-      <span class="label">
-        <%= pl(:category, @book.categories_count) %>:
-      </span>
-      <span class="content">
-        <% if @book.categories.present? %>
-          <%= raw @book.categories.order(:names_depth_cache_en).map{|e| link_to e.names_depth_cache(english?),e}.join(', ') %>
-        <% else %>
-          -
-        <% end %>
-      </span>
-    </div>
+    <%= render 'books/categories', book:@book %>
     <div id="price">
       <span class="label">
         <%= t(:price) %>:

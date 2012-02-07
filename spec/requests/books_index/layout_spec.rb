@@ -39,7 +39,7 @@ describe "Books" do
         @book.categories << create_category('science')
         @book.categories << create_category('religion')
         visit books_path
-        div('book',0).div('categories').should have_content('Categories: science, religion')
+        div('book',0).div('categories').should have_content('Categories: religion, science')
       end
 
       it "one root category and one leaf category" do
@@ -47,7 +47,7 @@ describe "Books" do
         religion = create_category('religion')
         @book.categories << create_category('islam',religion.id)
         visit books_path
-        div('book',0).div('categories').should have_content('Categories: science, religion/islam')
+        div('book',0).div('categories').should have_content('Categories: religion/islam, science')
       end
     end
   end

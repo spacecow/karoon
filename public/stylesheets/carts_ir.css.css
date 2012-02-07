@@ -1,0 +1,28 @@
+/* line 2, ../../app/assets/stylesheets/carts_ir.css.sass */
+form.edit_cart div#total {
+  float: left;
+  margin-left: 25px;
+}
+/* line 5, ../../app/assets/stylesheets/carts_ir.css.sass */
+form.edit_cart input.submit {
+  float: right;
+}
+/* line 8, ../../app/assets/stylesheets/carts_ir.css.sass */
+form.edit_cart div.line_item {
+  padding-right: 100px;
+  padding-left: 200px;
+}
+/* line 11, ../../app/assets/stylesheets/carts_ir.css.sass */
+form.edit_cart div.line_item div#image {
+  float: right;
+  margin-right: -100px;
+}
+/* line 14, ../../app/assets/stylesheets/carts_ir.css.sass */
+form.edit_cart div.line_item div#content {
+  float: right;
+}
+/* line 16, ../../app/assets/stylesheets/carts_ir.css.sass */
+form.edit_cart div.line_item div#expenses {
+  float: right;
+  margin-left: -200px;
+}

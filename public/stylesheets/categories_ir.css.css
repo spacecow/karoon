@@ -1,0 +1,13 @@
+/* line 2, ../../app/assets/stylesheets/categories_ir.css.sass */
+div#categories div.nested_category {
+  margin-right: 20px;
+}
+/* line 5, ../../app/assets/stylesheets/categories_ir.css.sass */
+div#categories div.category div#name {
+  float: right;
+  margin-left: 10px;
+}
+/* line 8, ../../app/assets/stylesheets/categories_ir.css.sass */
+div#categories div.category div#actions {
+  float: right;
+}

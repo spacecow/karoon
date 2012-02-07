@@ -1,0 +1,80 @@
+/* line 1, ../../app/assets/stylesheets/layout_ir.css.sass */
+body {
+  text-align: right;
+}
+
+/* line 4, ../../app/assets/stylesheets/layout_ir.css.sass */
+div#top_container {
+  padding-right: 200px;
+}
+/* line 6, ../../app/assets/stylesheets/layout_ir.css.sass */
+div#top_container div#image_container {
+  float: right;
+  margin-right: -200px;
+}
+/* line 9, ../../app/assets/stylesheets/layout_ir.css.sass */
+div#top_container div#image_container img {
+  float: right;
+}
+
+/* line 13, ../../app/assets/stylesheets/layout_ir.css.sass */
+div#flash_container div#flash_notice {
+  float: right;
+}
+/* line 15, ../../app/assets/stylesheets/layout_ir.css.sass */
+div#flash_container div#flash_alert {
+  float: right;
+}
+/* line 17, ../../app/assets/stylesheets/layout_ir.css.sass */
+div#flash_container div#user_nav {
+  float: left;
+  text-align: left;
+}
+/* line 20, ../../app/assets/stylesheets/layout_ir.css.sass */
+div#flash_container div#user_nav div#my_cart {
+  float: left;
+}
+
+/* line 25, ../../app/assets/stylesheets/layout_ir.css.sass */
+div#search_bar form div#form {
+  padding-right: 55px;
+  padding-left: 500px;
+}
+/* line 28, ../../app/assets/stylesheets/layout_ir.css.sass */
+div#search_bar form div#form div#label {
+  float: right;
+  margin-right: -55px;
+}
+/* line 32, ../../app/assets/stylesheets/layout_ir.css.sass */
+div#search_bar form div#form div#left_content input {
+  float: right;
+}
+/* line 34, ../../app/assets/stylesheets/layout_ir.css.sass */
+div#search_bar form div#form div#right_content {
+  float: right;
+  margin-left: -500px;
+}
+/* line 37, ../../app/assets/stylesheets/layout_ir.css.sass */
+div#search_bar form div#form div#right_content img {
+  float: left;
+}
+
+/* line 40, ../../app/assets/stylesheets/layout_ir.css.sass */
+div#mid_container {
+  padding-right: 200px;
+}
+/* line 42, ../../app/assets/stylesheets/layout_ir.css.sass */
+div#mid_container div#site_nav_container {
+  float: right;
+  margin-right: -200px;
+}
+/* line 45, ../../app/assets/stylesheets/layout_ir.css.sass */
+div#mid_container div#site_nav_container div#site_nav {
+  text-align: left;
+  margin-left: 15px;
+}
+/* line 49, ../../app/assets/stylesheets/layout_ir.css.sass */
+div#mid_container div#site_nav_container div#site_nav ul li.selected {
+  margin-left: -5px;
+  padding-left: 5px;
+}

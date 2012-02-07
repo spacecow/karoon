@@ -95,3 +95,5 @@ b9da25: !ruby/object:Dooby::Task
   todo: customizing pluralize method :done
 dc4e85: !ruby/object:Dooby::Task 
   todo: add persian field for category :done
+c7147f: !ruby/object:Dooby::Task 
+  todo: persian website to mirror the english one :done

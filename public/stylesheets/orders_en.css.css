@@ -1,0 +1,24 @@
+/* line 2, ../../app/assets/stylesheets/orders_en.css.sass */
+div#line_items div.line_item {
+  padding-right: 300px;
+  padding-left: 100px;
+}
+/* line 5, ../../app/assets/stylesheets/orders_en.css.sass */
+div#line_items div.line_item div#image {
+  float: left;
+  margin-left: -100px;
+}
+/* line 8, ../../app/assets/stylesheets/orders_en.css.sass */
+div#line_items div.line_item div#info {
+  float: left;
+}
+/* line 10, ../../app/assets/stylesheets/orders_en.css.sass */
+div#line_items div.line_item div#price {
+  float: left;
+  margin-right: -300px;
+}
+/* line 13, ../../app/assets/stylesheets/orders_en.css.sass */
+div#line_items div#total {
+  float: right;
+  margin-right: 50px;
+}

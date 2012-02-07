@@ -4,10 +4,14 @@ module BooksHelper
       search_link_to author.name, :author_path, author
     end.join(', ').html_safe
   end
-  def link_to_categories(categories)
+  def link_to_categories(categories,options)
     if categories.present?
-      categories.map do |category|
-        search_link_to category.names_depth_cache(get_language), :category_path, category
+      categories.order(:names_depth_cache_en).map do |category|
+        if options[:as] == :static
+          category.names_depth_cache(get_language)
+        else
+          search_link_to category.names_depth_cache(get_language), :category_path, category
+        end
       end.join(', ').html_safe
     else
       '-'

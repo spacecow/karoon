@@ -12,7 +12,7 @@
     </div>
     <%= render 'books/categories', :book => line_item.book %>
     <div id="actions">
-      <%= link_to t(:delete), line_item, :confirm => sure?, :method => :delete %>
+      <%= link_to t(:remove), line_item, :confirm => sure?, :method => :delete %>
     </div>
   </div>
   <div id="expenses">

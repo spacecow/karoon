@@ -3,19 +3,18 @@
 @import "fancy-buttons"
 
 $flash_container_height: 35px
+
 $blue: #4B7399
-
-input.submit
-  width: auto
-  margin: 10px 5px 0 0
-  +fancy-button
-
-div#signup
-  margin-top: 10px
-  font-size: 16px
-  input
-    margin-top: 10px
-    +fancy-button($blue, 26px, 1em, 5px)
+$alert_dark: #933
+$alert_light: #f33
+$notice_dark: #396
+$notice_light: #4CC417
+@mixin custom_gradient($light, $dark, $corner: 10px)
+  color: white
+  font-weight: bold
+  padding: 5px
+  +border-radius($corner)
+  +linear-gradient(color-stops($light, $dark))
 
 body
   font: normal 14px "Helvetica Neue", Arial, Helvetica, sans-serif
@@ -38,25 +37,33 @@ ul
   li
     list-style-type: none
 
-ul.nested_category
-  margin-right: 10px
-
 div#top_links
   margin-bottom: 10px
 
 div#bottom_links
   margin-top: 10px
 
-$alert_dark: #933
-$alert_light: #f33
-$notice_dark: #396
-$notice_light: #4CC417
-@mixin custom_gradient($light, $dark, $corner: 10px)
-  color: white
+span.label
   font-weight: bold
-  padding: 5px
-  +border-radius($corner)
-  +linear-gradient(color-stops($light, $dark))
+
+input.submit
+  width: auto
+  margin: 10px 5px 0 0
+  +fancy-button
+
+div#top_container
+  div#image_container
+    width: 200px
+
+div#signup
+  margin-top: 10px
+  font-size: 16px
+  input
+    margin-top: 10px
+    +fancy-button($blue, 26px, 1em, 5px)
+
+ul.nested_category
+  margin-right: 10px
 
 form
   li
@@ -78,49 +85,23 @@ form
       font-style: italic
       color: red
       margin: 0
-  li#book_regular_price_input
-    input
-      float: left
-    p.inline-hints
-      float: left
-      margin: 4px 0 0 5px
-    p.inline-errors
-      float: left
-      width: 100% 
-
-span.label
-  font-weight: bold
-
-div#top_container
-  padding-left: 200px
-  div#image_container
-    float: left
-    width: 200px
-    margin-left: -200px
-    img
-      float: right
 
 div#flash_container
   padding: 2px
   height: $flash_container_height
   div#flash_notice
     border: 1px solid black
-    float: left
     margin-top: 2px
     +custom_gradient($notice_light,$notice_dark)
   div#flash_alert
     border: 1px solid black
-    float: left
     margin-top: 2px
     +custom_gradient($alert_light,$alert_dark)
   div#user_nav
-    float: right
-    text-align: right
     div#my_cart
       background-image: url('my_cart.png')
       height: 60px
       width: 180px
-      float: right
 
 div#search_bar
   margin-top: 57px
@@ -128,44 +109,30 @@ div#search_bar
   +custom_gradient(#fff,$blue)
   form
     div#form
-      padding-left: 55px
-      padding-right: 500px
       div#label
-        float: left
-        margin-left: -55px
         margin-top: 10px
         width: 55px
       div#left_content
         input
           margin-top: 7px
-          float: left
           width: 100%
       div#right_content
-        float: left 
         width: 490px
-        margin-right: -500px
         select
           margin-top: 7px
         img
           margin-top: 3px
-          float: right
           border: 1px solid black
           +border-radius(5px)
 
 div#mid_container
-  padding-left: 200px
   div#site_nav_container
-    float: left
     width: 200px
-    margin: 7px 0 0 -200px
+    margin-top: 7px
     div#site_nav
       font-size: 20px
-      text-align: right
-      margin-right: 15px
       ul
         li.selected
-          margin-right: -5px
-          padding-right: 5px
           +border-radius(5px)
           border: 1px solid $blue
         li
