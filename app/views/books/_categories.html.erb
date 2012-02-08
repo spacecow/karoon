@@ -1,9 +1,9 @@
 <% as = as || nil %>
 <div id="categories">
-  <span class="label">
+  <div class="label">
     <%= pl(:category, book.categories_count) %>:
-  </span>
-  <span class="content">
+  </div>
+  <div class="content">
     <%= link_to_categories book.categories, as:as %>
-  </span>
+  </div>
 </div>
