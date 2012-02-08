@@ -26,4 +26,19 @@ class Translation < ActiveRecord::Base
       self.locale_id = Locale.find_or_create_by_name(:name=>id).id
     end
   end
+
+  class << self 
+    def generate_keys(file)
+      set = Set.new
+      File.open(file,File::RDONLY) do |f|
+        index = 0
+        f.each do |line|
+          set.add(line)
+        end
+      end
+      File.open('data/unique_translation_keys.txt',File::WRONLY) do |f|
+        f.puts set.to_a.sort
+      end
+    end
+  end
 end

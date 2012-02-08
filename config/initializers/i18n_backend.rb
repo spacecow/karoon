@@ -5,6 +5,7 @@ DATABASES = {
 }
 
 TRANSLATION_STORE = Redis.new(:db => DATABASES[Rails.env.to_s])
+TRANSLATION_LOG = Logger.new("log/translation.log")
 #$redis = Redis.new(:host => 'localhost', :port => 6379)
 
 if Rails.env.test?

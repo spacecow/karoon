@@ -92,6 +92,7 @@ en:
       address: 'Address'
       author: 'Author'
       category: 'Category'
+      confirmation: 'Confirmation'
       email: 'Email'
       first_name: 'First Name'
       image: 'Image'
