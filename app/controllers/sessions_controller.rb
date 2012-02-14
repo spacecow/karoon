@@ -7,9 +7,9 @@ class SessionsController < ApplicationController
     if user
       session_userid(user.id)
       flash[:notice] = notify(:logged_in)
-      if session[:original_url]
-        url = session[:original_url]
-        session[:original_url] = nil
+      if session_original_url
+        url = session_original_url
+        session_original_url(nil)
         redirect_to url and return
       end
       redirect_to root_url

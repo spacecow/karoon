@@ -8,7 +8,10 @@ class Ability
     can [:show,:create], Search
     can :create, LineItem
     can :destroy, LineItem
+    can [:create,:signup_confirmation], User
     if user
+      can :show, User
+      cannot :new, User
       if user.role?(User::MEMBER) || user.role?(User::VIP) || user.role?(User::MINIADMIN) || user.role?(User::ADMIN)
         can :create, Order
         can :show, Order, :user_id => user.id
@@ -33,6 +36,6 @@ class Ability
       if user.role? :god
         can :manage, :all
       end 
-    end
+    end #user
   end
 end

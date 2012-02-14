@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_many :books
   has_many :blank_books, :class_name => 'Book', :conditions => {:user_id => nil}
   accepts_nested_attributes_for :blank_books
+  has_one :signup_token
 
   attr_accessor :password
   before_create :set_role
@@ -13,6 +14,7 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password
   validates_presence_of :email
   validates_uniqueness_of :email
+  validates_uniqueness_of :userid, :unless => Proc.new{|user| user.userid.blank? } 
 
   ADMIN     = 'admin'
   GOD       = 'god'

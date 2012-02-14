@@ -4,7 +4,12 @@ Karoon::Application.routes.draw do
   resources :sessions, :only => [:new,:create,:destroy]
 
   get 'signup' => 'users#new'
-  resources :users, :only => [:new,:create]
+  match 'signup_confirmation/:token' => 'users#signup_confirmation', :as => :signup_confirmation
+  resources :users, :only => [:show,:new,:create] do
+    collection do
+      get :signup_confirmation
+    end
+  end
 
   get 'welcome' => 'books#index'
   resources :books do

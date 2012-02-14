@@ -28,7 +28,7 @@ class TranslationsController < ApplicationController
   end
 
   def update_multiple
-    (params[:english]||{}).each do |key,value|
+    (params[:en]||{}).each do |key,value|
       I18n.backend.store_translations(value[:locale], {value[:key] => value[:value]}, :escape => false) unless value[:value].blank?
       if value[:locale] == 'en.categories'
         category = Category.find_by_name(value[:key])
@@ -38,7 +38,7 @@ class TranslationsController < ApplicationController
         end
       end
     end
-    (params[:persian]||{}).each do |key,value|
+    (params[:ir]||{}).each do |key,value|
       I18n.backend.store_translations(value[:locale], {value[:key] => value[:value]}, :escape => false) unless value[:value].blank?
       if value[:locale] == 'ir.categories'
         category = Category.find_by_name(value[:key])

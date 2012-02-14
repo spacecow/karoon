@@ -1,5 +1,5 @@
 en:
-  author: 
+  authoractivated: 
     one: 'Author'
     other: 'Authors'
   author_match: 'Author Match'
@@ -67,8 +67,10 @@ en:
   alerts:
     invalid_cart: "Invalid cart."
     invalid_login_or_password: "Invalid login or password."
+    invalid_signup_token: "Invalid signup token."
     not_created: 'No %{o} was created.'
     unauthorized_access: "Unauthorized Access."
+    user_does_not_exist: 'User does not exist.'
 
   categories:
     christianity: "angels come down from heaven"
@@ -120,15 +122,16 @@ en:
     update: 'Update %{o}'
   messages:
     dont_have_an_account?: "Don't have an account?"
-    logged_in_as: "Logged in as %{name}"
+    logged_in_as: "Logged in as %{name}."
     sure?: 'Are you sure?'
     your_cart_is_currently_empty: 'Your cart is currently empty.'
   notices:
     email_has_been_sent_about_your_purchase: "An email has been sent to you with information about your purchase."
+    email_with_userinfo_has_been_sent: "An email has been sent to you with information about your account. To activate your account, make sure to click the link in the mail."
     logged_in: "Logged in."
     logged_out: "Logged out."
     saved_as_draft_in_my_orders: "It is saved as 'draft' in 'My Orders'."
-    signed_up_and_logged_in: "Signed up and logged in."
+    account_activated: "Account activated. You are now logged in."
     your_cart_is_empty: 'Your cart is empty.'
   successes:
     added_to_cart: 
@@ -157,3 +160,4 @@ en:
   unauthorized:
     new:
       order: 'You must be logged in to place an order.'
+      user: 'You already have an account.'
