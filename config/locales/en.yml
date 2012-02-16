@@ -126,12 +126,13 @@ en:
     sure?: 'Are you sure?'
     your_cart_is_currently_empty: 'Your cart is currently empty.'
   notices:
+    account_activated: "Account activated. You are now logged in."
     email_has_been_sent_about_your_purchase: "An email has been sent to you with information about your purchase."
     email_with_userinfo_has_been_sent: "An email has been sent to you with information about your account. To activate your account, make sure to click the link in the mail."
     logged_in: "Logged in."
     logged_out: "Logged out."
     saved_as_draft_in_my_orders: "It is saved as 'draft' in 'My Orders'."
-    account_activated: "Account activated. You are now logged in."
+    signed_up_and_logged_in: "Signed up and logged in."
     your_cart_is_empty: 'Your cart is empty.'
   successes:
     added_to_cart: 
@@ -160,4 +161,6 @@ en:
   unauthorized:
     new:
       order: 'You must be logged in to place an order.'
+      user: 'You already have an account.'
+    signup_confirmation:
       user: 'You already have an account.'

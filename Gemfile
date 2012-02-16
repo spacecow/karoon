@@ -37,7 +37,7 @@ group :test do
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-spork'
-  gem 'factory_girl', '2.3.2'
+  gem 'factory_girl_rails', '~> 1.1'
   gem 'capybara'
   gem 'launchy'
   gem 'libnotify'

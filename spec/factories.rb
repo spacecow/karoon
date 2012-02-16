@@ -1,39 +1,43 @@
-FactoryGirl.define :author
-
-FactoryGirl.define :book do |f|
-  f.sequence(:title){|n| "FactoryGirl Title #{n}"}
-  f.regular_price 1000
-  f.sequence(:category_tokens){|n| "token#{n}"}
+FactoryGirl.define do
+factory :author do
 end
 
-FactoryGirl.define :cart
-
-FactoryGirl.define :category do |f|
-  f.name 'factory'
+factory :book do
+  sequence(:title){|n| "Factory Title #{n}"}
+  regular_price 1000
+  sequence(:category_tokens){|n| "token#{n}"}
 end
 
-FactoryGirl.define :line_item do |f|
-  f.association :book
+factory :cart do 
 end
 
-FactoryGirl.define :locale do |f|
-  f.name 'FactoryGirl Name'
+factory :category do
+  name 'factory'
 end
 
-FactoryGirl.define :order do |f|
-  f.name 'FactoryGirl Name'
-  f.address 'FactoryGirl Address'
-  f.email 'FactoryGirl Email'
-  f.pay_type Order::PAY_ON_DELIVERY
-  f.postal_service Order::FLYING_CARPET
+factory :line_item do
+  association :book
 end
 
-FactoryGirl.define :search do |f|
-  f.keywords 'FactoryGirl Keywords'
-  f.ip '1.2.3.4'
+factory :locale do
+  name 'Factory Name'
 end
 
-FactoryGirl.define :user do |f|
-  f.email 'test@example.com'
-  f.password 'secret'
+factory :order do
+  name 'Factory Name'
+  address 'Factory Address'
+  email 'Factory Email'
+  pay_type Order::PAY_ON_DELIVERY
+  postal_service Order::FLYING_CARPET
+end
+
+factory :search do
+  keywords 'Factory Keywords'
+  ip '1.2.3.4'
+end
+
+factory :user do
+  email 'test@example.com'
+  password 'secret'
+end
 end

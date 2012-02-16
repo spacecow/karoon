@@ -32,6 +32,7 @@ module ApplicationHelper
   end
   def english?; get_language == :en end
   def get_language; I18n.locale end
+  def get_html_language; english? ? :en : :fa end
   def listed_categories(categories)
     return if categories.empty?
     content_tag(:ul,categories.map{|cat,subcat|

@@ -11,7 +11,7 @@ class Ability
     can [:create,:signup_confirmation], User
     if user
       can :show, User
-      cannot :new, User
+      cannot [:create,:signup_confirmation], User
       if user.role?(User::MEMBER) || user.role?(User::VIP) || user.role?(User::MINIADMIN) || user.role?(User::ADMIN)
         can :create, Order
         can :show, Order, :user_id => user.id
