@@ -59,5 +59,4 @@ $(function() {
     var i = $("div.book").filter(":visible").size();
     $("div#book_"+i).show();
   });
-
 });

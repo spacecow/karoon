@@ -5,5 +5,5 @@
 </div>
 
 <div id="bottom_links">
-  <%= link_to t(:edit), edit_category_path(@category) if can? :edit, @category %> <%= link_to t(:delete), @category, :confirm => sure?, :method => :delete if can? :destroy, @category %>
+  <%= link_to jt(:edit), edit_category_path(@category) if can? :edit, @category %> <%= link_to jt(:delete), @category, :confirm => sure?, :method => :delete if can? :destroy, @category %>
 </div>

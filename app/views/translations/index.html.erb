@@ -5,9 +5,9 @@
 <%= subtitle new(:translation) %>
 
 <%= semantic_form_for @translation do |f| %>
-  <%= f.input :key %>
+  <%= f.input :key, label:ft(:key) %>
   <% if @translation.value %>
-    <%= f.input :value %>
+    <%= f.input :value, label:ft(:value) %>
   <% else %>
     <%= f.input :value, :hint => concatenate_or_skip("English: ", translate_or_skip(@translation.anti_language,'en',nil)) %>
   <% end %>

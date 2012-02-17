@@ -1,6 +1,6 @@
 <%= semantic_form_for @author do |f| %>
-  <%= f.input :first_name %>
-  <%= f.input :middle_names %>
-  <%= f.input :last_name %>
+  <%= f.input :first_name, label:ft(:first_name) %>
+  <%= f.input :middle_names, label:ft(:middle_names) %>
+  <%= f.input :last_name, label:ft(:last_name) %>
   <%= f.submit :class => :submit %>
 <% end %>

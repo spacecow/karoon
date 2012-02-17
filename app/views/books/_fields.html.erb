@@ -1,12 +1,12 @@
 <li id="book_title_input">
-  <%= f.label :title %>
+  <%= f.label :title, ft(:title) %>
   <%= f.text_field :title %>
   <p class="inline-errors">
     <%= book.errors[:title].join %>
   </p>
 </li>
 <li id="book_summary_input">
-  <%= f.label :summary %>
+  <%= f.label :summary, ft(:summary) %>
   <%= f.text_area :summary %>
 </li>
 <li id="book_regular_price_input">
@@ -21,7 +21,7 @@
 </li>
 <div class="clear"></div>
 <li id="book_image_input">
-  <%= f.label :image %>
+  <%= f.label :image, ft(:image) %>
   <%= f.file_field :image %>
 </li>
 <li id="book_author_tokens_input">

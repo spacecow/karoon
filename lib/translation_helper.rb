@@ -20,7 +20,7 @@ module TranslationHelper
   end
 
   def translate_or_skip(s,lang,skip=nil)
-    TRANSLATION_STORE["#{lang}.#{s}"].nil? ? skip : t(s,:locale=>lang)
+    TRANSLATION_STORE["#{lang}.#{s}"].nil? ? skip : jt(s,:locale=>lang)
   end
 
   def unique_suffixes(translations)

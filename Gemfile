@@ -21,6 +21,7 @@ gem 'aasm'
 gem 'fancy-buttons'
 gem 'redis'
 gem 'yajl-ruby'
+#gem 'i18n', path:'/home/jsveholm/apps/external/i18n'
 
 group :assets do
   gem 'sass-rails', "  ~> 3.1.0"

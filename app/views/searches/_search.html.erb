@@ -4,7 +4,7 @@
   </div>
   <div id="ip">
     <span class="label">
-      <%= t(:ip) %>:
+      <%= jt(:ip) %>:
     </span>
     <span class="content">
       <%= search.ip %>
@@ -13,7 +13,7 @@
   <% if search.user %>
     <div id="userid">
       <span class="label">
-        <%= t(:userid) %>:
+        <%= jt(:userid) %>:
       </span>
       <span class="content">
         <%= search.user.email %>
@@ -23,7 +23,7 @@
   <% if search.book_match %>
     <div id="book_match">
       <span class="label">
-        <%= t(:book_match) %>:
+        <%= jt(:book_match) %>:
       </span>
       <span class="content">
         <%= link_book_json_array search.book_match %>
@@ -33,7 +33,7 @@
   <% if search.author_match %>
     <div id="author_match">
       <span class="label">
-        <%= t(:author_match) %>:
+        <%= jt(:author_match) %>:
       </span>
       <span class="content">
         <%= link_author_json_array search.author_match %>
@@ -43,7 +43,7 @@
   <% if search.category_match %>
     <div id="category_match">
       <span class="label">
-        <%= t(:category_match) %>:
+        <%= jt(:category_match) %>:
       </span>
       <span class="content">
         <%= link_category_json_array search.category_match %>

@@ -1,6 +1,6 @@
 <%= semantic_form_for @book do |f| %>
-  <%= f.input :title %>
-  <%= f.input :summary %>
+  <%= f.input :title, label:ft(:title) %>
+  <%= f.input :summary, label:ft(:summary) %>
   <li id="book_regular_price_input">
     <%= f.label :regular_price, ft(:regular_price) %>
     <%= f.text_field :regular_price, {:class => :short} %>
@@ -12,8 +12,8 @@
     </p>
   </li>
   <div class="clear"></div>
-  <%= f.input :image %>
-  <%= f.input :author_tokens, :label => ft(:author), :input_html => {"data-pre" => @book.authors.map(&:attributes).to_json} %>
-  <%= f.input :category_tokens, :label => ft(:category), :input_html => {"data-pre" => @book.categories.map(&:attributes).to_json} %>
+  <%= f.input :image, label:ft(:image) %>
+  <%= f.input :author_tokens, label:ft(:author), :input_html => {"data-pre" => @book.authors.map(&:attributes).to_json} %>
+  <%= f.input :category_tokens, label:ft(:category), :input_html => {"data-pre" => @book.categories.map(&:attributes).to_json} %>
   <%= f.submit @book.new_record? ? create(:book) : update(:book), :class => :submit %>
 <% end %>

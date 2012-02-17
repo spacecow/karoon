@@ -24,7 +24,7 @@
     <%= render 'books/categories', book:@book %>
     <div id="price">
       <span class="label">
-        <%= t(:price) %>:
+        <%= jt(:price) %>:
       </span>
       <span class="content">
       <% if currency_in_riel? %>
@@ -53,7 +53,7 @@
     <% end %>
 
     <div id="bottom_links">
-      <%= link_to t(:edit), edit_book_path(@book) if can? :edit, @book %> <%= link_to t(:delete), @book, :confirm => sure?, :method => :delete if can? :destroy, @book %>
+      <%= link_to jt(:edit), edit_book_path(@book) if can? :edit, @book %> <%= link_to jt(:delete), @book, :confirm => sure?, :method => :delete if can? :destroy, @book %>
     </div>
   </div>
   <div class="clear"></div>

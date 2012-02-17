@@ -3,7 +3,7 @@
     <%= link_to category.name, category %>
   </div>
   <div id="actions">
-    <%= link_to t(:edit), edit_category_path(category) if can? :edit, category %> <%= link_to t(:del), category, :confirm => sure?, :method => :delete if can? :destroy, category %>
+    <%= link_to jt(:edit), edit_category_path(category) if can? :edit, category %> <%= link_to jt(:del), category, :confirm => sure?, :method => :delete if can? :destroy, category %>
   </div>
 </div>
 <div class="clear"></div>
