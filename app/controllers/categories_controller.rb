@@ -23,7 +23,9 @@ class CategoriesController < ApplicationController
   end
 
   def index
-    @categories = Category.arrange(:order => :names_depth_cache_en)
+    @categories = Category.scoped
+    @category_hash = @categories.arrange(:order => :names_depth_cache_en)
+    @category = Category.new
     @selection = :categories
     respond_to do |f|
       f.html
@@ -57,9 +59,8 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    name = @category.name
     @category.destroy
-    redirect_to categories_path, :notice => deleted_adv(:category,name)
+    redirect_to categories_path, :notice => deleted(:category)
   end
 
   private

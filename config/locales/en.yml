@@ -149,6 +149,7 @@ en:
     confirmed: "%{o} has been confirmed."
     created: "%{o} was successfully created."
     created_state: "%{o} %{state} was successfully created."
+    deleted: "%{o} was successfully deleted."
     emptied: "%{o} was emptied."
     removed_from_cart: 
       one: "%{o}: '%{name}' was removed from your cart."

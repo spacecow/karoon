@@ -1,0 +1,1 @@
+/home/johan/apps/basiq/spec/request/categories_index/create_spec.rb
