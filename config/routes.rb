@@ -25,7 +25,7 @@ Karoon::Application.routes.draw do
   resources :settings, :only => [:edit,:update]
 
   resources :authors
-  resources :categories
+  resources :categories, :only => [:show,:index,:create,:update,:destroy]
   resources :searches, :only => [:show,:index,:create]
 
   resources :carts, :only => [:show,:update,:destroy]

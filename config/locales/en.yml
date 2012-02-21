@@ -107,7 +107,8 @@ en:
       locale: 'Locale'
       login: 'Login'
       middle_names: 'Middle Names'
-      name: 'Name'
+      name_en: 'English Name'
+      name_ir: 'Persian Name'
       pay_type: 'Pay Type'
       password: 'Password'
       password_confirmation: 'Confirmation'
@@ -149,6 +150,7 @@ en:
     confirmed: "%{o} has been confirmed."
     created: "%{o} was successfully created."
     created_state: "%{o} %{state} was successfully created."
+    deleted: "%{o} was successfully deleted."
     emptied: "%{o} was emptied."
     removed_from_cart: 
       one: "%{o}: '%{name}' was removed from your cart."

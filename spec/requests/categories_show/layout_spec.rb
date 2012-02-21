@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "Categories" do
   describe "show" do
     before(:each) do
-      @category = create_category('rocket_launcher')
+      @category = create_category('rocket launcher')
     end 
 
     context "member layout" do

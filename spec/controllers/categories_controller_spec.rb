@@ -4,7 +4,7 @@ describe CategoriesController do
   controller_actions = controller_actions("categories")
 
   before(:each) do
-    @model = Factory(:category)
+    @model = Factory(:category,name_en:'test')
   end
 
   describe "a user is not logged in" do

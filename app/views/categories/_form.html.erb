@@ -1,5 +1,8 @@
+<%= formtitle @category %>
+
 <%= semantic_form_for @category do |f| %>
-  <%= f.input :name %>
-  <%= f.input :parent_id, :as => :select, :collection => @categories %>
-  <%= f.submit :class => :submit %>
+  <%= f.input :name_en, label:ft(:name_en) %>
+  <%= f.input :name_ir, label:ft(:name_ir) %>
+  <%= f.input :parent_id, :as => :select, :collection => @categories.map{|e| [e.send("names_depth_cache_#{get_language}"),e.id]} %>
+  <%= submit(f,@category) %>
 <% end %>

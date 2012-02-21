@@ -1,9 +1,5 @@
 <%= title pl(:category) %>
 
-<div id="categories">
-  <%= nested_categories @categories %>
-</div>
+<%= render 'categories', categories:@category_hash unless @category_hash.empty? %>
 
-<div id="bottom_links">
-  <%= link_to new(:category), new_category_path if can? :new, Category %>
-</div>
+<%= render 'form' if can? :new, Category %>

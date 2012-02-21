@@ -25,7 +25,7 @@ describe "Searches" do
       context "layout, one category" do
         context "categories have two options in" do
           before(:each) do
-            create_category('science')
+            Factory(:category,name_en:'science',name_ir:'persian science')
             visit root_path
           end
 
@@ -34,7 +34,7 @@ describe "Searches" do
           end
           it "persian" do
             user_nav.click_link 'Persian'
-            search_bar.options("search_category_id").should eq 'کتابها, علم'
+            search_bar.options("search_category_id").should eq 'کتابها, persian science'
           end
         end
       end
@@ -42,8 +42,8 @@ describe "Searches" do
       context "layout, two categories" do
         context "categories have three options in" do
           before(:each) do
-            science = create_category('science')
-            create_category('rocket_launcher',science.id)
+            science = Factory(:category,name_en:'science',name_ir:'persian science')
+            Factory(:category,name_en:'rocket launcher',name_ir:'persian rocket launcher',parent_id:science.id)
             visit root_path
           end
 
@@ -52,7 +52,7 @@ describe "Searches" do
           end
           it "persian" do
             user_nav.click_link 'Persian'
-            search_bar.options("search_category_id").should eq 'کتابها, علم, علم\راکت'
+            search_bar.options("search_category_id").should eq 'کتابها, persian science, persian science\persian rocket launcher'
           end
         end
       end

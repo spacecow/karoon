@@ -12,7 +12,6 @@ factory :cart do
 end
 
 factory :category do
-  name 'factory'
 end
 
 factory :line_item do

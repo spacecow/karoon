@@ -18,3 +18,12 @@ ir:
     rocket_launcher: 'راکت'
     ruby: 'روبی' 
     science: 'علم'
+
+  formtastic:
+    labels:
+      category: 'Category'
+      regular_price: 'Regular Price'
+      title: 'Title'
+
+  labels:
+    create: 'Create %{o}'

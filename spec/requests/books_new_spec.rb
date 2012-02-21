@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'spec_helper'
 
 describe "Books" do
@@ -97,7 +98,7 @@ describe "Books" do
         book.image_url.should eq "/uploads/book/image/#{book.id}/tree.png"
         book.image_url(:thumb).should eq "/uploads/book/image/#{book.id}/thumb_tree.png"
         book.author.name.should eq 'Test Author'
-        book.category.name.should eq 'science'
+        book.category.name_en.should eq 'science'
       end
 
       context "saves the price in Toman for" do
@@ -175,12 +176,25 @@ describe "Books" do
           end.should change(Author,:count).by(1)
           Book.last.authors.map(&:name).sort.should eq ['Basil Mouse','Test Author']
         end
-        it "category" do
-          lambda do
-            fill_in 'Category', :with => " space, #{@category.id}"
-            click_button 'Create Book'
-          end.should change(Category,:count).by(1)
-          Book.last.categories.map(&:name).sort.should eq ['science','space']
+        context "category", focus:true do
+          it "in egnlish" do
+            lambda do
+              fill_in 'Category', :with => " space, #{@category.id}"
+              click_button 'Create Book'
+            end.should change(Category,:count).by(1)
+            Book.last.categories.map(&:name_en).sort.should eq ['science','space']
+          end
+
+          it "in persian" do
+            user_nav.click_link 'Persian'
+            lambda do
+              fill_in 'Title', :with => 'New Title'
+              fill_in 'Regular Price', :with => 10000
+              fill_in 'Category', :with => " space, #{@category.id}"
+              click_button 'Create کتابها'
+            end.should change(Category,:count).by(1)
+            Book.last.categories.map(&:name_ir).sort.should eq ['science','space']
+          end
         end
       end
     end

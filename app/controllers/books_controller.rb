@@ -36,7 +36,7 @@ class BooksController < ApplicationController
       end
     end
     @books = Book.create(params[:books].values).reject{|e| e.errors.empty?} 
-    i = params[:books].count - @books.count
+    p i = params[:books].count - @books.count
     @books.reject!(&:all_fields_empty?)
     if @books.empty? #no temporary filled fields 
       if i == 0 #no fields filled in

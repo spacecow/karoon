@@ -1,9 +1,9 @@
 <div class="category">
   <div id="name">
-    <%= link_to category.name, category %>
+    <%= link_to category.name(get_language), category %>
   </div>
   <div id="actions">
-    <%= link_to jt(:edit), edit_category_path(category) if can? :edit, category %> <%= link_to jt(:del), category, :confirm => sure?, :method => :delete if can? :destroy, category %>
+    <%= link_to jt(:edit), categories_path(id:category.id) if can? :edit, category %> <%= link_to jt(:del), category, :confirm => sure?, :method => :delete if can? :destroy, category %>
   </div>
 </div>
 <div class="clear"></div>

@@ -50,7 +50,7 @@ class Book < ActiveRecord::Base
       if id =~ /^\d+$/
         tokens.push id
       else
-        tokens.push Category.create(:name=>id).id end
+        tokens.push Category.create(:name_en=>id).id end
     end
     self.category_ids = tokens
   end
