@@ -1,5 +1,6 @@
 <%= title pl(:category) %>
 
 <%= render 'categories', categories:@category_hash unless @category_hash.empty? %>
+<div class="clear"></div>
 
 <%= render 'form' if can? :new, Category %>

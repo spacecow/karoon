@@ -176,13 +176,14 @@ describe "Books" do
           end.should change(Author,:count).by(1)
           Book.last.authors.map(&:name).sort.should eq ['Basil Mouse','Test Author']
         end
-        context "category", focus:true do
+        context "category" do
           it "in egnlish" do
             lambda do
               fill_in 'Category', :with => " space, #{@category.id}"
               click_button 'Create Book'
             end.should change(Category,:count).by(1)
             Book.last.categories.map(&:name_en).sort.should eq ['science','space']
+            Book.last.categories.map(&:names_depth_cache_en).sort.should eq ['science','space']
           end
 
           it "in persian" do
@@ -193,7 +194,8 @@ describe "Books" do
               fill_in 'Category', :with => " space, #{@category.id}"
               click_button 'Create کتابها'
             end.should change(Category,:count).by(1)
-            Book.last.categories.map(&:name_ir).sort.should eq ['science','space']
+            Book.last.categories.map(&:name_ir).compact.should eq ['space']
+            Book.last.categories.map(&:names_depth_cache_ir).sort.should eq ['science','space']
           end
         end
       end

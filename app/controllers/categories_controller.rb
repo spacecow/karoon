@@ -19,7 +19,7 @@ class CategoriesController < ApplicationController
       @site_nav_categories[@category] = @category.children.arrange(:order => :names_depth_cache_en)
     end
       
-    @selection = @category.name(get_language)
+    @selection = @category.name?(get_language)
   end
 
   def index
@@ -35,7 +35,7 @@ class CategoriesController < ApplicationController
     @selection = :categories
     respond_to do |f|
       f.html
-      f.json {render :json => load_selected_categories.map{|e| e.name=e.names_depth_cache_en; e}.map(&:attributes)}
+      f.json {render :json => load_selected_categories.map{|e| e.attributes.merge("name" => english? ? e.names_depth_cache_en : e.names_depth_cache_ir)}}
     end
   end
 
@@ -85,6 +85,10 @@ class CategoriesController < ApplicationController
       @categories = Category.all.reject{|e| @category.subtree_ids.include? e.id}.map{|e| [e.names_depth_cache_en,e.id]}
     end
     def load_selected_categories
-      @categories = Category.where('names_depth_cache_en like ?',"%#{params[:q]}%").order(:names_depth_cache_en) 
+      if english?
+        @categories = Category.where('names_depth_cache_en like ?',"%#{params[:q]}%").order(:names_depth_cache_en) 
+      else
+        @categories = Category.where('names_depth_cache_ir like ?',"%#{params[:q]}%").order(:names_depth_cache_ir) 
+      end
     end
 end

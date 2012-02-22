@@ -23,7 +23,11 @@ class BooksController < ApplicationController
     if @book.save
       redirect_to new_book_path, :notice => created_adv(:book,@book.title)
     else
-      @book.errors.add(:category_tokens,@book.errors[:categories]) if @book.errors[:categories]
+      if english?
+        @book.errors.add(:category_tokens_en,@book.errors[:categories]) if @book.errors[:categories]
+      else
+        @book.errors.add(:category_tokens_ir,@book.errors[:categories]) if @book.errors[:categories]
+      end 
       render :new
     end
   end
@@ -36,7 +40,7 @@ class BooksController < ApplicationController
       end
     end
     @books = Book.create(params[:books].values).reject{|e| e.errors.empty?} 
-    p i = params[:books].count - @books.count
+    i = params[:books].count - @books.count
     @books.reject!(&:all_fields_empty?)
     if @books.empty? #no temporary filled fields 
       if i == 0 #no fields filled in
@@ -78,7 +82,11 @@ class BooksController < ApplicationController
     if @book.update_attributes(params[:book])
       redirect_to @book, :notice => updated_adv(:book,@book.title)
     else
-      @book.errors.add(:category_tokens,@book.errors[:categories]) if @book.errors[:categories]
+      if english?
+        @book.errors.add(:category_tokens_en,@book.errors[:categories]) if @book.errors[:categories]
+      else
+        @book.errors.add(:category_tokens_ir,@book.errors[:categories]) if @book.errors[:categories]
+      end 
       @book.convert_to_riel if currency_in_riel?
       render :edit
     end

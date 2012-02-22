@@ -14,6 +14,10 @@
   <div class="clear"></div>
   <%= f.input :image, label:ft(:image) %>
   <%= f.input :author_tokens, label:ft(:author), :input_html => {"data-pre" => @book.authors.map(&:attributes).to_json} %>
-  <%= f.input :category_tokens, label:ft(:category), :input_html => {"data-pre" => @book.categories.map(&:attributes).to_json} %>
+  <% if english? %>
+    <%= f.input :category_tokens_en, label:ft(:category), :input_html => {"data-pre" => @book.categories.map{|e| e.attributes.merge("name" => e.names_depth_cache_en)}.to_json} %>
+  <% else %>
+    <%= f.input :category_tokens_ir, label:ft(:category), :input_html => {"data-pre" => @book.categories.map{|e| e.attributes.merge("name" => e.names_depth_cache_ir)}.to_json} %>
+  <% end %>
   <%= f.submit @book.new_record? ? create(:book) : update(:book), :class => :submit %>
 <% end %>

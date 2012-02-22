@@ -5,7 +5,7 @@ end
 factory :book do
   sequence(:title){|n| "Factory Title #{n}"}
   regular_price 1000
-  sequence(:category_tokens){|n| "token#{n}"}
+  sequence(:category_tokens_en){|n| "token#{n}"}
 end
 
 factory :cart do 

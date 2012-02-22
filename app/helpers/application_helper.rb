@@ -34,7 +34,7 @@ module ApplicationHelper
   def listed_categories(categories)
     return if categories.empty?
     content_tag(:ul,categories.map{|cat,subcat|
-      content_tag(:li,link_to(cat.translated_name(get_language),cat),:class=>class_selection(cat.name(get_language))) + (subcat.present? ? content_tag(:li,listed_categories(subcat)) : '')
+      content_tag(:li,link_to(cat.name?(get_language),cat),:class=>class_selection(cat.name?(get_language))) + (subcat.present? ? content_tag(:li,listed_categories(subcat)) : '')
     }.join.html_safe,:class=>'nested_category')
   end
 end

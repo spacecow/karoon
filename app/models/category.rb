@@ -6,8 +6,9 @@ class Category < ActiveRecord::Base
   before_save :cache_ancestry
 
   attr_accessor :recursion
-  attr_accessible :name_en,:parent_id
-  validates_uniqueness_of :name_en, :name_ir
+  attr_accessible :name_en,:name_ir,:parent_id
+  validates_uniqueness_of :name_en, :unless => Proc.new{|cat| cat.name_en.blank?}
+  validates_uniqueness_of :name_ir, :unless => Proc.new{|cat| cat.name_ir.blank?}
   validates_presence_of :name_en, :if => Proc.new{|cat| cat.name_ir.blank?}
   validates_presence_of :name_ir, :if => Proc.new{|cat| cat.name_en.blank?}
   validate :ancestry_exclude_self
@@ -36,12 +37,26 @@ class Category < ActiveRecord::Base
   end
   
   class << self
+    def first_owner; owner.first end
+    def last_owner; owner.last end
+    def owner; Book end
+
     def separate(lang,*cats)
       if lang == :en
         cats.join('/')
       else
         cats.join('\\')
       end
+    end
+
+    def token(s,a,lang)
+      if s =~ /^\d+$/
+        cat = exists?(s) ? find(s) : create("name_#{lang}" => s)
+      else
+        cat = send("find_or_create_by_name_#{lang}",s)
+      end 
+      token(a.shift,a,lang).update_attribute(:parent_id,cat) unless a.empty?
+      cat
     end
   end
 

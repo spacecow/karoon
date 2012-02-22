@@ -1,0 +1,1 @@
+/home/johan/apps/basiq/spec/request/create_category_spec.rb
