@@ -10,6 +10,6 @@
  *= require categories
  *= require searches
  *= require token-input-facebook 
- *= require token-input-mac
- *= require token-input
+ *= require token-input-mac 
+ *= require token-input 
 */

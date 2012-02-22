@@ -1,4 +1,4 @@
-<%= title @search.category.nil? ? t(:books) : @search.category.name %>
+<%= title @search.category.nil? ? pl(:book) : @search.category.name(get_language) %>
 <%= subtitle("#{pl(:search,1)}: '#{@search.keywords}'. #{@search.books_count} #{pl(:hit,@search.books_count)}.") %>
 
 <div id="books">

@@ -21,6 +21,7 @@ gem 'aasm'
 gem 'fancy-buttons'
 gem 'redis'
 gem 'yajl-ruby'
+#gem 'i18n', path:'/home/jsveholm/apps/external/i18n'
 
 group :assets do
   gem 'sass-rails', "  ~> 3.1.0"
@@ -37,8 +38,9 @@ group :test do
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-spork'
-  gem 'factory_girl'
+  gem 'factory_girl_rails', '~> 1.1'
   gem 'capybara'
   gem 'launchy'
   gem 'libnotify'
+  gem 'email_spec'
 end

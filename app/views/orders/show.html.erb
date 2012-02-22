@@ -1,4 +1,4 @@
-<%= title t("order_#{@order.aasm_state}") %>
+<%= title jt("order_#{@order.aasm_state}") %>
 
 <%= render 'orders/line_items', :line_items => @order.line_items, :model => @order %>
 

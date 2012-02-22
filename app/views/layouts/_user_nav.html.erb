@@ -1,16 +1,16 @@
 <div id="user_nav">
   <% if current_user %>
-    <%= t('messages.logged_in_as',:name=>current_user.email) %><br>
-    <%= link_to t(:logout), logout_path %>
+    <%= mess(:logged_in_as,:name=>current_user.email) %><br>
+    <%= link_to jt(:logout), logout_path %>
   <% else %>
-    <%= link_to t(:login), login_path %>
+    <%= link_to jt(:login), login_path %>
   <% end %>
-  <%= link_to t(:signup), signup_path unless current_user %>
-  <%= link_to t(:settings), edit_setting_path(Setting.singleton) if can?(:edit, Setting.singleton) %>
+  <%= link_to jt(:signup), signup_path unless current_user %>
+  <%= link_to jt(:settings), edit_setting_path(Setting.singleton) if can?(:edit, Setting.singleton) %>
   <%= link_to pl(:search), searches_path if can? :index, Search %><br>
   <% if english? %>
-    <%= link_to t(:persian), :language => 'ir' %>
+    <%= link_to jt(:persian), :language => 'ir' %>
   <% else %>
-    <%= link_to t(:english), :language => 'en' %>
+    <%= link_to jt(:english), :language => 'en' %>
   <% end %>
 </div>

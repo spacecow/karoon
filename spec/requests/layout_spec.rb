@@ -21,7 +21,7 @@ describe "Sessions" do
         @religion = create_category('religion')
         create_category('islam',@religion.id)
         @space = create_category('space')
-        create_category('rocket_launcher',@space.id)
+        create_category('rocket launcher',@space.id)
         @planet = create_category('planet',@space.id)
         create_category('Mars',@planet.id)
       end

@@ -11,13 +11,13 @@ describe "Translations" do
     end
 
     it "update translations" do
-      fill_in 'english_0_value', :with => 'bbqing' 
-      fill_in 'persian_1_value', :with => 'doggy' 
+      fill_in 'en_0_value', :with => 'bbqing' 
+      fill_in 'ir_1_value', :with => 'doggy' 
       click_button 'Update Translations'
-      value('english_0_value').should eq 'bbqing'
-      value('persian_0_value').should eq 'BBQ'
-      value('english_1_value').should eq 'Dog'
-      value('persian_1_value').should eq 'doggy'
+      value(:en_0_value).should eq 'bbqing'
+      value(:ir_0_value).should eq 'BBQ'
+      value(:en_1_value).should eq 'Dog'
+      value(:ir_1_value).should eq 'doggy'
     end
   end
 end

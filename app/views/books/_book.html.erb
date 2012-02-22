@@ -13,7 +13,7 @@
     <%= render 'books/categories', book:book %>
     <div id="price">
       <span class="label">
-        <%= t(:price) %>:
+        <%= jt(:price) %>:
       </span>
       <span class="content">
         <%= book.price(currency_in_riel?) %> <%= currency %>
@@ -32,8 +32,8 @@
       <%= f.submit add_to(:cart) %>
     <% end %>
     <div id="actions">
-      <%= link_to t(:edit), edit_book_path(book) if can? :edit, book %>
-      <%= link_to t(:del), book, :confirm => sure?, :method => :delete if can? :destroy, book %>
+      <%= link_to jt(:edit), edit_book_path(book) if can? :edit, book %>
+      <%= link_to jt(:del), book, :confirm => sure?, :method => :delete if can? :destroy, book %>
     </div>
     <div class="clear"></div>
   </div>

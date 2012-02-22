@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include BasicApplicationController
   protect_from_forgery
-  helper_method :pt,:current_user,:currency_in_riel?,:currency,:current_cart,:pl
+  helper_method :pt,:current_user,:currency_in_riel?,:currency,:current_cart,:pl,:jt,:english?,:get_language
   before_filter :load_new_search, :set_language
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -15,12 +15,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
+
   def currency
     session[:currency] ||= Setting.singleton.currency
   end
   def currency_in_riel?
     currency == Setting::RIEL
   end
+  def english?; get_language == :en end
+  def get_language; I18n.locale end
 
   private
 

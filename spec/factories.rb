@@ -1,41 +1,42 @@
-Factory.define :author do |f|
+FactoryGirl.define do
+factory :author do
 end
 
-Factory.define :book do |f|
-  f.sequence(:title){|n| "Factory Title #{n}"}
-  f.regular_price 1000
-  f.sequence(:category_tokens){|n| "token#{n}"}
+factory :book do
+  sequence(:title){|n| "Factory Title #{n}"}
+  regular_price 1000
+  sequence(:category_tokens_en){|n| "token#{n}"}
 end
 
-Factory.define :cart do |f|
+factory :cart do 
 end
 
-Factory.define :category do |f|
-  f.name 'factory'
+factory :category do
 end
 
-Factory.define :line_item do |f|
-  f.association :book
+factory :line_item do
+  association :book
 end
 
-Factory.define :locale do |f|
-  f.name 'Factory Name'
+factory :locale do
+  name 'Factory Name'
 end
 
-Factory.define :order do |f|
-  f.name 'Factory Name'
-  f.address 'Factory Address'
-  f.email 'Factory Email'
-  f.pay_type Order::PAY_ON_DELIVERY
-  f.postal_service Order::FLYING_CARPET
+factory :order do
+  name 'Factory Name'
+  address 'Factory Address'
+  email 'Factory Email'
+  pay_type Order::PAY_ON_DELIVERY
+  postal_service Order::FLYING_CARPET
 end
 
-Factory.define :search do |f|
-  f.keywords 'Factory Keywords'
-  f.ip '1.2.3.4'
+factory :search do
+  keywords 'Factory Keywords'
+  ip '1.2.3.4'
 end
 
-Factory.define :user do |f|
-  f.email 'test@example.com'
-  f.password 'secret'
+factory :user do
+  email 'test@example.com'
+  password 'secret'
+end
 end

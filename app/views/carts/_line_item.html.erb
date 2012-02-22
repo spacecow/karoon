@@ -12,13 +12,13 @@
     </div>
     <%= render 'books/categories', :book => line_item.book %>
     <div id="actions">
-      <%= link_to t(:remove), line_item, :confirm => sure?, :method => :delete %>
+      <%= link_to jt(:remove), line_item, :confirm => sure?, :method => :delete %>
     </div>
   </div>
   <div id="expenses">
     <div id="price">
       <span class="label">
-        <%= t(:book_price) %>:
+        <%= jt(:book_price) %>:
       </span>
       <span class="content">
         <%= line_item.item_price(currency_in_riel?) %> <%= currency %>
@@ -34,7 +34,7 @@
     </div>
     <div id="book_total">
       <span class="label">
-        <%= t(:total) %>:
+        <%= jt(:total) %>:
       </span>
       <span class="content">
         <%= line_item.total_price(currency_in_riel?) %> <%= currency %>

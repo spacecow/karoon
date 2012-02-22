@@ -48,7 +48,7 @@ describe "Carts" do
 
       context "one, in" do
         before(:each) do
-          @book.categories << create_category('programming')
+          @book.categories << Factory(:category, name_en:'programming',name_ir:'prog.')
           visit cart_path(@cart)
         end
 
@@ -58,8 +58,8 @@ describe "Carts" do
         end
         it "persian" do
           user_nav.click_link 'Persian'
-          div(:line_item,0).div(:categories).should have_content('موضوعها: برنامه‌نویسی')
-          div(:line_item,0).div(:categories).should have_link('برنامه‌نویسی')
+          div(:line_item,0).div(:categories).should have_content('موضوعها: prog.')
+          div(:line_item,0).div(:categories).should have_link('prog.')
         end
       end
     end

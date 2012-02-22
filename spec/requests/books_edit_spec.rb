@@ -107,7 +107,7 @@ describe "Books" do
         book = Book.last
         book.title.should eq 'No Way'
         book.summary.should eq 'Edited Summary'
-        book.categories.map(&:name).should eq ["rocket"]
+        book.categories.map(&:name_en).should eq ["rocket"]
         book.authors.map(&:name).should eq ["Stephen King", "Mark Twain"]
       end
 

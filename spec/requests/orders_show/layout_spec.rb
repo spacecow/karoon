@@ -38,7 +38,7 @@ describe "Orders" do
 
       context "one, in" do
         before(:each) do
-          @book.categories << create_category('programming')
+          @book.categories << Factory(:category,name_en:'programming',name_ir:'prog.')
           visit new_order_path
         end
 
@@ -48,8 +48,8 @@ describe "Orders" do
         end
         it "persian" do
           user_nav.click_link 'Persian'
-          div(:line_item,0).div(:categories).should have_content('برنامه‌نویسی')
-          div(:line_item,0).div(:categories).should_not have_link('برنامه‌نویسی')
+          div(:line_item,0).div(:categories).should have_content('prog.')
+          div(:line_item,0).div(:categories).should_not have_link('prog.')
         end
       end
     end

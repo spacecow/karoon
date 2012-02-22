@@ -1,8 +1,9 @@
-<%= title t(:signup) %>
+<%= title jt(:signup) %>
 
 <%= semantic_form_for @user do |f| %>
-  <%= f.input :email, :label => ft(:login), :input_html => {:class => :short} %>
-  <%= f.input :password, :input_html => {:class => :short} %>
-  <%= f.input :password_confirmation, :label => ft(:confirmation), :input_html => {:class => :short} %>
+  <%= f.input :userid, label:ft(:userid), :input_html => {:class => :short} %>
+  <%= f.input :email, label:ft(:email), :input_html => {:class => :short} %>
+  <%= f.input :password, label:ft(:password), :input_html => {:class => :short} %>
+  <%= f.input :password_confirmation, label:ft(:confirmation), :input_html => {:class => :short} %>
   <%= f.submit create(:user), :class => :submit %>
 <% end %>

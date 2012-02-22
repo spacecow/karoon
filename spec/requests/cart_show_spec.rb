@@ -226,9 +226,6 @@ describe "Carts" do
             it "logging in" do
               login('member@example.com')
             end
-            it "signing up" do
-              signup
-            end
 
             after(:each) do
               current_path.should eq new_order_path

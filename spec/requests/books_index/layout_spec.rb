@@ -30,7 +30,7 @@ describe "Books" do
       end
 
       it "one category" do
-        @book.categories << create_category('rocket_launcher')
+        @book.categories << create_category('rocket launcher')
         visit books_path
         div('book',0).div('categories').should have_content('Category: rocket launcher')
       end

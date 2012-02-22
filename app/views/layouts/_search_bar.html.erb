@@ -9,7 +9,7 @@
       </div>
       <div id="right_content">
         <%= f.select :category_id, Category.order(:names_depth_cache_en).map{|e| [e.names_depth_cache(get_language),e.id]}, :prompt => pl(:book) %>
-        <%= f.submit t(:go) %>
+        <%= f.submit jt(:go) %>
         <%= link_to cart_image, current_cart %>
       </div>
       <div class="clear"></div>

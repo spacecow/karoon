@@ -23,7 +23,14 @@ $(function() {
     prePopulate: $("#book_author_tokens").data("pre"),
     theme: ""
   });
-  $("#book_category_tokens").tokenInput("/categories.json", {
+  $("#book_category_tokens_en").tokenInput("/categories.json", {
+    crossDomain: false,
+    preventDuplicates: true,
+    allowCreation: true,
+    prePopulate: $("#book_category_tokens").data("pre"),
+    theme: "facebook"
+  });
+  $("#book_category_tokens_ir").tokenInput("/categories.json", {
     crossDomain: false,
     preventDuplicates: true,
     allowCreation: true,
@@ -41,7 +48,16 @@ $(function() {
       theme: ""
     });
 
-    var category_id = "#books_"+i+"_category_tokens";
+    var category_id = "#books_"+i+"_category_tokens_en";
+    $(category_id).tokenInput("/categories.json", {
+      crossDomain: false,
+      preventDuplicates: true,
+      allowCreation: true,
+      prePopulate: $(category_id).data("pre"),
+      theme: "facebook"
+    });
+
+    var category_id = "#books_"+i+"_category_tokens_ir";
     $(category_id).tokenInput("/categories.json", {
       crossDomain: false,
       preventDuplicates: true,
@@ -59,5 +75,4 @@ $(function() {
     var i = $("div.book").filter(":visible").size();
     $("div#book_"+i).show();
   });
-
 });

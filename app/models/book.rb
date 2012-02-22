@@ -7,8 +7,8 @@ class Book < ActiveRecord::Base
   has_many :categorizations, :dependent => :destroy
   has_many :categories, :through => :categorizations
 
-  attr_reader :author_tokens, :category_tokens
-  attr_accessible :title,:author_tokens,:category_tokens,:image,:summary,:regular_price
+  attr_reader :author_tokens, :category_tokens_en, :category_tokens_ir
+  attr_accessible :title,:author_tokens,:category_tokens_en,:category_tokens_ir,:image,:summary,:regular_price
   attr_accessor :hide
 
   before_destroy :ensure_not_referenced_by_any_line_item
@@ -44,15 +44,19 @@ class Book < ActiveRecord::Base
   def category
     categories.first == categories.last ? categories.first : nil 
   end
-  def category_tokens=(ids)
+  def category_tokens_en=(s)
     tokens = []
-    ids.split(',').map(&:strip).each do |id|
-      if id =~ /^\d+$/
-        tokens.push id
-      else
-        tokens.push Category.create(:name=>id).id end
+    s.split(',').map(&:strip).each do |cat|
+      tokens.push treed_category_tokens(cat,:en) 
     end
-    self.category_ids = tokens
+    self.category_ids = tokens 
+  end
+  def category_tokens_ir=(s)
+    tokens = []
+    s.split(',').map(&:strip).each do |cat|
+      tokens.push treed_category_tokens(cat,:ir) 
+    end
+    self.category_ids = tokens 
   end
 
   def price(riel)
@@ -88,5 +92,15 @@ class Book < ActiveRecord::Base
         error = I18n.t('activerecord.errors.messages.greater_than',:count => 50) if regular_price.to_i < 50 
         errors.add(:regular_price,error) if error && !errors_on_regular_price?
       end
+    end
+
+    def treed_category_tokens(s,lang)
+      if lang == :en
+        a = s.split('/')
+      else
+        a = s.split('\\')
+      end
+      cat = Category.token(a.shift,a,lang)
+      cat.id
     end
 end

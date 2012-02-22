@@ -9,16 +9,16 @@ describe "Translations" do
       visit translations_path
     end
 
-    it "creating a category updates the category model" do
-      locale = create_locale('en.categories')
-      create_category('java')
-      Category.last.names_depth_cache_en.should eq "translation missing: en.categories.java"
-      fill_in 'Key', :with => 'java'
-      fill_in 'Value', :with => 'java'
-      fill_in 'Locale', :with => locale.id 
-      click_button 'Create Translation'
-      Category.last.names_depth_cache_en.should eq 'java'
-    end 
+    #it "creating a category updates the category model" do
+    #  locale = create_locale('en.categories')
+    #  create_category('java')
+    #  Category.last.names_depth_cache_en.should eq "translation missing: en.categories.java"
+    #  fill_in 'Key', :with => 'java'
+    #  fill_in 'Value', :with => 'java'
+    #  fill_in 'Locale', :with => locale.id 
+    #  click_button 'Create Translation'
+    #  Category.last.names_depth_cache_en.should eq 'java'
+    #end 
 
     context "create translation" do
       before(:each) do

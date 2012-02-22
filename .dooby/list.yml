@@ -97,3 +97,5 @@ dc4e85: !ruby/object:Dooby::Task
   todo: add persian field for category :done
 c7147f: !ruby/object:Dooby::Task 
   todo: persian website to mirror the english one :done
+d7bca6: !ruby/object:Dooby::Task 
+  todo: signup email :done

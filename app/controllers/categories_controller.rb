@@ -7,7 +7,7 @@ class CategoriesController < ApplicationController
   def show
     if params[:search]
       search = Search.find(params[:search])
-      search.add_and_save_category_match(@category.id,@category.name)
+      search.add_and_save_category_match(@category.id,@category.name(get_language))
     end
     if @category.parent
       @site_nav_categories = @category.ancestors.arrange(:order => :names_depth_cache_en)
@@ -19,47 +19,52 @@ class CategoriesController < ApplicationController
       @site_nav_categories[@category] = @category.children.arrange(:order => :names_depth_cache_en)
     end
       
-    @selection = @category.name
+    @selection = @category.name?(get_language)
   end
 
   def index
-    @categories = Category.arrange(:order => :names_depth_cache_en)
+    if params[:id] 
+      @category = Category.find(params[:id]) 
+      @categories = Category.where(["id NOT IN (?)",@category.subtree_ids])
+    else
+      @category = Category.new
+      @categories = Category.scoped
+    end
+    @category_hash = Category.scoped.arrange(:order => :names_depth_cache_en)
+
     @selection = :categories
     respond_to do |f|
       f.html
-      f.json {render :json => load_selected_categories.map{|e| e.name=e.names_depth_cache_en; e}.map(&:attributes)}
+      f.json {render :json => load_selected_categories.map{|e| e.attributes.merge("name" => english? ? e.names_depth_cache_en : e.names_depth_cache_ir)}}
     end
   end
 
-  def new
-  end
-  
   def create
     if @category.save
-      redirect_to new_category_path, :notice => created_adv(:category,@category.name)
+      redirect_to categories_path, :notice => created(:category)
     else
-      load_all_categories
-      render :new
+      #load_all_categories
+      @categories = Category.scoped
+      @category_hash = @categories.arrange(:order => :names_depth_cache_en)
+      render :index
     end
   end
 
-  def edit
-  end
-  
   def update
     if @category.update_attributes(params[:category])
       @category.descendants.map(&:save) #update names_depth_cache
-      redirect_to @category, :notice => updated_adv(:category,@category.name)
+      redirect_to categories_path, :notice => updated(:category)
     else
-      load_min_categories
-      render :edit
+      #load_min_categories
+      @categories = Category.where(["id NOT IN (?)",@category.subtree_ids])
+      @category_hash = Category.scoped.arrange(:order => :names_depth_cache_en)
+      render :index
     end
   end
 
   def destroy
-    name = @category.name
     @category.destroy
-    redirect_to categories_path, :notice => deleted_adv(:category,name)
+    redirect_to categories_path, :notice => deleted(:category)
   end
 
   private
@@ -80,6 +85,10 @@ class CategoriesController < ApplicationController
       @categories = Category.all.reject{|e| @category.subtree_ids.include? e.id}.map{|e| [e.names_depth_cache_en,e.id]}
     end
     def load_selected_categories
-      @categories = Category.where('names_depth_cache_en like ?',"%#{params[:q]}%").order(:names_depth_cache_en) 
+      if english?
+        @categories = Category.where('names_depth_cache_en like ?',"%#{params[:q]}%").order(:names_depth_cache_en) 
+      else
+        @categories = Category.where('names_depth_cache_ir like ?',"%#{params[:q]}%").order(:names_depth_cache_ir) 
+      end
     end
 end

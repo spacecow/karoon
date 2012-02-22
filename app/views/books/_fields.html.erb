@@ -1,12 +1,12 @@
 <li id="book_title_input">
-  <%= f.label :title %>
+  <%= f.label :title, ft(:title) %>
   <%= f.text_field :title %>
   <p class="inline-errors">
     <%= book.errors[:title].join %>
   </p>
 </li>
 <li id="book_summary_input">
-  <%= f.label :summary %>
+  <%= f.label :summary, ft(:summary) %>
   <%= f.text_area :summary %>
 </li>
 <li id="book_regular_price_input">
@@ -21,7 +21,7 @@
 </li>
 <div class="clear"></div>
 <li id="book_image_input">
-  <%= f.label :image %>
+  <%= f.label :image, ft(:image) %>
   <%= f.file_field :image %>
 </li>
 <li id="book_author_tokens_input">
@@ -29,8 +29,13 @@
   <%= f.text_field :author_tokens, "data-pre" => book.authors.map(&:attributes).to_json %>
 </li>
 <li id="book_category_tokens_input">
-  <%= f.label :category_tokens, ft(:category) %>
-  <%= f.text_field :category_tokens, "data-pre" => book.categories.map(&:attributes).to_json  %>
+<% if english? %>
+  <%= f.label :category_tokens_en, ft(:category) %>
+  <%= f.text_field :category_tokens_en, "data-pre" => book.categories.map(&:attributes).to_json  %>
+<% else %>
+  <%= f.label :category_tokens_ir, ft(:category) %>
+  <%= f.text_field :category_tokens_ir, "data-pre" => book.categories.map(&:attributes).to_json  %>
+<% end %>
   <p class="inline-errors">
     <%= book.errors[:categories].join %>
   </p>

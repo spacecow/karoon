@@ -6,24 +6,60 @@ class Category < ActiveRecord::Base
   before_save :cache_ancestry
 
   attr_accessor :recursion
-  attr_accessible :name,:parent_id
-  validates :name, :presence => true, :uniqueness => true
-  validates_format_of :name, :with => /^[a-zA-Z0-9_]+$/
+  attr_accessible :name_en,:name_ir,:parent_id
+  validates_uniqueness_of :name_en, :unless => Proc.new{|cat| cat.name_en.blank?}
+  validates_uniqueness_of :name_ir, :unless => Proc.new{|cat| cat.name_ir.blank?}
+  validates_presence_of :name_en, :if => Proc.new{|cat| cat.name_ir.blank?}
+  validates_presence_of :name_ir, :if => Proc.new{|cat| cat.name_en.blank?}
   validate :ancestry_exclude_self
 
   def cache_ancestry
-    #jp ancestors = ancestors.map(&:name)
-    #ancestors.pop unless new_record?
-    self.names_depth_cache_en = ancestors.map{|e| category(e.name,:en)}.push(category(name,:en)).join('/')
-    self.names_depth_cache_ir = ancestors.map{|e| category(e.name,:ir)}.push(category(name,:ir)).join('\\')
+    self.names_depth_cache_en = ancestors.map{|e| e.name?(:en)}.push(name?(:en)).join('/')
+    self.names_depth_cache_ir = ancestors.map{|e| e.name?(:ir)}.push(name?(:ir)).join('\\')
   end
 
-  def translated_name(lang); category(name,lang) end
+  def name(lang) send("name_#{lang}") end
+  def name?(lang) 
+    if lang==:en
+      name_en.present? ? name_en : name_ir
+    else
+      name_ir.present? ? name_ir : name_en
+    end
+  end
+
+  def translated_name(lang)
+    send("name_#{lang}")
+    #category(name,lang) 
+  end
   def names_depth_cache(lang)
     #names_depth_cache_en.split('/').map{|e| category(e)}.join('/')
     lang==:en ? names_depth_cache_en : names_depth_cache_ir
   end
   
+  class << self
+    def first_owner; owner.first end
+    def last_owner; owner.last end
+    def owner; Book end
+
+    def separate(lang,*cats)
+      if lang == :en
+        cats.join('/')
+      else
+        cats.join('\\')
+      end
+    end
+
+    def token(s,a,lang)
+      if s =~ /^\d+$/
+        cat = exists?(s) ? find(s) : create("name_#{lang}" => s)
+      else
+        cat = send("find_or_create_by_name_#{lang}",s)
+      end 
+      token(a.shift,a,lang).update_attribute(:parent_id,cat) unless a.empty?
+      cat
+    end
+  end
+
   private
 
     def ancestry_exclude_self

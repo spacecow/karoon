@@ -1,0 +1,1 @@
+/home/johan/apps/basiq/spec/request/categories_index/delete_spec.rb

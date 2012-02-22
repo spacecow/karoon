@@ -28,7 +28,7 @@ describe "Searches" do
         end
         it "contains categories in order" do
           science = create_category('science')
-          create_category('rocket_launcher',science.id)
+          create_category('rocket launcher',science.id)
           visit root_path
           search_bar.options("search_category_id").should eq "Books, science, science/rocket launcher"
         end

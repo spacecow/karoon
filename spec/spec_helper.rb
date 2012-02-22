@@ -1,4 +1,5 @@
 require 'spork'
+require 'email_spec'
 
 Spork.prefork do
   ENV["RAILS_ENV"] ||= 'test'
