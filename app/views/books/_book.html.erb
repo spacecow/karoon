@@ -16,13 +16,13 @@
         <%= jt(:price) %>:
       </span>
       <span class="content">
-        <%= book.price(currency_in_riel?) %> <%= currency %>
+        <%= book.price(currency_in_riel?) %> <%= t(currency) %>
       </span>
     </div>
     <%= form_for LineItem.new(:book_id => book.id) do |f| %>
       <div id="quantity">
         <span class="label">
-          <%= f.label :quantity %>:
+          <%= f.label :quantity, ft(:quantity) %>:
         </span>
         <span class="content">
           <%= f.select :quantity, (1..10) %>

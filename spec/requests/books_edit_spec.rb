@@ -36,9 +36,9 @@ describe "Books" do
       end
     end
 
-    context "Riel" do
+    context "Rial" do
       before(:each) do
-        Setting.singleton.update_attribute(:currency,Setting::RIEL)
+        Setting.singleton.update_attribute(:currency,Setting::RIAL)
         create_admin(:email=>'admin@example.com')
         login('admin@example.com')
         book = Factory(:book,:regular_price=>100)
@@ -52,7 +52,7 @@ describe "Books" do
         click_button 'Update Book'
         find_field('Regular Price').value.should eq '1000'  
       end
-      it "regular price cannot be less than 500 Riel" do
+      it "regular price cannot be less than 500 Rial" do
         fill_in 'Price', :with => 499 
         click_button 'Update Book'
         li(:regular_price).should have_greater_than_error(500)
@@ -62,7 +62,7 @@ describe "Books" do
         click_button 'Update Book'
         li(:regular_price).should have_numericality_error
       end
-      it "on error form, alphabetical regular price shows up in Riel" do
+      it "on error form, alphabetical regular price shows up in Rial" do
         fill_in 'Title', :with => ''
         fill_in 'Regular Price', :with => 'letters' 
         click_button 'Update Book'

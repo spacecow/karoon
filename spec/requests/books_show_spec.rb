@@ -71,10 +71,10 @@ describe "Books" do
           visit book_path(@book)
           div('book').should have_content('Price: 1000 Toman') 
         end
-        it "in Riel" do
-          Setting.singleton.update_attribute(:currency,Setting::RIEL)
+        it "in Rial" do
+          Setting.singleton.update_attribute(:currency,Setting::RIAL)
           visit book_path(@book)
-          div('book').should have_content('Price: 10000 Riel') 
+          div('book').should have_content('Price: 10000 Rial') 
         end
       end
     
