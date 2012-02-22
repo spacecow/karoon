@@ -7,6 +7,10 @@ describe "Carts" do
       @cart = Cart.last 
     end
 
+    it "ajax update when removing an item from a cart"
+
+    it "no dropdown menu for no of items in the cart"
+
     context "attempt to display a cart that does not exist" do
       it "generates an alert message" do
         visit cart_path(1)
