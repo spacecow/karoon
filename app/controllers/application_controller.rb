@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
     session[:currency] ||= Setting.singleton.currency
   end
   def currency_in_riel?
-    currency == Setting::RIEL
+    currency == Setting::RIAL
   end
   def english?; get_language == :en end
   def get_language; I18n.locale end

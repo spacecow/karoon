@@ -27,6 +27,7 @@ en:
   hit: 
     one: 'Hit'
     other: 'Hits'
+  in_rial: 'in Rial'
   in_toman: 'in Toman'
   ip: 'IP'
   ir: 'Persian'
@@ -41,13 +42,14 @@ en:
   persian: 'Persian'
   price: 'Price'
   purchase: 'Purchase'
-  quantity: 'Quantity'
+  quantity: 'Quantitys1:w'
   remove: 'Remove'
   search: 
     one: 'Search'
     other: 'Searches'
   settings: 'Settings'
   signup: 'Signup'
+  toman: 'Toman'
   total: 'Total'
   translation: 
     one: 'Translation'
@@ -114,6 +116,7 @@ en:
       password: 'Password'
       password_confirmation: 'Confirmation'
       postal_service: 'Postal Service'
+      quantity: 'Quantity'
       regular_price: 'Regular Price'
       summary: 'Summary'
       title: 'Title'

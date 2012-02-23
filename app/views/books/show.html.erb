@@ -28,9 +28,9 @@
       </span>
       <span class="content">
       <% if currency_in_riel? %>
-        <%= @book.regular_price_in_riel %> <%= currency %>
+        <%= @book.regular_price_in_riel %> <%= t(currency) %>
       <% else %>
-        <%= @book.regular_price %> <%= currency %>
+        <%= @book.regular_price %> <%= t(currency) %>
       <% end %>
       </span>
     </div>

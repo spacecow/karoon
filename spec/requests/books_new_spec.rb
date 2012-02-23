@@ -23,20 +23,20 @@ describe "Books" do
       end
     end
   
-    context "Riel on error form" do
+    context "Rial on error form" do
       before(:each) do
-        Setting.singleton.update_attribute(:currency,Setting::RIEL)
+        Setting.singleton.update_attribute(:currency,Setting::RIAL)
         create_admin(:email=>'admin@example.com')
         login('admin@example.com')
         visit new_book_path
       end
 
-      it "regular price shows up in Riel" do
+      it "regular price shows up in Rial" do
         fill_in 'Regular Price', :with => '10000' 
         click_button 'Create Book'
         find_field('Regular Price').value.should eq '1000'  
       end 
-      it "cannot be less than 500 Riel" do
+      it "cannot be less than 500 Rial" do
         fill_in 'Price', :with => 499 
         click_button 'Create Book'
         li(:regular_price,0).should have_greater_than_error(500)
@@ -68,10 +68,10 @@ describe "Books" do
         li(:regular_price).should have_hint('in Toman')
       end
 
-      it "currency in Riel" do
-        Setting.singleton.update_attribute(:currency,Setting::RIEL)
+      it "currency in Rial" do
+        Setting.singleton.update_attribute(:currency,Setting::RIAL)
         visit new_book_path
-        li(:regular_price).should have_hint('in Riel')
+        li(:regular_price).should have_hint('in Rial')
       end
     end
 
@@ -107,8 +107,8 @@ describe "Books" do
           click_button 'Create Book'
           Book.last.regular_price.should eq "10000"
         end
-        it "Riel input" do
-          Setting.singleton.update_attribute(:currency,Setting::RIEL)
+        it "Rial input" do
+          Setting.singleton.update_attribute(:currency,Setting::RIAL)
           click_button 'Create Book'
           Book.last.regular_price.should eq "1000"
         end
@@ -139,7 +139,7 @@ describe "Books" do
           it "in Toman" do
             Setting.singleton.update_attribute(:currency,Setting::TOMAN)
           end
-          it "in Riel" do
+          it "in Rial" do
             Setting.singleton.update_attribute(:currency,Setting::TOMAN)
           end
           after(:each) do
@@ -156,8 +156,8 @@ describe "Books" do
           it "Toman" do
             Setting.singleton.update_attribute(:currency,Setting::TOMAN)
           end
-          it "Riel" do
-            Setting.singleton.update_attribute(:currency,Setting::RIEL)
+          it "Rial" do
+            Setting.singleton.update_attribute(:currency,Setting::RIAL)
           end 
           after(:each) do
             fill_in 'Title', :with => ''

@@ -1,7 +1,7 @@
 class Setting < ActiveRecord::Base
-  RIEL = "Riel"
-  TOMAN = "Toman"
-  CURRENCY = [RIEL, TOMAN]
+  RIAL = "rial"
+  TOMAN = "toman"
+  CURRENCY = [RIAL, TOMAN]
 
   class << self
     #def currency_in_riel?;
@@ -10,7 +10,7 @@ class Setting < ActiveRecord::Base
     #def currency_in_toman?;
     #  singleton.currency == TOMAN 
     #end
-    def in_currency; "in #{singleton.currency}" end 
+    def in_currency; I18n.t("in_#{singleton.currency}") end 
     def singleton; Setting.first end
   end
 end
