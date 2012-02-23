@@ -2,16 +2,12 @@
 div#categories div.nested_category {
   margin-left: 20px;
 }
-/* line 4, ../../app/assets/stylesheets/categories_en.css.sass */
-div#categories div.category {
-  display: block;
-}
-/* line 6, ../../app/assets/stylesheets/categories_en.css.sass */
+/* line 5, ../../app/assets/stylesheets/categories_en.css.sass */
 div#categories div.category div#name {
   float: left;
   margin-right: 10px;
 }
-/* line 9, ../../app/assets/stylesheets/categories_en.css.sass */
+/* line 8, ../../app/assets/stylesheets/categories_en.css.sass */
 div#categories div.category div#actions {
   float: left;
 }
