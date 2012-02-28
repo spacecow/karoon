@@ -4,7 +4,7 @@ class Setting < ActiveRecord::Base
   CURRENCY = [RIAL, TOMAN]
 
   class << self
-    def currencies; CURRENCY.map{|e| I18n.t(e)} end
+    def currencies; CURRENCY.map{|e| [I18n.t(e),e]} end
     def in_currency; I18n.t("in_#{singleton.currency}") end 
     def singleton; Setting.first end
   end

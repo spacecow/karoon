@@ -13,7 +13,7 @@ describe "Searches" do
       end
       it "the category is not selected" do
         visit root_path
-        selected_value('search_category_id').should be_empty 
+        selected_value('search_category_id').should be_blank 
       end
 
       context "category options" do

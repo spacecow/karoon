@@ -11,7 +11,7 @@ describe "Settings" do
       it "general" do
         visit edit_setting_path(Setting.singleton)
         page.should have_title("Edit Settings")
-        options('Currency').should eq "BLANK, Riel, Toman" 
+        options('Currency').should eq "BLANK, Rial, Toman" 
         page.should have_button("Update Settings")
       end
       
@@ -19,12 +19,12 @@ describe "Settings" do
         it "in Toman" do
           Setting.singleton.update_attribute(:currency,Setting::TOMAN)
           visit edit_setting_path(Setting.singleton)
-          selected_value('Currency').should eq "Toman"
+          selected_value('Currency').should eq "toman"
         end
-        it "in Riel" do
-          Setting.singleton.update_attribute(:currency,Setting::RIEL)
+        it "in Rial" do
+          Setting.singleton.update_attribute(:currency,Setting::RIAL)
           visit edit_setting_path(Setting.singleton)
-          selected_value('Currency').should eq "Riel"
+          selected_value('Currency').should eq "rial"
         end
         it "nil" do
           Setting.singleton.update_attribute(:currency,nil)
@@ -37,14 +37,14 @@ describe "Settings" do
     context "edit settings" do
       before(:each) do
         visit edit_setting_path(Setting.singleton)
-        select 'Riel', :from => 'Currency'
+        select 'Rial', :from => 'Currency'
       end
 
       it "updates the setting in the database" do
         lambda do
           click_button 'Update Settings'
         end.should change(Setting,:count).by(0)
-        Setting.singleton.currency.should eq "Riel"
+        Setting.singleton.currency.should eq "rial"
       end
 
       it "generates a flash message" do

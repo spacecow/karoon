@@ -5,7 +5,7 @@ describe "Orders" do
     it "send email to user after confirmation"
 
     before(:each) do
-      Setting.singleton.update_attribute(:currency,Setting::RIEL)
+      Setting.singleton.update_attribute(:currency,Setting::RIAL)
       member = create_member(:email=>'member@example.com')
       login('member@example.com')
       book = Factory(:book,:title=>'Funny Title',:regular_price=>'1234')
@@ -35,16 +35,16 @@ describe "Orders" do
         it "one" do
           visit validate_order_path(@order)
           div('line_item',0).div('info').should have_content('Funny Title')
-          div('line_item',0).div('price').should have_content('12340 Riel x 2 = 24680 Riel')
-          div('line_items').div('total').should have_content('Total: 24680 Riel')
+          div('line_item',0).div('price').should have_content('12340 Rial x 2 = 24680 Rial')
+          div('line_items').div('total').should have_content('Total: 24680 Rial')
         end
         it "two" do
           book2 = Factory(:book,:title=>'Funnier Title',:regular_price=>"2345")
           @order.line_items.create!(:book_id=>book2.id,:quantity=>1)
           visit validate_order_path(@order)
           div('line_item',1).div('info').should have_content('Funnier Title')
-          div('line_item',1).div('price').should have_content('23450 Riel x 1 = 23450 Riel')
-          div('line_items').div('total').should have_content('Total: 48130 Riel')
+          div('line_item',1).div('price').should have_content('23450 Rial x 1 = 23450 Rial')
+          div('line_items').div('total').should have_content('Total: 48130 Rial')
         end
       end
     
