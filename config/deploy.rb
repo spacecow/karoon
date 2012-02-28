@@ -6,13 +6,13 @@ set :deploy_via, :remote_cache
 set :use_sudo, false
 
 set :application, "karoon"
-set :deploy_to, "/home/aurora/apps/#{application}"
-set :user, "aurora"
-set :admin_runner, "aurora"
+set :deploy_to, "/home/ghazal/apps/#{application}"
+set :user, "ghazal"
+set :admin_runner, "ghazal"
   
-role :app, "sao.fir-vpc.riec.tohoku.ac.jp"
-role :web, "sao.fir-vpc.riec.tohoku.ac.jp"
-role :db,  "sao.fir-vpc.riec.tohoku.ac.jp", :primary => true
+role :app, "106.187.50.182"
+role :web, "106.187.50.182"
+role :db,  "106.187.50.182", :primary => true
 
 namespace :deploy do
   task :start do ; end
