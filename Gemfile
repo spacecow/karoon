@@ -5,7 +5,7 @@ end
 
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0'
+gem 'rails', '3.1.3'
 gem 'mysql2'
 gem 'execjs'
 gem 'ancestry'
@@ -13,21 +13,22 @@ gem 'therubyracer'
 gem 'jquery-rails'
 gem 'formtastic'
 gem 'cancan'
-gem 'compass', '>= 0.12.alpha.0'
 gem 'carrierwave'
 gem 'rmagick', '2.12.2'
 gem 'annotate'
 gem 'aasm'
-gem 'fancy-buttons'
 gem 'redis'
 gem 'yajl-ruby'
 gem 'rabl'
+gem 'bcrypt-ruby', :require => 'bcrypt'
 #gem 'i18n', path:'/home/jsveholm/apps/external/i18n'
 
 group :assets do
   gem 'sass-rails', "  ~> 3.1.0"
   gem 'coffee-rails', "~> 3.1.0"
   gem 'uglifier'
+  gem 'compass-rails'
+  gem 'fancy-buttons'
 end
 
 group :development do
