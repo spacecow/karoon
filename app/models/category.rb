@@ -41,6 +41,14 @@ class Category < ActiveRecord::Base
     def last_owner; owner.last end
     def owner; Book end
 
+    def selected_path(search,lang)
+      if lang == :en
+        where('names_depth_cache_en like ?',"%#{search}%").order(:names_depth_cache_en) 
+      else
+        where('names_depth_cache_ir like ?',"%#{search}%").order(:names_depth_cache_ir) 
+      end
+    end
+      
     def separate(lang,*cats)
       if lang == :en
         cats.join('/')
