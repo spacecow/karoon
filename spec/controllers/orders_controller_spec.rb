@@ -32,7 +32,7 @@ describe OrdersController do
         @other = Factory(:order,:user_id=>create_member(:email=>'other@email.com').id)
       end
       controller_actions.each do |action,req|
-        if %w(new create).include?(action)
+        if %w(new create index).include?(action)
           it "should reach the #{action} page" do
             send(req, action, :id => @model.id)
             response.redirect_url.should_not eq welcome_url
@@ -76,7 +76,7 @@ describe OrdersController do
         @other = Factory(:order,:user_id=>create_member(:email=>'other@email.com').id)
       end
       controller_actions.each do |action,req|
-        if %w(new create).include?(action)
+        if %w(new create index).include?(action)
           it "should reach the #{action} page" do
             send(req, action, :id => @model.id)
             response.redirect_url.should_not eq welcome_url
@@ -120,7 +120,7 @@ describe OrdersController do
         @other = Factory(:order,:user_id=>create_member(:email=>'other@email.com').id)
       end
       controller_actions.each do |action,req|
-        if %w(new create).include?(action)
+        if %w(new create index).include?(action)
           it "should reach the #{action} page" do
             send(req, action, :id => @model.id, :books => {"0" => {:title => "Title"}})
             response.redirect_url.should_not eq welcome_url
@@ -164,7 +164,7 @@ describe OrdersController do
         @other = Factory(:order,:user_id=>create_member(:email=>'other@email.com').id)
       end
       controller_actions.each do |action,req|
-        if %w(new create).include?(action)
+        if %w(new create index).include?(action)
           it "should reach the #{action} page" do
             send(req, action, :id => @model.id, :books => {"0" => {:title => "Title"}})
             response.redirect_url.should_not eq welcome_url
@@ -200,7 +200,7 @@ describe OrdersController do
         @other = Factory(:order,:user_id=>create_member(:email=>'other@email.com').id)
       end
       controller_actions.each do |action,req|
-        if %w(new create).include?(action)
+        if %w(new create index).include?(action)
           it "should reach the #{action} page" do
             send(req, action, :id => @model.id, :books => {"0" => {:title => "Title"}})
             response.redirect_url.should_not eq welcome_url

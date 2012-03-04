@@ -22,8 +22,6 @@ class ApplicationController < ActionController::Base
   def currency_in_riel?
     currency == Setting::RIAL
   end
-  def english?; get_language == :en end
-  def get_language; I18n.locale end
 
   private
 

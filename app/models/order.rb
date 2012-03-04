@@ -35,6 +35,10 @@ class Order < ActiveRecord::Base
     self.postal_service = order.postal_service
   end
 
+  def line_item_book_titles 
+    line_items.map(&:book_title)
+  end
+
   def total_price(riel)
     line_items.to_a.sum{|e| e.total_price(riel)} 
   end

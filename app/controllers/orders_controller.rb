@@ -1,8 +1,13 @@
 class OrdersController < ApplicationController
-  skip_load_resource :only => :create
+  skip_load_resource :only => [:create,:index]
   load_and_authorize_resource
 
   def show
+  end
+
+  def index
+    @orders = Order.scoped
+    @orders = @orders.where(user_id:current_user.id) if cannot? :check, Order
   end
 
   def new
@@ -62,5 +67,8 @@ class OrdersController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def check
   end
 end

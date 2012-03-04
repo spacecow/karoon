@@ -58,27 +58,28 @@ div#search_bar form div#form div#left_content input {
 div#search_bar form div#form div#right_content {
   float: left;
   margin-right: -500px;
+  margin-left: 10px;
 }
-/* line 40, ../../app/assets/stylesheets/layout_en.css.sass */
+/* line 41, ../../app/assets/stylesheets/layout_en.css.sass */
 div#search_bar form div#form div#right_content img {
   float: right;
 }
 
-/* line 43, ../../app/assets/stylesheets/layout_en.css.sass */
+/* line 44, ../../app/assets/stylesheets/layout_en.css.sass */
 div#mid_container {
   padding-left: 200px;
 }
-/* line 45, ../../app/assets/stylesheets/layout_en.css.sass */
+/* line 46, ../../app/assets/stylesheets/layout_en.css.sass */
 div#mid_container div#site_nav_container {
   float: left;
   margin-left: -200px;
 }
-/* line 48, ../../app/assets/stylesheets/layout_en.css.sass */
+/* line 49, ../../app/assets/stylesheets/layout_en.css.sass */
 div#mid_container div#site_nav_container div#site_nav {
   text-align: right;
   margin-right: 15px;
 }
-/* line 52, ../../app/assets/stylesheets/layout_en.css.sass */
+/* line 53, ../../app/assets/stylesheets/layout_en.css.sass */
 div#mid_container div#site_nav_container div#site_nav ul li.selected {
   margin-right: -5px;
   padding-right: 5px;

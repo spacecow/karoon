@@ -30,7 +30,7 @@ Karoon::Application.routes.draw do
 
   resources :carts, :only => [:show,:update,:destroy]
   resources :line_items, :only => [:create,:destroy]
-  resources :orders, :only => [:new,:create,:edit,:update,:show] do
+  resources :orders, :only => [:new,:create,:edit,:update,:show,:index] do
     member do
       get 'validate'
       put 'confirm'

@@ -14,7 +14,7 @@ class Ability
       cannot [:create,:signup_confirmation], User
       if user.role?(User::MEMBER) || user.role?(User::VIP) || user.role?(User::MINIADMIN) || user.role?(User::ADMIN)
         can :create, Order
-        can :show, Order, :user_id => user.id
+        can [:show,:index], Order, :user_id => user.id
         can [:validate,:confirm,:update], Order, :user_id => user.id, :aasm_state => "draft"
       end
       if user.role?(User::VIP) || user.role?(User::MINIADMIN) || user.role?(User::ADMIN)
@@ -28,7 +28,7 @@ class Ability
         can :update, Setting
         can :index, Search
         can :create, LineItem
-        can [:show,:validate,:confirm,:update], Order
+        can [:show,:validate,:confirm,:update,:check], Order
         can [:show,:update,:destroy], Cart
         can [:index,:create,:update_multiple], Translation
         can :index, Locale

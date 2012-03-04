@@ -1,0 +1,12 @@
+<table id="orders">
+  <tr>
+    <th><%= pl(:item) %></th>
+    <th><%= jt(:price) %></th>
+    <th><%= jt(:status) %></th>
+    <th><%= jt(:created_at) %></th>
+    <th><%= jt(:updated_at) %></th>
+  </tr>
+  <% orders.each do |order| %>
+    <%= render 'tableorder', order:order %>
+  <% end %>
+</table>
