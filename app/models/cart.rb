@@ -19,3 +19,12 @@ class Cart < ActiveRecord::Base
     line_items.to_a.sum{|e| e.total_price(riel)} 
   end
 end
+# == Schema Information
+#
+# Table name: carts
+#
+#  id         :integer(4)      not null, primary key
+#  created_at :datetime
+#  updated_at :datetime
+#
+

@@ -12,3 +12,17 @@ describe LineItem do
     end
   end
 end
+# == Schema Information
+#
+# Table name: line_items
+#
+#  id         :integer(4)      not null, primary key
+#  book_id    :integer(4)
+#  cart_id    :integer(4)
+#  created_at :datetime
+#  updated_at :datetime
+#  quantity   :integer(4)      default(1)
+#  order_id   :integer(4)
+#  price      :string(255)
+#
+

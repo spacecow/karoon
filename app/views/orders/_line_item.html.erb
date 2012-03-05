@@ -7,11 +7,13 @@
     <% end %>
   </div>
   <div id="info">
-    <%= line_item.book.title %>
+    <div id="title">
+      <%= line_item.book.title %>
+    </div>
     <%= render 'books/categories', book:line_item.book, :as=>:static %>
   </div>
   <div id="price">
-    <%= line_item.item_price(currency_in_riel?) %> <%= currency %> x <%= line_item.quantity %> = <%= line_item.total_price(currency_in_riel?) %> <%= currency %>
+    <%= line_item.item_price(currency_in_riel?) %> <%= t currency %> x <%= line_item.quantity %> = <%= line_item.total_price(currency_in_riel?) %> <%= t currency %>
   </div>
   <div class="clear"></div>
 </div>

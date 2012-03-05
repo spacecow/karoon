@@ -11,6 +11,6 @@
   <% else %>
     <%= f.input :value, :hint => concatenate_or_skip("English: ", translate_or_skip(@translation.anti_language,'en',nil)) %>
   <% end %>
-  <%= f.input :locale_token, :label => ft(:locale), :input_html => {"data-pre" => @translation.locale_attributes_to_json} %>
+  <%= f.input :locale_token, :label => ft(:locale), :input_html => {"data-pre" => @translation.locale_attributes_to_json, "data-url" => locales_path(:format=>:json)} %>
   <%= f.submit create(:translation), :class => :submit %>
 <% end %>

@@ -11,6 +11,7 @@ class OrdersController < ApplicationController
   end
 
   def new
+    @order.pay_type = Order::PAY_ON_DELIVERY
     @cart = current_cart
     if @cart.line_items.empty?
       redirect_to root_path, :notice => notify(:your_cart_is_empty)

@@ -13,3 +13,13 @@ class Author < ActiveRecord::Base
   def last_name; self.name && self.name.split[-1] end
   def last_name=(s); self.name += " "+s.strip end
 end
+# == Schema Information
+#
+# Table name: authors
+#
+#  id         :integer(4)      not null, primary key
+#  name       :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+

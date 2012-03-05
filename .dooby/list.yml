@@ -99,3 +99,5 @@ c7147f: !ruby/object:Dooby::Task
   todo: persian website to mirror the english one :done
 d7bca6: !ruby/object:Dooby::Task 
   todo: signup email :done
+12a0b1: !ruby/object:Dooby::Task 
+  todo: deploy on linode :done

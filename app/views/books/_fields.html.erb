@@ -26,15 +26,15 @@
 </li>
 <li id="book_author_tokens_input">
   <%= f.label :author_tokens, ft(:author) %>
-  <%= f.text_field :author_tokens, "data-pre" => book.authors.map(&:attributes).to_json %>
+  <%= f.text_field :author_tokens, "data-pre" => book.authors.map(&:attributes).to_json, "data-url" => authors_path(:format=>:json) %>
 </li>
 <li id="book_category_tokens_input">
 <% if english? %>
   <%= f.label :category_tokens_en, ft(:category) %>
-  <%= f.text_field :category_tokens_en, "data-pre" => book.categories.map(&:attributes).to_json  %>
+  <%= f.text_field :category_tokens_en, "data-pre" => book.categories.map(&:attributes).to_json, "data-url" => categories_path(:format=>:json)  %>
 <% else %>
   <%= f.label :category_tokens_ir, ft(:category) %>
-  <%= f.text_field :category_tokens_ir, "data-pre" => book.categories.map(&:attributes).to_json  %>
+  <%= f.text_field :category_tokens_ir, "data-pre" => book.categories.map(&:attributes).to_json, "data-url" => categories_path(:format=>:json)  %>
 <% end %>
   <p class="inline-errors">
     <%= book.errors[:categories].join %>

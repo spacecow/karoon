@@ -21,7 +21,7 @@ describe "Orders, index:", focus:true do
       own   = login_member
       order = Factory(:order, user_id:own.id,created_at:Time.parse('2011-3-4 11:00'), updated_at:Time.parse('2011-3-4 12:00'))
       order2 = Factory(:order, user_id:own.id, :aasm_state => :confirmed, created_at:Time.parse('2011-3-4 11:00'), updated_at:Time.parse('2011-3-4 12:00'))
-      book  = Factory(:book,title:'A new book')
+      book  = Factory(:book,title:'A new book', regular_price:12000)
       Factory(:line_item, order_id:order.id, book_id:book.id)
       Factory(:line_item, order_id:order2.id, book_id:book.id)
 
@@ -35,7 +35,7 @@ describe "Orders, index:", focus:true do
     end
 
     it "has tableheaders" do
-      tableheader(:orders).should eq ["Items","Price","Status","Created at","Updated at"]
+      tableheader(:orders).should eq ["Items","Price (Toman)","Status","Created at","Updated at"]
     end
 
     it "has a row for each own order" do
@@ -43,7 +43,7 @@ describe "Orders, index:", focus:true do
     end
 
     it "info about the order on each line" do
-      tablemap(:orders).should eq [["A new book","draft","2011-03-04 11:00","2011-03-04 12:00","Edit"],["A new book","confirmed","2011-03-04 11:00","2011-03-04 12:00",""]]
+      tablemap(:orders).should eq [["A new book","12000","draft","2011-03-04 11:00","2011-03-04 12:00","Edit"],["A new book","12000","confirmed","2011-03-04 11:00","2011-03-04 12:00",""]]
     end
 
     it "has a link to a detailed order page" do

@@ -48,18 +48,29 @@ describe "Orders" do
           options('Pay Type').should eq 'Pay on Delivery'
           selected_value('Pay Type').should eq 'Pay on Delivery' 
           options('Postal Service').should eq 'BLANK, Camel Caravan, Flying Carpet, Scud Missile'
-          selected_value('Postal Service').should be_empty
+        end
+
+        context "default: no order is filled in" do
+          it "no postal service is selected" do
+            selected_value('Postal Service').should be_nil
+          end
         end
       end
 
       context "a previous order exists" do
-        it "new order is filled in" do
+        before(:each) do
           Factory(:order,:user_id=>@member.id,:name=>'Last Name',:address=>'Last Address',:email=>'Last Email',:pay_type=>'Pay on Delivery',:postal_service=>'Scud Missile')
           visit new_order_path
+        end
+
+        it "new order is filled in" do
           find_field('Name').value.should eq 'Last Name'
           find_field('Address').value.should eq 'Last Address'
           find_field('Email').value.should eq 'Last Email'
           selected_value('Pay Type').should eq 'Pay on Delivery'
+        end
+
+        it "the postal service is pre-selected" do
           selected_value('Postal Service').should eq 'Scud Missile'
         end
       end

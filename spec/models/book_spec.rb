@@ -20,3 +20,17 @@ describe Book do
     end
   end
 end
+# == Schema Information
+#
+# Table name: books
+#
+#  id            :integer(4)      not null, primary key
+#  title         :string(255)
+#  created_at    :datetime
+#  updated_at    :datetime
+#  image         :string(255)
+#  summary       :text
+#  user_id       :integer(4)
+#  regular_price :string(255)
+#
+

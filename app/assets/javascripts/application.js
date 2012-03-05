@@ -9,60 +9,57 @@
 //= require_tree .
 
 $(function() {
-  $("#translation_locale_token").tokenInput("/locales.json", {
+  var locale_id = "#translation_locale_token";
+  $(locale_id).tokenInput($(locale_id).data("url"), {
     crossDomain: false,
     allowCreation: true,
     tokenLimit: 1,
-    prePopulate: $("#translation_locale_token").data("pre"),
     theme: ""
   });
-  $("#book_author_tokens").tokenInput("/authors.json", {
+  var author_id = "#book_author_tokens";
+  $(author_id).tokenInput($(author_id).data("url"), {
     crossDomain: false,
     preventDuplicates: true,
     allowCreation: true,
-    prePopulate: $("#book_author_tokens").data("pre"),
     theme: ""
   });
-  $("#book_category_tokens_en").tokenInput("/categories.json", {
+  var category_id = "#book_category_tokens_en";
+  $(category_id).tokenInput($(category_id).data("url"), {
     crossDomain: false,
     preventDuplicates: true,
     allowCreation: true,
-    prePopulate: $("#book_category_tokens").data("pre"),
     theme: "facebook"
   });
-  $("#book_category_tokens_ir").tokenInput("/categories.json", {
+  var category_id = "#book_category_tokens_ir";
+  $(category_id).tokenInput($(category_id).data("url"), {
     crossDomain: false,
     preventDuplicates: true,
     allowCreation: true,
-    prePopulate: $("#book_category_tokens").data("pre"),
     theme: "facebook"
   });
 
   for(i=0; i<10; i++){
     var author_id = "#books_"+i+"_author_tokens";
-    $(author_id).tokenInput("/authors.json", {
+    $(author_id).tokenInput($(author_id).data("url"), {
       crossDomain: false,
       preventDuplicates: true,
       allowCreation: true,
-      prePopulate: $(author_id).data("pre"),
       theme: ""
     });
 
     var category_id = "#books_"+i+"_category_tokens_en";
-    $(category_id).tokenInput("/categories.json", {
+    $(category_id).tokenInput($(category_id).data("url"), {
       crossDomain: false,
       preventDuplicates: true,
       allowCreation: true,
-      prePopulate: $(category_id).data("pre"),
       theme: "facebook"
     });
 
     var category_id = "#books_"+i+"_category_tokens_ir";
-    $(category_id).tokenInput("/categories.json", {
+    $(category_id).tokenInput($(category_id).data("url"), {
       crossDomain: false,
       preventDuplicates: true,
       allowCreation: true,
-      prePopulate: $(category_id).data("pre"),
       theme: "facebook"
     });
   }

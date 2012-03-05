@@ -28,15 +28,11 @@ class CategoriesController < ApplicationController
       @categories = Category.where(["id NOT IN (?)",@category.subtree_ids])
     else
       @category = Category.new
-      @categories = Category.scoped
+      @categories = Category.selected_path(params[:q],get_language)
     end
     @category_hash = Category.scoped.arrange(:order => :names_depth_cache_en)
 
     @selection = :categories
-    respond_to do |f|
-      f.html
-      f.json {render :json => load_selected_categories.map{|e| e.attributes.merge("name" => english? ? e.names_depth_cache_en : e.names_depth_cache_ir)}}
-    end
   end
 
   def create
@@ -83,12 +79,5 @@ class CategoriesController < ApplicationController
     end
     def load_min_categories
       @categories = Category.all.reject{|e| @category.subtree_ids.include? e.id}.map{|e| [e.names_depth_cache_en,e.id]}
-    end
-    def load_selected_categories
-      if english?
-        @categories = Category.where('names_depth_cache_en like ?',"%#{params[:q]}%").order(:names_depth_cache_en) 
-      else
-        @categories = Category.where('names_depth_cache_ir like ?',"%#{params[:q]}%").order(:names_depth_cache_ir) 
-      end
     end
 end

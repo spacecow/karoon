@@ -1,6 +1,6 @@
 <%= title edit(:settings) %>
 
 <%= semantic_form_for @setting do |f| %>
-  <%= f.input :currency, :as => :select, :collection => Setting::CURRENCY %>
+  <%= f.input :currency, :as => :select, :collection => Setting.currencies %>
   <%= f.submit update(:settings) %>
 <% end %>

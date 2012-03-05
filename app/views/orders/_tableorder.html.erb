@@ -1,5 +1,6 @@
 <tr>
   <td><%= listed_books(order) %></td>
+  <td><%= order.total_price(currency_in_riel?) %>
   <td><%= order.aasm_state %>
   <td><%= order.created_at.strftime("%Y-%m-%d %H:%M") %>
   <td><%= order.updated_at.strftime("%Y-%m-%d %H:%M") %>

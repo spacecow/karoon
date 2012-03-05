@@ -36,11 +36,11 @@ describe "Carts" do
           div(:line_item,0).div(:price).should have_content('Book Price: 10000 Toman')
           div(:line_item,0).div(:book_total).should have_content('Total: 20000 Toman')
         end
-        it "for Riel" do
-          Setting.singleton.update_attribute(:currency,Setting::RIEL)
+        it "for Rial" do
+          Setting.singleton.update_attribute(:currency,Setting::RIAL)
           visit cart_path(@cart)
-          div(:line_item,0).div(:price).should have_content('Book Price: 100000 Riel')
-          div(:line_item,0).div(:book_total).should have_content('Total: 200000 Riel')
+          div(:line_item,0).div(:price).should have_content('Book Price: 100000 Rial')
+          div(:line_item,0).div(:book_total).should have_content('Total: 200000 Rial')
         end
       end
 
@@ -57,10 +57,10 @@ describe "Carts" do
           visit cart_path(@cart)
           div('total').should have_content('Total: 50000 Toman')
         end
-        it "Riel" do
-          Setting.singleton.update_attribute(:currency,Setting::RIEL)
+        it "Rial" do
+          Setting.singleton.update_attribute(:currency,Setting::RIAL)
           visit cart_path(@cart)
-          div('total').should have_content('Total: 500000 Riel')
+          div('total').should have_content('Total: 500000 Rial')
         end
       end
     end

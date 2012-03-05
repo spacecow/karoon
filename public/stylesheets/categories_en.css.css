@@ -2,6 +2,15 @@
 div#nested_categories div.nested_category {
   margin-left: 20px;
 }
+<<<<<<< HEAD
+/* line 5, ../../app/assets/stylesheets/categories_en.css.sass */
+div#categories div.category div#name {
+  float: left;
+  margin-right: 10px;
+}
+/* line 8, ../../app/assets/stylesheets/categories_en.css.sass */
+div#categories div.category div#actions {
+=======
 /* line 4, ../../app/assets/stylesheets/categories_en.css.sass */
 div#nested_categories div.category {
   display: block;
@@ -13,5 +22,6 @@ div#nested_categories div.category div#name {
 }
 /* line 9, ../../app/assets/stylesheets/categories_en.css.sass */
 div#nested_categories div.category div#actions {
+>>>>>>> 023518a2b9aea953d468a93bf1680f67782d1f54
   float: left;
 }
