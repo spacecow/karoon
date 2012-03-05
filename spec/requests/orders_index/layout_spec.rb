@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Orders, index:", focus:true do
+describe "Orders, index:" do
   context "member layout without orders" do
     before(:each) do
       login_member

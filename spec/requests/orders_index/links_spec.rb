@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Orders, index:", focus:true do
+describe "Orders, index:" do
   context "member links to" do
     before(:each) do
       own   = login_member

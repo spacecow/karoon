@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Users, show:", focus:true do
+describe "Users, show:" do
   context "user layout without orders" do
     before(:each) do
       visit user_path(login_member)
