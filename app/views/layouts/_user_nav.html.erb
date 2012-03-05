@@ -7,6 +7,7 @@
   <% end %>
   <%= link_to jt(:signup), signup_path unless current_user %>
   <%= link_to jt(:settings), edit_setting_path(Setting.singleton) if can?(:edit, Setting.singleton) %>
+  <%= link_to jt(:my_account), current_user if current_user %>
   <%= link_to pl(:search), searches_path if can? :index, Search %><br>
   <% if english? %>
     <%= link_to jt(:persian), :language => 'ir' %>

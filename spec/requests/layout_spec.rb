@@ -6,6 +6,7 @@ describe "Sessions" do
 
     it "general layout" do
       visit root_path
+save_and_open_page
       site_nav.should have_link('Books')
       site_nav.should have_link('Authors')
       site_nav.should have_link('Categories')
@@ -14,6 +15,13 @@ describe "Sessions" do
       user_nav.should_not have_link('Settings')
       user_nav.should_not have_link('Searches')
       user_nav.should have_link('Persian')
+      user_nav.should_not have_link('My Account')
+    end
+
+    it "member layout" do
+      login_member
+      visit root_path
+      user_nav.should have_link('My Account')
     end
 
     context "category listing" do
@@ -185,6 +193,18 @@ describe "Sessions" do
       it "translations" do
         site_nav.click_link 'Translations'
         page.current_path.should eq translations_path
+      end
+    end
+
+    context "member links to" do
+      before(:each) do
+        @member = login_member
+        visit root_path
+      end
+
+      it "my account" do
+        user_nav.click_link 'My Account'
+        current_path.should eq user_path(@member)
       end
     end
 

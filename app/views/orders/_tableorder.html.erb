@@ -2,7 +2,7 @@
   <td><%= listed_books(order) %></td>
   <td><%= order.total_price(currency_in_riel?) %>
   <td><%= order.aasm_state %>
-  <td><%= order.created_at.strftime("%Y-%m-%d %H:%M") %>
-  <td><%= order.updated_at.strftime("%Y-%m-%d %H:%M") %>
+  <td><%= "#{time_ago_in_words(order.created_at)} #{t(:ago)}" %>
+  <td><%= "#{time_ago_in_words(order.updated_at)} #{t(:ago)}" %>
   <td><%= link_to t(:edit), edit_order_path(order) if can? :edit, order %></td>
 </tr>

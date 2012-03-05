@@ -1,4 +1,6 @@
 en:
+  ago: 'ago'
+  all_orders: 'All Orders'
   author: 
     one: 'Author'
     other: 'Authors'
@@ -17,10 +19,12 @@ en:
   category_match: 'Category Match'
   checkout: 'Checkout'
   confirm: 'Confirm'
+  confirmed_orders: 'Confirmed Orders'
   created_at: 'Created at'
   del: 'Del'
   delete: 'Delete'
   draft: 'Draft' 
+  draft_orders: 'Draft Orders'
   edit: 'Edit'
   en: 'English'
   english: 'English'
@@ -37,6 +41,7 @@ en:
     other: 'Items'
   login: 'Login'
   logout: 'Logout'
+  my_account: 'My Account'
   my_cart: 'My Cart'
   order: 
     one: 'Order'

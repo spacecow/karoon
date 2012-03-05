@@ -19,7 +19,7 @@ describe "Orders, index:", focus:true do
   context "member layout with orders" do
     before(:each) do
       own   = login_member
-      order = Factory(:order, user_id:own.id,created_at:Time.parse('2011-3-4 11:00'), updated_at:Time.parse('2011-3-4 12:00'))
+      order = Factory(:order, user_id:own.id,created_at:Time.now-1.hour, updated_at:Time.now-30.minute)
       order2 = Factory(:order, user_id:own.id, :aasm_state => :confirmed, created_at:Time.parse('2011-3-4 11:00'), updated_at:Time.parse('2011-3-4 12:00'))
       book  = Factory(:book,title:'A new book', regular_price:12000)
       Factory(:line_item, order_id:order.id, book_id:book.id)
@@ -43,7 +43,7 @@ describe "Orders, index:", focus:true do
     end
 
     it "info about the order on each line" do
-      tablemap(:orders).should eq [["A new book","12000","draft","2011-03-04 11:00","2011-03-04 12:00","Edit"],["A new book","12000","confirmed","2011-03-04 11:00","2011-03-04 12:00",""]]
+      tablemap(:orders).should eq [["A new book","12000","draft","about 1 hour ago","30 minutes ago","Edit"],["A new book","12000","confirmed","about 1 year ago","about 1 year ago",""]]
     end
 
     it "has a link to a detailed order page" do

@@ -8,6 +8,11 @@ class OrdersController < ApplicationController
   def index
     @orders = Order.scoped
     @orders = @orders.where(user_id:current_user.id) if cannot? :check, Order
+    @title = case params[:status]
+      when "draft"; jt(:draft_orders)
+      when "confirmed"; jt(:confirmed_orders)
+      else; jt(:all_orders)
+    end
   end
 
   def new
