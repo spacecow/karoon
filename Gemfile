@@ -21,6 +21,7 @@ gem 'redis'
 gem 'yajl-ruby'
 gem 'rabl'
 gem 'bcrypt-ruby', :require => 'bcrypt'
+gem 'will_paginate', '> 3.0' 
 
 group :assets do
   gem 'sass-rails', "  ~> 3.1.0"

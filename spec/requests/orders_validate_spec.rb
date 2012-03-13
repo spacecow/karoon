@@ -50,11 +50,11 @@ describe "Orders" do
     
       it "show order info" do
         visit validate_order_path(@order)
-        div('order').div('name').should have_content('Name: New Name')
-        div('order').div('address').should have_content('Address: New Address')
-        div('order').div('email').should have_content('Email: new@email.com')
-        div('order').div('pay_type').should have_content('Pay Type: Pay on Delivery')
-        div('order').div('postal_service').should have_content('Postal Service: Scud Missile')
+        div('order',0).div('name').should have_content('Name: New Name')
+        div('order',0).div('address').should have_content('Address: New Address')
+        div('order',0).div('email').should have_content('Email: new@email.com')
+        div('order',0).div('pay_type').should have_content('Pay Type: Pay on Delivery')
+        div('order',0).div('postal_service').should have_content('Postal Service: Scud Missile')
       end
     end
 

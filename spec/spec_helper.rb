@@ -16,6 +16,10 @@ Spork.prefork do
     config.treat_symbols_as_metadata_keys_with_true_values = true
     config.filter_run :focus => true
     config.run_all_when_everything_filtered = true
+
+    #Presenters
+#    config.include RSpec::Rails::Matchers::RenderTemplate, example_group: {file_path: %r{spec/presenters}}
+    config.include ActionView::TestCase::Behavior, example_group: {file_path: %r{spec/presenters}}
   end
 end
 

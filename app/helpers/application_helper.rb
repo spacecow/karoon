@@ -1,8 +1,4 @@
-require 'translation_helper'
-
 module ApplicationHelper
-  include TranslationHelper
-
   def anti_language(key)
     key.split('.')[1..-1].join('.')
   end
@@ -36,5 +32,12 @@ module ApplicationHelper
     content_tag(:ul,categories.map{|cat,subcat|
       content_tag(:li,link_to(cat.name?(get_language),cat),:class=>class_selection(cat.name?(get_language))) + (subcat.present? ? content_tag(:li,listed_categories(subcat)) : '')
     }.join.html_safe,:class=>'nested_category')
+  end
+
+  def present(object,klass=nil)
+    klass ||= "#{object.class}Presenter".constantize
+    presenter = klass.new(object,self)
+    yield presenter if block_given?
+    presenter
   end
 end

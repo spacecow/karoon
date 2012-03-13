@@ -1,10 +1,8 @@
+<% present book do |presenter| %>
+
 <div class="book">
   <div id="image">
-    <% if book.image_url.nil? %>
-      <%= link_to image_tag('books-pile.jpg'), book %>
-    <% else %>
-      <%= link_to image_tag(book.image_url(:thumb)), book %>
-    <% end %>
+    <%= presenter.image_thumb %>
   </div>
   <div id="content">
     <div id="title">
@@ -38,3 +36,5 @@
     <div class="clear"></div>
   </div>
 </div>
+
+<% end %>

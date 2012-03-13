@@ -1,10 +1,9 @@
 require 'spec_helper'
-require 'translation_helper'
 
-describe TranslationHelper do
+describe TranslationsHelper do
   before(:each) do
     @obj = Object.new    
-    @obj.extend(TranslationHelper)
+    @obj.extend(TranslationsHelper)
   end
 
   context "#sorted_unique_suffixes" do
