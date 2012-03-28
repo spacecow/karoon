@@ -36,6 +36,7 @@ group :development do
 end
 
 group :test do
+  gem 'email_spec'
   gem 'spork-rails' #, '> 0.9.0.rc'
   gem 'guard'
   gem 'guard-rspec'
@@ -44,5 +45,4 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'libnotify'
-  gem 'email_spec'
 end

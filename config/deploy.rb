@@ -1,4 +1,6 @@
 default_run_options[:pty] = true
+ssh_options[:forward_agent] = true
+
 set :repository, "git@github.com:spacecow/karoon.git"
 set :scm, "git"
 set :branch, "master"

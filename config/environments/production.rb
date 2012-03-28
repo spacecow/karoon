@@ -58,3 +58,14 @@ Karoon::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 end
+
+ActionMailer::Base.smtp_settings = {
+  :address              => "smtp.gmail.com",
+  :port                 => 587,
+#  :domain               => "topic-books.com",
+  :user_name            => "admin@topic-books.com",
+  :password             => "caspiantiger",
+  :authentication       => "plain",
+  :enable_starttls_auto => true
+}
+
