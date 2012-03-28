@@ -33,7 +33,7 @@ describe "Searches" do
             search_bar.options("search_category_id").should eq "Books, science"
           end
           it "persian" do
-            user_nav.click_link 'Persian'
+            user_nav.click_link 'فارسی'
             search_bar.options("search_category_id").should eq 'کتابها, persian science'
           end
         end
@@ -51,7 +51,7 @@ describe "Searches" do
             search_bar.options("search_category_id").should eq "Books, science, science/rocket launcher"
           end
           it "persian" do
-            user_nav.click_link 'Persian'
+            user_nav.click_link 'فارسی'
             search_bar.options("search_category_id").should eq 'کتابها, persian science, persian science\persian rocket launcher'
           end
         end

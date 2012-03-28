@@ -8,7 +8,7 @@ describe "Orders, index:" do
     end
 
     it "has a title" do
-      page.should have_title('Orders')
+      page.should have_title('All Orders')
     end
 
     it "has no table with the orders" do

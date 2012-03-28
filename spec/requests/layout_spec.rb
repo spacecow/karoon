@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'spec_helper'
 
 describe "Sessions" do
@@ -6,7 +8,6 @@ describe "Sessions" do
 
     it "general layout" do
       visit root_path
-save_and_open_page
       site_nav.should have_link('Books')
       site_nav.should have_link('Authors')
       site_nav.should have_link('Categories')
@@ -14,7 +15,7 @@ save_and_open_page
       search_bar.should have_image('My_cart_e')
       user_nav.should_not have_link('Settings')
       user_nav.should_not have_link('Searches')
-      user_nav.should have_link('Persian')
+      user_nav.should have_link('فارسی')
       user_nav.should_not have_link('My Account')
     end
 
@@ -234,7 +235,7 @@ save_and_open_page
         current_path.should eq cart_path(Cart.last)
       end
       it "persian" do
-        user_nav.click_link 'Persian'
+        user_nav.click_link 'فارسی'
         user_nav.should have_link('English')
       end
     end

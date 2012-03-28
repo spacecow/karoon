@@ -16,7 +16,7 @@ describe "Books" do
         click_button 'Create Book'
         find_field('Regular Price').value.should eq '1000'  
       end
-      it "cannot be less than 50 tomen" do
+      it "cannot be less than 50 Toman" do
         fill_in 'Price', :with => 49 
         click_button 'Create Book'
         li(:regular_price,0).should have_greater_than_error(50)
@@ -187,12 +187,13 @@ describe "Books" do
           end
 
           it "in persian" do
-            user_nav.click_link 'Persian'
+            user_nav.click_link 'فارسی'
+save_and_open_page
             lambda do
-              fill_in 'Title', :with => 'New Title'
-              fill_in 'Regular Price', :with => 10000
-              fill_in 'Category', :with => " space, #{@category.id}"
-              click_button 'Create کتابها'
+              fill_in 'عنوان', :with => 'New Title'
+              fill_in 'قیمت اولیه', :with => 10000
+              fill_in 'موضوع', :with => " space, #{@category.id}"
+              click_button 'ایجاد کتابها'
             end.should change(Category,:count).by(1)
             Book.last.categories.map(&:name_ir).compact.should eq ['space']
             Book.last.categories.map(&:names_depth_cache_ir).sort.should eq ['science','space']

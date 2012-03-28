@@ -1,6 +1,6 @@
 DATABASES = {
-  "development" => 0,
-  "test" => 1,
+  "development" => 2,
+  "test" => 2,
   "production" => 2
 }
 
@@ -9,9 +9,11 @@ TRANSLATION_LOG = Logger.new("log/translation.log")
 #$redis = Redis.new(:host => 'localhost', :port => 6379)
 
 if Rails.env.test?
-  I18n.backend = I18n::Backend::Chain.new(I18n::Backend::KeyValue.new(TRANSLATION_STORE), I18n.backend)
+  I18n.backend = I18n::Backend::KeyValue.new(TRANSLATION_STORE)
+#  I18n.backend = I18n::Backend::Chain.new(I18n::Backend::KeyValue.new(TRANSLATION_STORE), I18n.backend)
 elsif Rails.env.development?
-  I18n.backend = I18n::Backend::Chain.new(I18n::Backend::KeyValue.new(TRANSLATION_STORE), I18n.backend)
+  I18n.backend = I18n::Backend::KeyValue.new(TRANSLATION_STORE)
+#  I18n.backend = I18n::Backend::Chain.new(I18n::Backend::KeyValue.new(TRANSLATION_STORE), I18n.backend)
 else
   I18n.backend = I18n::Backend::KeyValue.new(TRANSLATION_STORE)
 end

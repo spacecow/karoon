@@ -47,7 +47,7 @@ describe "Orders" do
           div(:line_item,0).div(:categories).should_not have_link('programming')
         end
         it "persian" do
-          user_nav.click_link 'Persian'
+          user_nav.click_link 'فارسی'
           div(:line_item,0).div(:categories).should have_content('prog.')
           div(:line_item,0).div(:categories).should_not have_link('prog.')
         end

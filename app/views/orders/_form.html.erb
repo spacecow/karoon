@@ -1,9 +1,9 @@
 <%= semantic_form_for @order do |f| %>
-  <%= f.input :name %>
-  <%= f.input :address %>
-  <%= f.input :email %>
-  <%= f.input :pay_type, :as => :select, :collection => Order::PAYMENT_TYPES, :include_blank => false %>
-  <%= f.input :postal_service, :as => :select, :collection => Order::POSTAL_SERVICES %>
+  <%= f.input :name, label:ft(:name) %>
+  <%= f.input :address, label:ft(:address) %>
+  <%= f.input :email, label:ft(:email) %>
+  <%= f.input :pay_type, :as => :select, :collection => Order::PAYMENT_TYPES, :include_blank => false, label:ft(:pay_type) %>
+  <%= f.input :postal_service, :as => :select, :collection => Order::POSTAL_SERVICES, label:ft(:postal_service) %>
   <%= f.submit cancel, :name => :cancel_button, :class => :submit %>
   <%= f.submit @order.new_record? ? create(:order) : update(:order), :class => :submit %>
 <% end %>
