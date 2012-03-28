@@ -11,16 +11,15 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      flash[:notice] = notify(:signed_up_and_logged_in)
-      #flash[:notice] = notify(:email_with_userinfo_has_been_sent)
+      flash[:notice] = notify(:email_with_userinfo_has_been_sent)
       signup_token = SignupToken.create(email:@user.email)
-      #UserMailer.signup(@user,signup_confirmation_url(signup_token.token)).deliver
-      session_userid(@user.id)
-      if session_original_url
-        url = session_original_url
-        session_original_url(nil)
-        redirect_to url and return
-      end
+      UserMailer.signup(@user,signup_confirmation_url(signup_token.token)).deliver
+      #session_userid(@user.id)
+      #if session_original_url
+      #  url = session_original_url
+      #  session_original_url(nil)
+      #  redirect_to url and return
+      #end
       redirect_to root_url
     else
       render :new
