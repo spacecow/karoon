@@ -14,7 +14,7 @@ class UsersController < ApplicationController
       flash[:notice] = notify(:signed_up_and_logged_in)
       #flash[:notice] = notify(:email_with_userinfo_has_been_sent)
       signup_token = SignupToken.create(email:@user.email)
-      #UserMailer.signup(@user,signup_confirmation_url(signup_token.token)).deliver
+      UserMailer.signup(@user,signup_confirmation_url(signup_token.token)).deliver
       session_userid(@user.id)
       if session_original_url
         url = session_original_url
