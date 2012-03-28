@@ -45,5 +45,4 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'libnotify'
-  gem 'email_spec'
 end

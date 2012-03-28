@@ -107,7 +107,7 @@ class BooksController < ApplicationController
   private
 
     def load_books_with_associations
-      @books = Book.includes(:categories,:authors).page(params[:page]).per_page(1)
+      @books = Book.includes(:categories,:authors).page(params[:page]).per_page(5)
     end
     def load_hidden_book(i)
       i.times do

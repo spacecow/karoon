@@ -3,6 +3,7 @@ class SignupToken < ActiveRecord::Base
   before_create :generate_token
 
   validates :email, presence:true
+  attr_accessible :email
 
   private
 

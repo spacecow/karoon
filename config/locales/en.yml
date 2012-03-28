@@ -83,6 +83,7 @@ en:
         numericality: "is not a number"
 
   alerts:
+    account_not_activated: "Account has not been activated."
     invalid_cart: "Invalid cart."
     invalid_login_or_password: "Invalid login or password."
     invalid_signup_token: "Invalid signup token."

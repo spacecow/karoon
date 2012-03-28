@@ -1,0 +1,1 @@
+/home/johan/apps/basiq/spec/request/login_with_confirmation_spec.rb
