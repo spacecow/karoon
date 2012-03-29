@@ -188,7 +188,6 @@ describe "Books" do
 
           it "in persian" do
             user_nav.click_link 'فارسی'
-save_and_open_page
             lambda do
               fill_in 'عنوان', :with => 'New Title'
               fill_in 'قیمت اولیه', :with => 10000
