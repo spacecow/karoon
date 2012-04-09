@@ -24,7 +24,9 @@ describe "Users, show:" do
   end
 
   context "user page, links to" do
-    before(:each){ visit user_path(login_member) }
+    before(:each) do
+      visit user_path(login_member)
+    end
 
     context "all orders" do
       before(:each) do

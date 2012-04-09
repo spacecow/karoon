@@ -37,6 +37,10 @@ ul
   li
     list-style-type: none
 
+fieldset
+  legend
+    border: 1px solid $blue
+
 span.label
   font-weight: bold
 
@@ -63,16 +67,19 @@ div#bottom_links
   margin-top: 10px
 
 div#flash_container
+  div#flash_notice
+    padding-top: 10px
+    font-size: 16px
+    text-shadow: 3px 3px 3px $blue
+  div#flash_alert
+    padding-top: 10px
+    font-size: 16px
+    color: $alert_light
+    font-weight: bold
+
+div#user_nav_container
   padding: 2px
   height: $flash_container_height
-  div#flash_notice
-    border: 1px solid black
-    margin-top: 2px
-    +custom_gradient($notice_light,$notice_dark)
-  div#flash_alert
-    border: 1px solid black
-    margin-top: 2px
-    +custom_gradient($alert_light,$alert_dark)
   div#user_nav
     div#my_cart
       background-image: url('my_cart.png')

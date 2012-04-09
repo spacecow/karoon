@@ -21,10 +21,7 @@
         <%= link_to image_tag('blue_logo.png'), root_path %>
       </div>
       <div id="user_container">
-        <div id="flash_container">
-          <% flash.each do |name,msg| %>
-            <%= content_tag :div, msg, :id => "flash_#{name}" %>
-          <% end %>
+        <div id="user_nav_container">
           <%= render 'layouts/user_nav' %>
         </div>
         <%= render 'layouts/search_bar' %>
@@ -37,6 +34,12 @@
       </div>
 
       <div id="main_container">
+        <div id="flash_container">
+          <% flash.each do |name,msg| %>
+            <%= content_tag :div, msg, :id => "flash_#{name}" %>
+          <% end %>
+          <br>
+        </div>
         <div id="main">
           <%= yield %>
         </div>

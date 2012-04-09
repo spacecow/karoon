@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe BasicApplicationHelper, focus:true do
+describe BasicApplicationHelper do
   before(:each) do
     @obj = Object.new    
     @obj.extend(BasicApplicationHelper)
