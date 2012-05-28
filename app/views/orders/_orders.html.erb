@@ -7,6 +7,8 @@
     <th><%= jt(:updated_at) %></th>
   </tr>
   <% orders.each do |order| %>
-    <%= render 'tableorder', order:order %>
+    <%# render 'tableorder', order:order %>
+    <%= render 'orders/line_items', :line_items => order.line_items, :model => order %>
+    <%= render order %>
   <% end %>
 </table>

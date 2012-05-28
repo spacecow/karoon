@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include BasicApplicationController
   protect_from_forgery
-  helper_method :pt,:current_user,:currency_in_riel?,:currency,:current_cart,:pl,:jt,:english?,:get_language
+  helper_method :pt,:current_user,:currency_in_riel?,:currency,:current_cart,:pl,:jt,:english?,:get_language,:mess
   before_filter :load_new_search, :set_language
 
   rescue_from CanCan::AccessDenied do |exception|
