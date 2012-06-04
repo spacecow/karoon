@@ -1,14 +1,5 @@
-<table id="orders">
-  <tr>
-    <th><%= pl(:item) %></th>
-    <th><%= "#{jt(:price)} (#{jt currency})" %></th>
-    <th><%= jt(:status) %></th>
-    <th><%= jt(:created_at) %></th>
-    <th><%= jt(:updated_at) %></th>
-  </tr>
-  <% orders.each do |order| %>
-    <%# render 'tableorder', order:order %>
-    <%= render 'orders/line_items', :line_items => order.line_items, :model => order %>
-    <%= render order %>
-  <% end %>
-</table>
+<% orders.each do |order| %>
+  <%# render 'tableorder', order:order %>
+  <%= render 'orders/line_items', :line_items => order.line_items, :model => order %>
+  <%= render order %>
+<% end %>

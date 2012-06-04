@@ -36,10 +36,8 @@ describe "Orders, index:" do
     end
 
     it "displays the member's draft book" do
-      table(:orders).rows_no.should eq (2)
-      tablemap(:orders).should have_content("A draft book") 
-      tablemap(:orders).should_not have_content("A confirmed book") 
-      tablemap(:orders).should_not have_content("An other book") 
+      divs_no(:line_item).should be(1)
+      div(:line_item,0).should have_content("A draft book")
     end
   end
 
@@ -60,10 +58,8 @@ describe "Orders, index:" do
     end
 
     it "displays the member's confirmed book" do
-      table(:orders).rows_no.should eq (2)
-      tablemap(:orders).should_not have_content("A draft book") 
-      tablemap(:orders).should have_content("A confirmed book") 
-      tablemap(:orders).should_not have_content("An other book") 
+      divs_no(:line_item).should be(1)
+      div(:line_item,0).should have_content("A confirmed book")
     end
   end
 
@@ -76,37 +72,37 @@ describe "Orders, index:" do
       Factory(:line_item, order_id:order.id, book_id:book.id)
       Factory(:line_item, order_id:order2.id, book_id:book.id)
 
-      user  = Factory(:user)
-      Factory(:order,user_id:user.id) 
+      #user  = Factory(:user)
+      #Factory(:order,user_id:user.id) 
       visit orders_path
     end
 
-    it "has a table with the orders" do
-      page.should have_a_table(:orders)
+    it "has no table with the orders" do
+      page.should_not have_a_table(:orders)
     end
 
-    it "has tableheaders" do
-      tableheader(:orders).should eq ["Items","Price (Toman)","Status","Created at","Updated at"]
+    #it "has tableheaders" do
+    #  tableheader(:orders).should eq ["Items","Price (Toman)","Status","Created at","Updated at"]
+    #end
+
+    it "has a div for each own order" do
+      divs_no(:line_item).should be(2)
     end
 
-    it "has a row for each own order" do
-      table(:orders).rows_no.should eq (3)
-    end
+    #it "info about the order on each line" do
+    #  tablemap(:orders).should eq [["A new book","12000","draft","about 1 hour ago","30 minutes ago","Edit"],["A new book","12000","confirmed","about 1 year ago","about 1 year ago",""]]
+    #end
 
-    it "info about the order on each line" do
-      tablemap(:orders).should eq [["A new book","12000","draft","about 1 hour ago","30 minutes ago","Edit"],["A new book","12000","confirmed","about 1 year ago","about 1 year ago",""]]
-    end
-
-    it "has a link to a detailed order page" do
-      row(1,:orders).should have_link('A new book')
-    end
+    #it "has a link to a detailed order page" do
+    #  row(1,:orders).should have_link('A new book')
+    #end
 
     it "has an edit link for the draft order" do
-      row(1,:orders).should have_link('Edit')
+      div(:order,0).should have_link('Edit')
     end
 
     it "has no edit link for the confirmed order" do
-      row(2,:orders).should_not have_link('Edit')
+      div(:order,1).should_not have_link('Edit')
     end
   end
 
@@ -124,9 +120,8 @@ describe "Orders, index:" do
       visit orders_path
     end
 
-    it "has a row for each order" do
-      tablecell(0,0,:orders).should eq "A new book"
-      tablecell(1,0,:orders).should eq "A second book"
+    it "displays all order" do
+      divs_no(:order).should be(2)
     end
   end
 end

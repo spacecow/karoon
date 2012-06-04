@@ -43,4 +43,5 @@
       <%= order.postal_service %>
     </span>
   </div>
+  <%= link_to t(:edit), edit_order_path(order) if can? :confirm, order %>
 </div>

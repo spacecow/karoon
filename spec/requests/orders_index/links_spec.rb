@@ -10,13 +10,13 @@ describe "Orders, index:" do
       visit orders_path
     end
 
-    it "the order page" do
-      row(1,:orders).click_link('A new book')
-      current_path.should eq order_path(@order)
-    end
+    #it "the order page" do
+    #  row(1,:orders).click_link('A new book')
+    #  current_path.should eq order_path(@order)
+    #end
 
     it "the edit order page" do
-      row(1,:orders).click_link('Edit')
+      div(:order,0).click_link('Edit')
       current_path.should eq edit_order_path(@order)
     end
   end
