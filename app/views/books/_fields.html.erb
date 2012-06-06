@@ -22,7 +22,9 @@
 <div class="clear"></div>
 <li id="book_image_input">
   <%= f.label :image, ft(:image) %>
+  <%= image_tag book.image_url(:mini) if book.image? %>
   <%= f.file_field :image %>
+  <%= f.hidden_field :image_cache %>
 </li>
 <li id="book_author_tokens_input">
   <%= f.label :author_tokens, ft(:author) %>
@@ -31,10 +33,10 @@
 <li id="book_category_tokens_input">
 <% if english? %>
   <%= f.label :category_tokens_en, ft(:category) %>
-  <%= f.text_field :category_tokens_en, "data-pre" => book.categories.map(&:attributes).to_json, "data-url" => categories_path(:format=>:json)  %>
+  <%= f.text_field :category_tokens_en, data:{pre:book.categories.map(&:english_name), url:categories_path(:format=>:json)} %>
 <% else %>
   <%= f.label :category_tokens_ir, ft(:category) %>
-  <%= f.text_field :category_tokens_ir, "data-pre" => book.categories.map(&:attributes).to_json, "data-url" => categories_path(:format=>:json)  %>
+  <%= f.text_field :category_tokens_ir, data:{pre:book.categories.map(&:persian_name), url:categories_path(:format=>:json)} %>
 <% end %>
   <p class="inline-errors">
     <%= book.errors[:categories].join %>

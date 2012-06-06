@@ -75,6 +75,50 @@ describe "Books" do
       end
     end
 
+    context "create two books" do
+      before(:each) do
+        @category =  create_category("science")
+        visit new_book_path
+        fill_in 'Title', :with => 'New Title'
+        fill_in 'Regular Price', :with => 10000
+        fill_in 'Category', :with => @category.id
+        attach_file 'Image', 'spec/tree.png'
+
+        div(:book,1).fill_in 'Title', with:'A second title'
+        div(:book,1).fill_in 'Regular Price', :with => 20000
+        div(:book,1).fill_in 'Category', :with => @category.id
+        div(:book,1).attach_file 'Image', 'spec/tree.png'
+      end
+
+      it "adds two books to the database" do
+      end
+
+      it "adds two books to the database after error" do
+        fill_in 'Title', with:''
+        div(:book,1).fill_in 'Title', with:''
+        click_button 'Create Books'
+        fill_in 'Title', with:'New Title'
+        div(:book,1).fill_in 'Title', with:'A second title'
+        fill_in 'Category', :with => @category.id
+        div(:book,1).fill_in 'Category', :with => @category.id
+      end
+
+      after(:each) do
+        lambda{ click_button 'Create Books'
+        }.should change(Book,:count).by(2)
+        book = Book.first
+        book.title.should eq 'New Title'
+        book.regular_price.should eq "10000" 
+        book.categories.last.name_en.should eq("science") 
+        book.image_url.should eq "/uploads/book/image/#{book.id}/tree.png"
+        book = Book.last
+        book.title.should eq 'A second title'
+        book.regular_price.should eq "20000" 
+        book.categories.last.name_en.should eq("science") 
+        book.image_url.should eq "/uploads/book/image/#{book.id}/tree.png"
+      end
+    end
+
     context "create book" do
       before(:each) do
         @author = create_author("Test Author")

@@ -8,7 +8,7 @@ class Book < ActiveRecord::Base
   has_many :categories, :through => :categorizations
 
   attr_reader :author_tokens, :category_tokens_en, :category_tokens_ir
-  attr_accessible :title,:author_tokens,:category_tokens_en,:category_tokens_ir,:image,:summary,:regular_price
+  attr_accessible :title,:author_tokens,:category_tokens_en,:category_tokens_ir,:image, :image_cache, :summary,:regular_price
   attr_accessor :hide
 
   before_destroy :ensure_not_referenced_by_any_line_item

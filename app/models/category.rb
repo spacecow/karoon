@@ -18,6 +18,13 @@ class Category < ActiveRecord::Base
     self.names_depth_cache_ir = ancestors.map{|e| e.name?(:ir)}.push(name?(:ir)).join('\\')
   end
 
+  def english_name
+    {id:self.id,name:self.name_en}
+  end
+  def persian_name
+    {id:self.id,name:self.name_ir}
+  end
+
   def name(lang) send("name_#{lang}") end
   def name?(lang) 
     if lang==:en
